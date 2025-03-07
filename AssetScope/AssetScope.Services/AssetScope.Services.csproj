@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="oneof" Version="3.0.271" />
-    <PackageReference Include="bespoke.services" Version="1.0.*" />
+    <PackageReference Include="oneof" />
+    <PackageReference Include="bespoke.services" />
   </ItemGroup>
 
   <ItemGroup>
