@@ -10,6 +10,3 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Handlebars\Bespoke.Handlebars.csproj" />
-    <PackageReference Include="Moq" />
-  </ItemGroup>
-</Project>

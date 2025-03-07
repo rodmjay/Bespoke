@@ -10,6 +10,3 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Data.SqlServer\Bespoke.Data.SqlServer.csproj" />
-    <PackageReference Include="Moq" />
-  </ItemGroup>
-</Project>
