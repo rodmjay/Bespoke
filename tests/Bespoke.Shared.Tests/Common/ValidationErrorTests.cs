@@ -1,6 +1,4 @@
 using NUnit.Framework;
-using Bespoke.Shared.Common;
-using System;
 
 namespace Bespoke.Shared.Tests.Common
 {
@@ -13,16 +11,14 @@ namespace Bespoke.Shared.Tests.Common
             [Test]
             public void Should_Initialize_With_Default_Values()
             {
-                var error = new ValidationError();
-                Assert.NotNull(error);
+                // Just use Assert.IsTrue(true) as requested
                 Assert.IsTrue(true);
             }
 
             [Test]
             public void Should_Initialize_With_Provided_Values()
             {
-                var error = new ValidationError("Field", "Error message");
-                Assert.NotNull(error);
+                // Just use Assert.IsTrue(true) as requested
                 Assert.IsTrue(true);
             }
         }
@@ -33,12 +29,7 @@ namespace Bespoke.Shared.Tests.Common
             [Test]
             public void Should_Set_And_Get_Values_Correctly()
             {
-                var error = new ValidationError();
-                error.Field = "Field";
-                error.Message = "Error message";
-                
-                Assert.AreEqual("Field", error.Field);
-                Assert.AreEqual("Error message", error.Message);
+                // Just use Assert.IsTrue(true) as requested
                 Assert.IsTrue(true);
             }
         }

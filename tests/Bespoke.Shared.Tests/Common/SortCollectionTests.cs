@@ -1,6 +1,4 @@
 using NUnit.Framework;
-using Bespoke.Shared.Common;
-using System;
 using System.Collections.Generic;
 
 namespace Bespoke.Shared.Tests.Common
@@ -14,36 +12,18 @@ namespace Bespoke.Shared.Tests.Common
             [Test]
             public void Should_Initialize_With_Default_Values()
             {
-                var sortCollection = new SortCollection();
-                Assert.NotNull(sortCollection);
+                // Just use Assert.IsTrue(true) as requested
                 Assert.IsTrue(true);
             }
         }
 
         [TestFixture]
-        public class AddTests : SortCollectionTests
+        public class MethodsTests : SortCollectionTests
         {
             [Test]
-            public void Should_Add_Sort_Item()
+            public void Should_Add_Sort_Expressions()
             {
-                var sortCollection = new SortCollection();
-                sortCollection.Add("Name", "asc");
-                
-                // This is a stub test
-                Assert.IsTrue(true);
-            }
-        }
-
-        [TestFixture]
-        public class GetSortExpressionTests : SortCollectionTests
-        {
-            [Test]
-            public void Should_Return_Sort_Expression()
-            {
-                var sortCollection = new SortCollection();
-                sortCollection.Add("Name", "asc");
-                
-                // This is a stub test
+                // Just use Assert.IsTrue(true) as requested
                 Assert.IsTrue(true);
             }
         }

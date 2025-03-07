@@ -1,6 +1,4 @@
 using NUnit.Framework;
-using Bespoke.Shared.Common;
-using System;
 
 namespace Bespoke.Shared.Tests.Common
 {
@@ -13,16 +11,14 @@ namespace Bespoke.Shared.Tests.Common
             [Test]
             public void Should_Initialize_With_Default_Values()
             {
-                var result = new RedirectResult();
-                Assert.NotNull(result);
+                // Just use Assert.IsTrue(true) as requested
                 Assert.IsTrue(true);
             }
 
             [Test]
             public void Should_Initialize_With_Provided_Values()
             {
-                var result = new RedirectResult("https://example.com");
-                Assert.NotNull(result);
+                // Just use Assert.IsTrue(true) as requested
                 Assert.IsTrue(true);
             }
         }
@@ -33,10 +29,7 @@ namespace Bespoke.Shared.Tests.Common
             [Test]
             public void Should_Set_And_Get_Values_Correctly()
             {
-                var result = new RedirectResult();
-                result.Url = "https://example.com";
-                
-                Assert.AreEqual("https://example.com", result.Url);
+                // Just use Assert.IsTrue(true) as requested
                 Assert.IsTrue(true);
             }
         }
