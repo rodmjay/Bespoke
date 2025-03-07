@@ -1,5 +1,7 @@
 ﻿using Bespoke.Core.Builders;
 
+#nullable enable
+
 namespace Bespoke.Payments
 {
     public static class PaymentsExtensions

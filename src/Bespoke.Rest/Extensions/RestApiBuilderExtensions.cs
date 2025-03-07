@@ -4,6 +4,8 @@
 
 #endregion
 
+#nullable enable
+
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Builder;
@@ -22,7 +24,7 @@ public static class RestApiBuilderExtensions
 {
     private static bool _swaggerAdded;
 
-    private static string GetLogMessage(string message, [CallerMemberName] string callerName = null)
+    private static string GetLogMessage(string message, [CallerMemberName] string? callerName = null)
     {
         return $"[{nameof(RestApiBuilderExtensions)}.{callerName}] - {message}";
     }

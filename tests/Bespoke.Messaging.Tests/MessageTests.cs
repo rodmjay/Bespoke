@@ -42,11 +42,11 @@ namespace Bespoke.Messaging.Tests
             message.RecipientAddresses = testRecipients;
             
             // Assert
-            Assert.AreEqual(testId, message.Id);
-            Assert.AreEqual(testSubject, message.Subject);
-            Assert.AreEqual(testBody, message.Body);
-            Assert.AreEqual(testSender, message.SenderAddress);
-            Assert.AreEqual(testRecipients, message.RecipientAddresses);
+            Assert.That(message.Id, Is.EqualTo(testId));
+            Assert.That(message.Subject, Is.EqualTo(testSubject));
+            Assert.That(message.Body, Is.EqualTo(testBody));
+            Assert.That(message.SenderAddress, Is.EqualTo(testSender));
+            Assert.That(message.RecipientAddresses, Is.EqualTo(testRecipients));
         }
     }
 }

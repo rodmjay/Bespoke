@@ -6,6 +6,8 @@
 
 using Newtonsoft.Json;
 
+#nullable enable
+
 namespace Bespoke.Shared.Common;
 
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
@@ -14,14 +16,14 @@ public class Result
     private readonly List<Error> _errors = new();
 
     public string? Message { get; set; }
-    public IEnumerable<ValidationError> ValidationErrors { get; set; }
+    public IEnumerable<ValidationError>? ValidationErrors { get; set; }
 
     [JsonProperty("succeeded")] public bool Succeeded { get; protected set; }
 
-    [JsonProperty("id")] public object Id { get; protected set; }
+    [JsonProperty("id")] public object? Id { get; protected set; }
 
     [JsonProperty]
-    public List<Error> Errors
+    public List<Error>? Errors
     {
         get
         {
@@ -59,6 +61,6 @@ public class Result
     {
         return Succeeded
             ? "Succeeded"
-            : string.Format("{0} : {1}", "Failed", string.Join(",", Errors.Select(x => x.Code).ToList()));
+            : string.Format("{0} : {1}", "Failed", Errors != null ? string.Join(",", Errors.Select(x => x.Code).ToList()) : "");
     }
 }

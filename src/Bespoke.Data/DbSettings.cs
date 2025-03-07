@@ -6,6 +6,8 @@
 
 using System.Diagnostics.CodeAnalysis;
 
+#nullable enable
+
 namespace Bespoke.Data;
 
 [ExcludeFromCodeCoverage]

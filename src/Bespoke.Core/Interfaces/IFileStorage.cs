@@ -7,7 +7,7 @@
 
     public class FileStorageService : IFileStorage
     {
-        public async Task<string> SaveFile(byte[] content, string fileName, string extension, string location)
+        public Task<string> SaveFile(byte[] content, string fileName, string extension, string location)
         {
             throw new NotImplementedException();
         }

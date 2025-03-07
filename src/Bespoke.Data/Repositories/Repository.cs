@@ -10,12 +10,14 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
+#nullable enable
+
 namespace Bespoke.Data.Repositories;
 
 [ExcludeFromCodeCoverage]
 public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : class, IObjectState
 {
-    private HashSet<object>
+    private HashSet<object>?
         _entitesChecked; // tracking of all process entities in the object graph when calling SyncObjectGraph
 
     public Repository(IDataContextAsync context, IUnitOfWorkAsync unitOfWork)
@@ -56,7 +58,7 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
 
     public virtual TEntity Find(params object[] keyValues)
     {
-        return _dbSet.Find(keyValues);
+        return _dbSet.Find(keyValues) ?? throw new Exception("Entity not found");
     }
 
     public virtual void Attach(TEntity entity)
@@ -71,7 +73,7 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
 
     public virtual TEntity FirstOrDefault(Expression<Func<TEntity, bool>> filter)
     {
-        return _dbSet.FirstOrDefault(filter);
+        return _dbSet.FirstOrDefault(filter) ?? throw new Exception("Entity not found");
     }
 
     public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate,
@@ -79,7 +81,7 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
     {
         IQueryable<TEntity> query = _dbSet;
         foreach (var includeProperty in includeProperties) query = query.Include(includeProperty);
-        return query.Where(predicate).FirstOrDefault();
+        return query.Where(predicate).FirstOrDefault() ?? throw new Exception("Entity not found");
     }
 
 
@@ -135,6 +137,8 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
     public virtual int Delete(object id, bool? commit = false)
     {
         var entity = _dbSet.Find(id);
+        if (entity == null)
+            return 0;
 
         return Delete(entity, commit);
     }
@@ -143,6 +147,8 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
     public virtual int Delete(TEntity entity, bool? commit = false)
     {
         if (entity == null) return 0;
+        
+        ArgumentNullException.ThrowIfNull(entity);
 
         if (entity is ISoftDelete deletableEntity)
         {
@@ -250,18 +256,18 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
 
     public virtual async Task<TEntity> FindAsync(params object[] keyValues)
     {
-        return await _dbSet.FindAsync(keyValues);
+        return await _dbSet.FindAsync(keyValues) ?? throw new Exception("Entity not found");
     }
 
     public virtual async Task<TEntity> FindAsync(CancellationToken cancellationToken, params object[] keyValues)
     {
-        return await _dbSet.FindAsync(cancellationToken, keyValues);
+        return await _dbSet.FindAsync(cancellationToken, keyValues) ?? throw new Exception("Entity not found");
     }
 
     public async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> filter)
     {
         var entity = await _dbSet.FirstOrDefaultAsync(filter);
-        return entity;
+        return entity ?? throw new Exception("Entity not found");
     }
 
     public async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> filter,
@@ -269,7 +275,7 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
     {
         var query = _dbSet.Where(filter);
         foreach (var includeProperty in includes) query = query.Include(includeProperty);
-        return await query.FirstOrDefaultAsync();
+        return await query.FirstOrDefaultAsync() ?? throw new Exception("Entity not found");
     }
 
     public async Task<TEntity> FirstOrDefaultAsync<TResult>(Expression<Func<TEntity, bool>> filter,
@@ -277,12 +283,12 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
     {
         var query = _dbSet.Where(filter);
         foreach (var includeProperty in includes) query = query.Include(includeProperty);
-        return await query.FirstOrDefaultAsync();
+        return await query.FirstOrDefaultAsync() ?? throw new Exception("Entity not found");
     }
 
-    public void HandleSaveChanges(object sender, EventArgs e)
+    public void HandleSaveChanges(object? sender, EventArgs e)
     {
-        EventHandler dispatch;
+        EventHandler? dispatch;
         while (_events.TryDequeue(out dispatch)) dispatch(this, e);
     }
 
@@ -305,6 +311,9 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
 
     private void SyncObjectGraph(object entity) // scan object graph for all 
     {
+        if (entity == null)
+            return;
+            
         if (_entitesChecked == null)
             _entitesChecked = new HashSet<object>();
 
@@ -330,7 +339,9 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
             if (trackableRef != null)
             {
                 if (trackableRef.ObjectState == ObjectState.Added) _context.SyncObjectState((IObjectState) entity);
-                SyncObjectGraph(prop.GetValue(entity, null));
+                var propValue = prop.GetValue(entity, null);
+                if (propValue != null)
+                    SyncObjectGraph(propValue);
             }
 
             // Apply changes to 1-M properties
@@ -347,12 +358,15 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
     #region Private Fields
 
     private readonly IDataContextAsync _context;
-    private readonly DbSet<TEntity> _dbSet;
+    private readonly DbSet<TEntity> _dbSet = null!;
     private readonly IUnitOfWorkAsync _unitOfWork;
 
-    public event EventHandler OnEntityCreated;
-    public event EventHandler OnEntityUpdated;
-    public event EventHandler OnEntityDeleted;
+    // These events are required by the interface but are not used in this implementation
+#pragma warning disable CS0067
+    public event EventHandler? OnEntityCreated;
+    public event EventHandler? OnEntityUpdated;
+    public event EventHandler? OnEntityDeleted;
+#pragma warning restore CS0067
 
     private readonly ConcurrentQueue<EventHandler> _events = new();
 

@@ -29,8 +29,8 @@ namespace Bespoke.Logging.Tests
             provider.LogInformation(message);
             
             // Assert
-            Assert.AreEqual(message, provider.LastMessage);
-            Assert.AreEqual(LogLevel.Information, provider.LastLevel);
+            Assert.That(provider.LastMessage, Is.EqualTo(message));
+            Assert.That(provider.LastLevel, Is.EqualTo(LogLevel.Information));
         }
         
         [Test]
@@ -44,8 +44,8 @@ namespace Bespoke.Logging.Tests
             provider.LogWarning(message);
             
             // Assert
-            Assert.AreEqual(message, provider.LastMessage);
-            Assert.AreEqual(LogLevel.Warning, provider.LastLevel);
+            Assert.That(provider.LastMessage, Is.EqualTo(message));
+            Assert.That(provider.LastLevel, Is.EqualTo(LogLevel.Warning));
         }
         
         [Test]
@@ -59,8 +59,8 @@ namespace Bespoke.Logging.Tests
             provider.LogError(message);
             
             // Assert
-            Assert.AreEqual(message, provider.LastMessage);
-            Assert.AreEqual(LogLevel.Error, provider.LastLevel);
+            Assert.That(provider.LastMessage, Is.EqualTo(message));
+            Assert.That(provider.LastLevel, Is.EqualTo(LogLevel.Error));
         }
     }
 }

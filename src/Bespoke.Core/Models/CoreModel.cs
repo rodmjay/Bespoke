@@ -5,7 +5,7 @@ namespace Bespoke.Core.Models
     /// </summary>
     public class CoreModel
     {
-        public string Id { get; set; } = string.Empty;
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

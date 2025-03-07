@@ -4,6 +4,8 @@
 
 #endregion
 
+#nullable enable
+
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Runtime.CompilerServices;
@@ -27,7 +29,7 @@ public class ExceptionMiddleware(
     private readonly JsonSerializerSettings _jsonSerializerSettings = jsonOptions.Value.SerializerSettings;
 
 
-    private static string GetLogMessage(string message, [CallerMemberName] string callerName = null)
+    private static string GetLogMessage(string message, [CallerMemberName] string? callerName = null)
     {
         return $"[{nameof(ExceptionMiddleware)}.{callerName}] - {message}";
     }
@@ -68,13 +70,19 @@ public class ExceptionMiddleware(
         Guard.Argument(exception)
             .NotNull();
 
-        var exLogger = loggerFactory.CreateLogger(exception.TargetSite!.DeclaringType!.FullName!);
-        exLogger?.LogError(exception, exception.Message);
-        modelResult.Errors.Add(new Error
+        if (exception.TargetSite?.DeclaringType != null)
         {
-            Code = GetErrorCode(exception).ToString(),
-            Description = exception.Message
-        });
+            var exLogger = loggerFactory.CreateLogger(exception.TargetSite.DeclaringType.FullName!);
+            exLogger.LogError(exception, exception.Message);
+        }
+        if (modelResult.Errors != null)
+        {
+            modelResult.Errors.Add(new Error
+            {
+                Code = GetErrorCode(exception).ToString(),
+                Description = exception.Message
+            });
+        }
     }
 
     private Task HandleExceptionAsync(HttpContext context, Exception exception)
