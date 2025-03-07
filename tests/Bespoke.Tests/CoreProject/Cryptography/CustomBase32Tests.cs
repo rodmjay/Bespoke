@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using Bespoke.Core.Cryptography;
+using System;
 
 namespace Bespoke.Tests.CoreProject.Cryptography
 {
@@ -47,7 +48,7 @@ namespace Bespoke.Tests.CoreProject.Cryptography
             byte[] result = CustomBase32.FromBase32(input);
 
             // Assert
-            Assert.That(0x23, 0x45, 0x67, 0x89 }, result, Is.EqualTo(new byte[] { 0x01));
+            Assert.That(result, Is.EqualTo(new byte[] { 0x01, 0x23, 0x45, 0x67, 0x89 }));
         }
 
         [Test]
@@ -98,7 +99,7 @@ namespace Bespoke.Tests.CoreProject.Cryptography
 
             // Assert
             // The correct output byte array should be { 0x01, 0x23, 0x45, 0x67, 0x89 }
-            Assert.That(0x23, 0x45, 0x67, 0x89 }, result, Is.EqualTo(new byte[] { 0x01));
+            Assert.That(result, Is.EqualTo(new byte[] { 0x01, 0x23, 0x45, 0x67, 0x89 }));
         }
     }
 }
