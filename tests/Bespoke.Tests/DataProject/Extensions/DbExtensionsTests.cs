@@ -19,8 +19,8 @@ public class DbExtensionsTests
         var expression = DbExtensions.BuildLikeExpression(keywords, action);
 
         // Assert
-        ClassicAssert.NotNull(expression);
-        ClassicAssert.AreEqual("x => value(Microsoft.EntityFrameworkCore.DbFunctions).Like(x.Name, \"%test\")", expression.ToString());
+        Assert.That(expression);
+        Assert.That(\"%test\", Is.EqualTo("x => value(Microsoft.EntityFrameworkCore.DbFunctions).Like(x.Name))", expression.ToString());
     }
 
     [Test]
@@ -34,8 +34,8 @@ public class DbExtensionsTests
         var expression = DbExtensions.BuildLikeExpression(keywords, action);
 
         // Assert
-        ClassicAssert.NotNull(expression);
-        ClassicAssert.AreEqual("x => (value(Microsoft.EntityFrameworkCore.DbFunctions).Like(x.Name, \"%test\") OrElse value(Microsoft.EntityFrameworkCore.DbFunctions).Like(x.Name, \"%example\"))"
+        Assert.That(expression);
+        Assert.That(\"%test\", Is.EqualTo("x => (value(Microsoft.EntityFrameworkCore.DbFunctions).Like(x.Name)) OrElse value(Microsoft.EntityFrameworkCore.DbFunctions).Like(x.Name, \"%example\"))"
             , expression.ToString());
     }
 

@@ -55,7 +55,7 @@ namespace Bespoke.Tests.DataProject.Repositories
                 var result = await _repository.TotalCountAsync();
 
                 // Assert
-                ClassicAssert.AreEqual(testData.Count(), result);
+                Assert.That(result, Is.EqualTo(testData.Count()));
             }
         }
         
@@ -83,7 +83,7 @@ namespace Bespoke.Tests.DataProject.Repositories
                 var result = _repository.TotalCount();
 
                 // Assert
-                ClassicAssert.AreEqual(testData.Count(), result);
+                Assert.That(result, Is.EqualTo(testData.Count()));
             }
 
         }
@@ -115,7 +115,7 @@ namespace Bespoke.Tests.DataProject.Repositories
                 var result = _repository.Find(key);
 
                 // Assert
-                ClassicAssert.AreEqual(entity, result);
+                Assert.That(result, Is.EqualTo(entity));
             }
         }
 
@@ -139,7 +139,7 @@ namespace Bespoke.Tests.DataProject.Repositories
                 _repository.Delete(entity);
 
                 // Assert
-                ClassicAssert.AreEqual(ObjectState.Deleted, entity.ObjectState);
+                Assert.That(entity.ObjectState, Is.EqualTo(ObjectState.Deleted));
             }
         }
 
@@ -162,7 +162,7 @@ namespace Bespoke.Tests.DataProject.Repositories
                 _repository.Update(entity);
 
                 // Assert
-                ClassicAssert.AreEqual(ObjectState.Modified, entity.ObjectState);
+                Assert.That(entity.ObjectState, Is.EqualTo(ObjectState.Modified));
             }
         }
 
@@ -191,7 +191,7 @@ namespace Bespoke.Tests.DataProject.Repositories
                 var result = _repository.Queryable().ToList();
 
                 // Assert
-                ClassicAssert.AreEqual(testData.Count(), result.Count);
+                Assert.That(result.Count, Is.EqualTo(testData.Count()));
             }
         }
 
@@ -222,7 +222,7 @@ namespace Bespoke.Tests.DataProject.Repositories
                 var result = _repository.Find(key);
 
                 // Assert
-                ClassicAssert.AreEqual(entity, result);
+                Assert.That(result, Is.EqualTo(entity));
             }
         }
     }

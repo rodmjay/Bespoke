@@ -21,7 +21,7 @@ namespace Bespoke.Tests.DataProject.Helpers
             var result = StateHelper.ConvertState(objectState);
 
             // Assert
-            ClassicAssert.AreEqual(EntityState.Added, result);
+            Assert.That(result, Is.EqualTo(EntityState.Added));
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace Bespoke.Tests.DataProject.Helpers
             var result = StateHelper.ConvertState(objectState);
 
             // Assert
-            ClassicAssert.AreEqual(EntityState.Modified, result);
+            Assert.That(result, Is.EqualTo(EntityState.Modified));
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace Bespoke.Tests.DataProject.Helpers
             var result = StateHelper.ConvertState(objectState);
 
             // Assert
-            ClassicAssert.AreEqual(EntityState.Deleted, result);
+            Assert.That(result, Is.EqualTo(EntityState.Deleted));
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace Bespoke.Tests.DataProject.Helpers
             var result = StateHelper.ConvertState(objectState);
 
             // Assert
-            ClassicAssert.AreEqual(EntityState.Unchanged, result);
+            Assert.That(result, Is.EqualTo(EntityState.Unchanged));
         }
 
         //[Test]
@@ -71,7 +71,7 @@ namespace Bespoke.Tests.DataProject.Helpers
 
         //    // Act & Assert
         //    var ex = Assert.Throws<ArgumentOutOfRangeException>(() => StateHelper.ConvertState(objectState));
-        //    ClassicAssert.That(ex.ParamName, Is.EqualTo("state"));
+        //    // ClassicAssert.That(ex.ParamName, Is.EqualTo("state"));
         //}
 
         #endregion
@@ -88,7 +88,7 @@ namespace Bespoke.Tests.DataProject.Helpers
             var result = StateHelper.ConvertState(entityState);
 
             // Assert
-            ClassicAssert.AreEqual(ObjectState.Unchanged, result);
+            Assert.That(result, Is.EqualTo(ObjectState.Unchanged));
         }
 
         [Test]
@@ -101,7 +101,7 @@ namespace Bespoke.Tests.DataProject.Helpers
             var result = StateHelper.ConvertState(entityState);
 
             // Assert
-            ClassicAssert.AreEqual(ObjectState.Unchanged, result);
+            Assert.That(result, Is.EqualTo(ObjectState.Unchanged));
         }
 
         [Test]
@@ -114,7 +114,7 @@ namespace Bespoke.Tests.DataProject.Helpers
             var result = StateHelper.ConvertState(entityState);
 
             // Assert
-            ClassicAssert.AreEqual(ObjectState.Added, result);
+            Assert.That(result, Is.EqualTo(ObjectState.Added));
         }
 
         [Test]
@@ -127,7 +127,7 @@ namespace Bespoke.Tests.DataProject.Helpers
             var result = StateHelper.ConvertState(entityState);
 
             // Assert
-            ClassicAssert.AreEqual(ObjectState.Deleted, result);
+            Assert.That(result, Is.EqualTo(ObjectState.Deleted));
         }
 
         [Test]
@@ -140,7 +140,7 @@ namespace Bespoke.Tests.DataProject.Helpers
             var result = StateHelper.ConvertState(entityState);
 
             // Assert
-            ClassicAssert.AreEqual(ObjectState.Modified, result);
+            Assert.That(result, Is.EqualTo(ObjectState.Modified));
         }
 
         [Test]

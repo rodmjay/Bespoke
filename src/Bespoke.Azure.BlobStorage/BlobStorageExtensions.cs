@@ -5,6 +5,8 @@ using Microsoft.Extensions.Options;
 using Bespoke.Azure.Builders;
 using Bespoke.Core.Helpers;
 
+#nullable enable
+
 namespace Bespoke.Azure.BlobStorage;
 
 public static class BlobStorageExtensions

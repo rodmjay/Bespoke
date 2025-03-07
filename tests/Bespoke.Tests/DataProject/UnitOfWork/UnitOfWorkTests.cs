@@ -88,8 +88,8 @@ namespace Bespoke.Tests.DataProject
                 var result = unitOfWork.SaveChanges();
 
                 // Assert
-                ClassicAssert.IsTrue(eventInvoked);
-                ClassicAssert.AreEqual(1, result);
+                Assert.That(eventInvoked, Is.True);
+                Assert.That(result, Is.EqualTo(1));
                 _mockDataContext.Verify(m => m.SaveChanges(), Times.Once);
             }
         }
@@ -109,7 +109,7 @@ namespace Bespoke.Tests.DataProject
                 var result = await unitOfWork.SaveChangesAsync();
 
                 // Assert
-                ClassicAssert.AreEqual(1, result);
+                Assert.That(result, Is.EqualTo(1));
                 _mockDataContext.Verify(m => m.SaveChangesAsync(), Times.Once);
             }
 
@@ -126,7 +126,7 @@ namespace Bespoke.Tests.DataProject
                 var result = await unitOfWork.SaveChangesAsync(cancellationToken);
 
                 // Assert
-                ClassicAssert.AreEqual(1, result);
+                Assert.That(result, Is.EqualTo(1));
                 _mockDataContext.Verify(m => m.SaveChangesAsync(cancellationToken), Times.Once);
             }
         }
@@ -151,8 +151,8 @@ namespace Bespoke.Tests.DataProject
                 var repository = unitOfWork.Repository<TestEntity>();
 
                 // Assert
-                ClassicAssert.IsNotNull(repository);
-                ClassicAssert.AreSame(mockRepository, repository);
+                Assert.That(repository, Is.Not.Null);
+                Assert.That(repository, Is.SameAs(mockRepository));
                 _mockServiceProvider.Verify(m => m.GetService(typeof(IRepository<TestEntity>)), Times.Once);
             }
         }
@@ -175,8 +175,8 @@ namespace Bespoke.Tests.DataProject
                 var repositoryAsync = unitOfWork.RepositoryAsync<TestEntity>();
 
                 // Assert
-                ClassicAssert.IsNotNull(repositoryAsync);
-                ClassicAssert.AreSame(mockRepositoryAsync, repositoryAsync);
+                Assert.That(repositoryAsync, Is.Not.Null);
+                Assert.That(repositoryAsync, Is.SameAs(mockRepositoryAsync));
                 _mockServiceProvider.Verify(m => m.GetService(typeof(IRepositoryAsync<TestEntity>)), Times.Once);
             }
         }

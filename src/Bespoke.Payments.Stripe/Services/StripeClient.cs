@@ -6,6 +6,8 @@
 
 using Stripe;
 
+#nullable enable
+
 namespace Bespoke.Payments.Stripe.Services;
 
 public abstract class StripeClient

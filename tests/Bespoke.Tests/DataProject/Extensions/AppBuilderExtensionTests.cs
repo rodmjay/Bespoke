@@ -90,11 +90,11 @@ namespace Bespoke.Tests.DataProject.Extensions
                 // Assert
                 var provider = appBuilder.Build();
 
-                ClassicAssert.NotNull(provider.GetRequiredService<IUnitOfWork>());
-                ClassicAssert.NotNull(provider.GetRequiredService<IUnitOfWorkAsync>());
-                ClassicAssert.NotNull(provider.GetRequiredService<IRepository<TestEntity>>());
-                ClassicAssert.NotNull(provider.GetRequiredService<IRepositoryAsync<TestEntity>>());
-                ClassicAssert.NotNull(provider.GetRequiredService<TestDbContext>());
+                Assert.That(provider.GetRequiredService<IUnitOfWork>(), Is.Not.Null);
+                Assert.That(provider.GetRequiredService<IUnitOfWorkAsync>(), Is.Not.Null);
+                Assert.That(provider.GetRequiredService<IRepository<TestEntity>>(), Is.Not.Null);
+                Assert.That(provider.GetRequiredService<IRepositoryAsync<TestEntity>>(), Is.Not.Null);
+                Assert.That(provider.GetRequiredService<TestDbContext>(), Is.Not.Null);
             }
 
             [Test]
@@ -137,8 +137,8 @@ namespace Bespoke.Tests.DataProject.Extensions
                 var appBuilder = GetAppBuilder(config);
                 // Assert
                 var dbContextRegistration = appBuilder.Services.SingleOrDefault(sd => sd.ServiceType == typeof(DbContextOptions<TestDbContext>));
-                ClassicAssert.NotNull(dbContextRegistration);
-                ClassicAssert.AreEqual(ServiceLifetime.Scoped, dbContextRegistration.Lifetime);
+                Assert.That(dbContextRegistration);
+                Assert.That(dbContextRegistration.Lifetime, Is.EqualTo(ServiceLifetime.Scoped));
             }
 
 
@@ -158,7 +158,7 @@ namespace Bespoke.Tests.DataProject.Extensions
 
                 // Assert
                 var dbContextRegistration = appBuilder.Services.SingleOrDefault(sd => sd.ServiceType == typeof(DbContextOptions<TestDbContext>));
-                ClassicAssert.NotNull(dbContextRegistration);
+                Assert.That(dbContextRegistration);
                 // Note: DbContext pooling is implemented as Singleton under the hood.
             }
         }

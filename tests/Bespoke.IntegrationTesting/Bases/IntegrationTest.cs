@@ -50,7 +50,7 @@ public abstract class IntegrationTest<TFixture, TStartup> where TStartup : class
     {
         var content = input.SerializeToUTF8Json();
         var response = await ApiClient.PostAsync(url, content);
-        ClassicAssert.True(response.IsSuccessStatusCode);
+        Assert.That(response.IsSuccessStatusCode, Is.True);
 
         var result = response.Content.DeserializeObject<TOutput>();
         return result;
@@ -59,7 +59,7 @@ public abstract class IntegrationTest<TFixture, TStartup> where TStartup : class
     protected async Task<TOutput> DoGet<TOutput>(string url)
     {
         var response = await ApiClient.GetAsync(url);
-        ClassicAssert.True(response.IsSuccessStatusCode);
+        Assert.That(response.IsSuccessStatusCode, Is.True);
 
         var result = response.Content.DeserializeObject<TOutput>();
 
@@ -70,7 +70,7 @@ public abstract class IntegrationTest<TFixture, TStartup> where TStartup : class
     {
         var content = input.SerializeToUTF8Json();
         var response = await ApiClient.PutAsync(url, content);
-        ClassicAssert.True(response.IsSuccessStatusCode);
+        Assert.That(response.IsSuccessStatusCode, Is.True);
 
         var result = response.Content.DeserializeObject<TOutput>();
         return result;
@@ -79,7 +79,7 @@ public abstract class IntegrationTest<TFixture, TStartup> where TStartup : class
     protected async Task<TOutput> DoDelete<TOutput>(string url)
     {
         var response = await ApiClient.DeleteAsync(url);
-        ClassicAssert.True(response.IsSuccessStatusCode);
+        Assert.That(response.IsSuccessStatusCode, Is.True);
 
         var result = response.Content.DeserializeObject<TOutput>();
         return result;

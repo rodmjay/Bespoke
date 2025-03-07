@@ -1,6 +1,8 @@
 ﻿using Stripe;
 using Bespoke.Shared.Common;
 
+#nullable enable
+
 namespace Bespoke.Payments.Stripe.Interfaces;
 
 public interface IStripeCustomerClient

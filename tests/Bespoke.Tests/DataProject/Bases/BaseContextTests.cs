@@ -58,7 +58,7 @@ public class BaseContextTests
         var result = dbContext.SaveChanges();
 
         // Assert
-        ClassicAssert.AreEqual(1, result);  // Ensure one record is saved
+        Assert.That(result, Is.EqualTo(1));  // Ensure one record is saved
     }
 
     [Test]
@@ -80,6 +80,6 @@ public class BaseContextTests
         var result = await dbContext.SaveChangesAsync();
 
         // Assert
-        ClassicAssert.AreEqual(1, result);  // Ensure one record is saved
+        Assert.That(result, Is.EqualTo(1));  // Ensure one record is saved
     }
 }

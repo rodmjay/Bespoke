@@ -46,6 +46,6 @@ public class BaseEntityTests
         };
 
         // Assert
-        ClassicAssert.AreEqual(ObjectState.Added, entity.ObjectState);
+        Assert.That(entity.ObjectState, Is.EqualTo(ObjectState.Added));
     }
 }

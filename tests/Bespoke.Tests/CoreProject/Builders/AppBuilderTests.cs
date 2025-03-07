@@ -38,9 +38,9 @@ namespace Bespoke.Tests.CoreProject.Builders
         public void Constructor_ShouldInitializeProperties()
         {
             // Assert
-            ClassicAssert.AreEqual(_services, _appBuilder.Services, "Services should match the initialized collection.");
-            ClassicAssert.AreEqual(_configuration, _appBuilder.Configuration, "Configuration should match the initialized configuration.");
-            ClassicAssert.AreEqual(_appSettings, _appBuilder.AppSettings, "AppSettings should match the initialized settings.");
+            Assert.That(_appBuilder.Services, "Services should match the initialized collection.", Is.EqualTo(_services));
+            Assert.That(_appBuilder.Configuration, "Configuration should match the initialized configuration.", Is.EqualTo(_configuration));
+            Assert.That(_appBuilder.AppSettings, "AppSettings should match the initialized settings.", Is.EqualTo(_appSettings));
         }
 
         [Test]
@@ -50,8 +50,8 @@ namespace Bespoke.Tests.CoreProject.Builders
             var serviceProvider = _appBuilder.Build();
 
             // Assert
-            ClassicAssert.IsNotNull(serviceProvider, "Service provider should not be null.");
-            ClassicAssert.IsInstanceOf<IServiceProvider>(serviceProvider, "Service provider should be of type IServiceProvider.");
+            Assert.That(serviceProvider, Is.Not.Null, "Service provider should not be null.");
+            Assert.That(serviceProvider, Is.InstanceOf<IServiceProvider>, "Service provider should be of type IServiceProvider.");
         }
 
         [Test]
@@ -65,8 +65,8 @@ namespace Bespoke.Tests.CoreProject.Builders
             var resolvedService = serviceProvider.GetService<ITestService>();
 
             // Assert
-            ClassicAssert.IsNotNull(resolvedService, "Resolved service should not be null.");
-            ClassicAssert.IsInstanceOf<TestService>(resolvedService, "Resolved service should be of type TestService.");
+            Assert.That(resolvedService, Is.Not.Null, "Resolved service should not be null.");
+            Assert.That(resolvedService, Is.InstanceOf<TestService>, "Resolved service should be of type TestService.");
         }
     }
 }

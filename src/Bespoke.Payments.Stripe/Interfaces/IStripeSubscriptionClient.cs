@@ -6,6 +6,8 @@
 
 using Stripe;
 
+#nullable enable
+
 namespace Bespoke.Payments.Stripe.Interfaces;
 
 public interface IStripeSubscriptionClient

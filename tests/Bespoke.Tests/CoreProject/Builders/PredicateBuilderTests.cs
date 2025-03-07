@@ -18,7 +18,7 @@ namespace Bespoke.Tests.CoreProject.Builders
             var result = predicate.Compile()(5);
 
             // Assert
-            ClassicAssert.IsTrue(result, "Predicate should always return true.");
+            Assert.That(result, Is.True, "Predicate should always return true.");
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace Bespoke.Tests.CoreProject.Builders
             var result = predicate.Compile()(5);
 
             // Assert
-            ClassicAssert.IsFalse(result, "Predicate should always return false.");
+            Assert.That(result, Is.False, "Predicate should always return false.");
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace Bespoke.Tests.CoreProject.Builders
             var result = combinedPredicate.Compile()(5);
 
             // Assert
-            ClassicAssert.IsTrue(result, "Logical OR should return true if one predicate is true.");
+            Assert.That(result, Is.True, "Logical OR should return true if one predicate is true.");
         }
 
         [Test]
@@ -61,7 +61,7 @@ namespace Bespoke.Tests.CoreProject.Builders
             var result = combinedPredicate.Compile()(5);
 
             // Assert
-            ClassicAssert.IsTrue(result, "Logical AND should return true if both predicates are true.");
+            Assert.That(result, Is.True, "Logical AND should return true if both predicates are true.");
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace Bespoke.Tests.CoreProject.Builders
             var result = combinedPredicate.Compile()(5);
 
             // Assert
-            ClassicAssert.IsFalse(result, "Logical AND should return false if one predicate is false.");
+            Assert.That(result, Is.False, "Logical AND should return false if one predicate is false.");
         }
 
 
@@ -95,7 +95,7 @@ namespace Bespoke.Tests.CoreProject.Builders
             var result = data.AsQueryable().Where(combinedPredicate).ToArray();
 
             // Assert
-            CollectionAssert.AreEqual(new[] { 4 }, result, "Filtered collection should contain only even numbers greater than 3.");
+            Assert.That(result, "Filtered collection should contain only even numbers greater than 3.", Is.EqualTo(new[] { 4 }));
         }
     }
 }

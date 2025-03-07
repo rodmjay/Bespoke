@@ -6,6 +6,8 @@ using Microsoft.Extensions.Options;
 using Bespoke.Azure.TableStorage.Interfaces;
 using Bespoke.Azure.TableStorage.Services;
 
+#nullable enable
+
 namespace Bespoke.Azure.TableStorage.Factories
 {
     public class TableServiceFactory : ITableServiceFactory

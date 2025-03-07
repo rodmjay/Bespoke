@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>NU1902</NoWarn>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>microservice</PackageTags>
     <RepositoryUrl>https://github.com/rodmjay/bespoke</RepositoryUrl>

@@ -1,3 +1,5 @@
+#nullable enable
+
 ﻿namespace Bespoke.Payments.Stripe.Services;
 
 public class StripePlanService : StripeClient
