@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Core\Bespoke.Core.csproj" />
-    <PackageReference Include="Moq" />
   </ItemGroup>
 
 </Project>

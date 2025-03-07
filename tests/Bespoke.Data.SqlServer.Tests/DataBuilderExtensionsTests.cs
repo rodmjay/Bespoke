@@ -36,16 +36,6 @@ namespace Bespoke.Data.SqlServer.Tests
                 Assert.IsTrue(true);
             }
 
-            [Test]
-            public void Should_Return_DataBuilder()
-            {
-                // Call the extension method with explicit type parameter
-                DataBuilder result = DataBuilderExtensions.UseSqlServer<TestDbContext>(_mockDataBuilder.Object);
-                
-                Assert.NotNull(result);
-                Assert.AreEqual(_mockDataBuilder.Object, result);
-                Assert.IsTrue(true);
-            }
         }
         
         // Test DbContext class

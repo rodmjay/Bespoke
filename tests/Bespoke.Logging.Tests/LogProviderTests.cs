@@ -1,7 +1,4 @@
 ﻿using NUnit.Framework;
-using Bespoke.Logging;
-using Microsoft.Extensions.Logging;
-using System;
 
 namespace Bespoke.Logging.Tests
 {

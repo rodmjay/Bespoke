@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Moq;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Bespoke.Rest.Tests.Middleware
 {

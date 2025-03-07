@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Messaging\Bespoke.Messaging.csproj" />
-    <PackageReference Include="Moq" />
   </ItemGroup>
 
 </Project>

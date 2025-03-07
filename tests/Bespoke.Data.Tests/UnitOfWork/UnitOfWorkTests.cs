@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using Bespoke.Data.UnitOfWork;
 using System;
 
 namespace Bespoke.Data.Tests.UnitOfWork
