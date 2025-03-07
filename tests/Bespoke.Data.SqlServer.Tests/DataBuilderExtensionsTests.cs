@@ -1,4 +1,4 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Bespoke.Data.SqlServer;
 using Bespoke.Data.Builders;
 using Microsoft.Extensions.Configuration;
@@ -39,12 +39,18 @@ namespace Bespoke.Data.SqlServer.Tests
             [Test]
             public void Should_Return_DataBuilder()
             {
-                var result = DataBuilderExtensions.UseSqlServer(_mockDataBuilder.Object);
+                // Call the extension method with explicit type parameter
+                DataBuilder result = DataBuilderExtensions.UseSqlServer<TestDbContext>(_mockDataBuilder.Object);
                 
                 Assert.NotNull(result);
                 Assert.AreEqual(_mockDataBuilder.Object, result);
                 Assert.IsTrue(true);
             }
+        }
+        
+        // Test DbContext class
+        private class TestDbContext : Microsoft.EntityFrameworkCore.DbContext
+        {
         }
     }
 }
