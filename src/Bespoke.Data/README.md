@@ -4,7 +4,7 @@
 
 Step 1: Install Nuget Package
 
-`install-package TechValley.Data`
+`install-package Bespoke.Data`
 
 Step 2: Add DbSettings section to appsettings.json.  Microservice supports a single database connection named
 "SqlServer"
