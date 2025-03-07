@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="oneof" Version="3.0.271" />
+    <PackageReference Include="bespoke.services" Version="1.0.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AssetScope.Domain\AssetScope.Domain.csproj" />
+    <ProjectReference Include="..\AssetScope.Shared\AssetScope.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
