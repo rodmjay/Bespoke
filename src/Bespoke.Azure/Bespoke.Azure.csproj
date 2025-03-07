@@ -33,8 +33,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Azure.Identity" Version="1.10.4" />
-		<PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.1" />
+		<PackageReference Include="Azure.Identity" />
+		<PackageReference Include="Microsoft.Extensions.Azure" />
 	</ItemGroup>
 
 	<ItemGroup>

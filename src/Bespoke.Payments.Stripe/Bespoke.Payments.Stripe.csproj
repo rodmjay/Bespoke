@@ -33,7 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Stripe.net" Version="43.8.0" />
+		<PackageReference Include="Stripe.net" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
-	  <PackageReference Include="Bespoke.Rest" Version="1.0.*" />
-	  <PackageReference Include="Bespoke.Data.SqlServer" Version="1.0.*" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+	  <PackageReference Include="Bespoke.Rest" />
+	  <PackageReference Include="Bespoke.Data.SqlServer" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,8 +20,8 @@
 
 
 	<ItemGroup>
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.*">
+		<PackageReference Include="Swashbuckle.AspNetCore" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>

@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bespoke.Data.SqlServer" Version="1.0.*" />
+    <PackageReference Include="Bespoke.Data.SqlServer" />
   </ItemGroup>
 
   <ItemGroup>

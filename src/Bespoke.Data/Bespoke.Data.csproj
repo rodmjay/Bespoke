@@ -33,9 +33,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CsvHelper" Version="33.0.*" />
-		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.*" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.tools" Version="8.0.*">
+		<PackageReference Include="CsvHelper" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.tools">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
