@@ -4,7 +4,7 @@
 
 Step 1: Install Nuget Package
 
-`install-package TechValley.Azure.AppInsights`
+`install-package Bespoke.Azure.AppInsights`
 
 Step 2: Add AppInsightsSettings section to appsettings.json.
 
