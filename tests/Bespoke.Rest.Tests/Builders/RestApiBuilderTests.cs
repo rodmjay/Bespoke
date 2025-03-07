@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Bespoke.Rest.Builders;
 using Bespoke.Core.Builders;
+using Bespoke.Core.Settings;
 using Bespoke.Rest;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +13,7 @@ namespace Bespoke.Rest.Tests.Builders
     [TestFixture]
     public class RestApiBuilderTests
     {
-        private Mock<AppBuilder> _mockAppBuilder;
+        private AppBuilder _appBuilder;
         private Mock<IServiceCollection> _mockServices;
         private Mock<IConfiguration> _mockConfiguration;
         private RestSettings _restSettings;
@@ -23,9 +24,11 @@ namespace Bespoke.Rest.Tests.Builders
             _mockServices = new Mock<IServiceCollection>();
             _mockConfiguration = new Mock<IConfiguration>();
             
-            _mockAppBuilder = new Mock<AppBuilder>(null);
-            _mockAppBuilder.Setup(x => x.Services).Returns(_mockServices.Object);
-            _mockAppBuilder.Setup(x => x.Configuration).Returns(_mockConfiguration.Object);
+            // Create a real AppBuilder instance with mocked dependencies
+            _appBuilder = new AppBuilder(
+                _mockServices.Object,
+                new AppSettings(),
+                _mockConfiguration.Object);
             
             _restSettings = new RestSettings();
         }
@@ -36,7 +39,7 @@ namespace Bespoke.Rest.Tests.Builders
             [Test]
             public void Should_Initialize_With_AppBuilder()
             {
-                var builder = new RestApiBuilder(_mockAppBuilder.Object, _restSettings);
+                var builder = new RestApiBuilder(_appBuilder, _restSettings);
                 Assert.NotNull(builder);
                 Assert.IsTrue(true);
             }
