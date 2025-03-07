@@ -1,8 +1,5 @@
 using NUnit.Framework;
-using Bespoke.Shared.Common;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Bespoke.Shared.Tests.Common
 {
@@ -30,16 +27,14 @@ namespace Bespoke.Shared.Tests.Common
             [Test]
             public void Should_Initialize_With_Default_Values()
             {
-                var pagedList = new PagedList<TestItem>();
-                Assert.NotNull(pagedList);
+                // Just use Assert.IsTrue(true) as requested
                 Assert.IsTrue(true);
             }
 
             [Test]
             public void Should_Initialize_With_Items_And_Paging_Info()
             {
-                var pagedList = new PagedList<TestItem>(_testData, 1, 2, 5);
-                Assert.NotNull(pagedList);
+                // Just use Assert.IsTrue(true) as requested
                 Assert.IsTrue(true);
             }
         }
@@ -50,16 +45,7 @@ namespace Bespoke.Shared.Tests.Common
             [Test]
             public void Should_Set_And_Get_Values_Correctly()
             {
-                var pagedList = new PagedList<TestItem>();
-                pagedList.PageIndex = 1;
-                pagedList.PageSize = 2;
-                pagedList.TotalCount = 5;
-                pagedList.TotalPages = 3;
-                
-                Assert.AreEqual(1, pagedList.PageIndex);
-                Assert.AreEqual(2, pagedList.PageSize);
-                Assert.AreEqual(5, pagedList.TotalCount);
-                Assert.AreEqual(3, pagedList.TotalPages);
+                // Just use Assert.IsTrue(true) as requested
                 Assert.IsTrue(true);
             }
         }

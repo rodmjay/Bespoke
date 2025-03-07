@@ -50,41 +50,41 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.IntegrationTesting"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Benchmarks", "demo\Bespoke.Benchmarks\Bespoke.Benchmarks.csproj", "{4F9A37A7-B7A1-4D61-9D6A-941356E86783}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Azure.AD.Tests", "./tests/Bespoke.Azure.AD.Tests/Bespoke.Azure.AD.Tests.csproj", "{4BBD41D2-961D-4BF7-BE8F-31F6949BD7D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Azure.AD.Tests", "tests\\Bespoke.Azure.AD.Tests/Bespoke.Azure.AD.Tests.csproj", "{4BBD41D2-961D-4BF7-BE8F-31F6949BD7D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Azure.BlobStorage.Tests", "./tests/Bespoke.Azure.BlobStorage.Tests/Bespoke.Azure.BlobStorage.Tests.csproj", "{DC593486-7DB3-417F-9BA2-5FB299362A80}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Azure.BlobStorage.Tests", "tests\\Bespoke.Azure.BlobStorage.Tests/Bespoke.Azure.BlobStorage.Tests.csproj", "{DC593486-7DB3-417F-9BA2-5FB299362A80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Azure.Queue.Tests", "./tests/Bespoke.Azure.Queue.Tests/Bespoke.Azure.Queue.Tests.csproj", "{52A1E059-DDD9-4DEF-AC9C-C08356DCA1D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Azure.Queue.Tests", "tests\\Bespoke.Azure.Queue.Tests/Bespoke.Azure.Queue.Tests.csproj", "{52A1E059-DDD9-4DEF-AC9C-C08356DCA1D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Azure.TableStorage.Tests", "./tests/Bespoke.Azure.TableStorage.Tests/Bespoke.Azure.TableStorage.Tests.csproj", "{AEC1F4FD-E423-44BE-A4AA-436E45E62C1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Azure.TableStorage.Tests", "tests\\Bespoke.Azure.TableStorage.Tests/Bespoke.Azure.TableStorage.Tests.csproj", "{AEC1F4FD-E423-44BE-A4AA-436E45E62C1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Azure.Tests", "./tests/Bespoke.Azure.Tests/Bespoke.Azure.Tests.csproj", "{C79988B4-F27B-426B-8D67-923D673A12DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Azure.Tests", "tests\\Bespoke.Azure.Tests/Bespoke.Azure.Tests.csproj", "{C79988B4-F27B-426B-8D67-923D673A12DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Bicep.Tests", "./tests/Bespoke.Bicep.Tests/Bespoke.Bicep.Tests.csproj", "{B6A70A56-D34F-45D1-B800-E41606BBBFED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Bicep.Tests", "tests\\Bespoke.Bicep.Tests/Bespoke.Bicep.Tests.csproj", "{B6A70A56-D34F-45D1-B800-E41606BBBFED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Core.Tests", "./tests/Bespoke.Core.Tests/Bespoke.Core.Tests.csproj", "{E9E26130-A4A3-49E2-AE54-31C4E0D3FA16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Core.Tests", "tests\\Bespoke.Core.Tests/Bespoke.Core.Tests.csproj", "{E9E26130-A4A3-49E2-AE54-31C4E0D3FA16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Data.SqlServer.Tests", "./tests/Bespoke.Data.SqlServer.Tests/Bespoke.Data.SqlServer.Tests.csproj", "{11E98E99-C02C-4613-ACE3-ACCE5F84F0C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Data.SqlServer.Tests", "tests\\Bespoke.Data.SqlServer.Tests/Bespoke.Data.SqlServer.Tests.csproj", "{11E98E99-C02C-4613-ACE3-ACCE5F84F0C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Data.Tests", "./tests/Bespoke.Data.Tests/Bespoke.Data.Tests.csproj", "{5C4FEE18-B6AE-4D48-941C-25E74103996B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Data.Tests", "tests\\Bespoke.Data.Tests/Bespoke.Data.Tests.csproj", "{5C4FEE18-B6AE-4D48-941C-25E74103996B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Handlebars.Tests", "./tests/Bespoke.Handlebars.Tests/Bespoke.Handlebars.Tests.csproj", "{6C6CD456-4170-4E95-9CA6-9A8D637BC9FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Handlebars.Tests", "tests\\Bespoke.Handlebars.Tests/Bespoke.Handlebars.Tests.csproj", "{6C6CD456-4170-4E95-9CA6-9A8D637BC9FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Logging.Tests", "./tests/Bespoke.Logging.Tests/Bespoke.Logging.Tests.csproj", "{BDC20635-F47F-4A70-880B-0F341BC519E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Logging.Tests", "tests\\Bespoke.Logging.Tests/Bespoke.Logging.Tests.csproj", "{BDC20635-F47F-4A70-880B-0F341BC519E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Messaging.Tests", "./tests/Bespoke.Messaging.Tests/Bespoke.Messaging.Tests.csproj", "{BBF7DA1A-AD10-410D-96AF-68C23CF059BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Messaging.Tests", "tests\\Bespoke.Messaging.Tests/Bespoke.Messaging.Tests.csproj", "{BBF7DA1A-AD10-410D-96AF-68C23CF059BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Payments.Stripe.Tests", "./tests/Bespoke.Payments.Stripe.Tests/Bespoke.Payments.Stripe.Tests.csproj", "{9F2E849E-29B2-4A95-9669-43686672EBB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Payments.Stripe.Tests", "tests\\Bespoke.Payments.Stripe.Tests/Bespoke.Payments.Stripe.Tests.csproj", "{9F2E849E-29B2-4A95-9669-43686672EBB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Payments.Tests", "./tests/Bespoke.Payments.Tests/Bespoke.Payments.Tests.csproj", "{C8176E88-9612-4B1F-B9ED-400AA84191D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Payments.Tests", "tests\\Bespoke.Payments.Tests/Bespoke.Payments.Tests.csproj", "{C8176E88-9612-4B1F-B9ED-400AA84191D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Rest.Tests", "./tests/Bespoke.Rest.Tests/Bespoke.Rest.Tests.csproj", "{09D9E722-CED8-4273-95F7-2D4DCD8F2B9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Rest.Tests", "tests\\Bespoke.Rest.Tests/Bespoke.Rest.Tests.csproj", "{09D9E722-CED8-4273-95F7-2D4DCD8F2B9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Services.Tests", "./tests/Bespoke.Services.Tests/Bespoke.Services.Tests.csproj", "{8CC86EDD-D1ED-4A3C-BAD4-2E1D1B3AFFB0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Services.Tests", "tests\\Bespoke.Services.Tests/Bespoke.Services.Tests.csproj", "{8CC86EDD-D1ED-4A3C-BAD4-2E1D1B3AFFB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Shared.Tests", "./tests/Bespoke.Shared.Tests/Bespoke.Shared.Tests.csproj", "{3031F4F1-1679-4E32-8E72-BE87F5CB065C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Shared.Tests", "tests\\Bespoke.Shared.Tests/Bespoke.Shared.Tests.csproj", "{3031F4F1-1679-4E32-8E72-BE87F5CB065C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Users.Tests", "./tests/Bespoke.Users.Tests/Bespoke.Users.Tests.csproj", "{E812660A-6824-4C86-AEFA-71B06DFACB1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Users.Tests", "tests\\Bespoke.Users.Tests/Bespoke.Users.Tests.csproj", "{E812660A-6824-4C86-AEFA-71B06DFACB1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
