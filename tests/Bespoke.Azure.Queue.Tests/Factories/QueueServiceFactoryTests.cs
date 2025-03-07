@@ -56,8 +56,7 @@ namespace Bespoke.Azure.Queue.Tests.Factories
             [Test]
             public void Should_Create_QueueService()
             {
-                // Commented out due to Moq issues with extension methods
-                // This is a stub test
+                // Removed test due to Moq issues with GetConnectionString extension method
                 Assert.IsTrue(true);
             }
         }
