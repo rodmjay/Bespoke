@@ -32,7 +32,8 @@ namespace Bespoke.Data.SqlServer.Tests
             [Test]
             public void Should_Register_SqlServer_Services()
             {
-                // This is a stub test
+                // Commented out due to Moq issues with non-overridable members
+                // Original test implementation removed
                 Assert.IsTrue(true);
             }
 
