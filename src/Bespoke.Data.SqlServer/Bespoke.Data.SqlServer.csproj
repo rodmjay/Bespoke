@@ -10,6 +10,7 @@
     <Authors>Rod Johnson</Authors>
     <Version>1.0.0</Version>
     <PackageId>Bespoke.Data.SqlServer</PackageId>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
@@ -22,6 +23,11 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Bespoke.Data\Bespoke.Data.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Include the README.md file in the package -->
+		<None Include="README.md" Pack="true" PackagePath="" />
 	</ItemGroup>
 
 </Project>
