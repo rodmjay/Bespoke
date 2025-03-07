@@ -1,23 +1,24 @@
 using Bespoke.Core.Models;
-using Xunit;
+using NUnit.Framework;
 
 namespace Bespoke.Core.Tests
 {
+    [TestFixture]
     public class CoreModelTests
     {
-        [Fact]
+        [Test]
         public void CoreModel_WhenCreated_HasDefaultValues()
         {
             // Arrange & Act
             var model = new CoreModel();
             
             // Assert
-            Assert.NotNull(model);
-            Assert.NotEmpty(model.Id);
-            Assert.True(model.CreatedAt <= DateTime.UtcNow);
+            Assert.IsNotNull(model);
+            Assert.IsNotEmpty(model.Id);
+            Assert.IsTrue(model.CreatedAt <= DateTime.UtcNow);
         }
         
-        [Fact]
+        [Test]
         public void CoreModel_WhenIdSet_ReturnsCorrectValue()
         {
             // Arrange
@@ -28,7 +29,7 @@ namespace Bespoke.Core.Tests
             model.Id = testId;
             
             // Assert
-            Assert.Equal(testId, model.Id);
+            Assert.AreEqual(testId, model.Id);
         }
     }
 }

@@ -1,0 +1,82 @@
+<div class="introduction-container">
+    <p-card styleClass="intro-card">
+        <ng-template pTemplate="header">
+            <div class="header-container">
+                <h1 class="title">Welcome to Bespoke</h1>
+            </div>
+        </ng-template>
+        
+        <div class="content">
+            <p-divider></p-divider>
+            
+            <h2>A Comprehensive .NET Library Suite</h2>
+            <p>
+                Bespoke is a collection of modular, extensible .NET libraries designed to accelerate 
+                application development while maintaining high quality and performance standards.
+            </p>
+            
+            <p-divider></p-divider>
+            
+            <h3>Core Libraries</h3>
+            <p-panel header="Bespoke.Core" [toggleable]="true">
+                <p>The foundation library providing essential models, interfaces, and utilities that all other Bespoke libraries build upon.</p>
+                <p>Features include:</p>
+                <ul>
+                    <li>Base entity models with standardized properties</li>
+                    <li>Common interfaces for consistent implementation patterns</li>
+                    <li>Utility classes for everyday development tasks</li>
+                </ul>
+            </p-panel>
+            
+            <p-panel header="Bespoke.Logging" [toggleable]="true">
+                <p>A flexible logging framework that simplifies application logging with multiple provider options.</p>
+                <p>Features include:</p>
+                <ul>
+                    <li>Pluggable logging providers</li>
+                    <li>Structured logging support</li>
+                    <li>Log level filtering and configuration</li>
+                </ul>
+            </p-panel>
+            
+            <p-panel header="Bespoke.Messaging" [toggleable]="true">
+                <p>A messaging library for implementing various communication patterns in your applications.</p>
+                <p>Features include:</p>
+                <ul>
+                    <li>Message models for different communication scenarios</li>
+                    <li>Message handlers and processors</li>
+                    <li>Support for various messaging patterns</li>
+                </ul>
+            </p-panel>
+            
+            <p-divider></p-divider>
+            
+            <h3>Getting Started</h3>
+            <p>
+                To start using Bespoke libraries in your project, install the NuGet packages:
+            </p>
+            
+            <p-card styleClass="code-card">
+                <pre>dotnet add package Bespoke.Core
+dotnet add package Bespoke.Logging
+dotnet add package Bespoke.Messaging</pre>
+            </p-card>
+            
+            <p>Check out our <a href="/docs">documentation</a> for detailed guides and API references.</p>
+            
+            <p-divider></p-divider>
+            
+            <h3>Demo Applications</h3>
+            <p>
+                Explore our demo applications to see Bespoke libraries in action:
+            </p>
+            <p-button label="Demo App 1" icon="pi pi-external-link" styleClass="p-button-outlined"></p-button>
+            <p-button label="Demo App 2" icon="pi pi-external-link" styleClass="p-button-outlined" class="ml-2"></p-button>
+        </div>
+        
+        <ng-template pTemplate="footer">
+            <div class="footer-container">
+                <p>Bespoke - Built with .NET 8.0</p>
+            </div>
+        </ng-template>
+    </p-card>
+</div>

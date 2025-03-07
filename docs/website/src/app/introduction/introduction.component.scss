@@ -1,0 +1,92 @@
+.introduction-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.header-container {
+  text-align: center;
+  padding: 1rem 0;
+  background-color: #f8f9fa;
+  border-radius: 6px 6px 0 0;
+}
+
+.title {
+  color: #3B82F6;
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.content {
+  padding: 1rem;
+}
+
+.footer-container {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 0 0 6px 6px;
+}
+
+h2 {
+  color: #3B82F6;
+  margin-top: 0;
+}
+
+h3 {
+  color: #4B5563;
+  margin-top: 1.5rem;
+}
+
+p {
+  line-height: 1.6;
+  color: #4B5563;
+}
+
+ul {
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  color: #4B5563;
+}
+
+.code-card {
+  background-color: #f8f9fa;
+  margin: 1rem 0;
+}
+
+pre {
+  padding: 1rem;
+  background-color: #f1f5f9;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 0;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+:host ::ng-deep {
+  .p-card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .p-panel {
+    margin-bottom: 1rem;
+  }
+  
+  .p-panel-header {
+    background-color: #f8f9fa;
+  }
+  
+  .p-divider {
+    margin: 1.5rem 0;
+  }
+  
+  .p-button {
+    margin-top: 0.5rem;
+  }
+}
