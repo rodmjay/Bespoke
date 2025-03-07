@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<RootNamespace>Bespoke.Azure</RootNamespace>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<DebugType>portable</DebugType>
+		<!-- Ensures PDB generation -->
+		<IncludeSymbols>true</IncludeSymbols>
+		<!-- Include debug symbols -->
+		<IncludeSource>true</IncludeSource>
+		<!-- Include source files -->
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<!-- Creates .snupkg -->
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Update="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Identity" Version="1.10.4" />
+		<PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Bespoke.Core\Bespoke.Core.csproj" />
+	</ItemGroup>
+
+</Project>
