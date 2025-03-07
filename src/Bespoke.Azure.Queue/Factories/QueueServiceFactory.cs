@@ -6,6 +6,8 @@ using Microsoft.Extensions.Logging;
 using Bespoke.Azure.Queue.Interfaces;
 using Bespoke.Azure.Queue.Services;
 
+#nullable enable
+
 namespace Bespoke.Azure.Queue.Factories;
 
 public class QueueServiceFactory : IQueueServiceFactory

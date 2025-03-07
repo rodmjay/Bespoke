@@ -2,6 +2,8 @@
 using Bespoke.Azure.Builders;
 using Bespoke.Core.Helpers;
 
+#nullable enable
+
 namespace Bespoke.Azure.AD.Extensions;
 
 public static class AzureBuilderExtensions

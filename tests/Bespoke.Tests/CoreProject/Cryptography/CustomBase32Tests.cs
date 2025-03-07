@@ -17,7 +17,7 @@ namespace Bespoke.Tests.CoreProject.Cryptography
             string result = CustomBase32.ToBase32(input);
 
             // Assert
-            ClassicAssert.AreEqual("AID3F6AEXG=", result);  // Expected Base32 output for the given input
+            Assert.That(result, Is.EqualTo("AID3F6AEXG="));  // Expected Base32 output for the given input
         }
 
         [Test]
@@ -27,7 +27,7 @@ namespace Bespoke.Tests.CoreProject.Cryptography
             string result = CustomBase32.ToBase32(new byte[0]);
 
             // Assert
-            ClassicAssert.AreEqual("", result);  // Empty input should result in an empty string
+            Assert.That(result, Is.EqualTo(""));  // Empty input should result in an empty string
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace Bespoke.Tests.CoreProject.Cryptography
             byte[] result = CustomBase32.FromBase32(input);
 
             // Assert
-            CollectionAssert.AreEqual(new byte[] { 0x01, 0x23, 0x45, 0x67, 0x89 }, result);
+            Assert.That(0x23, 0x45, 0x67, 0x89 }, result, Is.EqualTo(new byte[] { 0x01));
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace Bespoke.Tests.CoreProject.Cryptography
             byte[] result = CustomBase32.FromBase32("");
 
             // Assert
-            CollectionAssert.AreEqual(new byte[0], result);  // Empty string should result in empty byte array
+            Assert.That(result, Is.EqualTo(new byte[0]));  // Empty string should result in empty byte array
         }
 
         [Test]
@@ -98,7 +98,7 @@ namespace Bespoke.Tests.CoreProject.Cryptography
 
             // Assert
             // The correct output byte array should be { 0x01, 0x23, 0x45, 0x67, 0x89 }
-            CollectionAssert.AreEqual(new byte[] { 0x01, 0x23, 0x45, 0x67, 0x89 }, result);
+            Assert.That(0x23, 0x45, 0x67, 0x89 }, result, Is.EqualTo(new byte[] { 0x01));
         }
     }
 }

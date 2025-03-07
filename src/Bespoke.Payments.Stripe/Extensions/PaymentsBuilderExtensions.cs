@@ -5,6 +5,8 @@ using Bespoke.Payments.Stripe.Builders;
 using Bespoke.Payments.Stripe.Factories;
 using Bespoke.Payments.Stripe.Interfaces;
 
+#nullable enable
+
 namespace Bespoke.Payments.Stripe.Extensions
 {
     public static class PaymentsBuilderExtensions

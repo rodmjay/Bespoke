@@ -4,6 +4,8 @@ using Bespoke.Azure.Queue.Builders;
 using Bespoke.Azure.Queue.Factories;
 using Bespoke.Azure.Queue.Interfaces;
 
+#nullable enable
+
 namespace Bespoke.Azure.Queue.Extensions;
 
 public static class QueueStorageExtensions

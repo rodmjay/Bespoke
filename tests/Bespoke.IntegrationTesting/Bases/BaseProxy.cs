@@ -146,7 +146,7 @@ public abstract class BaseProxy(HttpClient httpClient)
 
             return new StatusCodeResult((int)response.StatusCode);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return new StatusCodeResult(500);
         }
@@ -231,7 +231,7 @@ public abstract class BaseProxy(HttpClient httpClient)
 
             return new NotFoundResult();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             // Handle exceptions by returning an appropriate result
             return new BadRequestObjectResult(ex.Message);

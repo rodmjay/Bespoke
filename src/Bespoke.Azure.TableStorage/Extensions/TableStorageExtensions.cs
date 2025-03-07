@@ -9,6 +9,8 @@ using Bespoke.Azure.TableStorage.Interfaces;
 using Bespoke.Azure.TableStorage.Services;
 using Bespoke.Core.Helpers;
 
+#nullable enable
+
 namespace Bespoke.Azure.TableStorage.Extensions;
 
 public static class TableStorageExtensions
