@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Core\Bespoke.Core.csproj" />
-    <ProjectReference Include="..\..\src\Bespoke.Messaging\Bespoke.Messaging.csproj" />
   </ItemGroup>
 
 </Project>
