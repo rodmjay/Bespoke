@@ -1,28 +1,29 @@
 using Bespoke.Messaging.Models;
-using Xunit;
+using NUnit.Framework;
 
 namespace Bespoke.Messaging.Tests
 {
+    [TestFixture]
     public class MessageTests
     {
-        [Fact]
+        [Test]
         public void Message_WhenCreated_HasDefaultValues()
         {
             // Arrange & Act
             var message = new Message();
             
             // Assert
-            Assert.NotNull(message);
-            Assert.Empty(message.Id);
-            Assert.Empty(message.Subject);
-            Assert.Empty(message.Body);
-            Assert.Empty(message.SenderAddress);
-            Assert.NotNull(message.RecipientAddresses);
-            Assert.Empty(message.RecipientAddresses);
-            Assert.True(message.SentAt <= DateTime.UtcNow);
+            Assert.IsNotNull(message);
+            Assert.IsEmpty(message.Id);
+            Assert.IsEmpty(message.Subject);
+            Assert.IsEmpty(message.Body);
+            Assert.IsEmpty(message.SenderAddress);
+            Assert.IsNotNull(message.RecipientAddresses);
+            Assert.IsEmpty(message.RecipientAddresses);
+            Assert.IsTrue(message.SentAt <= DateTime.UtcNow);
         }
         
-        [Fact]
+        [Test]
         public void Message_WhenPropertiesSet_ReturnsCorrectValues()
         {
             // Arrange
@@ -41,11 +42,11 @@ namespace Bespoke.Messaging.Tests
             message.RecipientAddresses = testRecipients;
             
             // Assert
-            Assert.Equal(testId, message.Id);
-            Assert.Equal(testSubject, message.Subject);
-            Assert.Equal(testBody, message.Body);
-            Assert.Equal(testSender, message.SenderAddress);
-            Assert.Equal(testRecipients, message.RecipientAddresses);
+            Assert.AreEqual(testId, message.Id);
+            Assert.AreEqual(testSubject, message.Subject);
+            Assert.AreEqual(testBody, message.Body);
+            Assert.AreEqual(testSender, message.SenderAddress);
+            Assert.AreEqual(testRecipients, message.RecipientAddresses);
         }
     }
 }

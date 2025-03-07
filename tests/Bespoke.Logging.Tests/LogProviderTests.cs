@@ -1,8 +1,9 @@
 using Bespoke.Logging.Providers;
-using Xunit;
+using NUnit.Framework;
 
 namespace Bespoke.Logging.Tests
 {
+    [TestFixture]
     public class LogProviderTests
     {
         private class TestLogProvider : LogProvider
@@ -17,7 +18,7 @@ namespace Bespoke.Logging.Tests
             }
         }
         
-        [Fact]
+        [Test]
         public void LogInformation_SetsCorrectLevel()
         {
             // Arrange
@@ -28,11 +29,11 @@ namespace Bespoke.Logging.Tests
             provider.LogInformation(message);
             
             // Assert
-            Assert.Equal(message, provider.LastMessage);
-            Assert.Equal(LogLevel.Information, provider.LastLevel);
+            Assert.AreEqual(message, provider.LastMessage);
+            Assert.AreEqual(LogLevel.Information, provider.LastLevel);
         }
         
-        [Fact]
+        [Test]
         public void LogWarning_SetsCorrectLevel()
         {
             // Arrange
@@ -43,11 +44,11 @@ namespace Bespoke.Logging.Tests
             provider.LogWarning(message);
             
             // Assert
-            Assert.Equal(message, provider.LastMessage);
-            Assert.Equal(LogLevel.Warning, provider.LastLevel);
+            Assert.AreEqual(message, provider.LastMessage);
+            Assert.AreEqual(LogLevel.Warning, provider.LastLevel);
         }
         
-        [Fact]
+        [Test]
         public void LogError_SetsCorrectLevel()
         {
             // Arrange
@@ -58,8 +59,8 @@ namespace Bespoke.Logging.Tests
             provider.LogError(message);
             
             // Assert
-            Assert.Equal(message, provider.LastMessage);
-            Assert.Equal(LogLevel.Error, provider.LastLevel);
+            Assert.AreEqual(message, provider.LastMessage);
+            Assert.AreEqual(LogLevel.Error, provider.LastLevel);
         }
     }
 }
