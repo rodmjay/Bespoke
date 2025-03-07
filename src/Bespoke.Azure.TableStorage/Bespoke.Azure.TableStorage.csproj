@@ -1,6 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>microservice</PackageTags>
+    <RepositoryUrl>https://github.com/rodmjay/bespoke</RepositoryUrl>
+    <Description>Bespoke library for building microservices</Description>
+    <Authors>Rod Johnson</Authors>
+    <Version>1.0.0</Version>
+    <PackageId>Bespoke.Azure.TableStorage</PackageId>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
