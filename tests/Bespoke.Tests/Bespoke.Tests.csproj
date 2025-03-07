@@ -20,6 +20,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Bespoke.Core\Bespoke.Core.csproj" />
 		<ProjectReference Include="..\..\src\Bespoke.Data\Bespoke.Data.csproj" />
+		<ProjectReference Include="..\..\src\Bespoke.Data.SqlServer\Bespoke.Data.SqlServer.csproj" />
 		<ProjectReference Include="..\..\src\Bespoke.Services\Bespoke.Services.csproj" />
 	</ItemGroup>
 

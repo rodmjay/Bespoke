@@ -6,7 +6,6 @@
 
 using Microsoft.AspNetCore.Authentication;
 using Stripe;
-using Stripe.Forwarding;
 using Bespoke.Payments.Stripe.Interfaces;
 
 namespace Bespoke.Payments.Stripe.Services;
