@@ -43,7 +43,8 @@ public class ApplicationContext(DbContextOptions<ApplicationContext> options, IO
     public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
     public DbSet<Key> Keys { get; set; }
     public DbSet<ServerSideSession> ServerSideSessions { get; set; }
-    public DbSet<PushedAuthorizationRequest> PushedAuthorizationRequests { get; set; }
+    // PushedAuthorizationRequest is not available in Duende.IdentityServer.EntityFramework 6.3.6
+    // public DbSet<PushedAuthorizationRequest> PushedAuthorizationRequests { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -85,7 +86,8 @@ public class ApplicationContext(DbContextOptions<ApplicationContext> options, IO
             DeviceFlowCodes = new TableConfiguration("DeviceFlowCodes", IdentityServerSchema),
             PersistedGrants = new TableConfiguration("PersistedGrants", IdentityServerSchema),
             ServerSideSessions = new TableConfiguration("ServerSideSession", IdentityServerSchema),
-            PushedAuthorizationRequests = new TableConfiguration("PushedAuthorizationRequests", IdentityServerSchema),
+            // PushedAuthorizationRequests is not available in Duende.IdentityServer.EntityFramework 6.3.6
+            // PushedAuthorizationRequests = new TableConfiguration("PushedAuthorizationRequests", IdentityServerSchema),
             Keys = new TableConfiguration("Key", IdentityServerSchema)
         };
 
