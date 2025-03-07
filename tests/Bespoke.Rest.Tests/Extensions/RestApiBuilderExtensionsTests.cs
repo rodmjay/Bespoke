@@ -2,6 +2,7 @@ using NUnit.Framework;
 using Bespoke.Rest.Extensions;
 using Bespoke.Rest.Builders;
 using Bespoke.Core.Builders;
+using Bespoke.Core.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
@@ -29,8 +30,8 @@ namespace Bespoke.Rest.Tests.Extensions
                 new AppSettings(),
                 _mockConfiguration.Object);
             
-            // Create a real RestApiBuilder instance with the real AppBuilder
-            _restApiBuilder = new RestApiBuilder(_appBuilder);
+            // Create a real RestApiBuilder instance with the real AppBuilder and RestSettings
+            _restApiBuilder = new RestApiBuilder(_appBuilder, new RestSettings());
         }
 
         [TestFixture]

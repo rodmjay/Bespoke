@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Bespoke.Data.Extensions;
 using Bespoke.Core.Builders;
+using Bespoke.Core.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;

@@ -27,10 +27,7 @@ namespace Bespoke.Rest.Tests.Middleware
             _mockLoggerFactory = new Mock<ILoggerFactory>();
             
             // Create a real MvcNewtonsoftJsonOptions instance
-            _jsonOptions = new MvcNewtonsoftJsonOptions
-            {
-                SerializerSettings = new JsonSerializerSettings()
-            };
+            _jsonOptions = new MvcNewtonsoftJsonOptions();
             
             // Set up the mock to return the real options
             _mockJsonOptions = new Mock<IOptions<MvcNewtonsoftJsonOptions>>();
