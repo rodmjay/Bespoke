@@ -4,6 +4,8 @@
 
 #endregion
 
+#nullable enable
+
 using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -23,7 +25,7 @@ namespace Bespoke.Rest.Extensions;
 
 public static class AppBuilderExtensions
 {
-    private static string GetLogMessage(string message, [CallerMemberName] string callerName = null)
+    private static string GetLogMessage(string message, [CallerMemberName] string? callerName = null)
     {
         return $"[{nameof(AppBuilderExtensions)}.{callerName}] - {message}";
     }
@@ -53,7 +55,7 @@ public static class AppBuilderExtensions
     {
         //builder.Services.AddSingleton<IClaimsTransformation, ClaimsTransformer>();
         builder.Services.AddAuthentication("Bearer")
-            .AddJwtBearer("Bearer", action);
+            .AddJwtBearer("Bearer", action ?? (_ => { }));
 
         return builder;
     }
@@ -117,23 +119,26 @@ public static class AppBuilderExtensions
             })
             .AddNewtonsoftJson(o =>
             {
-                o.SerializerSettings.Formatting = JsonSettings.Settings.Formatting;
-                o.SerializerSettings.NullValueHandling = JsonSettings.Settings.NullValueHandling;
-                o.SerializerSettings.Converters = JsonSettings.Settings.Converters;
-                o.SerializerSettings.NullValueHandling = JsonSettings.Settings.NullValueHandling;
-                o.SerializerSettings.DateFormatString = JsonSettings.Settings.DateFormatString;
-                o.SerializerSettings.ReferenceLoopHandling = JsonSettings.Settings.ReferenceLoopHandling;
+                if (JsonSettings.Settings != null)
+                {
+                    o.SerializerSettings.Formatting = JsonSettings.Settings.Formatting;
+                    o.SerializerSettings.NullValueHandling = JsonSettings.Settings.NullValueHandling;
+                    o.SerializerSettings.Converters = JsonSettings.Settings.Converters;
+                    o.SerializerSettings.NullValueHandling = JsonSettings.Settings.NullValueHandling;
+                    o.SerializerSettings.DateFormatString = JsonSettings.Settings.DateFormatString;
+                    o.SerializerSettings.ReferenceLoopHandling = JsonSettings.Settings.ReferenceLoopHandling;
+                }
             })
             .ConfigureApiBehaviorOptions(o =>
             {
                 o.InvalidModelStateResponseFactory = context =>
                 {
                     var errors = context.ModelState
-                        .Where(e => e.Value.Errors.Count > 0)
+                        .Where(e => e.Value != null && e.Value.Errors.Count > 0)
                         .Select(e => new
                         {
                             Field = e.Key,
-                            Errors = e.Value.Errors.Select(x => x.ErrorMessage)
+                            Errors = e.Value!.Errors.Select(x => x.ErrorMessage)
                         });
 
                     var result = new Result

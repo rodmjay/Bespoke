@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authentication;
 using Stripe;
 using Bespoke.Payments.Stripe.Interfaces;
 
+#nullable enable
+
 namespace Bespoke.Payments.Stripe.Services;
 
 public class StripeCustomerClient : StripeClient, IStripeCustomerClient

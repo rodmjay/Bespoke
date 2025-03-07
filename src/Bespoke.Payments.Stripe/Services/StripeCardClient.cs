@@ -9,6 +9,8 @@ using Stripe;
 using Bespoke.Payments.Stripe.Interfaces;
 using Bespoke.Shared.Common;
 
+#nullable enable
+
 namespace Bespoke.Payments.Stripe.Services;
 
 public class StripeCardClient : StripeClient, IStripeCardClient
@@ -20,12 +22,12 @@ public class StripeCardClient : StripeClient, IStripeCardClient
         _cardId = cardId;
     }
 
-    public async Task<Card> UpdateCard(string customerId, CardUpdateOptions options)
+    public Task<Card> UpdateCard(string customerId, CardUpdateOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Card> DeleteCard(string customerId, CardDeleteOptions options)
+    public Task<Card> DeleteCard(string customerId, CardDeleteOptions options)
     {
         throw new NotImplementedException();
     }

@@ -45,7 +45,6 @@ public static class CustomBase32
 
         var output = new byte[input.Length * 5 / 8];  // Calculate output size based on Base32 encoding rules
         int bitIndex = 0;
-        int inputIndex = 0;
         int outputIndex = 0;
         int currentByte = 0;
 

@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 
+#nullable enable
+
 namespace Bespoke.Core.Helpers;
 
 public static class EnumHelper

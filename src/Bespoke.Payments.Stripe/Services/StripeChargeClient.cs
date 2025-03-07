@@ -8,6 +8,8 @@ using Stripe;
 using Bespoke.Payments.Stripe.Interfaces;
 using Bespoke.Shared.Common;
 
+#nullable enable
+
 namespace Bespoke.Payments.Stripe.Services;
 
 using Stripe;
@@ -34,12 +36,12 @@ public class StripeChargeClient : IStripeChargeClient
         return refund;
     }
 
-    public async Task<Charge> UpdateCharge(ChargeUpdateOptions options)
+    public Task<Charge> UpdateCharge(ChargeUpdateOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Charge> CaptureCharge(ChargeCaptureOptions options)
+    public Task<Charge> CaptureCharge(ChargeCaptureOptions options)
     {
         throw new NotImplementedException();
     }
