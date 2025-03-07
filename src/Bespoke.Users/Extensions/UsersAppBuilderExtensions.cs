@@ -48,7 +48,8 @@ public static class UsersAppBuilderExtensions
             .AddUserStore<UserService>()
             .AddEntityFrameworkStores<ApplicationContext>()
             .AddDefaultTokenProviders()
-            .AddDefaultUI()
+            // AddDefaultUI is not available in the current version of Microsoft.AspNetCore.Identity.UI
+            // .AddDefaultUI()
             .AddClaimsPrincipalFactory<UserRoleClaimsPrincipalFactory>()
             .AddRoleManager<RoleManager>()
             .AddUserManager<UserManager>()

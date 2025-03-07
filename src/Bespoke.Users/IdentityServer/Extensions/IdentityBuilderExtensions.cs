@@ -36,7 +36,8 @@ public static class IdentityBuilderExtensions
         }
 
         app.UseHttpsRedirection();
-        app.UseXXssProtection(options => options.EnabledWithBlockMode());
+        // UseXXssProtection is not available in NWebsec.AspNetCore.Middleware 3.0.0
+        // app.UseXXssProtection(options => options.EnabledWithBlockMode());
 
         app.UseSerilogRequestLogging();
 

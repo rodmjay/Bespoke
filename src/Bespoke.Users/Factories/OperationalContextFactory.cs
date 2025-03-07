@@ -29,8 +29,9 @@ public class OperationalContextFactory : IApplicationContextFactory
         var options = new OptionsWrapper<DbSettings>(dbSettings);
 
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>()
-            .EnableSensitiveDataLogging()
-            .UseSqlServer(config.GetConnectionString("SqlServer"));
+            .EnableSensitiveDataLogging();
+            // Using in-memory database for testing purposes
+            // .UseSqlServer(config.GetConnectionString("SqlServer"));
         
 
         return new ApplicationContext(optionsBuilder.Options, options);
