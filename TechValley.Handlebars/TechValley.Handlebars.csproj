@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<DebugType>portable</DebugType>
+		<!-- Ensures PDB generation -->
+		<IncludeSymbols>true</IncludeSymbols>
+		<!-- Include debug symbols -->
+		<IncludeSource>true</IncludeSource>
+		<!-- Include source files -->
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<!-- Creates .snupkg -->
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<None Update="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+		<ProjectReference Include="..\TechValley.Core\TechValley.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' == 'Release'">
+		<PackageReference Include="TechValley.Core" Version="1.0.*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Handlebars.Net" Version="2.1.6" />
+	</ItemGroup>
+
+</Project>
