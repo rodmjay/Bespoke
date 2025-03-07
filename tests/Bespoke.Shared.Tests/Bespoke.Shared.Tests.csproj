@@ -10,3 +10,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Shared\Bespoke.Shared.csproj" />
+</ItemGroup>
+</Project>

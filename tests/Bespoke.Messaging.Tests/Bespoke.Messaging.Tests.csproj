@@ -21,3 +21,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Messaging\Bespoke.Messaging.csproj" />
+</ItemGroup>
+</Project>

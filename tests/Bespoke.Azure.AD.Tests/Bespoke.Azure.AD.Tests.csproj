@@ -10,3 +10,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Azure.AD\Bespoke.Azure.AD.csproj" />
+</ItemGroup>
+</Project>

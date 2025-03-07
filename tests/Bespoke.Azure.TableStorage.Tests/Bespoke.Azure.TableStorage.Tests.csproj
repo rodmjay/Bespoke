@@ -11,3 +11,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Azure.TableStorage\Bespoke.Azure.TableStorage.csproj" />
+</ItemGroup>
+</Project>

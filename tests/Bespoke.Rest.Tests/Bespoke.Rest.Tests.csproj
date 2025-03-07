@@ -10,3 +10,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Rest\Bespoke.Rest.csproj" />
+</ItemGroup>
+</Project>

@@ -10,3 +10,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Payments.Stripe\Bespoke.Payments.Stripe.csproj" />
+</ItemGroup>
+</Project>

@@ -10,3 +10,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Data.SqlServer\Bespoke.Data.SqlServer.csproj" />
+</ItemGroup>
+</Project>

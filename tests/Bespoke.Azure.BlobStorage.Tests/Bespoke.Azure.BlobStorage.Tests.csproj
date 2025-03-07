@@ -10,3 +10,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Azure.BlobStorage\Bespoke.Azure.BlobStorage.csproj" />
+</ItemGroup>
+</Project>
