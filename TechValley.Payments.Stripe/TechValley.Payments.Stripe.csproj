@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <DebugType>portable</DebugType>
+	  <!-- Ensures PDB generation -->
+	  <IncludeSymbols>true</IncludeSymbols>
+	  <!-- Include debug symbols -->
+	  <IncludeSource>true</IncludeSource>
+	  <!-- Include source files -->
+	  <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	  <!-- Creates .snupkg -->
+  </PropertyGroup>
+
+	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+		<ProjectReference Include="..\TechValley.Payments\TechValley.Payments.csproj" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' == 'Release'">
+		<PackageReference Include="TechValley.Payments" Version="1.0.*" />
+	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="stripe.net" Version="47.1.0" />
+  </ItemGroup>
+
+</Project>

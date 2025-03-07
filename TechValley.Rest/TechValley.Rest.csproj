@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<DebugType>portable</DebugType>
+		<!-- Ensures PDB generation -->
+		<IncludeSymbols>true</IncludeSymbols>
+		<!-- Include debug symbols -->
+		<IncludeSource>true</IncludeSource>
+		<!-- Include source files -->
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<!-- Creates .snupkg -->
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Update="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<!-- Use Project References ONLY for Debug build -->
+	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+		<ProjectReference Include="..\TechValley.Core\TechValley.Core.csproj" />
+	</ItemGroup>
+
+	<!-- Use NuGet Package References ONLY for Release build -->
+	<ItemGroup Condition="'$(Configuration)' == 'Release'">
+		<PackageReference Include="TechValley.Core" Version="1.0.*" />
+	</ItemGroup>
+
+	<!-- Common Package References for all builds -->
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.7" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.*" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.6.*" />
+	</ItemGroup>
+
+</Project>
