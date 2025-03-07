@@ -1,6 +1,10 @@
 using NUnit.Framework;
 using Bespoke.Azure.AD.Extensions;
 using Bespoke.Azure.Builders;
+using Bespoke.Core.Builders;
+using Bespoke.Core.Settings;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using System;
 
@@ -9,12 +13,25 @@ namespace Bespoke.Azure.AD.Tests.Extensions
     [TestFixture]
     public class AzureBuilderExtensionsTests
     {
-        private Mock<AzureBuilder> _mockAzureBuilder;
+        private AzureBuilder _azureBuilder;
+        private AppBuilder _appBuilder;
+        private Mock<IServiceCollection> _mockServices;
+        private Mock<IConfiguration> _mockConfiguration;
 
         [SetUp]
         public void Setup()
         {
-            _mockAzureBuilder = new Mock<AzureBuilder>();
+            _mockServices = new Mock<IServiceCollection>();
+            _mockConfiguration = new Mock<IConfiguration>();
+            
+            // Create a real AppBuilder instance with mocked dependencies
+            _appBuilder = new AppBuilder(
+                _mockServices.Object,
+                new AppSettings(),
+                _mockConfiguration.Object);
+                
+            // Create a real AzureBuilder instance with the real AppBuilder
+            _azureBuilder = new AzureBuilder(_appBuilder);
         }
 
         [TestFixture]
@@ -23,7 +40,7 @@ namespace Bespoke.Azure.AD.Tests.Extensions
             [Test]
             public void Should_Return_AzureBuilder()
             {
-                var result = AzureBuilderExtensions.AddAzureAd(_mockAzureBuilder.Object);
+                var result = AzureBuilderExtensions.AddAzureAd(_azureBuilder);
                 Assert.NotNull(result);
                 Assert.IsTrue(true);
             }
@@ -32,7 +49,7 @@ namespace Bespoke.Azure.AD.Tests.Extensions
             public void Should_Invoke_Action_When_Provided()
             {
                 bool actionInvoked = false;
-                var result = AzureBuilderExtensions.AddAzureAd(_mockAzureBuilder.Object, builder => {
+                var result = AzureBuilderExtensions.AddAzureAd(_azureBuilder, builder => {
                     actionInvoked = true;
                 });
                 

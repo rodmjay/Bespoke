@@ -2,26 +2,37 @@ using NUnit.Framework;
 using Bespoke.Azure.Queue.Extensions;
 using Bespoke.Azure.Builders;
 using Bespoke.Azure.Queue.Builders;
+using Bespoke.Core.Builders;
+using Bespoke.Core.Settings;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using System;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Bespoke.Azure.Queue.Tests.Extensions
 {
     [TestFixture]
     public class QueueStorageExtensionsTests
     {
-        private Mock<AzureBuilder> _mockAzureBuilder;
+        private AzureBuilder _azureBuilder;
+        private AppBuilder _appBuilder;
         private Mock<IServiceCollection> _mockServices;
+        private Mock<IConfiguration> _mockConfiguration;
 
         [SetUp]
         public void Setup()
         {
             _mockServices = new Mock<IServiceCollection>();
-            _mockAzureBuilder = new Mock<AzureBuilder>();
+            _mockConfiguration = new Mock<IConfiguration>();
             
-            // Setup the necessary mocks
-            _mockAzureBuilder.Setup(x => x.Services).Returns(_mockServices.Object);
+            // Create a real AppBuilder instance with mocked dependencies
+            _appBuilder = new AppBuilder(
+                _mockServices.Object,
+                new AppSettings(),
+                _mockConfiguration.Object);
+                
+            // Create a real AzureBuilder instance with the real AppBuilder
+            _azureBuilder = new AzureBuilder(_appBuilder);
         }
 
         [TestFixture]
@@ -30,7 +41,7 @@ namespace Bespoke.Azure.Queue.Tests.Extensions
             [Test]
             public void Should_Return_AzureBuilder()
             {
-                var result = QueueStorageExtensions.AddQueueStorage(_mockAzureBuilder.Object);
+                var result = QueueStorageExtensions.AddQueueStorage(_azureBuilder);
                 Assert.NotNull(result);
                 Assert.IsTrue(true);
             }
@@ -39,7 +50,7 @@ namespace Bespoke.Azure.Queue.Tests.Extensions
             public void Should_Invoke_Action_When_Provided()
             {
                 bool actionInvoked = false;
-                var result = QueueStorageExtensions.AddQueueStorage(_mockAzureBuilder.Object, builder => {
+                var result = QueueStorageExtensions.AddQueueStorage(_azureBuilder, builder => {
                     actionInvoked = true;
                 });
                 
