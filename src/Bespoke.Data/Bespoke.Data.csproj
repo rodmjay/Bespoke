@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<RootNamespace>Bespoke.Data</RootNamespace>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<DebugType>portable</DebugType>
+		<!-- Ensures PDB generation -->
+		<IncludeSymbols>true</IncludeSymbols>
+		<!-- Include debug symbols -->
+		<IncludeSource>true</IncludeSource>
+		<!-- Include source files -->
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<!-- Creates .snupkg -->
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Update="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CsvHelper" Version="33.0.*" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.*" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.tools" Version="8.0.*">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Bespoke.Core\Bespoke.Core.csproj" />
+	</ItemGroup>
+
+</Project>
