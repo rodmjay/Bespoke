@@ -12,8 +12,8 @@ namespace Bespoke.Rest.Tests.Extensions
     [TestFixture]
     public class RestApiBuilderExtensionsTests
     {
-        private Mock<RestApiBuilder> _mockRestApiBuilder;
-        private Mock<AppBuilder> _mockAppBuilder;
+        private RestApiBuilder _restApiBuilder;
+        private AppBuilder _appBuilder;
         private Mock<IServiceCollection> _mockServices;
         private Mock<IConfiguration> _mockConfiguration;
 
@@ -23,11 +23,14 @@ namespace Bespoke.Rest.Tests.Extensions
             _mockServices = new Mock<IServiceCollection>();
             _mockConfiguration = new Mock<IConfiguration>();
             
-            _mockAppBuilder = new Mock<AppBuilder>();
-            _mockAppBuilder.Setup(x => x.Services).Returns(_mockServices.Object);
-            _mockAppBuilder.Setup(x => x.Configuration).Returns(_mockConfiguration.Object);
+            // Create a real AppBuilder instance with mocked dependencies
+            _appBuilder = new AppBuilder(
+                _mockServices.Object,
+                new AppSettings(),
+                _mockConfiguration.Object);
             
-            _mockRestApiBuilder = new Mock<RestApiBuilder>(_mockAppBuilder.Object);
+            // Create a real RestApiBuilder instance with the real AppBuilder
+            _restApiBuilder = new RestApiBuilder(_appBuilder);
         }
 
         [TestFixture]

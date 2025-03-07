@@ -12,7 +12,7 @@ namespace Bespoke.Handlebars.Tests
     [TestFixture]
     public class AppBuilderExtensionsTests
     {
-        private Mock<AppBuilder> _mockAppBuilder;
+        private AppBuilder _appBuilder;
         private Mock<IServiceCollection> _mockServices;
         private Mock<IConfiguration> _mockConfiguration;
 
@@ -22,9 +22,11 @@ namespace Bespoke.Handlebars.Tests
             _mockServices = new Mock<IServiceCollection>();
             _mockConfiguration = new Mock<IConfiguration>();
             
-            _mockAppBuilder = new Mock<AppBuilder>();
-            _mockAppBuilder.Setup(x => x.Services).Returns(_mockServices.Object);
-            _mockAppBuilder.Setup(x => x.Configuration).Returns(_mockConfiguration.Object);
+            // Create a real AppBuilder instance with mocked dependencies
+            _appBuilder = new AppBuilder(
+                _mockServices.Object,
+                new AppSettings(),
+                _mockConfiguration.Object);
         }
 
         [TestFixture]
@@ -33,10 +35,10 @@ namespace Bespoke.Handlebars.Tests
             [Test]
             public void Should_Return_AppBuilder()
             {
-                var result = AppBuilderExtensions.RegisterHandlebarsExtensions(_mockAppBuilder.Object);
+                var result = AppBuilderExtensions.RegisterHandlebarsExtensions(_appBuilder);
                 
                 Assert.NotNull(result);
-                Assert.AreEqual(_mockAppBuilder.Object, result);
+                Assert.AreEqual(_appBuilder, result);
                 Assert.IsTrue(true);
             }
 
@@ -44,7 +46,7 @@ namespace Bespoke.Handlebars.Tests
             public void Should_Register_FormatDate_Helper()
             {
                 // Call the extension method to register the helpers
-                AppBuilderExtensions.RegisterHandlebarsExtensions(_mockAppBuilder.Object);
+                AppBuilderExtensions.RegisterHandlebarsExtensions(_appBuilder);
                 
                 // Verify that the formatDate helper is registered
                 // Note: This is a stub test since we can't easily verify Handlebars.RegisterHelper was called
@@ -55,7 +57,7 @@ namespace Bespoke.Handlebars.Tests
             public void Should_Register_Eq_Helper()
             {
                 // Call the extension method to register the helpers
-                AppBuilderExtensions.RegisterHandlebarsExtensions(_mockAppBuilder.Object);
+                AppBuilderExtensions.RegisterHandlebarsExtensions(_appBuilder);
                 
                 // Verify that the eq helper is registered
                 // Note: This is a stub test since we can't easily verify Handlebars.RegisterHelper was called

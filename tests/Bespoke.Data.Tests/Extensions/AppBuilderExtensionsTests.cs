@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Bespoke.Data.Extensions;
 using Bespoke.Core.Builders;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using System;
@@ -10,15 +11,21 @@ namespace Bespoke.Data.Tests.Extensions
     [TestFixture]
     public class AppBuilderExtensionsTests
     {
-        private Mock<AppBuilder> _mockAppBuilder;
+        private AppBuilder _appBuilder;
         private Mock<IServiceCollection> _mockServices;
+        private Mock<IConfiguration> _mockConfiguration;
 
         [SetUp]
         public void Setup()
         {
             _mockServices = new Mock<IServiceCollection>();
-            _mockAppBuilder = new Mock<AppBuilder>();
-            _mockAppBuilder.Setup(x => x.Services).Returns(_mockServices.Object);
+            _mockConfiguration = new Mock<IConfiguration>();
+            
+            // Create a real AppBuilder instance with mocked dependencies
+            _appBuilder = new AppBuilder(
+                _mockServices.Object,
+                new AppSettings(),
+                _mockConfiguration.Object);
         }
 
         [TestFixture]

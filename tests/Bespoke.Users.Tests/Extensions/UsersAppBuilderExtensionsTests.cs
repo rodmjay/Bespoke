@@ -11,7 +11,7 @@ namespace Bespoke.Users.Tests.Extensions
     [TestFixture]
     public class UsersAppBuilderExtensionsTests
     {
-        private Mock<AppBuilder> _mockAppBuilder;
+        private AppBuilder _appBuilder;
         private Mock<IServiceCollection> _mockServices;
         private Mock<IConfiguration> _mockConfiguration;
 
@@ -21,9 +21,11 @@ namespace Bespoke.Users.Tests.Extensions
             _mockServices = new Mock<IServiceCollection>();
             _mockConfiguration = new Mock<IConfiguration>();
             
-            _mockAppBuilder = new Mock<AppBuilder>();
-            _mockAppBuilder.Setup(x => x.Services).Returns(_mockServices.Object);
-            _mockAppBuilder.Setup(x => x.Configuration).Returns(_mockConfiguration.Object);
+            // Create a real AppBuilder instance with mocked dependencies
+            _appBuilder = new AppBuilder(
+                _mockServices.Object,
+                new AppSettings(),
+                _mockConfiguration.Object);
         }
 
         [TestFixture]
