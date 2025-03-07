@@ -4,6 +4,9 @@
 
 #endregion
 
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Bespoke.Core.Settings;

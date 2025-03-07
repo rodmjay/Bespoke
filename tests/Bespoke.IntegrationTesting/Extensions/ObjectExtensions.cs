@@ -5,6 +5,7 @@
 #endregion
 
 using System.Text;
+using System.Net.Http;
 using Newtonsoft.Json;
 
 namespace Bespoke.IntegrationTesting.Extensions;
