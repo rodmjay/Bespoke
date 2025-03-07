@@ -231,7 +231,7 @@ public abstract class BaseProxy(HttpClient httpClient)
 
             return new NotFoundResult();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             // Handle exceptions by returning an appropriate result
             return new BadRequestObjectResult(ex.Message);

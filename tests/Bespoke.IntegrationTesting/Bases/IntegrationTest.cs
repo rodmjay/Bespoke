@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework.Legacy;
 using Bespoke.Data.Interfaces;
 using Bespoke.IntegrationTesting.Extensions;
+using NUnit.Framework;
 
 namespace Bespoke.IntegrationTesting.Bases;
 
