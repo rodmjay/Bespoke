@@ -10,6 +10,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Rest\Bespoke.Rest.csproj" />
-    <PackageReference Include="Moq" />
   </ItemGroup>
 </Project>
