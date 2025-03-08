@@ -9,12 +9,6 @@ on:
     branches:
       - main
       - master
-  workflow_dispatch:
-    inputs:
-      bump_type:
-        description: 'Version bump type: patch, minor, or major'
-        required: false
-        default: 'patch'
 
 jobs:
   build:
@@ -23,76 +17,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-
-      - name: Extract Current Version
-        id: get_version
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
-        run: |
-          FILE="src/Bespoke.Core/Bespoke.Core.csproj"
-          if [ -f "$FILE" ]; then
-            CURRENT_VERSION=$(grep '<Version>' "$FILE" | sed -E 's/.*<Version>(.*)<\/Version>.*/\1/')
-            echo "Current version: $CURRENT_VERSION"
-            echo "::set-output name=current::$CURRENT_VERSION"
-          else
-            echo "File not found: $FILE"
-            exit 1
-          fi
-
-      - name: Increment Version
-        id: bump
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
-        run: |
-          # Get the bump type from workflow_dispatch input (default is patch)
-          BUMP_TYPE="${{ github.event.inputs.bump_type }}"
-          if [ -z "$BUMP_TYPE" ]; then
-            BUMP_TYPE="patch"
-          fi
-          echo "Bump type: $BUMP_TYPE"
-          
-          # Read current version parts: major.minor.patch
-          IFS='.' read -r major minor patch <<< "${{ steps.get_version.outputs.current }}"
-          
-          case "$BUMP_TYPE" in
-            patch)
-              patch=$((patch + 1))
-              ;;
-            minor)
-              minor=$((minor + 1))
-              patch=0
-              ;;
-            major)
-              major=$((major + 1))
-              minor=0
-              patch=0
-              ;;
-            *)
-              echo "Invalid bump type: $BUMP_TYPE. Use patch, minor, or major."
-              exit 1
-              ;;
-          esac
-          NEW_VERSION="${major}.${minor}.${patch}"
-          echo "New version: $NEW_VERSION"
-          echo "::set-output name=new::$NEW_VERSION"
-
-      - name: Update csproj Version
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
-        run: |
-          FILE="src/Bespoke.Core/Bespoke.Core.csproj"
-          CURRENT_VERSION="${{ steps.get_version.outputs.current }}"
-          NEW_VERSION="${{ steps.bump.outputs.new }}"
-          sed -i "s/<Version>$CURRENT_VERSION<\/Version>/<Version>$NEW_VERSION<\/Version>/g" "$FILE"
-
-      - name: Commit and Push Version Change
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
-        env:
-          NEW_VERSION: ${{ steps.bump.outputs.new }}
-        run: |
-          FILE="src/Bespoke.Core/Bespoke.Core.csproj"
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
-          git add "$FILE"
-          git commit -m "Bump version to $NEW_VERSION" || echo "No changes to commit"
-          git push
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
