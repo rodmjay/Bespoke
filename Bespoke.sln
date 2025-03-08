@@ -87,6 +87,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Users.Tests", "tests\Bespoke.Users.Tests\Bespoke.Users.Tests.csproj", "{E812660A-6824-4C86-AEFA-71B06DFACB1F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{376EDBCC-8B54-4C13-8803-8C77890A8653}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
