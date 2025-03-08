@@ -6,7 +6,6 @@
 
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Identity;
-using Bespoke.Core.Cryptography;
 
 namespace Bespoke.Users.Managers;
 
@@ -43,6 +42,6 @@ public partial class UserManager
     {
         var bytes = new byte[20];
         RandomNumberGenerator.Fill(bytes);
-        return CustomBase32.ToBase32(bytes);
+        return Convert.ToBase64String(bytes);
     }
 }
