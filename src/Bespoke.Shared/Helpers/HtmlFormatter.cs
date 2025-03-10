@@ -1,6 +1,6 @@
 ﻿using HtmlAgilityPack;
 
-namespace AssetScope.Shared.Helpers;
+namespace Bespoke.Shared.Helpers;
 
 public class HtmlFormatter
 {

@@ -11,7 +11,7 @@ namespace Bespoke.Core.Settings;
 public class AppSettings
 {
     public string Name { get; set; }
-    public bool Version { get; set; }
+    public string Version { get; set; }
     public OperationMode Mode { get; set; } = OperationMode.Demo;
 
 }

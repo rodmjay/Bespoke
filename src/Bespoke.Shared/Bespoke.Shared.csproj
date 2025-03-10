@@ -34,6 +34,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" />
+		<PackageReference Include="HtmlAgilityPack" />
+
 	</ItemGroup>
 
 </Project>
