@@ -1,0 +1,6 @@
+﻿Id,OrganizationId,PersonId,CompanyId,PositionId,Order,Name,Description,Budget
+1,1,1,1,1,1,BASF-Refinity,"Refinity is a digital platform that manages inventory, color, learning, and business management for body shops",NULL
+2,1,1,1,1,2,Microsoft,The SRE Team oversees the quality assurance and monitoring of Microsoft's internal systems.,NULL
+1,1,1,2,2,1,Elder Care Management Platform,ElderKey is a sophisticated platform designed to manage the health and wellness of senior citizens.,500000
+2,1,1,2,1,2,Real Estate Accounting Platform,Cashflow Tactics is a platform designed to enhance the profitability of real estate investors through a diverse array of strategic approaches.,500000
+3,1,1,2,2,3,Major Food Distribution System,"Associated Foods is a cooperative network that provides food distribution, warehousing, and retail support to independent grocery stores.",3000000
