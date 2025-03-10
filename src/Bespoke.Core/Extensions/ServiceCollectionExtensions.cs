@@ -59,18 +59,14 @@ public static class ServiceCollectionExtensions
         this AppBuilder builder, List<Assembly> assemblies)
 
     {
-        var assembliesToMap = new List<string>();
-
-        foreach (var assembly in assemblies)
-            if (!assembliesToMap.Contains(assembly.FullName))
-                assembliesToMap.Add(assembly.FullName);
-
-        var config = new MapperConfiguration(x => x.AddMaps(assembliesToMap));
-
-        var mapper = config.CreateMapper();
-
-        builder.Services.TryAddSingleton(config);
-        builder.Services.TryAddScoped(sp => mapper);
+        var filteredAssemblies = assemblies.Where(a => a.GetName().Name != "Microsoft.Data.SqlClient");
+        var mapperConfig = new MapperConfiguration(cfg =>
+        {
+            cfg.AddMaps(filteredAssemblies);
+        });
+        var mapper = mapperConfig.CreateMapper();
+        builder.Services.AddSingleton(mapper);
+        //builder.Services.TryAddScoped(sp => mapper);
 
         return builder;
     }
