@@ -4,9 +4,7 @@
 
 #endregion
 
-using Bespoke.Rest.Bases;
 using ResumePro.Services.Interfaces;
-using ResumePro.Shared.Interfaces;
 
 namespace ResumePro.Api.Controllers;
 

@@ -19,27 +19,27 @@ public sealed class SchoolsProxy : BaseProxy, ISchoolsController
     {
     }
 
-    public async Task<List<SchoolDetails>> GetSchools(int personId)
+    public  Task<List<SchoolDetails>> GetSchools(int personId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<SchoolDetails> GetSchool(int personId, int schoolId)
+    public  Task<SchoolDetails> GetSchool(int personId, int schoolId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<SchoolDetails>> UpdateSchool(int personId, int schoolId, SchoolOptions options)
+    public Task<ActionResult<SchoolDetails>> UpdateSchool(int personId, int schoolId, SchoolOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Result> DeleteSchool(int personId, int schoolId)
+    public Task<Result> DeleteSchool(int personId, int schoolId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<SchoolDetails>> CreateSchool(int personId, SchoolOptions options)
+    public Task<ActionResult<SchoolDetails>> CreateSchool(int personId, SchoolOptions options)
     {
         throw new NotImplementedException();
     }

@@ -19,27 +19,27 @@ public sealed class HighlightsProxy : BaseProxy, IHighlightsController
     {
     }
 
-    public async Task<HighlightDto> GetHighlight(int personId, int companyId, int positionId, int highlightId)
+    public  Task<HighlightDto> GetHighlight(int personId, int companyId, int positionId, int highlightId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<List<HighlightDto>> GetHighlights(int personId, int companyId, int positionId)
+    public Task<List<HighlightDto>> GetHighlights(int personId, int companyId, int positionId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<HighlightDto>> CreateHighlight(int personId, int companyId, int positionId, HighlightOptions options)
+    public Task<ActionResult<HighlightDto>> CreateHighlight(int personId, int companyId, int positionId, HighlightOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<HighlightDto>> UpdateHighlight(int personId, int companyId, int positionId, int highlightId, HighlightOptions options)
+    public Task<ActionResult<HighlightDto>> UpdateHighlight(int personId, int companyId, int positionId, int highlightId, HighlightOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Result> DeleteHighlight(int personId, int companyId, int positionId, int highlightId)
+    public Task<Result> DeleteHighlight(int personId, int companyId, int positionId, int highlightId)
     {
         throw new NotImplementedException();
     }

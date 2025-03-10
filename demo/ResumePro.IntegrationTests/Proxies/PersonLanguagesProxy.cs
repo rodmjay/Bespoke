@@ -16,7 +16,7 @@ public sealed class PersonLanguagesProxy : BaseProxy, IPersonLanguagesController
     {
     }
 
-    public async Task<List<PersonaLanguageDto>> GetPersonLanguages(int personId)
+    public Task<List<PersonaLanguageDto>> GetPersonLanguages(int personId)
     {
         throw new NotImplementedException();
     }

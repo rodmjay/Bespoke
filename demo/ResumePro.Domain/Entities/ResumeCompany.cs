@@ -13,9 +13,9 @@ public sealed class ResumeCompany : BaseEntity<ResumeCompany>
 {
     public int OrganizationId { get; set; }
     public int ResumeId { get; set; }
-    public Resume Resume { get; set; }
+    public Resume Resume { get; set; } = null!;
     public int CompanyId { get; set; }
-    public Company Company { get; set; }
+    public Company Company { get; set; } = null!;
 
     public override void Configure(EntityTypeBuilder<ResumeCompany> builder)
     {

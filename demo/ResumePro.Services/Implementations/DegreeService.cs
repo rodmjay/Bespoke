@@ -33,7 +33,7 @@ public sealed class DegreeService : BaseService<Degree>, IDegreeService
         return Degrees.AsNoTracking()
             .Where(x => x.OrganizationId == organizationId && x.SchoolId == schoolId && x.Id == degreeId)
             .ProjectTo<T>(Mapper)
-            .FirstOrDefaultAsync();
+            .FirstAsync();
     }
 
     public Task<List<T>> GetDegrees<T>(int organizationId, int personId, int schoolId) where T : DegreeDto

@@ -14,7 +14,7 @@ namespace ResumePro.Shared.Models;
 
 public class CompanySkillDto : ICompanySkill
 {
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     [JsonIgnore] public int OrganizationId { get; set; }
 

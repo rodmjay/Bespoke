@@ -16,7 +16,7 @@ public sealed class SkillsProxy : BaseProxy, ISkillsController
     {
     }
 
-    public async Task<List<SkillDto>> GetSkills()
+    public Task<List<SkillDto>> GetSkills()
     {
         throw new NotImplementedException();
     }

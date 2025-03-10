@@ -41,7 +41,7 @@ public sealed class CertificationService : BaseService<Certification>, ICertific
         return Certifications.AsNoTracking()
             .Where(x => x.OrganizationId == organizationId && x.PersonId == personId && x.Id == certificationId)
             .ProjectTo<T>(Mapper)
-            .FirstOrDefaultAsync();
+            .FirstAsync();
     }
 
     public async Task<OneOf<CertificationDto, Result>> CreateCertification(int organizationId, int personId,
@@ -59,7 +59,7 @@ public sealed class CertificationService : BaseService<Certification>, ICertific
             Id = await GetNextCertificationId(organizationId, personId),
             Body = options.Body,
             PersonId = personId,
-            Date = options.Date.Value,
+            Date = options.Date!.Value,
             Name = options.Name
         };
 
@@ -85,7 +85,7 @@ public sealed class CertificationService : BaseService<Certification>, ICertific
             return Result.Failed(_errors.CertificationNotFound(certificationId));
 
         certification.ObjectState = ObjectState.Modified;
-        certification.Date = options.Date.Value;
+        certification.Date = options.Date!.Value;
         certification.Body = options.Body;
         certification.Name = options.Name;
 

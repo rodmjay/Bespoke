@@ -11,7 +11,7 @@ namespace ResumePro.Domain.Entities;
 
 public sealed class OrganizationSettings : BaseEntity<OrganizationSettings>, IOrganizationSettings
 {
-    public ICollection<ResumeSettings> ResumeSettings { get; set; }
+    public ICollection<ResumeSettings> ResumeSettings { get; set; } = null!;
     public int OrganizationId { get; set; }
     public int ResumeYearHistory { get; set; } = 10;
     public bool AttachAllJobs { get; set; } = true;

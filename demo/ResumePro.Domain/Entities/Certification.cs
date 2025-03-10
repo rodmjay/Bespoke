@@ -15,8 +15,8 @@ public sealed class Certification : BaseEntity<Certification>, ICertification
 {
     public Persona Persona { get; set; } = null!;
     public int OrganizationId { get; set; }
-    public string Name { get; set; }
-    public string Body { get; set; }
+    public string Name { get; set; } = null!;
+    public string Body { get; set; } = null!;
     public DateTime Date { get; set; }
     public int PersonId { get; set; }
     public int Id { get; set; }

@@ -15,7 +15,7 @@ public static class EnumExtensions
     {
         var field = value.GetType().GetField(value.ToString());
 
-        var attributes = (DescriptionAttribute[]) field.GetCustomAttributes(typeof(DescriptionAttribute), false);
+        var attributes = (DescriptionAttribute[]) field!.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
         return attributes.Length > 0 ? attributes[0].Description : value.ToString();
     }
@@ -23,6 +23,6 @@ public static class EnumExtensions
     public static string GetName(this Enum value)
     {
         var field = value.GetType().GetField(value.ToString());
-        return field.Name;
+        return field!.Name;
     }
 }

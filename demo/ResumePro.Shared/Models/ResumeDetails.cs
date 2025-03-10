@@ -10,14 +10,14 @@ namespace ResumePro.Shared.Models;
 
 public class ResumeDetails : ResumeDto
 {
-    public List<CompanyDetails> Companies { get; set; }
+    public List<CompanyDetails> Companies { get; set; } = new();
 
-    public List<ResumeSkillDto> Skills { get; set; }
-    public List<ReferenceDto> References { get; set; }
-    public List<SchoolDetails> Education { get; set; }
-    public List<PersonaLanguageDto> Languages { get; set; }
-    public List<CertificationDto> Certifications { get; set; }
-    public List<RenderingDto> Renderings { get; set; }
+    public List<ResumeSkillDto> Skills { get; set; } = new();  
+    public List<ReferenceDto> References { get; set; } = new();
+    public List<SchoolDetails> Education { get; set; } = new();
+    public List<PersonaLanguageDto> Languages { get; set; } = new();
+    public List<CertificationDto> Certifications { get; set; } = new();
+    public List<RenderingDto> Renderings { get; set; } = new();
 
     public List<CategorySkillRating> SkillDictionary
     {
@@ -37,5 +37,5 @@ public class ResumeDetails : ResumeDto
         }
     }
 
-    public string LanguageString => this.GetLanguageString();
+    public string? LanguageString => this.GetLanguageString();
 }

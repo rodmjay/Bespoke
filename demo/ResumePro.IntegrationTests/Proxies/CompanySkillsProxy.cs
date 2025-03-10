@@ -16,12 +16,12 @@ public sealed class CompanySkillsProxy : BaseProxy, ICompanySkillsController
     {
     }
 
-    public async Task<Result> AddCompanySkill(int personId, int companyId, int skillId)
+    public Task<Result> AddCompanySkill(int personId, int companyId, int skillId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Result> DeleteCompanySkill(int personId, int companyId, int skillId)
+    public Task<Result> DeleteCompanySkill(int personId, int companyId, int skillId)
     {
         throw new NotImplementedException();
     }

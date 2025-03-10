@@ -62,7 +62,7 @@ public sealed class SchoolService : BaseService<School>, ISchoolService
             Id = await GetNextSchoolId(organizationId),
             ObjectState = ObjectState.Added,
             EndDate = options.EndDate,
-            StartDate = options.StartDate.Value,
+            StartDate = options.StartDate!.Value,
             Name = options.Name,
             PersonId = personId,
             OrganizationId = organizationId
@@ -109,7 +109,7 @@ public sealed class SchoolService : BaseService<School>, ISchoolService
 
         school.Name = options.Name;
         school.EndDate = options.EndDate;
-        school.StartDate = options.StartDate.Value;
+        school.StartDate = options.StartDate!.Value;
         school.ObjectState = ObjectState.Modified;
 
         var nextDegreeId = await GetNextDegreeId(organizationId);

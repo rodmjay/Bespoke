@@ -14,7 +14,7 @@ public class PositionOptions : IJobTitle, IStartDate, IEndDate, IId, IValidatabl
     public List<ProjectOptions> Projects { get; set; } = new();
 
     [Required]
-    public string JobTitle { get; set; }
+    public string JobTitle { get; set; } = null!;
     public DateTime StartDate { get; set; }
     public DateTime? EndDate { get; set; }
     public int Id { get; set; }

@@ -57,7 +57,7 @@ public sealed class CompanyService : BaseService<Company>, ICompanyService
     {
         return Companies.AsNoTracking()
             .Where(x => x.OrganizationId == organizationId && x.PersonId == personId && x.Id == companyId)
-            .ProjectTo<T>(Mapper).FirstOrDefaultAsync();
+            .ProjectTo<T>(Mapper).FirstAsync();
     }
 
     public async Task<OneOf<CompanyDetails, Result>> CreateCompany(int organizationId, int personId, CompanyOptions options)

@@ -40,7 +40,7 @@ public sealed class HighlightService : BaseService<Highlight>, IHighlightService
             .AsNoTracking()
             .Where(x => x.OrganizationId == organizationId && x.Id == highlightId)
             .ProjectTo<T>(Mapper)
-            .FirstOrDefaultAsync();
+            .FirstAsync();
     }
 
     public async Task<OneOf<HighlightDto, Result>> CreateHighlight(int organizationId, int personId, int companyId, int positionId,

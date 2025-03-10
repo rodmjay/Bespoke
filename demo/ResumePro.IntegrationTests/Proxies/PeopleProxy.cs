@@ -21,27 +21,27 @@ public sealed class PeopleProxy : BaseProxy, IPeopleController
     {
     }
 
-    public async Task<PagedList<PersonaDto>> GetPeople(PersonaFilters filters, PagingQuery paging)
+    public  Task<PagedList<PersonaDto>> GetPeople(PersonaFilters filters, PagingQuery paging)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<PersonaDetails> GetPerson(int personId)
+    public  Task<PersonaDetails> GetPerson(int personId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<PersonaDetails>> CreatePerson(PersonOptions options)
+    public  Task<ActionResult<PersonaDetails>> CreatePerson(PersonOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<PersonaDetails>> UpdatePerson(int personId, PersonOptions options)
+    public  Task<ActionResult<PersonaDetails>> UpdatePerson(int personId, PersonOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Result> DeletePerson(int personId)
+    public  Task<Result> DeletePerson(int personId)
     {
         throw new NotImplementedException();
     }

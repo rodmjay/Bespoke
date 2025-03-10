@@ -12,11 +12,11 @@ namespace ResumePro.Domain.Entities;
 
 public sealed class PersonaLanguage : BaseEntity<PersonaLanguage>, IPersonaLanguage
 {
-    public Persona Persona { get; set; }
-    public Language Language { get; set; }
+    public Persona Persona { get; set; } = null!;
+    public Language Language { get; set; } = null!;
     public int OrganizationId { get; set; }
     public int PersonId { get; set; }
-    public string Code3 { get; set; }
+    public string Code3 { get; set; } = null!;
 
     public LanguageLevel Proficiency { get; set; }
 

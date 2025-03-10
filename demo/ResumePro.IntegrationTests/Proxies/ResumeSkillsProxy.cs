@@ -17,12 +17,12 @@ public sealed class ResumeSkillsProxy : BaseProxy, IResumeSkillsController
     {
     }
 
-    public async Task<Result> AddResumeSkill(int personId, int resumeId, int skillId)
+    public Task<Result> AddResumeSkill(int personId, int resumeId, int skillId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Result> DeleteResumeSkill(int personId, int resumeId, int skillId)
+    public Task<Result> DeleteResumeSkill(int personId, int resumeId, int skillId)
     {
         throw new NotImplementedException();
     }

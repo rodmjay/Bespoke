@@ -12,7 +12,7 @@ public class UrlHelper
 {
     public static string CombineObjectsToUrl(params object[] dataObjects)
     {
-        var queryParams = new List<string>();
+        var queryParams = new List<string?>();
 
         foreach (var obj in dataObjects)
         {

@@ -19,27 +19,27 @@ public sealed class ResumeProxy : BaseProxy, IResumeController
     {
     }
 
-    public async Task<ResumeDetails> GetResume(int personId, int resumeId)
+    public  Task<ResumeDetails> GetResume(int personId, int resumeId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<List<ResumeDto>> GetResumes(int personId)
+    public  Task<List<ResumeDto>> GetResumes(int personId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<ResumeDetails>> CreateResume(int personId, ResumeOptions options)
+    public  Task<ActionResult<ResumeDetails>> CreateResume(int personId, ResumeOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<ResumeDetails>> UpdateResume(int personId, int resumeId, ResumeOptions options)
+    public  Task<ActionResult<ResumeDetails>> UpdateResume(int personId, int resumeId, ResumeOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Result> DeleteResume(int personId, int resumeId)
+    public  Task<Result> DeleteResume(int personId, int resumeId)
     {
         throw new NotImplementedException();
     }

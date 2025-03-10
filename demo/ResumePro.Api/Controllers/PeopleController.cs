@@ -7,7 +7,6 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using ResumePro.Services.Interfaces;
 using ResumePro.Shared.Filters;
-using ResumePro.Shared.Interfaces;
 
 namespace ResumePro.Api.Controllers;
 
@@ -25,6 +24,7 @@ public sealed class PeopleController : BaseController, IPeopleController
         [FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)]
         PersonaFilters? filters, [FromQuery] PagingQuery paging)
     {
+        filters ??= new PersonaFilters();
         return await _peopleService.GetPeople<PersonaDto>(OrganizationId, filters, paging)
             .ConfigureAwait(false);
     }

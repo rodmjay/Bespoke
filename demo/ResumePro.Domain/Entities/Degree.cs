@@ -14,10 +14,10 @@ namespace ResumePro.Domain.Entities;
 public sealed class Degree : BaseEntity<Degree>, IDegree
 {
     public int OrganizationId { get; set; }
-    public School School { get; set; }
+    public School School { get; set; } = null!;
     public int SchoolId { get; set; }
     public int Id { get; set; }
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
     public int Order { get; set; }
 
     public override void Configure(EntityTypeBuilder<Degree> builder)

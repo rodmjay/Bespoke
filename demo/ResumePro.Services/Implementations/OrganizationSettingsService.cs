@@ -29,7 +29,7 @@ public sealed class OrganizationSettingsService : BaseService<OrganizationSettin
     {
         return Settings.AsNoTracking().Where(x => x.OrganizationId == organizationId)
             .ProjectTo<OrganizationSettingsDto>(Mapper)
-            .FirstOrDefaultAsync();
+            .FirstAsync();
     }
 
     public async Task<OneOf<OrganizationSettingsDto, Result>> AddOrUpdateUpdateOrganizationSettings(int organizationId,

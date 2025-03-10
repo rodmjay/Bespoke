@@ -14,7 +14,7 @@ namespace ResumePro.Shared.Extensions;
 
 public static class ResumeExtensions
 {
-    public static string GetLanguageString(this ResumeDetails details)
+    public static string? GetLanguageString(this ResumeDetails details)
     {
         if (details.Languages == null || !details.Languages.Any())
             return null;

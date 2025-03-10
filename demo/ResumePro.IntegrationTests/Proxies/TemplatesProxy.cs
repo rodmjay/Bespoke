@@ -18,17 +18,17 @@ public sealed class TemplatesProxy : BaseProxy, ITemplatesController
     {
     }
 
-    public async Task<List<TemplateDto>> GetTemplates()
+    public  Task<List<TemplateDto>> GetTemplates()
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<TemplateDto>> CreateTemplate(TemplateOptions options)
+    public  Task<ActionResult<TemplateDto>> CreateTemplate(TemplateOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<TemplateDto>> UpdateTemplate(int templateId, TemplateOptions options)
+    public  Task<ActionResult<TemplateDto>> UpdateTemplate(int templateId, TemplateOptions options)
     {
         throw new NotImplementedException();
     }

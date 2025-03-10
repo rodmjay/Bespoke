@@ -8,17 +8,17 @@ namespace ResumePro.Shared.Models;
 
 public class ResumeDto : IResume
 {
-    public ResumeSettingsDto Settings { get; set; }
+    public ResumeSettingsDto Settings { get; set; } = null!;
 
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
-    public string PhoneNumber { get; set; }
-    public string LinkedIn { get; set; }
-    public string GitHub { get; set; }
-    public string City { get; set; }
-    public string State { get; set; }
-    public string Country { get; set; }
+    public string FirstName { get; set; } = null!;
+    public string LastName { get; set; } = null!;
+    public string Email { get; set; } = null!;
+    public string PhoneNumber { get; set; } = null!;
+    public string LinkedIn { get; set; } = null!;
+    public string GitHub { get; set; } = null!;
+    public string City { get; set; } = null!;
+    public string State { get; set; } = null!;
+    public string Country { get; set; } = null!;
     public int JobCount { get; set; }
     public int SkillCount { get; set; }
 
@@ -26,8 +26,8 @@ public class ResumeDto : IResume
 
     public int Id { get; set; }
 
-    public string JobTitle { get; set; }
-    public string Description { get; set; }
+    public string JobTitle { get; set; } = null!;
+    public string Description { get; set; } = null!;
 
     [JsonIgnore] public int OrganizationId { get; set; }
 }

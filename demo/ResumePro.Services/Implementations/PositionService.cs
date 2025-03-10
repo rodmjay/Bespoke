@@ -44,7 +44,7 @@ public sealed class PositionService : BaseService<Position>, IPositionService
         return await Positions.AsNoTracking().Where(x =>
                 x.OrganizationId == organizationId && x.CompanyId == companyId && x.Id == positionId &&
                 x.PersonId == personId)
-            .ProjectTo<T>(Mapper).FirstOrDefaultAsync();
+            .ProjectTo<T>(Mapper).FirstAsync();
     }
 
     public async Task<List<T>> GetPositions<T>(int organizationId, int personId, int companyId) where T : PositionDto
@@ -139,7 +139,7 @@ public sealed class PositionService : BaseService<Position>, IPositionService
             .ThenInclude(x=>x.Highlights)
             .Include(x=>x.Highlights)
             .Where(PositionHelpers.GetPredicate(organizationId, personId, companyId, positionId))
-            .FirstOrDefaultAsync();
+            .FirstAsync();
 
         foreach (var project in position.Projects)
         {

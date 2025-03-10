@@ -6,7 +6,6 @@
 
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using ResumePro.Services.Interfaces;
-using ResumePro.Shared.Interfaces;
 
 namespace ResumePro.Api.Controllers;
 
@@ -24,8 +23,10 @@ public sealed class OrganizationSettingsController : BaseController, IOrganizati
     [HttpPost]
     public async Task<ActionResult<OrganizationSettingsDto>> CreateSettings(
         [FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)]
-        OrganizationSettingsOptions? options)
+        OrganizationSettingsOptions? options = null)
     {
+        options ??= new OrganizationSettingsOptions();
+
         var result = await _service.AddOrUpdateUpdateOrganizationSettings(OrganizationId, options)
             .ConfigureAwait(false);
         if (result.IsT0) return Ok(result.AsT0);

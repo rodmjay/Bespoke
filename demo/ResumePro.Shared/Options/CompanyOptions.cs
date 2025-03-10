@@ -14,13 +14,13 @@ public class CompanyOptions
     public DateTime? EndDate { get; set; }
 
     [MaxLength(255)]
-    [Required] public string Company { get; set; }
+    [Required] public string Company { get; set; } = null!;
 
     [MaxLength(1024)]
-    public string Description { get; set; }
+    public string Description { get; set; } = null!;
 
     [MaxLength(255)]
-    public string Location { get; set; }
+    public string Location { get; set; } = null!;
 
     public List<PositionOptions> Positions { get; set; } = new();
 

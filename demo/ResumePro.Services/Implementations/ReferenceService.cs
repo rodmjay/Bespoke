@@ -44,7 +44,7 @@ public sealed class ReferenceService : BaseService<Reference>, IReferenceService
             .Where(x => x.OrganizationId == organizationId && x.PersonId == personId && x.Id == referenceId)
             .OrderBy(x => x.Order)
             .ProjectTo<T>(Mapper)
-            .FirstOrDefaultAsync();
+            .FirstAsync();
     }
 
     public async Task<OneOf<ReferenceDto, Result>> CreateReference(int organizationId, int personId,

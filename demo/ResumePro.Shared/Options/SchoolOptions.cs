@@ -15,8 +15,8 @@ public class SchoolOptions : ILocation, IName, IEndDate
 
     [Required] public DateTime? StartDate { get; set; }
 
-    [Required] public string Name { get; set; }
+    [Required] public string Name { get; set; } = null!;
 
     public List<DegreeOptions> DegreeOptions { get; set; } = new();
-    public string Location { get; set; }
+    public string Location { get; set; } = null!;
 }

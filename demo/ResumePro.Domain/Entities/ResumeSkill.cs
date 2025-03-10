@@ -11,8 +11,8 @@ namespace ResumePro.Domain.Entities;
 
 public sealed class ResumeSkill : BaseEntity<ResumeSkill>, IResumeSkill
 {
-    public Resume Resume { get; set; }
-    public PersonaSkill Skill { get; set; }
+    public Resume Resume { get; set; } = null!;
+    public PersonaSkill Skill { get; set; } = null!;
     public int OrganizationId { get; set; }
     public int ResumeId { get; set; }
     public int SkillId { get; set; }

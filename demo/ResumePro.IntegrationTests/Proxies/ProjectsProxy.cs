@@ -19,27 +19,27 @@ public sealed class ProjectsProxy : BaseProxy, IProjectsController
     {
     }
 
-    public async Task<ProjectDetails> GetProject(int personId, int companyId, int positionId, int projectId)
+    public Task<ProjectDetails> GetProject(int personId, int companyId, int positionId, int projectId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<List<ProjectDetails>> GetList(int personId, int companyId, int positionId)
+    public Task<List<ProjectDetails>> GetList(int personId, int companyId, int positionId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<ProjectDetails>> CreateProject(int personId, int companyId, int positionId, ProjectOptions options)
+    public Task<ActionResult<ProjectDetails>> CreateProject(int personId, int companyId, int positionId, ProjectOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<ProjectDetails>> Update(int personId, int companyId, int positionId, int projectId, ProjectOptions options)
+    public Task<ActionResult<ProjectDetails>> Update(int personId, int companyId, int positionId, int projectId, ProjectOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Result> Delete(int personId, int companyId, int positionId, int projectId)
+    public  Task<Result> Delete(int personId, int companyId, int positionId, int projectId)
     {
         throw new NotImplementedException();
     }

@@ -39,7 +39,7 @@ public sealed class PersonaLanguageService : BaseService<PersonaLanguage>, IPers
         return PersonaLanguages.AsNoTracking()
             .Where(x => x.OrganizationId == organizationId && x.PersonId == personId)
             .ProjectTo<T>(Mapper)
-            .FirstOrDefaultAsync();
+            .FirstAsync();
     }
 
     public Task<List<T>> GetPersonaLanguages<T>(int organizationId, int personId) where T : PersonaLanguageDto

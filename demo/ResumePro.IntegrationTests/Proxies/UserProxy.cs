@@ -16,7 +16,7 @@ public sealed class UserProxy : BaseProxy, IUserController
     {
     }
 
-    public async Task<UserOutput> GetUser()
+    public Task<UserOutput> GetUser()
     {
         throw new NotImplementedException();
     }

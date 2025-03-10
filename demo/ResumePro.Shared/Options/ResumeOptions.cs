@@ -10,9 +10,9 @@ namespace ResumePro.Shared.Options;
 
 public class ResumeOptions : IDescription, IJobTitle
 {
-    [Required] public string JobTitle { get; set; }
+    [Required] public string JobTitle { get; set; } = null!;
 
-    [Required] public string Description { get; set; }
+    [Required] public string Description { get; set; } = null!;
 
     public ResumeSettingsOptions Settings { get; set; } = new();
 

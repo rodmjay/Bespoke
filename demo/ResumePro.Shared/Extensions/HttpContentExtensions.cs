@@ -24,6 +24,6 @@ public static class HttpContentExtensions
         var jsonContent = content.ReadAsStringAsync().Result;
 
         var obj = JsonConvert.DeserializeObject<T>(jsonContent);
-        return obj;
+        return obj!;
     }
 }

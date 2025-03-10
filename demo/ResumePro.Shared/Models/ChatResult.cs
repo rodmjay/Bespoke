@@ -11,5 +11,5 @@ public class ChatResult
 {
     public bool Succeeded => !string.IsNullOrWhiteSpace(OutputText);
 
-    public string OutputText { get; set; }
+    public string OutputText { get; set; } = null!;
 }

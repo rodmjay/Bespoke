@@ -17,12 +17,12 @@ public sealed class PersonSkillsProxy : BaseProxy, IPersonSkillsController
     {
     }
 
-    public async Task<List<PersonaSkillDto>> GetSkills(int personId)
+    public Task<List<PersonaSkillDto>> GetSkills(int personId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Result> ToggleSkill(int personId, int skillId)
+    public Task<Result> ToggleSkill(int personId, int skillId)
     {
         throw new NotImplementedException();
     }

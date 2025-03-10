@@ -7,7 +7,6 @@
 using Microsoft.AspNetCore.Authorization;
 using ResumePro.Services.Interfaces;
 using ResumePro.Shared.Extensions;
-using ResumePro.Shared.Interfaces;
 
 namespace ResumePro.Api.Controllers;
 
@@ -48,20 +47,20 @@ public sealed class ResumesController : BaseController, IResumeController
     //    return await _pdfStorage.SavePdfAsync(response, fileName);
     //}
 
-    [HttpGet("{resumeId}/pdf")]
-    [AllowAnonymous]
-    public async Task<IActionResult> PdfAnonymous([FromRoute] int personId, [FromRoute] int resumeId, [FromQuery]int organizationId)
-    {
-        var resume = await _resumeService.GetResume<ResumeDetails>(organizationId, personId, resumeId);
-        var fileName = resume.GetFileName();
+    //[HttpGet("{resumeId}/pdf")]
+    //[AllowAnonymous]
+    //public async Task<IActionResult> PdfAnonymous([FromRoute] int personId, [FromRoute] int resumeId, [FromQuery]int organizationId)
+    //{
+    //    var resume = await _resumeService.GetResume<ResumeDetails>(organizationId, personId, resumeId);
+    //    var fileName = resume.GetFileName();
 
-        var resumeStream = await _resumeService.Generate2(resume)
-            .ConfigureAwait(true);
+    //    var resumeStream = await _resumeService.Generate2(resume)
+    //        .ConfigureAwait(true);
         
-        Response.Headers.Add("Content-Disposition", $"inline; filename={fileName}");
+    //    Response.Headers.Add("Content-Disposition", $"inline; filename={fileName}");
 
-        return File(resumeStream, "application/pdf");
-    }
+    //    return File(resumeStream, "application/pdf");
+    //}
 
     [HttpPost]
     public async Task<ActionResult<ResumeDetails>> CreateResume([FromRoute] int personId,

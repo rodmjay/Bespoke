@@ -12,10 +12,10 @@ namespace ResumePro.Domain.Entities;
 public sealed class PersonaSkill : BaseEntity<PersonaSkill>, IPersonaSkill
 {
     public int OrganizationId { get; set; }
-    public Persona Persona { get; set; }
-    public Skill Skill { get; set; }
-    public ICollection<CompanySkill> Jobs { get; set; }
-    public ICollection<ResumeSkill> Resumes { get; set; }
+    public Persona Persona { get; set; } = null!;
+    public Skill Skill { get; set; } = null!;
+    public ICollection<CompanySkill> Jobs { get; set; } = new List<CompanySkill>();
+    public ICollection<ResumeSkill> Resumes { get; set; } = new List<ResumeSkill>();
     public int PersonId { get; set; }
     public int SkillId { get; set; }
 

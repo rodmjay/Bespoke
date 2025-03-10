@@ -4,13 +4,11 @@
 
 #endregion
 
-using System.Diagnostics.CodeAnalysis;
 using Bespoke.Core.Extensions;
 using Serilog;
 
 namespace ResumePro.Api;
 
-[ExcludeFromCodeCoverage]
 public class Program
 {
     public static void Main(string[] args)

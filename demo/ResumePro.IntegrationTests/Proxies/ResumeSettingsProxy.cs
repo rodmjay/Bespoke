@@ -18,7 +18,7 @@ public sealed class ResumeSettingsProxy : BaseProxy, IResumeSettingsController
     {
     }
 
-    public async Task<ActionResult<ResumeSettingsDto>> UpdateSettings(int personId, int resumeId, ResumeSettingsOptions options)
+    public Task<ActionResult<ResumeSettingsDto>> UpdateSettings(int personId, int resumeId, ResumeSettingsOptions options)
     {
         throw new NotImplementedException();
     }

@@ -12,9 +12,9 @@ namespace ResumePro.Domain.Entities;
 
 public sealed class ResumeSettings : BaseEntity<ResumeSettings>, IResumeSettings
 {
-    public Resume Resume { get; set; }
-    public Template Template { get; set; }
-    public OrganizationSettings OrganizationSettings { get; set; }
+    public Resume Resume { get; set; } = null!;
+    public Template Template { get; set; } = null!;
+    public OrganizationSettings OrganizationSettings { get; set; } = null!;
     public int OrganizationId { get; set; }
     public int ResumeId { get; set; }
     public bool? AttachAllJobs { get; set; } = true;

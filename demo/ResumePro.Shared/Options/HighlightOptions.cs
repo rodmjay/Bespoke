@@ -15,7 +15,7 @@ public class HighlightOptions
 
     [DisplayName("Highlight")]
     [MaxLength(512)]
-    [Required] public string Text { get; set; }
+    [Required] public string Text { get; set; } = null!;
 
     public int? Order { get; set; }
 }

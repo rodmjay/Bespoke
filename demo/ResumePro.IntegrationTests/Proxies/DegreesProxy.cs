@@ -19,27 +19,27 @@ public sealed class DegreesProxy : BaseProxy, IDegreesController
     {
     }
 
-    public async Task<DegreeDto> GetDegree(int personId, int schoolId, int degreeId)
+    public  Task<DegreeDto> GetDegree(int personId, int schoolId, int degreeId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<List<DegreeDto>> GetDegrees(int personId, int schoolId)
+    public Task<List<DegreeDto>> GetDegrees(int personId, int schoolId)
     {
         throw new NotImplementedException(); 
     }
 
-    public async Task<ActionResult<DegreeDto>> UpdateDegree(int personId, int schoolId, int degreeId, DegreeOptions options)
+    public Task<ActionResult<DegreeDto>> UpdateDegree(int personId, int schoolId, int degreeId, DegreeOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Result> DeleteDegree(int personId, int schoolId, int degreeId)
+    public Task<Result> DeleteDegree(int personId, int schoolId, int degreeId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<DegreeDto>> CreateDegree(int personId, int schoolId, DegreeOptions options)
+    public Task<ActionResult<DegreeDto>> CreateDegree(int personId, int schoolId, DegreeOptions options)
     {
         throw new NotImplementedException();
     }

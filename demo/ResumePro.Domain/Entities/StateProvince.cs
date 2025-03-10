@@ -11,14 +11,14 @@ namespace ResumePro.Domain.Entities;
 public sealed class StateProvince : BaseEntity<StateProvince>, IStateProvince
 {
     public int Id { get; set; }
-    public Country Country { get; set; }
-    public string Iso2 { get; set; }
+    public Country Country { get; set; } = null!;
+    public string Iso2 { get; set; } = null!;
 
     public ICollection<Persona> People { get; set; } = new List<Persona>();
 
-    public string Name { get; set; }
-    public string Abbrev { get; set; }
-    public string Code { get; set; }
+    public string Name { get; set; } = null!;
+    public string Abbrev { get; set; } = null!;
+    public string Code { get; set; } = null!;
 
     public override void Configure(EntityTypeBuilder<StateProvince> builder)
     {

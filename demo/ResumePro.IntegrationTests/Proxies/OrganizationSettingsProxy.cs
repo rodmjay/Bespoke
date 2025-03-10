@@ -18,12 +18,12 @@ public sealed class OrganizationSettingsProxy : BaseProxy, IOrganizationSettings
     {
     }
 
-    public async Task<ActionResult<OrganizationSettingsDto>> CreateSettings(OrganizationSettingsOptions options)
+    public Task<ActionResult<OrganizationSettingsDto>> CreateSettings(OrganizationSettingsOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<OrganizationSettingsDto>> UpdateSettings(OrganizationSettingsOptions options)
+    public Task<ActionResult<OrganizationSettingsDto>> UpdateSettings(OrganizationSettingsOptions options)
     {
         throw new NotImplementedException();
     }

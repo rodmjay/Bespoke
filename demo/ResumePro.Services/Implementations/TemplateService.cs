@@ -4,6 +4,7 @@
 
 #endregion
 
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
@@ -37,7 +38,7 @@ public sealed class TemplateService : BaseService<Template>, ITemplateService
         return Templates.AsNoTracking()
             .Where(x => (x.OrganizationId == organizationId || x.OrganizationId == null) && x.Name == templateId)
             .ProjectTo<T>(Mapper)
-            .FirstOrDefaultAsync();
+            .FirstAsync();
     }
 
     public async Task<OneOf<TemplateDto, Result>> CreateTemplate(int organizationId, TemplateOptions options)
@@ -70,7 +71,7 @@ public sealed class TemplateService : BaseService<Template>, ITemplateService
             organizationId, templateId, options);
 
         var template = await Templates.Where(x => x.OrganizationId == organizationId && x.Id == templateId)
-            .FirstOrDefaultAsync();
+            .FirstAsync();
 
         template.ObjectState = ObjectState.Modified;
         template.Name = options.Name;

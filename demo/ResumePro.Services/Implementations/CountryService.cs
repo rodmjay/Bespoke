@@ -33,7 +33,7 @@ public sealed class CountryService : BaseService<Country>, ICountryService
             .AsNoTracking()
             .ProjectTo<T>(Mapper)
             .AsNoTracking()
-            .FirstOrDefaultAsync();
+            .FirstAsync();
     }
 
     public Task<PagedList<T>> GetCountries<T>(Expression<Func<Country, bool>> predicate, PagingQuery paging)

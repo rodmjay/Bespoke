@@ -14,7 +14,7 @@ namespace ResumePro.Domain.Entities;
 public sealed class Company : BaseEntity<Company>, ICompany
 {
     public int OrganizationId { get; set; }
-    public Persona Persona { get; set; }
+    public Persona Persona { get; set; } = null!;
     public ICollection<Project> Projects { get; set; } = new List<Project>();
     public int PersonId { get; set; }
     public ICollection<ResumeCompany> Resumes { get; set; } = new List<ResumeCompany>();
@@ -24,9 +24,9 @@ public sealed class Company : BaseEntity<Company>, ICompany
     public int Id { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime? EndDate { get; set; }
-    public string CompanyName { get; set; }
-    public string Location { get; set; }
-    public string Description { get; set; }
+    public string CompanyName { get; set; } = null!;
+    public string Location { get; set; } = null!;
+    public string Description { get; set; } = null!;
 
     public override void Configure(EntityTypeBuilder<Company> builder)
     {

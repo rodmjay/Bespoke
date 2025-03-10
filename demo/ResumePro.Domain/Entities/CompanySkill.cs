@@ -11,8 +11,8 @@ namespace ResumePro.Domain.Entities;
 
 public sealed class CompanySkill : BaseEntity<CompanySkill>, ICompanySkill
 {
-    public Company Company { get; set; }
-    public PersonaSkill Skill { get; set; }
+    public Company Company { get; set; } = null!;
+    public PersonaSkill Skill { get; set; } = null!;
     public int OrganizationId { get; set; }
     public int CompanyId { get; set; }
     public int PersonId { get; set; }

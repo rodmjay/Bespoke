@@ -13,16 +13,16 @@ namespace ResumePro.Domain.Entities;
 
 public sealed class Resume : BaseEntity<Resume>, IResume
 {
-    public Persona Persona { get; set; }
+    public Persona Persona { get; set; } = null!;
     public ICollection<ResumeCompany> Companies { get; set; } = new List<ResumeCompany>();
     public ICollection<ResumeSkill> Skills { get; set; } = new List<ResumeSkill>();
     public ICollection<Rendering> Renderings { get; set; } = new List<Rendering>();
-    public ResumeSettings ResumeSettings { get; set; }
+    public ResumeSettings ResumeSettings { get; set; } = null!;
     public int OrganizationId { get; set; }
     public int PersonId { get; set; }
     public int Id { get; set; }
-    public string JobTitle { get; set; }
-    public string Description { get; set; }
+    public string JobTitle { get; set; } = null!;
+    public string Description { get; set; } = null!;
 
     public override void Configure(EntityTypeBuilder<Resume> builder)
     {

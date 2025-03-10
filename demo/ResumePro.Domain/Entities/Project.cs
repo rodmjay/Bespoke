@@ -18,15 +18,15 @@ public sealed class Project : BaseEntity<Project>, IProject
     public int Id { get; set; }
     public int CompanyId { get; set; }
 
-    public Company Company { get; set; }
+    public Company Company { get; set; } = null!;
 
     public int PositionId { get; set; }
-    public Position Position { get; set; }
+    public Position Position { get; set; } = null!;
 
     public int PersonId { get; set; }
     public int Order { get; set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
+    public string Name { get; set; } = null!;
+    public string Description { get; set; } = null!;
     public decimal? Budget { get; set; }
 
     public override void Configure(EntityTypeBuilder<Project> builder)

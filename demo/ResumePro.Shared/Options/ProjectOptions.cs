@@ -14,10 +14,10 @@ public class ProjectOptions : IBudget, IDescription, IName, IOrder
     public decimal? Budget { get; set; } = 0;
 
     [MaxLength(512)]
-    public string Description { get; set; }
+    public string Description { get; set; } = null!;
 
     [MaxLength(255)]
-    [Required] public string Name { get; set; }
+    [Required] public string Name { get; set; } = null!;
 
     public int Order { get; set; }
     public List<HighlightOptions> Highlights { get; set; } = new();

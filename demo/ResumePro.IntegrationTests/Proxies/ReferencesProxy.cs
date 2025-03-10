@@ -19,27 +19,27 @@ public sealed class ReferencesProxy : BaseProxy, IReferencesController
     {
     }
 
-    public async Task<ReferenceDto> Get(int personId, int referenceId)
+    public Task<ReferenceDto> Get(int personId, int referenceId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<List<ReferenceDto>> GetReferences(int personId)
+    public Task<List<ReferenceDto>> GetReferences(int personId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<ReferenceDto>> CreateReference(int personId, ReferenceOptions options)
+    public  Task<ActionResult<ReferenceDto>> CreateReference(int personId, ReferenceOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<ReferenceDto>> UpdateReference(int personId, int referenceId, ReferenceOptions options)
+    public  Task<ActionResult<ReferenceDto>> UpdateReference(int personId, int referenceId, ReferenceOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Result> DeleteReference(int personId, int referenceId)
+    public  Task<Result> DeleteReference(int personId, int referenceId)
     {
         throw new NotImplementedException();
     }

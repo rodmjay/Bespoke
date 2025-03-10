@@ -39,7 +39,7 @@ public class ApplicationContextFactory : IDesignTimeDbContextFactory<Application
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>()
             .EnableSensitiveDataLogging()
             .UseSqlServer(config.GetConnectionString("DefaultConnection"),
-                opt => { opt.MigrationsAssembly("CMS.Infrastructure"); });
+                opt => { opt.MigrationsAssembly(settings.Value.MigrationsAssembly); });
 
         return new ApplicationContext(optionsBuilder.Options, settings);
     }

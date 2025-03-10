@@ -4,28 +4,22 @@
 
 #endregion
 
-using System.Reflection;
-using Bespoke.Azure.Extensions;
 using Bespoke.Core.Extensions;
 using Bespoke.Core.Settings;
 using Bespoke.Data.Extensions;
 using Bespoke.Data.SqlServer;
 using Bespoke.Rest.Extensions;
+using Bespoke.Rest.Swagger.Extensions;
 using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
 using ResumePro.Data.Contexts;
 
 namespace ResumePro.Api;
 
 public sealed class Startup
 {
-    private readonly HttpMessageHandler _identityServerMessageHandler;
-
     public Startup(IConfiguration configuration,
-        IWebHostEnvironment environment,
-        HttpMessageHandler identityServerMessageHandler = null)
+        IWebHostEnvironment environment)
     {
-        _identityServerMessageHandler = identityServerMessageHandler;
         Environment = environment;
         Configuration = configuration;
     }
@@ -47,32 +41,11 @@ public sealed class Startup
                 {
                     restBuilder.AddSwagger(options =>
                     {
-                        options.AddSecurityDefinition("X-User-Id", new OpenApiSecurityScheme
-                        {
-                            Name = "X-User-Id", // Name of the header
-                            In = ParameterLocation.Header, // Location of the header
-                            Type = SecuritySchemeType.ApiKey, // Specify it's a header
-                            Description = "Custom header to pass the User ID"
-                        });
-
-                        options.AddSecurityRequirement(new OpenApiSecurityRequirement
-                        {
-                            {
-                                new OpenApiSecurityScheme
-                                {
-                                    Reference = new OpenApiReference
-                                    {
-                                        Type = ReferenceType.SecurityScheme,
-                                        Id = "X-User-Id"
-                                    }
-                                },
-                                Array.Empty<string>()
-                            }
-                        });
+                        options.SwaggerGenDemoMode();
                     });
                 });
         });
-        
+
         //var thisAssembly = Assembly.GetAssembly(GetType());
         //var businessAssembly = typeof(ApplicationContext).Assembly;
 

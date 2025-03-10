@@ -17,10 +17,10 @@ public sealed class Template : BaseEntity<Template>, ITemplate
     public ICollection<Rendering> Renderings { get; set; } = new List<Rendering>();
     public ICollection<ResumeSettings> Resumes { get; set; } = new List<ResumeSettings>();
     public int Id { get; set; }
-    public string Name { get; set; }
-    public string Source { get; set; }
-    public string Format { get; set; }
-    public string Engine { get; set; }
+    public string Name { get; set; } = null!;
+    public string Source { get; set; } = null!;
+    public string Format { get; set; } = null!;
+    public string Engine { get; set; } = null!;
 
     public override void Configure(EntityTypeBuilder<Template> builder)
     {

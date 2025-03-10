@@ -19,28 +19,28 @@ public sealed class ProjectHighlightsProxy : BaseProxy, IProjectHighlightsContro
     {
     }
 
-    public async Task<HighlightDto> GetHighlight(int personId, int companyId, int positionId, int projectId, int highlightId)
+    public  Task<HighlightDto> GetHighlight(int personId, int companyId, int positionId, int projectId, int highlightId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<List<HighlightDto>> GetHighlights(int personId, int companyId, int positionId, int projectId)
+    public  Task<List<HighlightDto>> GetHighlights(int personId, int companyId, int positionId, int projectId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<HighlightDto>> CreateHighlight(int personId, int companyId, int positionId, int projectId, HighlightOptions options)
+    public  Task<ActionResult<HighlightDto>> CreateHighlight(int personId, int companyId, int positionId, int projectId, HighlightOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ActionResult<HighlightDto>> UpdateHighlight(int personId, int companyId, int positionId, int projectId, int highlightId,
+    public  Task<ActionResult<HighlightDto>> UpdateHighlight(int personId, int companyId, int positionId, int projectId, int highlightId,
         HighlightOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Result> DeleteHighlight(int personId, int companyId, int positionId, int projectId, int highlightId)
+    public  Task<Result> DeleteHighlight(int personId, int companyId, int positionId, int projectId, int highlightId)
     {
         throw new NotImplementedException();
     }

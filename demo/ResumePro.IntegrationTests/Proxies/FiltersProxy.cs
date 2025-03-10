@@ -16,7 +16,7 @@ public sealed class FiltersProxy : BaseProxy, IFiltersController
     {
     }
 
-    public async Task<FilterContainer> GetFilters()
+    public Task<FilterContainer> GetFilters()
     {
         throw new NotImplementedException();
     }

@@ -11,13 +11,13 @@ namespace ResumePro.Domain.Entities;
 
 public sealed class Rendering : BaseEntity<Rendering>, IRendering
 {
-    public Resume Resume { get; set; }
-    public Template Template { get; set; }
+    public Resume Resume { get; set; } = null!;
+    public Template Template { get; set; } = null!;
     public int OrganizationId { get; set; }
     public int ResumeId { get; set; }
     public int TemplateId { get; set; }
     public DateTime RenderDate { get; set; }
-    public string Text { get; set; }
+    public string Text { get; set; } = null!;
 
     public override void Configure(EntityTypeBuilder<Rendering> builder)
     {

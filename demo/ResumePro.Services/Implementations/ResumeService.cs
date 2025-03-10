@@ -60,7 +60,7 @@ public sealed class ResumeService : BaseService<Resume>, IResumeService
             .AsNoTracking()
             .AsSplitQuery()
             .ProjectTo<T>(Mapper)
-            .FirstOrDefaultAsync();
+            .FirstAsync();
 
         return resume;
     }

@@ -8,5 +8,5 @@ namespace ResumePro.Shared.Models;
 
 public class CountryFilters
 {
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 }

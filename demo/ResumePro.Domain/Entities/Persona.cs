@@ -21,7 +21,7 @@ public sealed class Persona : BaseEntity<Persona>, IPersona
     public ICollection<School> Schools { get; set; } = new List<School>();
     public ICollection<Certification> Certifications { get; set; } = new List<Certification>();
     public ICollection<PersonaLanguage> Languages { get; set; } = new List<PersonaLanguage>();
-    public StateProvince State { get; set; }
+    public StateProvince State { get; set; } = null!;
     public int StateId { get; set; }
     public bool IsDeleted { get; set; }
 
@@ -29,13 +29,13 @@ public sealed class Persona : BaseEntity<Persona>, IPersona
 
     public int OrganizationId { get; set; }
     public int Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
-    public string PhoneNumber { get; set; }
-    public string LinkedIn { get; set; }
-    public string GitHub { get; set; }
-    public string City { get; set; }
+    public string FirstName { get; set; } = null!;
+    public string LastName { get; set; } = null!;
+    public string Email { get; set; } = null!;
+    public string PhoneNumber { get; set; } = null!;
+    public string LinkedIn { get; set; } = null!;
+    public string GitHub { get; set; } = null!;
+    public string City { get; set; } = null!;
 
     public override void Configure(EntityTypeBuilder<Persona> builder)
     {

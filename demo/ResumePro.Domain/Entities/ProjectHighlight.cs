@@ -14,12 +14,12 @@ public sealed class ProjectHighlight : BaseEntity<ProjectHighlight>
     public int OrganizationId { get; set; }
     public int Id { get; set; }
     public int CompanyId { get; set; }
-    public Project Project { get; set; }
+    public Project Project { get; set; } = null!;
     public int ProjectId { get; set; }
     public int PositionId { get; set; }
     public int PersonId { get; set; }
     public int Order { get; set; }
-    public string Text { get; set; }
+    public string Text { get; set; } = null!;
     public override void Configure(EntityTypeBuilder<ProjectHighlight> builder)
     {
         builder.HasKey(x => new {x.OrganizationId, x.PersonId, x.CompanyId, x.PositionId, x.ProjectId, x.Id});

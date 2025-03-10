@@ -76,6 +76,7 @@ public static class ServiceCollectionExtensions
         // Get all assemblies in the current AppDomain
         var assemblies = DependencyContext.Default.RuntimeLibraries
             .SelectMany(library => library.GetDefaultAssemblyNames(DependencyContext.Default))
+            .Where(a => a.Name != "Microsoft.Data.SqlClient")
             .Select(Assembly.Load)
             .ToList();
 

@@ -12,14 +12,14 @@ namespace ResumePro.Domain.Entities;
 public sealed class School : BaseEntity<School>, ISchool
 {
     public int OrganizationId { get; set; }
-    public Persona Persona { get; set; }
+    public Persona Persona { get; set; } = null!;
     public ICollection<Degree> Degrees { get; set; } = new List<Degree>();
     public int Id { get; set; }
     public int PersonId { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime? EndDate { get; set; }
-    public string Name { get; set; }
-    public string Location { get; set; }
+    public string Name { get; set; } = null!;
+    public string Location { get; set; } = null!;
 
     public override void Configure(EntityTypeBuilder<School> builder)
     {
