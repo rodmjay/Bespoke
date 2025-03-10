@@ -20,6 +20,7 @@ using Serilog;
 using Bespoke.Core.Builders;
 using Bespoke.Core.Helpers;
 using Bespoke.Shared.Common;
+using Microsoft.Extensions.Configuration;
 
 namespace Bespoke.Rest.Extensions;
 
@@ -99,7 +100,78 @@ public static class AppBuilderExtensions
         });
         return builder;
     }
+    public static AppBuilder AddRest(this AppBuilder builder,
+            Action<RestSettings>? configureRestSettings = null,
+            Action<RestApiBuilder>? configureRestApi = null)
+    {
+        Log.Logger.Debug(GetLogMessage("ConfigureRestServices"));
 
+        // Register HTTP context services
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddScoped<HttpContextAccessor>();
+
+        // Load RestSettings from configuration
+        var restSettings = new RestSettings();
+        builder.Configuration.GetSection("RestSettings").Bind(restSettings);
+
+        // Allow modification of RestSettings before injection
+        configureRestSettings?.Invoke(restSettings);
+
+        // Register RestSettings in DI
+        builder.Services.Configure<RestSettings>(options =>
+        {
+            options.Authentication = restSettings.Authentication;
+            options.Cors = restSettings.Cors;
+        });
+
+        // Configure RestApiBuilder for REST services
+        var restBuilder = new RestApiBuilder(builder, restSettings);
+        configureRestApi?.Invoke(restBuilder);
+
+        // Configure controllers and JSON settings
+        builder.Services.AddControllers(options =>
+        {
+            options.EnableEndpointRouting = true;
+        })
+            .AddNewtonsoftJson(o =>
+            {
+                if (JsonSettings.Settings != null)
+                {
+                    o.SerializerSettings.Formatting = JsonSettings.Settings.Formatting;
+                    o.SerializerSettings.NullValueHandling = JsonSettings.Settings.NullValueHandling;
+                    o.SerializerSettings.Converters = JsonSettings.Settings.Converters;
+                    o.SerializerSettings.DateFormatString = JsonSettings.Settings.DateFormatString;
+                    o.SerializerSettings.ReferenceLoopHandling = JsonSettings.Settings.ReferenceLoopHandling;
+                }
+            })
+            .ConfigureApiBehaviorOptions(o =>
+            {
+                o.InvalidModelStateResponseFactory = context =>
+                {
+                    var errors = context.ModelState
+                        .Where(e => e.Value != null && e.Value.Errors.Count > 0)
+                        .Select(e => new
+                        {
+                            Field = e.Key,
+                            Errors = e.Value!.Errors.Select(x => x.ErrorMessage)
+                        });
+
+                    var result = new Result
+                    {
+                        ValidationErrors = errors.Select(e => new ValidationError
+                        {
+                            Field = e.Field,
+                            Errors = e.Errors
+                        }),
+                        Message = "Validation Failed"
+                    };
+
+                    return new BadRequestObjectResult(result);
+                };
+            });
+
+        return builder;
+    }
 
     public static AppBuilder AddRest(this AppBuilder builder, Action<RestApiBuilder>? configure = default)
     {

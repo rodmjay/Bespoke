@@ -12,6 +12,7 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
+	  <ProjectReference Include="..\..\src\Bespoke.Azure.AppInsights\Bespoke.Azure.AppInsights.csproj" />
 	  <ProjectReference Include="..\..\src\Bespoke.Azure.BlobStorage\Bespoke.Azure.BlobStorage.csproj" />
 	  <ProjectReference Include="..\..\src\Bespoke.Azure\Bespoke.Azure.csproj" />
 	  <ProjectReference Include="..\..\src\Bespoke.Rest\Bespoke.Rest.csproj" />

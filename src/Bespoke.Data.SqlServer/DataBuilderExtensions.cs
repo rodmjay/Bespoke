@@ -1,9 +1,3 @@
-#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System.Runtime.CompilerServices;
@@ -24,22 +18,29 @@ public static class DataBuilderExtensions
     {
         return $"[{nameof(DataBuilderExtensions)}.{callerName}] - {message}";
     }
-    public static void UseSqlServer<TContext>(this DataBuilder builder)
+
+    public static void UseSqlServer<TContext>(
+        this DataBuilder builder,
+        Action<SqlSettings> configureSqlSettings = null)
         where TContext : DbContext
     {
         Log.Logger.Debug(GetLogMessage("Adding SQL SERVER"));
 
-        var settings = (builder.Configuration, builder.Services)
-            .ConfigureSettings<SqlSettings>("DbSettings:SqlServer");
+        // Load SQL settings from configuration
+        var sqlSettings = new SqlSettings();
+        builder.Configuration.GetSection("DbSettings:SqlServer").Bind(sqlSettings);
 
-        var dbSettings = builder.Services
-            .BuildServiceProvider()
-            .GetRequiredService<IOptions<DbSettings>>();
-        
-        // Register the IDataContextAsync if not already registered
-        builder.Services.TryAddScoped(typeof(IDataContextAsync), typeof(TContext));
+        // Allow users to modify SqlSettings before injecting
+        configureSqlSettings?.Invoke(sqlSettings);
 
-        var connectionString = builder.Configuration.GetConnectionString(settings.ConnectionStringName);
+        // Register modified SqlSettings
+        builder.Services.Configure<SqlSettings>(options =>
+        {
+            options.ConnectionStringName = sqlSettings.ConnectionStringName;
+        });
+
+        // Retrieve connection string
+        var connectionString = builder.Configuration.GetConnectionString(sqlSettings.ConnectionStringName);
 
         if (string.IsNullOrWhiteSpace(connectionString))
         {
@@ -47,28 +48,32 @@ public static class DataBuilderExtensions
             throw new InvalidOperationException("Database configuration is invalid.");
         }
 
+        // Register the IDataContextAsync if not already registered
+        builder.Services.TryAddScoped(typeof(IDataContextAsync), typeof(TContext));
+
+        // SQL Server configuration
         Action<SqlServerDbContextOptionsBuilder> sqlBuilder = sqlOptionsBuilder =>
         {
-            sqlOptionsBuilder.UseQuerySplittingBehavior(dbSettings.Value.SplitQueries
+            sqlOptionsBuilder.UseQuerySplittingBehavior(builder.Settings.SplitQueries
                 ? QuerySplittingBehavior.SplitQuery
                 : QuerySplittingBehavior.SingleQuery);
-            sqlOptionsBuilder.MaxBatchSize(dbSettings.Value.MaxBatchSize);
+            sqlOptionsBuilder.MaxBatchSize(builder.Settings.MaxBatchSize);
             sqlOptionsBuilder.EnableRetryOnFailure(
-                dbSettings.Value.MaxRetryCount,
-                TimeSpan.FromSeconds(dbSettings.Value.MaxRetryDelaySeconds),
+                builder.Settings.MaxRetryCount,
+                TimeSpan.FromSeconds(builder.Settings.MaxRetryDelaySeconds),
                 null);
-            sqlOptionsBuilder.CommandTimeout(dbSettings.Value.Timeout);
-            sqlOptionsBuilder.MigrationsAssembly(dbSettings.Value.MigrationsAssembly);
+            sqlOptionsBuilder.CommandTimeout(builder.Settings.Timeout);
+            sqlOptionsBuilder.MigrationsAssembly(builder.Settings.MigrationsAssembly);
         };
 
         Action<DbContextOptionsBuilder> optionsAction = options =>
         {
             options.EnableSensitiveDataLogging(EnvironmentHelpers.IsDebug());
-            options.UseSqlServer(connectionString, sqlBuilder);  // Use connection string directly here
+            options.UseSqlServer(connectionString, sqlBuilder);
         };
 
         // Add DbContext with or without pooling based on settings
-        if (dbSettings.Value.UseContextPooling)
+        if (builder.Settings.UseContextPooling)
         {
             builder.Services.AddDbContextPool<TContext>(optionsAction);
         }
@@ -77,5 +82,4 @@ public static class DataBuilderExtensions
             builder.Services.AddDbContext<TContext>(optionsAction);
         }
     }
-
 }

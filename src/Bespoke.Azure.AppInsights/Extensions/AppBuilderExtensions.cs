@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 using Bespoke.Azure.AppInsights.Configuration;
 using Bespoke.Azure.AppInsights.Settings;
 using Bespoke.Azure.Builders;
@@ -8,33 +7,44 @@ using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Bespoke.Azure.AppInsights.Extensions;
-
-[ExcludeFromCodeCoverage]
-public static class AppBuilderExtensions
+namespace Bespoke.Azure.AppInsights.Extensions
 {
-    public static AzureBuilder AddAppInsights(this AzureBuilder builder, Action<AppInsightsBuilder> build = null)
+    [ExcludeFromCodeCoverage]
+    public static class AppBuilderExtensions
     {
-        var settings = builder.GetAppBuilder().ConfigureSettings<AppInsightsSettings>("AzureSettings:AppInsights");
-
-        var insightsBuilder = new AppInsightsBuilder(builder);
-
-        build?.Invoke(insightsBuilder);
-
-        builder.Services.AddApplicationInsightsTelemetry(options =>
+        public static AzureBuilder AddAppInsights(
+            this AzureBuilder builder,
+            Action<AppInsightsSettings> configureAppInsightsSettings = null,
+            Action<AppInsightsBuilder> configureAppInsightsBuilder = null)
         {
-            // todo: more options to come here
-            options.EnableAdaptiveSampling = settings.EnableAdaptiveSampling;
-            options.ConnectionString = builder.Configuration.GetConnectionString("AppInsights");
-            options.EnableDependencyTrackingTelemetryModule =
-                settings.EnableDependencyTrackingTelemetryModule; // Enable or disable dependency tracking
-            options.DeveloperMode = EnvironmentHelpers.IsDebug();
-            options.EnableRequestTrackingTelemetryModule = true;
-        });
+            // Load AppInsightsSettings from configuration
+            var appInsightsSettings = new AppInsightsSettings();
+            builder.Configuration
+                .GetSection("AzureSettings:AppInsights")
+                .Bind(appInsightsSettings);
 
-        builder.Services.AddSingleton<ITelemetryInitializer>(
-            new CloudRoleNameTelemetryInitializer(settings.CloudRoleName));
+            // Allow the user to modify settings before they are used
+            configureAppInsightsSettings?.Invoke(appInsightsSettings);
 
-        return builder;
+            // Create the AppInsightsBuilder to enable further configuration
+            var insightsBuilder = new AppInsightsBuilder(builder);
+            configureAppInsightsBuilder?.Invoke(insightsBuilder);
+
+            // Register Application Insights telemetry using the settings
+            builder.Services.AddApplicationInsightsTelemetry(options =>
+            {
+                options.EnableAdaptiveSampling = appInsightsSettings.EnableAdaptiveSampling;
+                options.ConnectionString = builder.Configuration.GetConnectionString("AppInsights");
+                options.EnableDependencyTrackingTelemetryModule = appInsightsSettings.EnableDependencyTrackingTelemetryModule;
+                options.DeveloperMode = EnvironmentHelpers.IsDebug();
+                options.EnableRequestTrackingTelemetryModule = true;
+            });
+
+            // Register a telemetry initializer with the configured Cloud Role Name
+            builder.Services.AddSingleton<ITelemetryInitializer>(
+                new CloudRoleNameTelemetryInitializer(appInsightsSettings.CloudRoleName));
+
+            return builder;
+        }
     }
 }

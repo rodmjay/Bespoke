@@ -10,7 +10,7 @@ using Bespoke.Core.Builders;
 
 namespace Bespoke.Rest.Builders;
 
-public class RestApiBuilder(AppBuilder appBuilder, RestSettings restSettings) : IBuilder
+public class RestApiBuilder(AppBuilder appBuilder, RestSettings restSettings)
 {
     public IConfiguration Configuration => appBuilder.Configuration;
 

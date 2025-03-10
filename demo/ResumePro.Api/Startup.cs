@@ -9,7 +9,6 @@ using Bespoke.Azure.BlobStorage;
 using Bespoke.Azure.Extensions;
 using Bespoke.Core.Extensions;
 using Bespoke.Core.Settings;
-using Bespoke.Data;
 using Bespoke.Data.Extensions;
 using Bespoke.Data.SqlServer;
 using Bespoke.Rest.Extensions;
@@ -47,7 +46,10 @@ public sealed class Startup
                     },
                     configureDataBuilder: dataBuilder =>
                     {
-                        dataBuilder.UseSqlServer<ApplicationContext>();
+                        dataBuilder.UseSqlServer<ApplicationContext>(sqlSettings =>
+                        {
+                            sqlSettings.ConnectionStringName = "DefaultConnection";
+                        });
                     }
                 )
                 .AddAzure(
@@ -59,17 +61,26 @@ public sealed class Startup
                     },
                     configureAzureBuilder: azureBuilder =>
                     {
-                        
-                        azureBuilder.AddAppInsights();
+                        azureBuilder.AddAppInsights(
+                            configureAppInsightsSettings: appInsightsSettings =>
+                            {
+                                appInsightsSettings.CloudRoleName = "RESUMEPRO";
+                                appInsightsSettings.EnableAdaptiveSampling = true;
+                                appInsightsSettings.EnableDependencyTrackingTelemetryModule = false;
+                            });
                         azureBuilder.AddBlobStorage();
                     })
-                .AddRest(restBuilder =>
-                {
-                    restBuilder.AddSwagger(options =>
+                .AddRest(configureRestSettings: restSettings =>
                     {
-                        options.SwaggerGenDemoMode();
+                        restSettings.Cors.AllowAnyOrigin = true;
+                    },
+                    configureRestApi: restBuilder =>
+                    {
+                        restBuilder.AddSwagger(options =>
+                        {
+                            options.SwaggerGenDemoMode();
+                        });
                     });
-                });
 
             builder.Services.AddServices(Configuration);
         });
