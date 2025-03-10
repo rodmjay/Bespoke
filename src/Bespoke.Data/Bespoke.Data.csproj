@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <NoWarn>NU1902</NoWarn>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>microservice</PackageTags>
-    <RepositoryUrl>https://github.com/rodmjay/bespoke</RepositoryUrl>
-    <Description>Bespoke library for building microservices</Description>
-    <Authors>Rod Johnson</Authors>
-    <Version>1.0.4</Version>
-    <PackageId>Bespoke.Data</PackageId>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<NoWarn>NU1902</NoWarn>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageTags>microservice</PackageTags>
+		<RepositoryUrl>https://github.com/rodmjay/bespoke</RepositoryUrl>
+		<Description>Bespoke library for building microservices</Description>
+		<Authors>Rod Johnson</Authors>
+		<Version>1.0.4</Version>
+		<PackageId>Bespoke.Data</PackageId>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>

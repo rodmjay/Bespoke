@@ -4,18 +4,15 @@
 
 #endregion
 
-using System;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Bespoke.Data.Interfaces;
 using Bespoke.IntegrationTesting.Extensions;
-using NUnit.Framework;
+using Bespoke.Core.Extensions;
+using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace Bespoke.IntegrationTesting.Bases;
 
@@ -28,6 +25,7 @@ public abstract class IntegrationTest<TFixture, TStartup> where TStartup : class
         Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development");
         InitializeApi();
     }
+    public int LoggedInUser { get; set; } = 1;
 
     protected IServiceProvider ServiceProvider { get; private set; }
     protected HttpClient ApiClient { get; private set; }
@@ -35,59 +33,37 @@ public abstract class IntegrationTest<TFixture, TStartup> where TStartup : class
 
     private void InitializeApi()
     {
-        var apiWebHostBuilder = WebHost.CreateDefaultBuilder()
+        var hostBuilder = Host.CreateDefaultBuilder()
             .ConfigureAppConfiguration(CustomWebHostBuilderExtensions.Configure<TFixture>)
-            .UseStartup<TStartup>();
+            .UseSerilog(HostBuilderExtensions.ConfigureLogging)
+            .ConfigureWebHost(webBuilder =>
+            {
+                // Instruct the host to use TestServer instead of Kestrel
+                webBuilder.UseTestServer();
+                // Override any URL settings to avoid binding conflicts.
+                webBuilder.UseSetting("server.urls", "http://localhost");
+                webBuilder.UseStartup<TStartup>();
+            });
 
-        var apiServer = new TestServer(apiWebHostBuilder);
+        // Start the host
+        var host = hostBuilder.Start();
+        ServiceProvider = host.Services;
 
-        ServiceProvider = apiServer.Services;
+        // Retrieve the TestServer instance
+        var testServer = host.GetTestServer();
 
-        ApiClient = apiServer.CreateClient();
+        // Configure HttpClient with your custom UserIdHandler
+        var handler = new UserIdHandler(() => LoggedInUser)
+        {
+            InnerHandler = testServer.CreateHandler()
+        };
 
-        ApiClient.DefaultRequestHeaders.Add("x-user-id", UserId.ToString());
+        ApiClient = new HttpClient(handler)
+        {
+            BaseAddress = testServer.BaseAddress
+        };
 
     }
-
-    protected async Task<TOutput> DoPost<TInput, TOutput>(string url, TInput input)
-    {
-        var content = input.SerializeToUTF8Json();
-        var response = await ApiClient.PostAsync(url, content);
-        Assert.That(response.IsSuccessStatusCode, Is.True);
-
-        var result = response.Content.DeserializeObject<TOutput>();
-        return result;
-    }
-
-    protected async Task<TOutput> DoGet<TOutput>(string url)
-    {
-        var response = await ApiClient.GetAsync(url);
-        Assert.That(response.IsSuccessStatusCode, Is.True);
-
-        var result = response.Content.DeserializeObject<TOutput>();
-
-        return result;
-    }
-
-    protected async Task<TOutput> DoPut<TInput, TOutput>(string url, TInput input)
-    {
-        var content = input.SerializeToUTF8Json();
-        var response = await ApiClient.PutAsync(url, content);
-        Assert.That(response.IsSuccessStatusCode, Is.True);
-
-        var result = response.Content.DeserializeObject<TOutput>();
-        return result;
-    }
-
-    protected async Task<TOutput> DoDelete<TOutput>(string url)
-    {
-        var response = await ApiClient.DeleteAsync(url);
-        Assert.That(response.IsSuccessStatusCode, Is.True);
-
-        var result = response.Content.DeserializeObject<TOutput>();
-        return result;
-    }
-
     protected async Task ResetDatabase()
     {
         using var scope = ServiceProvider.CreateScope();
