@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -11,11 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\data\AgencyPro.Services\AgencyPro.Services.csproj" />
     <ProjectReference Include="..\..\src\Bespoke.Azure.AppInsights\Bespoke.Azure.AppInsights.csproj" />
     <ProjectReference Include="..\..\src\Bespoke.Azure\Bespoke.Azure.csproj" />
     <ProjectReference Include="..\..\src\Bespoke.Rest\Bespoke.Rest.csproj" />
     <ProjectReference Include="..\AgencyPro.Infrastructure.SqlServer\AgencyPro.Infrastructure.SqlServer.csproj" />
+    <ProjectReference Include="..\AgencyPro.Services\AgencyPro.Services.csproj" />
     <ProjectReference Include="..\AgencyPro.Shared\AgencyPro.Shared.csproj" />
   </ItemGroup>
 
