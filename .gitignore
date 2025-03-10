@@ -216,7 +216,7 @@ appsettings.Development.json
 .vscode/
 *.swp
 *.swo
-*.sublime-project
+*.sublime-project 
 *.sublime-workspace
 
 # Development workspace settings
