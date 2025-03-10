@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Events\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\src\Bespoke.Data\Bespoke.Data.csproj" />
     <ProjectReference Include="..\ResumePro.Shared\ResumePro.Shared.csproj" />
   </ItemGroup>

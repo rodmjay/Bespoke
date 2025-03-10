@@ -32,7 +32,7 @@ namespace Bespoke.Azure.Queue.Tests.Extensions
                 _mockConfiguration.Object);
                 
             // Create a real AzureBuilder instance with the real AppBuilder
-            _azureBuilder = new AzureBuilder(_appBuilder);
+            _azureBuilder = new AzureBuilder(_appBuilder, new AzureSettings());
         }
 
         [TestFixture]

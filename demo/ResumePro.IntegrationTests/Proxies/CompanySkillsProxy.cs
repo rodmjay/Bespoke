@@ -6,7 +6,7 @@
 
 using Bespoke.IntegrationTesting.Bases;
 using Bespoke.Shared.Common;
-using ResumePro.Api.Controllers;
+using ResumePro.Api.Interfaces;
 
 namespace ResumePro.IntegrationTests.Proxies;
 

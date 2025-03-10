@@ -106,27 +106,19 @@ public static class RestApiBuilderExtensions
 
         app.UseRouting();
 
-        if (settings.Value.UseAuthentication)
-        {
-            app.UseAuthentication();
-            app.UseAuthorization();
+        //if (settings.Value.UseAuthentication)
+        //{
+        //    app.UseAuthentication();
+        //    app.UseAuthorization();
 
-        }
+        //}
 
         app.UseCors();
 
         app.UseEndpoints(endpoints =>
         {
-            if (settings.Value.UseAuthentication)
-            {
 
-                endpoints.MapControllers()
-                    .RequireAuthorization("ApiScope");
-            }
-            else
-            {
-                endpoints.MapControllers();
-            }
+            endpoints.MapControllers();
         });
     }
 

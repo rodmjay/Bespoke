@@ -34,7 +34,7 @@ namespace Bespoke.Azure.Tests.Builders
             [Test]
             public void Should_Initialize_With_AppBuilder()
             {
-                var azureBuilder = new AzureBuilder(_appBuilder);
+                var azureBuilder = new AzureBuilder(_appBuilder, new AzureSettings());
                 Assert.NotNull(azureBuilder);
                 Assert.IsTrue(true);
             }

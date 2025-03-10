@@ -5,7 +5,7 @@
 #endregion
 
 using Bespoke.IntegrationTesting.Bases;
-using ResumePro.Api.Controllers;
+using ResumePro.Api.Interfaces;
 using ResumePro.Shared.Models;
 
 namespace ResumePro.IntegrationTests.Proxies;

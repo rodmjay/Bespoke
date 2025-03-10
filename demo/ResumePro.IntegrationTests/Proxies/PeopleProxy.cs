@@ -7,7 +7,7 @@
 using Bespoke.IntegrationTesting.Bases;
 using Bespoke.Shared.Common;
 using Microsoft.AspNetCore.Mvc;
-using ResumePro.Api.Controllers;
+using ResumePro.Api.Interfaces;
 using ResumePro.Shared.Filters;
 using ResumePro.Shared.Helpers;
 using ResumePro.Shared.Models;

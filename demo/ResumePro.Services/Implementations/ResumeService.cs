@@ -5,6 +5,7 @@
 #endregion
 
 using System.Diagnostics.CodeAnalysis;
+using Bespoke.Core;
 using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
 using Bespoke.Data.Interfaces;
@@ -25,8 +26,6 @@ public sealed class ResumeService : BaseService<Resume>, IResumeService
     private readonly TemplateErrorDescriber _templateErrors;
     private readonly IRepositoryAsync<Company> _jobRepo;
     private readonly IRepositoryAsync<PersonaSkill> _personalSkillsRepo;
-    private readonly IRepositoryAsync<Rendering> _renderingRepo;
-    private readonly IRepositoryAsync<Template> _templateRepo;
     private readonly IIdGenerationService _idGenerationService;
 
     public ResumeService(ResumeErrorDescriber resumeErrors,
@@ -36,22 +35,19 @@ public sealed class ResumeService : BaseService<Resume>, IResumeService
         IRepositoryAsync<Rendering> renderingRepo,
         IRepositoryAsync<Template> templateRepo,
         IIdGenerationService idGenerationService,
+        IEventAggregator eventAggregator,
         IServiceProvider serviceProvider) : base(serviceProvider)
     {
         _resumeErrors = resumeErrors;
         _templateErrors = templateErrors;
         _jobRepo = jobRepo;
         _personalSkillsRepo = personalSkillsRepo;
-        _renderingRepo = renderingRepo;
-        _templateRepo = templateRepo;
         _idGenerationService = idGenerationService;
     }
 
     private IQueryable<Resume> Resumes => Repository.Queryable();
     private IQueryable<Company> Companies => _jobRepo.Queryable();
     private IQueryable<PersonaSkill> PersonalSkills => _personalSkillsRepo.Queryable();
-    private IQueryable<Template> Templates => _templateRepo.Queryable();
-    private IQueryable<Rendering> Renderings => _renderingRepo.Queryable();
 
     public async Task<T> GetResume<T>(int organizationId, int personId, int resumeId) where T : ResumeDto
     {

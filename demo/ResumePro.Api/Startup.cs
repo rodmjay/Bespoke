@@ -4,14 +4,19 @@
 
 #endregion
 
+using Bespoke.Azure.AppInsights.Extensions;
+using Bespoke.Azure.BlobStorage;
+using Bespoke.Azure.Extensions;
 using Bespoke.Core.Extensions;
 using Bespoke.Core.Settings;
+using Bespoke.Data;
 using Bespoke.Data.Extensions;
 using Bespoke.Data.SqlServer;
 using Bespoke.Rest.Extensions;
 using Bespoke.Rest.Swagger.Extensions;
 using Microsoft.Extensions.Options;
 using ResumePro.Data.Contexts;
+using ResumePro.Services.Extensions;
 
 namespace ResumePro.Api;
 
@@ -29,14 +34,35 @@ public sealed class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-
         services.AddCompositeRoot(Configuration, builder =>
         {
-            builder.AddAutomapper()
-                .AddStorage(storageBuilder =>
-                {
-                    storageBuilder.UseSqlServer<ApplicationContext>();
-                })
+            builder
+                .AddEventAggregator()
+                .AddAutomapper()
+                .AddStorage(
+                    configureDbSettings: dbSettings =>
+                    {
+                        dbSettings.MigrationsAssembly = "ResumePro.Infrastructure.SqlServer";
+                        dbSettings.MaxRetryCount = 5;
+                    },
+                    configureDataBuilder: dataBuilder =>
+                    {
+                        dataBuilder.UseSqlServer<ApplicationContext>();
+                    }
+                )
+                .AddAzure(
+                    configureAzureSettings: azureSettings =>
+                    {
+                        azureSettings.UseAzureManagedIdentity = true;
+                        azureSettings.AccountName = "MyAzureStorageAccount";
+                        azureSettings.AccountKey = "SuperSecretKey";
+                    },
+                    configureAzureBuilder: azureBuilder =>
+                    {
+                        
+                        azureBuilder.AddAppInsights();
+                        azureBuilder.AddBlobStorage();
+                    })
                 .AddRest(restBuilder =>
                 {
                     restBuilder.AddSwagger(options =>
@@ -44,6 +70,8 @@ public sealed class Startup
                         options.SwaggerGenDemoMode();
                     });
                 });
+
+            builder.Services.AddServices(Configuration);
         });
 
         //var thisAssembly = Assembly.GetAssembly(GetType());

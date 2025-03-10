@@ -6,7 +6,7 @@
 
 using Bespoke.IntegrationTesting.Bases;
 using Microsoft.AspNetCore.Mvc;
-using ResumePro.Api.Controllers;
+using ResumePro.Api.Interfaces;
 using ResumePro.Shared.Models;
 using ResumePro.Shared.Options;
 

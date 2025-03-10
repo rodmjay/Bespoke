@@ -1,6 +1,9 @@
 ﻿using Bespoke.Azure.Builders;
 using Bespoke.Core.Builders;
 using Bespoke.Core.Helpers;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 #nullable enable
 
@@ -8,17 +11,31 @@ namespace Bespoke.Azure.Extensions
 {
     public static class AzureExtensions
     {
-        public static AppBuilder AddAzure(this AppBuilder appBuilder, Action<AzureBuilder>? build = default)
+        public static AppBuilder AddAzure(this AppBuilder appBuilder,
+            Action<AzureSettings>? configureAzureSettings = null,
+            Action<AzureBuilder>? configureAzureBuilder = null)
         {
-            (appBuilder.Configuration, appBuilder.Services)
-                .ConfigureSettings<AzureSettings>("AzureSettings");
+            // Load AzureSettings from configuration
+            var azureSettings = new AzureSettings();
+            appBuilder.Configuration.GetSection("AzureSettings")
+                .Bind(azureSettings);
 
-            var azureBuilder = new AzureBuilder(appBuilder);
-            
-            build?.Invoke(azureBuilder);
+            // Allow users to modify AzureSettings before injecting into DI
+            configureAzureSettings?.Invoke(azureSettings);
+
+            // Register modified AzureSettings
+            appBuilder.Services.Configure<AzureSettings>(options =>
+            {
+                options.UseAzureManagedIdentity = azureSettings.UseAzureManagedIdentity;
+                options.AccountKey = azureSettings.AccountKey;
+                options.AccountName = azureSettings.AccountName;
+            });
+
+            // Allow users to configure the AzureBuilder
+            var azureBuilder = new AzureBuilder(appBuilder, azureSettings);
+            configureAzureBuilder?.Invoke(azureBuilder);
 
             return appBuilder;
         }
-
     }
 }

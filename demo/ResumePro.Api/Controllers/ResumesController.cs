@@ -5,6 +5,7 @@
 #endregion
 
 using Microsoft.AspNetCore.Authorization;
+using ResumePro.Api.Interfaces;
 using ResumePro.Services.Interfaces;
 using ResumePro.Shared.Extensions;
 

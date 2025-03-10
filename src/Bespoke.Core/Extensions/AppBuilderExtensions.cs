@@ -5,11 +5,6 @@
 #endregion
 
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
-using AutoMapper;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Serilog;
 
 namespace Bespoke.Core.Extensions;
 

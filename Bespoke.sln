@@ -84,10 +84,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{376EDBCC-8
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		UpdatePatch.ps1 = UpdatePatch.ps1
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6DDD3CD0-90CD-4B57-B852-C19B4E52E105}"
-	ProjectSection(SolutionItems) = preProject
 		upgrad-patch.bat = upgrad-patch.bat
 	EndProjectSection
 EndProject
@@ -106,6 +102,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumePro.Api", "demo\ResumePro.Api\ResumePro.Api.csproj", "{1496C5C2-8DF1-4D45-A15C-D04C9F3256EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumePro.IntegrationTests", "demo\ResumePro.IntegrationTests\ResumePro.IntegrationTests.csproj", "{E2E658C6-2957-4D70-AAAE-C9A2E3BE0BC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Azure.AppInsights", "src\Bespoke.Azure.AppInsights\Bespoke.Azure.AppInsights.csproj", "{702789CA-BAEF-4EB1-8EAA-6711B1D18B7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -281,6 +279,10 @@ Global
 		{E2E658C6-2957-4D70-AAAE-C9A2E3BE0BC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2E658C6-2957-4D70-AAAE-C9A2E3BE0BC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2E658C6-2957-4D70-AAAE-C9A2E3BE0BC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{702789CA-BAEF-4EB1-8EAA-6711B1D18B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{702789CA-BAEF-4EB1-8EAA-6711B1D18B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{702789CA-BAEF-4EB1-8EAA-6711B1D18B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{702789CA-BAEF-4EB1-8EAA-6711B1D18B7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -329,5 +331,6 @@ Global
 		{31F2E695-5122-48D2-99AA-B2C4D968E560} = {424BC713-3B85-4718-8713-22490141EA10}
 		{1496C5C2-8DF1-4D45-A15C-D04C9F3256EE} = {424BC713-3B85-4718-8713-22490141EA10}
 		{E2E658C6-2957-4D70-AAAE-C9A2E3BE0BC1} = {424BC713-3B85-4718-8713-22490141EA10}
+		{702789CA-BAEF-4EB1-8EAA-6711B1D18B7A} = {A1B0F8DB-8FD8-4F19-A81A-93F5D3F0A3A2}
 	EndGlobalSection
 EndGlobal

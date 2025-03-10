@@ -5,22 +5,20 @@
 #endregion
 
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.DependencyModel;
-using Serilog;
 using Bespoke.Core.Helpers;
 
 namespace Bespoke.Core.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    private static string GetLogMessage(string message, [CallerMemberName] string callerName = null)
+    public static AppBuilder AddEventAggregator(this AppBuilder builder)
     {
-        return $"[{nameof(ServiceCollectionExtensions)}.{callerName}] - {message}";
+        builder.Services.AddSingleton<IEventAggregator, EventAggregator>();
+        return builder;
     }
 
     public static AppBuilder AddCompositeRoot(this IServiceCollection services, IConfiguration configuration, Action<AppBuilder> configure = default)

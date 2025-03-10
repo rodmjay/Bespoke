@@ -5,6 +5,7 @@
 #endregion
 
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using ResumePro.Api.Interfaces;
 using ResumePro.Services.Interfaces;
 using ResumePro.Shared.Filters;
 
