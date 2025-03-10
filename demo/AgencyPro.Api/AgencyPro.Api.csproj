@@ -18,5 +18,11 @@
     <ProjectReference Include="..\AgencyPro.Services\AgencyPro.Services.csproj" />
     <ProjectReference Include="..\AgencyPro.Shared\AgencyPro.Shared.csproj" />
   </ItemGroup>
-
+	<ItemGroup>
+		<PackageReference Include="Swashbuckle.AspNetCore" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 </Project>
