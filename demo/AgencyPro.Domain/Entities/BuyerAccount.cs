@@ -2,7 +2,7 @@
 {
     public class BuyerAccount : BaseEntity<BuyerAccount>, IBuyerAccount
     {
-        private ICollection<StripeInvoiceItem> _items;
+        private ICollection<StripeInvoiceItem> _items = null!;
 
         public decimal Balance { get; set; }
         public bool Delinquent { get; set; }
@@ -12,8 +12,8 @@
         public DateTimeOffset Updated { get; set; }
 
 
-        public virtual OrganizationBuyerAccount OrganizationBuyerAccount { get; set; }
-        public virtual IndividualBuyerAccount IndividualBuyerAccount { get; set; }
+        public virtual OrganizationBuyerAccount OrganizationBuyerAccount { get; set; } = null!;
+        public virtual IndividualBuyerAccount IndividualBuyerAccount { get; set; } = null!;
         
         public virtual ICollection<StripeInvoiceItem> InvoiceItems
         {
@@ -23,7 +23,7 @@
 
 
 
-        private ICollection<StripeSource> _sources;
+        private ICollection<StripeSource> _sources = null!;
 
         public virtual ICollection<StripeSource> PaymentSources
         {
@@ -33,7 +33,7 @@
 
 
 
-        private ICollection<StripeInvoice> _invoices;
+        private ICollection<StripeInvoice> _invoices = null!;
 
         public virtual ICollection<StripeInvoice> Invoices
         {
@@ -41,7 +41,7 @@
             set => _invoices = value;
         }
         
-        private ICollection<StripeCharge> _charges;
+        private ICollection<StripeCharge> _charges = null!;
 
         public virtual ICollection<StripeCharge> Charges
         {
@@ -49,10 +49,10 @@
             set => _charges = value;
         }
 
-        public ICollection<StripeCheckoutSession> CheckoutSessions { get; set; }
+        public ICollection<StripeCheckoutSession> CheckoutSessions { get; set; } = new List<StripeCheckoutSession>();
        
 
-        private ICollection<CustomerCard> _cards;
+        private ICollection<CustomerCard> _cards = null!;
 
         public virtual ICollection<CustomerCard> Cards
         {

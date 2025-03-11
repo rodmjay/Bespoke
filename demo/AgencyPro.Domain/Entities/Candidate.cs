@@ -2,11 +2,11 @@
 {
     public class Candidate : BaseEntity<Candidate>, ICandidate
     {
-        public OrganizationRecruiter OrganizationRecruiter { get; set; }
-        public OrganizationProjectManager OrganizationProjectManager { get; set; }
-        public ProviderOrganization ProviderOrganization { get; set; }
+        public OrganizationRecruiter OrganizationRecruiter { get; set; } = null!;
+        public OrganizationProjectManager OrganizationProjectManager { get; set; } = null!;
+        public ProviderOrganization ProviderOrganization { get; set; } = null!;
         public Guid ProviderOrganizationId { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Comment> Comments { get; set; } = null!;
         
         private ICollection<CandidateStatusTransition> _statusTransitions;
 
@@ -16,7 +16,7 @@
             set => _statusTransitions = value;
         }
 
-       public ICollection<CandidateNotification> CandidateNotifications { get; set; }
+       public ICollection<CandidateNotification> CandidateNotifications { get; set; } = null!;
 
         public virtual CandidateStatus Status { get; set; }
 
@@ -39,15 +39,15 @@
         public bool IsContacted { get; set; }
         public Guid RecruiterId { get; set; }
         public Guid RecruiterOrganizationId { get; set; }
-        public Recruiter Recruiter { get; set; }
+        public Recruiter Recruiter { get; set; } = null!;
 
-        public Organization RecruiterOrganization { get; set; }
+        public Organization RecruiterOrganization { get; set; } = null!;
 
         public RejectionReason RejectionReason { get; set; }
         public string RejectionDescription { get; set; } = null!;
 
         public Guid? ProjectManagerId { get; set; }
-        public ProjectManager ProjectManager { get; set; }
+        public ProjectManager ProjectManager { get; set; } = null!;
         public Guid? ProjectManagerOrganizationId { get; set; }
 
         public string Description { get; set; } = null!;
@@ -58,9 +58,9 @@
         public bool IsDeleted { get; set; }
 
         
-        public IndividualBonusIntent IndividualBonusIntent { get; set; }
+        public IndividualBonusIntent IndividualBonusIntent { get; set; } = null!;
        
-        public OrganizationBonusIntent OrganizationBonusIntent { get; set; }
+        public OrganizationBonusIntent OrganizationBonusIntent { get; set; } = null!;
         public override void Configure(EntityTypeBuilder<Candidate> builder)
         {
             builder
