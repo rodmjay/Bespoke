@@ -111,12 +111,12 @@
             builder.HasOne(x => x.AccountManager)
                 .WithMany(x => x.CustomerAccounts)
                 .HasForeignKey(x => x.AccountManagerId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.CustomerAccounts)
                 .HasForeignKey(x => x.CustomerId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasMany(x => x.Contracts)
                 .WithOne(x => x.CustomerAccount)
@@ -126,7 +126,7 @@
                     x.CustomerId,
                     x.AccountManagerOrganizationId,
                     x.AccountManagerId
-                }).IsRequired();
+                }).IsRequired(false);
 
             builder
                 .HasOne(x => x.OrganizationAccountManager)

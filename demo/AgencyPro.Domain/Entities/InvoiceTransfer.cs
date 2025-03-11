@@ -16,12 +16,12 @@
             builder.HasOne(x => x.Transfer)
                 .WithOne(x => x.InvoiceTransfer)
                 .HasForeignKey<InvoiceTransfer>(x => x.TransferId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.Invoice)
                 .WithMany(x => x.InvoiceTransfers)
                 .HasForeignKey(x => x.InvoiceId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasMany(x => x.IndividualPayoutIntents)
                 .WithOne(x => x.InvoiceTransfer)

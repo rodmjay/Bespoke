@@ -53,20 +53,20 @@
                 {
                     x.OrganizationId,
                     x.PersonId
-                }).IsRequired();
+                }).IsRequired(false);
 
 
             builder
                 .HasOne(x => x.Person)
                 .WithMany(x => x.OrganizationPeople)
                 .HasForeignKey(x => x.PersonId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder
                 .HasOne(x => x.Organization)
                 .WithMany(x => x.OrganizationPeople)
                 .HasForeignKey(x => x.OrganizationId)
-                .IsRequired();
+                .IsRequired(false);
 
             
         }
