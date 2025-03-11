@@ -49,10 +49,11 @@
                     x.MarketerId
                 });
 
-            builder.HasMany(x => x.OrganizationCustomers)
-                .WithOne(x => x.Customer)
-                .HasForeignKey(x => x.CustomerId)
-                .IsRequired();
+            // Comment out HasMany calls to prevent duplicate relationship definitions
+            // builder.HasMany(x => x.OrganizationCustomers)
+            //     .WithOne(x => x.Customer)
+            //     .HasForeignKey(x => x.CustomerId)
+            //     .IsRequired();
 
             builder.HasOne(x => x.BuyerAccount)
                 .WithOne(x => x.Customer)

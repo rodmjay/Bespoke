@@ -44,23 +44,24 @@
             builder.HasQueryFilter(x => x.IsDeleted == false);
 
 
-            builder
-                .HasMany(x => x.Accounts)
-                .WithOne(x => x.OrganizationAccountManager)
-                .HasForeignKey(x => new
-                {
-                    x.AccountManagerOrganizationId,
-                    x.AccountManagerId
-                });
+            // Comment out HasMany calls to prevent duplicate relationship definitions
+            // builder
+            //     .HasMany(x => x.Accounts)
+            //     .WithOne(x => x.OrganizationAccountManager)
+            //     .HasForeignKey(x => new
+            //     {
+            //         x.AccountManagerOrganizationId,
+            //         x.AccountManagerId
+            //     });
 
-            builder
-                .HasMany(x => x.Leads)
-                .WithOne(x => x.OrganizationAccountManager)
-                .HasForeignKey(x => new
-                {
-                    OrganizationId = x.AccountManagerOrganizationId,
-                    x.AccountManagerId
-                }).IsRequired(false);
+            // builder
+            //     .HasMany(x => x.Leads)
+            //     .WithOne(x => x.OrganizationAccountManager)
+            //     .HasForeignKey(x => new
+            //     {
+            //         OrganizationId = x.AccountManagerOrganizationId,
+            //         x.AccountManagerId
+            //     }).IsRequired(false);
 
             builder
                 .HasOne(x => x.OrganizationPerson)
