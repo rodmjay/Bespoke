@@ -34,7 +34,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Balance = table.Column<decimal>(type: "Money", nullable: false),
+                    Balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Delinquent = table.Column<bool>(type: "bit", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     Updated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
@@ -67,16 +67,16 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     CustomerTitle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, defaultValue: "Customer"),
                     CustomerTitlePlural = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, defaultValue: "Customers"),
                     Searchable = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    DefaultRecruiterStream = table.Column<decimal>(type: "Money", nullable: false, defaultValue: 2.5m),
-                    DefaultMarketerStream = table.Column<decimal>(type: "Money", nullable: false, defaultValue: 2.5m),
-                    DefaultProjectManagerStream = table.Column<decimal>(type: "Money", nullable: false, defaultValue: 7.5m),
-                    DefaultAccountManagerStream = table.Column<decimal>(type: "Money", nullable: false, defaultValue: 5m),
-                    DefaultContractorStream = table.Column<decimal>(type: "Money", nullable: false, defaultValue: 25m),
-                    DefaultAgencyStream = table.Column<decimal>(type: "Money", nullable: false, defaultValue: 15m),
-                    DefaultMarketingAgencyStream = table.Column<decimal>(type: "Money", nullable: false, defaultValue: 1m),
-                    DefaultRecruitingAgencyStream = table.Column<decimal>(type: "Money", nullable: false, defaultValue: 2m),
-                    DefaultMarketerBonus = table.Column<decimal>(type: "Money", nullable: false, defaultValue: 10m),
-                    DefaultMarketingAgencyBonus = table.Column<decimal>(type: "Money", nullable: false, defaultValue: 10m)
+                    DefaultRecruiterStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 2.5m),
+                    DefaultMarketerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 2.5m),
+                    DefaultProjectManagerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 7.5m),
+                    DefaultAccountManagerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 5m),
+                    DefaultContractorStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 25m),
+                    DefaultAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 15m),
+                    DefaultMarketingAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 1m),
+                    DefaultRecruitingAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 2m),
+                    DefaultMarketerBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 10m),
+                    DefaultMarketingAgencyBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 10m)
                 },
                 constraints: table =>
                 {
@@ -263,7 +263,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -434,7 +434,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    AccountId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AccountId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -485,9 +485,9 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     SubscriptionId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    AmountPaid = table.Column<decimal>(type: "Money", nullable: false),
-                    AmountRemaining = table.Column<decimal>(type: "Money", nullable: false),
-                    AmountDue = table.Column<decimal>(type: "Money", nullable: false),
+                    AmountPaid = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AmountRemaining = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AmountDue = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     AttemptCount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Attempted = table.Column<bool>(type: "bit", nullable: false),
                     AutomaticCollection = table.Column<bool>(type: "bit", nullable: false),
@@ -501,8 +501,8 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Total = table.Column<decimal>(type: "Money", nullable: false),
-                    Subtotal = table.Column<decimal>(type: "Money", nullable: false)
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Subtotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -524,7 +524,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    SubscriptionId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    SubscriptionId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     PlanId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Quantity = table.Column<long>(type: "bigint", nullable: false)
@@ -625,7 +625,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 columns: table => new
                 {
                     TransferId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    InvoiceId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    InvoiceId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -802,11 +802,11 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     PhoneNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Iso2 = table.Column<string>(type: "char(2)", maxLength: 2, nullable: false),
                     ProvinceState = table.Column<string>(type: "varchar(3)", maxLength: 3, nullable: false),
-                    RecruiterStream = table.Column<decimal>(type: "Money", nullable: false),
+                    RecruiterStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Updated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    RecruiterBonus = table.Column<decimal>(type: "Money", nullable: false),
-                    RecruitingAgencyStream = table.Column<decimal>(type: "Money", nullable: false),
-                    RecruitingAgencyBonus = table.Column<decimal>(type: "Money", nullable: false),
+                    RecruiterBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RecruitingAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RecruitingAgencyBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsContacted = table.Column<bool>(type: "bit", nullable: false),
                     RecruiterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RecruiterOrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -914,15 +914,15 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BuyerOrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MaxWeeklyHours = table.Column<int>(type: "int", nullable: false),
-                    ContractorStream = table.Column<decimal>(type: "Money", nullable: false),
-                    MarketerStream = table.Column<decimal>(type: "Money", nullable: false),
-                    AccountManagerStream = table.Column<decimal>(type: "Money", nullable: false),
-                    ProjectManagerStream = table.Column<decimal>(type: "Money", nullable: false),
-                    RecruiterStream = table.Column<decimal>(type: "Money", nullable: false),
-                    SystemStream = table.Column<decimal>(type: "Money", nullable: false),
-                    AgencyStream = table.Column<decimal>(type: "Money", nullable: false),
-                    RecruitingAgencyStream = table.Column<decimal>(type: "Money", nullable: false),
-                    MarketingAgencyStream = table.Column<decimal>(type: "Money", nullable: false),
+                    ContractorStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MarketerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AccountManagerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ProjectManagerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RecruiterStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SystemStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RecruitingAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MarketingAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CustomerRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false, computedColumnSql: "[ContractorStream]+[RecruiterStream]+[ProjectManagerStream]+[AccountManagerStream]+[MarketerStream]+[AgencyStream]+[MarketingAgencyStream]+[RecruitingAgencyStream]+[SystemStream]"),
                     MaxCustomerWeekly = table.Column<decimal>(type: "decimal(18,2)", nullable: false, computedColumnSql: "([ContractorStream]+[RecruiterStream]+[ProjectManagerStream]+[AccountManagerStream]+[MarketerStream]+[AgencyStream]+[MarketingAgencyStream]+[RecruitingAgencyStream]+[SystemStream])*[MaxWeeklyHours]"),
                     MaxContractorWeekly = table.Column<decimal>(type: "decimal(18,2)", nullable: false, computedColumnSql: "([ContractorStream]*[MaxWeeklyHours])"),
@@ -1148,9 +1148,9 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CustomerId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CustomerEntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1161,8 +1161,8 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         principalTable: "BuyerAccount",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_CustomerCard_Customer_CustomerId1",
-                        column: x => x.CustomerId1,
+                        name: "FK_CustomerCard_Customer_CustomerEntityId",
+                        column: x => x.CustomerEntityId,
                         principalTable: "Customer",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -1344,7 +1344,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InvoiceId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    InvoiceId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     InvoiceTransferId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Created = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     Updated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
@@ -1495,7 +1495,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
                     PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    InvoiceId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    InvoiceId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     InvoiceItemId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
@@ -1545,7 +1545,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 {
                     OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AccountManagerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AccountManagerStream = table.Column<decimal>(type: "Money", nullable: false),
+                    AccountManagerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedById = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1577,7 +1577,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 {
                     OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ContractorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ContractorStream = table.Column<decimal>(type: "Money", nullable: false),
+                    ContractorStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsFeatured = table.Column<bool>(type: "bit", nullable: false),
                     Biography = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PortfolioMediaUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -1658,13 +1658,13 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MarketerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ReferralCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MarketerStream = table.Column<decimal>(type: "Money", nullable: false),
+                    MarketerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsSystemDefault = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedById = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UpdatedById = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MarketerBonus = table.Column<decimal>(type: "Money", nullable: false)
+                    MarketerBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1692,7 +1692,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 {
                     OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProjectManagerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProjectManagerStream = table.Column<decimal>(type: "Money", nullable: false),
+                    ProjectManagerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedById = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1724,7 +1724,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 {
                     OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RecruiterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RecruiterStream = table.Column<decimal>(type: "Money", nullable: false),
+                    RecruiterStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsSystemDefault = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -1757,10 +1757,10 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MarketerStream = table.Column<decimal>(type: "Money", nullable: false),
-                    MarketingAgencyStream = table.Column<decimal>(type: "Money", nullable: false),
-                    MarketerBonus = table.Column<decimal>(type: "Money", nullable: false),
-                    MarketingAgencyBonus = table.Column<decimal>(type: "Money", nullable: false),
+                    MarketerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MarketingAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MarketerBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MarketingAgencyBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Discoverable = table.Column<bool>(type: "bit", nullable: false),
                     ServiceFeePerLead = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DefaultMarketerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1787,10 +1787,10 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AccountManagerStream = table.Column<decimal>(type: "Money", nullable: false),
-                    ProjectManagerStream = table.Column<decimal>(type: "Money", nullable: false),
-                    AgencyStream = table.Column<decimal>(type: "Money", nullable: false),
-                    ContractorStream = table.Column<decimal>(type: "Money", nullable: false),
+                    AccountManagerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ProjectManagerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ContractorStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ProviderInformation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProjectManagerInformation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AccountManagerInformation = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -1801,7 +1801,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     EstimationBasis = table.Column<int>(type: "int", nullable: false),
                     FutureDaysAllowed = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     PreviousDaysAllowed = table.Column<int>(type: "int", nullable: false, defaultValue: 14),
-                    SystemStream = table.Column<decimal>(type: "Money", nullable: false),
+                    SystemStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DefaultContractorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DefaultProjectManagerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DefaultAccountManagerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1837,10 +1837,10 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RecruiterStream = table.Column<decimal>(type: "Money", nullable: false),
-                    RecruitingAgencyStream = table.Column<decimal>(type: "Money", nullable: false),
-                    RecruiterBonus = table.Column<decimal>(type: "Money", nullable: false),
-                    RecruitingAgencyBonus = table.Column<decimal>(type: "Money", nullable: false),
+                    RecruiterStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RecruitingAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RecruiterBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RecruitingAgencyBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Discoverable = table.Column<bool>(type: "bit", nullable: false),
                     ServiceFeePerLead = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DefaultRecruiterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1886,8 +1886,8 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     IsInternal = table.Column<bool>(type: "bit", nullable: false, computedColumnSql: "case when [AccountManagerOrganizationId]=[CustomerOrganizationId] then cast(1 as bit) else cast(0 as bit) end"),
                     IsCorporate = table.Column<bool>(type: "bit", nullable: false, computedColumnSql: "case when [AccountManagerOrganizationId]=[CustomerOrganizationId] AND [AccountManagerId]=[CustomerId] then cast(1 as bit) else cast(0 as bit) end"),
                     IsDeactivated = table.Column<bool>(type: "bit", nullable: false, computedColumnSql: "case when (coalesce([AgencyOwnerDeactivationDate],[AccountManagerDeactivationDate],[CustomerDeactivationDate]) is null) then cast(0 as bit) else cast(1 as bit) end"),
-                    MarketerStream = table.Column<decimal>(type: "Money", nullable: false),
-                    MarketingAgencyStream = table.Column<decimal>(type: "Money", nullable: false),
+                    MarketerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MarketingAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     StripeCustomerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AutoApproveTimeEntries = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -1949,11 +1949,11 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     Iso2 = table.Column<string>(type: "char(2)", maxLength: 2, nullable: false),
                     ProvinceState = table.Column<string>(type: "varchar(3)", maxLength: 3, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MarketerStream = table.Column<decimal>(type: "Money", nullable: false),
+                    MarketerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Updated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    MarketerBonus = table.Column<decimal>(type: "Money", nullable: false),
-                    MarketingAgencyStream = table.Column<decimal>(type: "Money", nullable: false),
-                    MarketingAgencyBonus = table.Column<decimal>(type: "Money", nullable: false),
+                    MarketerBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MarketingAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MarketingAgencyBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     IsContacted = table.Column<bool>(type: "bit", nullable: false),
                     AccountManagerOrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -2015,10 +2015,10 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     ProviderOrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MarketingOrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     InitiatedByProvider = table.Column<bool>(type: "bit", nullable: false),
-                    MarketerBonus = table.Column<decimal>(type: "Money", nullable: false),
-                    MarketingAgencyStream = table.Column<decimal>(type: "Money", nullable: false),
-                    MarketingAgencyBonus = table.Column<decimal>(type: "Money", nullable: false),
-                    MarketerStream = table.Column<decimal>(type: "Money", nullable: false),
+                    MarketerBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MarketingAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MarketingAgencyBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MarketerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     RequireUniqueEmail = table.Column<bool>(type: "bit", nullable: false),
                     MarketerInformation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MarketingStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false, computedColumnSql: "[MarketingAgencyStream]+[MarketerStream]"),
@@ -2072,10 +2072,10 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     ProviderOrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RecruitingOrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     InitiatedByProvider = table.Column<bool>(type: "bit", nullable: false),
-                    RecruiterStream = table.Column<decimal>(type: "Money", nullable: false),
-                    RecruitingAgencyBonus = table.Column<decimal>(type: "Money", nullable: false),
-                    RecruiterBonus = table.Column<decimal>(type: "Money", nullable: false),
-                    RecruitingAgencyStream = table.Column<decimal>(type: "Money", nullable: false),
+                    RecruiterStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RecruitingAgencyBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RecruiterBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RecruitingAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     RecruiterInformation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RecruitingStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false, computedColumnSql: "[RecruitingAgencyStream]+[RecruiterStream]"),
                     RecruitingBonus = table.Column<decimal>(type: "decimal(18,2)", nullable: false, computedColumnSql: "[RecruitingAgencyBonus]+[RecruiterBonus]"),
@@ -2532,10 +2532,10 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    VelocityBasis = table.Column<decimal>(type: "decimal(3,2)", nullable: false, defaultValue: 1m),
+                    VelocityBasis = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 1m),
                     WeeklyMaxHourBasis = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     AgreementText = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BudgetBasis = table.Column<decimal>(type: "Money", nullable: true),
+                    BudgetBasis = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedById = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UpdatedById = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -2545,7 +2545,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     DailyCapacity = table.Column<decimal>(type: "decimal(18,2)", nullable: false, computedColumnSql: "(([WeeklyMaxHourBasis] * [VelocityBasis]) / 7)"),
                     StoryPointBasis = table.Column<int>(type: "int", nullable: false),
                     EstimationBasis = table.Column<int>(type: "int", nullable: false),
-                    OtherPercentBasis = table.Column<decimal>(type: "decimal(3,2)", nullable: false, defaultValue: 0m),
+                    OtherPercentBasis = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 0m),
                     ExtraDayBasis = table.Column<int>(type: "int", nullable: false),
                     CustomerRateBasis = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     StoryHours = table.Column<int>(type: "int", nullable: false, computedColumnSql: "([StoryPointBasis]*[EstimationBasis])"),
@@ -2660,7 +2660,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Disputed = table.Column<bool>(type: "bit", nullable: false),
                     Paid = table.Column<bool>(type: "bit", nullable: false),
-                    InvoiceId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    InvoiceId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     OrderId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReceiptEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReceiptUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -2727,7 +2727,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     NetTerms = table.Column<int>(type: "int", nullable: false),
                     RetainerAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     ProposalBlob = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerRate = table.Column<decimal>(type: "Money", nullable: false),
+                    CustomerRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     AgreementText = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProposalType = table.Column<int>(type: "int", nullable: false),
                     TotalDays = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -2839,16 +2839,16 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TimeType = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    InstantContractorStream = table.Column<decimal>(type: "Money", nullable: false),
+                    InstantContractorStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     RejectionReason = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InstantRecruiterStream = table.Column<decimal>(type: "Money", nullable: false),
-                    InstantMarketerStream = table.Column<decimal>(type: "Money", nullable: false),
-                    InstantProjectManagerStream = table.Column<decimal>(type: "Money", nullable: false),
-                    InstantAccountManagerStream = table.Column<decimal>(type: "Money", nullable: false),
-                    InstantSystemStream = table.Column<decimal>(type: "Money", nullable: false),
-                    InstantAgencyStream = table.Column<decimal>(type: "Money", nullable: false),
-                    InstantRecruitingAgencyStream = table.Column<decimal>(type: "Money", nullable: false),
-                    InstantMarketingAgencyStream = table.Column<decimal>(type: "Money", nullable: false),
+                    InstantRecruiterStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    InstantMarketerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    InstantProjectManagerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    InstantAccountManagerStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    InstantSystemStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    InstantAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    InstantRecruitingAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    InstantMarketingAgencyStream = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     RecruitingOrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RecruiterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MarketerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -3249,14 +3249,14 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                 column: "PaymentTermId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CustomerCard_CustomerEntityId",
+                table: "CustomerCard",
+                column: "CustomerEntityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CustomerCard_CustomerId",
                 table: "CustomerCard",
                 column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CustomerCard_CustomerId1",
-                table: "CustomerCard",
-                column: "CustomerId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_IndividualBonusIntent_CandidateId",

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgencyPro.Infrastructure.SqlServer.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250311012239_Migration1")]
+    [Migration("20250311022121_Migration1")]
     partial class Migration1
     {
         /// <inheritdoc />
@@ -31,7 +31,6 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AccountId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
@@ -118,7 +117,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Balance")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("datetimeoffset");
@@ -200,7 +199,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("varchar(3)");
 
                     b.Property<decimal>("RecruiterBonus")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("RecruiterId")
                         .HasColumnType("uniqueidentifier");
@@ -209,13 +208,13 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("RecruiterStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("RecruitingAgencyBonus")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("RecruitingAgencyStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("RejectionDescription")
                         .IsRequired()
@@ -340,52 +339,52 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
 
                     b.Property<decimal>("DefaultAccountManagerStream")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("Money")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(5m);
 
                     b.Property<decimal>("DefaultAgencyStream")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("Money")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(15m);
 
                     b.Property<decimal>("DefaultContractorStream")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("Money")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(25m);
 
                     b.Property<decimal>("DefaultMarketerBonus")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("Money")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(10m);
 
                     b.Property<decimal>("DefaultMarketerStream")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("Money")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(2.5m);
 
                     b.Property<decimal>("DefaultMarketingAgencyBonus")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("Money")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(10m);
 
                     b.Property<decimal>("DefaultMarketingAgencyStream")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("Money")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(1m);
 
                     b.Property<decimal>("DefaultProjectManagerStream")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("Money")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(7.5m);
 
                     b.Property<decimal>("DefaultRecruiterStream")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("Money")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(2.5m);
 
                     b.Property<decimal>("DefaultRecruitingAgencyStream")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("Money")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(2m);
 
                     b.Property<string>("MarketerTitle")
@@ -607,7 +606,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<decimal>("AccountManagerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTimeOffset?>("AgencyOwnerEndDate")
                         .HasColumnType("datetimeoffset");
@@ -616,7 +615,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<decimal>("AgencyStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("BuyerNumber")
                         .HasColumnType("int");
@@ -637,7 +636,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<decimal>("ContractorStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("datetimeoffset");
@@ -679,10 +678,10 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("MarketerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("MarketingAgencyStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("MarketingNumber")
                         .HasColumnType("int");
@@ -750,7 +749,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("ProjectManagerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ProviderNumber")
                         .HasColumnType("int");
@@ -765,10 +764,10 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("RecruiterStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("RecruitingAgencyStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("RecruitingNumber")
                         .HasColumnType("int");
@@ -777,7 +776,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("tinyint");
 
                     b.Property<decimal>("SystemStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("TotalHoursLogged")
                         .HasColumnType("decimal(18,2)");
@@ -1013,10 +1012,10 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasComputedColumnSql("case when [AccountManagerOrganizationId]=[CustomerOrganizationId] then cast(1 as bit) else cast(0 as bit) end");
 
                     b.Property<decimal>("MarketerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("MarketingAgencyStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Number")
                         .HasColumnType("int");
@@ -1062,21 +1061,20 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid?>("CustomerId1")
+                    b.Property<Guid?>("CustomerEntityId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerEntityId");
 
-                    b.HasIndex("CustomerId1");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("CustomerCard");
                 });
@@ -1157,7 +1155,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("BudgetBasis")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -1183,7 +1181,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
 
                     b.Property<decimal>("OtherPercentBasis")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(3,2)")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
                     b.Property<int>("ProposalType")
@@ -1225,7 +1223,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
 
                     b.Property<decimal>("VelocityBasis")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(3,2)")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(1m);
 
                     b.Property<decimal>("WeeklyCapacity")
@@ -1350,7 +1348,6 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InvoiceId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("InvoiceItemId")
@@ -1393,7 +1390,6 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("InvoiceId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TransferId");
@@ -1465,7 +1461,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("MarketerBonus")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("MarketerId")
                         .HasColumnType("uniqueidentifier");
@@ -1474,13 +1470,13 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("MarketerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("MarketingAgencyBonus")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("MarketingAgencyStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("MeetingNotes")
                         .HasMaxLength(5000)
@@ -1632,20 +1628,20 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal>("MarketerBonus")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("MarketerInformation")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("MarketerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("MarketingAgencyBonus")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("MarketingAgencyStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("MarketingBonus")
                         .ValueGeneratedOnAddOrUpdate()
@@ -1692,16 +1688,16 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal>("MarketerBonus")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("MarketerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("MarketingAgencyBonus")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("MarketingAgencyStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ServiceFeePerLead")
                         .HasColumnType("decimal(18,2)");
@@ -1858,7 +1854,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("AccountManagerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -1986,7 +1982,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("ContractorStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("CreatedById")
                         .HasColumnType("uniqueidentifier");
@@ -2093,10 +2089,10 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal>("MarketerBonus")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("MarketerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ReferralCode")
                         .IsRequired()
@@ -2151,7 +2147,6 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InvoiceId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("InvoiceItemId")
@@ -2275,7 +2270,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal>("ProjectManagerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("UpdatedById")
                         .HasColumnType("uniqueidentifier");
@@ -2313,7 +2308,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("RecruiterStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("UpdatedById")
                         .HasColumnType("uniqueidentifier");
@@ -2871,7 +2866,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("CustomerRate")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("NetTerms")
                         .HasColumnType("int");
@@ -2968,10 +2963,10 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("AccountManagerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("AgencyStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("AutoApproveTimeEntries")
                         .HasColumnType("bit");
@@ -2981,7 +2976,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("ContractorStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("DefaultAccountManagerId")
                         .HasColumnType("uniqueidentifier");
@@ -3017,7 +3012,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("ProjectManagerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProviderInformation")
                         .IsRequired()
@@ -3028,7 +3023,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("SystemStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -3069,20 +3064,20 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal>("RecruiterBonus")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("RecruiterInformation")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("RecruiterStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("RecruitingAgencyBonus")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("RecruitingAgencyStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("RecruitingBonus")
                         .ValueGeneratedOnAddOrUpdate()
@@ -3126,16 +3121,16 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal>("RecruiterBonus")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("RecruiterStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("RecruitingAgencyBonus")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("RecruitingAgencyStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ServiceFeePerLead")
                         .HasColumnType("decimal(18,2)");
@@ -3463,7 +3458,6 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("InvoiceId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
@@ -3557,7 +3551,6 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CustomerId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
@@ -3576,13 +3569,13 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("AmountDue")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("AmountPaid")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("AmountRemaining")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("AttemptCount")
                         .HasColumnType("decimal(18,2)");
@@ -3635,10 +3628,10 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Subtotal")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -3924,7 +3917,6 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("SubscriptionId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -4040,31 +4032,31 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<decimal>("InstantAccountManagerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("InstantAgencyStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("InstantContractorStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("InstantMarketerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("InstantMarketingAgencyStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("InstantProjectManagerStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("InstantRecruiterStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("InstantRecruitingAgencyStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("InstantSystemStream")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("InvoiceItemId")
                         .IsRequired()
@@ -4493,8 +4485,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.FinancialAccount", "FinancialAccount")
                         .WithMany("Cards")
                         .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.StripeCard", "StripeCard")
                         .WithOne("AccountCard")
@@ -4523,8 +4514,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.StripeTransfer", "Transfer")
                         .WithOne("BonusTransfer")
                         .HasForeignKey("AgencyPro.Domain.Entities.BonusTransfer", "TransferId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Transfer");
                 });
@@ -4539,14 +4529,12 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.ProviderOrganization", "ProviderOrganization")
                         .WithMany("Candidates")
                         .HasForeignKey("ProviderOrganizationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Recruiter", "Recruiter")
                         .WithMany("Candidates")
                         .HasForeignKey("RecruiterId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Organization", "RecruiterOrganization")
                         .WithMany("Candidates")
@@ -4721,14 +4709,12 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.AccountManager", "AccountManager")
                         .WithMany("Contracts")
                         .HasForeignKey("AccountManagerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Organization", "BuyerOrganization")
                         .WithMany("BuyerContracts")
                         .HasForeignKey("BuyerOrganizationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Contractor", "Contractor")
                         .WithMany("Contracts")
@@ -4739,8 +4725,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.Customer", "Customer")
                         .WithMany("Contracts")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Marketer", "Marketer")
                         .WithMany("Contracts")
@@ -4757,14 +4742,12 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.Project", "Project")
                         .WithMany("Contracts")
                         .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.ProjectManager", "ProjectManager")
                         .WithMany("Contracts")
                         .HasForeignKey("ProjectManagerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.ProviderOrganization", "ProviderOrganization")
                         .WithMany("Contracts")
@@ -4793,14 +4776,12 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationCustomer", "OrganizationCustomer")
                         .WithMany("Contracts")
                         .HasForeignKey("BuyerOrganizationId", "CustomerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationContractor", "OrganizationContractor")
                         .WithMany("Contracts")
                         .HasForeignKey("ContractorOrganizationId", "ContractorId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationMarketer", "OrganizationMarketer")
                         .WithMany("Contracts")
@@ -4817,14 +4798,12 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationRecruiter", "OrganizationRecruiter")
                         .WithMany("Contracts")
                         .HasForeignKey("RecruiterOrganizationId", "RecruiterId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.CustomerAccount", "CustomerAccount")
                         .WithMany("Contracts")
                         .HasForeignKey("BuyerOrganizationId", "CustomerId", "AccountManagerOrganizationId", "AccountManagerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("AccountManager");
 
@@ -4891,8 +4870,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationRecruiter", "OrganizationRecruiter")
                         .WithMany("Contractors")
                         .HasForeignKey("RecruiterOrganizationId", "RecruiterId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("OrganizationRecruiter");
 
@@ -4944,8 +4922,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.AccountManager", "AccountManager")
                         .WithMany("CustomerAccounts")
                         .HasForeignKey("AccountManagerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.ProviderOrganization", "ProviderOrganization")
                         .WithMany("CustomerAccounts")
@@ -4956,8 +4933,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.Customer", "Customer")
                         .WithMany("CustomerAccounts")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Organization", "BuyerOrganization")
                         .WithMany("BuyerCustomerAccounts")
@@ -4980,8 +4956,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationCustomer", "OrganizationCustomer")
                         .WithMany("Accounts")
                         .HasForeignKey("CustomerOrganizationId", "CustomerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("AccountManager");
 
@@ -5000,24 +4975,24 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
 
             modelBuilder.Entity("AgencyPro.Domain.Entities.CustomerCard", b =>
                 {
+                    b.HasOne("AgencyPro.Domain.Entities.Customer", "CustomerEntity")
+                        .WithMany("Cards")
+                        .HasForeignKey("CustomerEntityId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("AgencyPro.Domain.Entities.BuyerAccount", "Customer")
                         .WithMany("Cards")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("AgencyPro.Domain.Entities.Customer", null)
-                        .WithMany("Cards")
-                        .HasForeignKey("CustomerId1")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.StripeCard", "StripeCard")
                         .WithOne("CustomerCard")
                         .HasForeignKey("AgencyPro.Domain.Entities.CustomerCard", "Id")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Customer");
+
+                    b.Navigation("CustomerEntity");
 
                     b.Navigation("StripeCard");
                 });
@@ -5116,8 +5091,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.StripeInvoice", "Invoice")
                         .WithMany("IndividualPayoutIntents")
                         .HasForeignKey("InvoiceId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.StripeInvoiceItem", "InvoiceItem")
                         .WithMany("IndividualPayoutIntents")
@@ -5145,8 +5119,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationPerson", "OrganizationPerson")
                         .WithMany("Payouts")
                         .HasForeignKey("OrganizationId", "PersonId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Invoice");
 
@@ -5166,14 +5139,12 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.StripeInvoice", "Invoice")
                         .WithMany("InvoiceTransfers")
                         .HasForeignKey("InvoiceId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.StripeTransfer", "Transfer")
                         .WithOne("InvoiceTransfer")
                         .HasForeignKey("AgencyPro.Domain.Entities.InvoiceTransfer", "TransferId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Invoice");
 
@@ -5190,8 +5161,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.Marketer", "Marketer")
                         .WithMany("Leads")
                         .HasForeignKey("MarketerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Organization", "MarketerOrganization")
                         .WithMany("Leads")
@@ -5207,8 +5177,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.ProviderOrganization", "ProviderOrganization")
                         .WithMany("Leads")
                         .HasForeignKey("ProviderOrganizationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationAccountManager", "OrganizationAccountManager")
                         .WithMany("Leads")
@@ -5218,8 +5187,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationMarketer", "OrganizationMarketer")
                         .WithMany("Leads")
                         .HasForeignKey("MarketerOrganizationId", "MarketerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("AccountManager");
 
@@ -5469,8 +5437,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.Customer", "Customer")
                         .WithMany("OrganizationCustomers")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Organization", "Organization")
                         .WithMany("Customers")
@@ -5481,8 +5448,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationPerson", "OrganizationPerson")
                         .WithOne("Customer")
                         .HasForeignKey("AgencyPro.Domain.Entities.OrganizationCustomer", "OrganizationId", "CustomerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Customer");
 
@@ -5561,8 +5527,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.StripeInvoice", "Invoice")
                         .WithMany("OrganizationPayoutIntents")
                         .HasForeignKey("InvoiceId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.StripeInvoiceItem", "InvoiceItem")
                         .WithMany("OrganizationPayoutIntents")
@@ -5595,14 +5560,12 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.Organization", "Organization")
                         .WithMany("OrganizationPeople")
                         .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Person", "Person")
                         .WithMany("OrganizationPeople")
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Organization");
 
@@ -5672,8 +5635,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationPerson", "OrganizationPerson")
                         .WithOne("Recruiter")
                         .HasForeignKey("AgencyPro.Domain.Entities.OrganizationRecruiter", "OrganizationId", "RecruiterId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Organization");
 
@@ -5769,8 +5731,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.AccountManager", "AccountManager")
                         .WithMany("Projects")
                         .HasForeignKey("AccountManagerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Organization", "BuyerOrganization")
                         .WithMany("BuyerProjects")
@@ -5787,14 +5748,12 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.ProjectManager", "ProjectManager")
                         .WithMany("Projects")
                         .HasForeignKey("ProjectManagerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.ProviderOrganization", "ProviderOrganization")
                         .WithMany("Projects")
                         .HasForeignKey("ProjectManagerOrganizationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationAccountManager", "OrganizationAccountManager")
                         .WithMany("Projects")
@@ -5817,8 +5776,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.CustomerAccount", "CustomerAccount")
                         .WithMany("Projects")
                         .HasForeignKey("CustomerOrganizationId", "CustomerId", "AccountManagerOrganizationId", "AccountManagerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("AccountManager");
 
@@ -6264,8 +6222,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.StripeInvoice", "Invoice")
                         .WithMany("Charges")
                         .HasForeignKey("InvoiceId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.StripePaymentIntent", "PaymentIntent")
                         .WithMany("Charges")
@@ -6294,8 +6251,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.BuyerAccount", "Customer")
                         .WithMany("CheckoutSessions")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Customer");
                 });
@@ -6389,8 +6345,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.StripeSubscription", "Subscription")
                         .WithMany("Items")
                         .HasForeignKey("SubscriptionId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Subscription");
                 });
@@ -6411,26 +6366,22 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.AccountManager", "AccountManager")
                         .WithMany("TimeEntries")
                         .HasForeignKey("AccountManagerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Contract", "Contract")
                         .WithMany("TimeEntries")
                         .HasForeignKey("ContractId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Contractor", "Contractor")
                         .WithMany("TimeEntries")
                         .HasForeignKey("ContractorId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Customer", "Customer")
                         .WithMany("BuyerTimeEntries")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.StripeInvoiceItem", "InvoiceItem")
                         .WithMany("TimeEntries")
@@ -6441,44 +6392,37 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.Marketer", "Marketer")
                         .WithMany("TimeEntries")
                         .HasForeignKey("MarketerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Customer", "MarketingAgencyOwner")
                         .WithMany("MarketingTimeEntries")
                         .HasForeignKey("MarketingAgencyOwnerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Project", "Project")
                         .WithMany("TimeEntries")
                         .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.ProjectManager", "ProjectManager")
                         .WithMany("TimeEntries")
                         .HasForeignKey("ProjectManagerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Customer", "ProviderAgencyOwner")
                         .WithMany("ProviderTimeEntries")
                         .HasForeignKey("ProviderAgencyOwnerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Recruiter", "Recruiter")
                         .WithMany("TimeEntries")
                         .HasForeignKey("RecruiterId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Customer", "RecruitingAgencyOwner")
                         .WithMany("RecruitingTimeEntries")
                         .HasForeignKey("RecruitingAgencyOwnerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.Story", "Story")
                         .WithMany("TimeEntries")
@@ -6494,8 +6438,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationCustomer", "OrganizationCustomer")
                         .WithMany("TimeEntries")
                         .HasForeignKey("CustomerOrganizationId", "CustomerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationMarketer", "OrganizationMarketer")
                         .WithMany("TimeEntries")
@@ -6595,8 +6538,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.AccountManager", "AccountManager")
                         .WithMany("WorkOrders")
                         .HasForeignKey("AccountManagerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.ProviderOrganization", "ProviderOrganization")
                         .WithMany("WorkOrders")
@@ -6613,8 +6555,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.Customer", "Customer")
                         .WithMany("WorkOrders")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("AgencyPro.Domain.Entities.OrganizationAccountManager", "OrganizationAccountManager")
                         .WithMany("WorkOrders")
@@ -6625,8 +6566,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.HasOne("AgencyPro.Domain.Entities.CustomerAccount", "CustomerAccount")
                         .WithMany("WorkOrders")
                         .HasForeignKey("CustomerOrganizationId", "CustomerId", "AccountManagerOrganizationId", "AccountManagerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("AccountManager");
 
