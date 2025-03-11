@@ -1,5 +1,6 @@
 ﻿using AgencyPro.Domain.Entities;
 using AgencyPro.Shared.Models;
+using AgencyPro.Shared.Models.Candidates;
 using AutoMapper;
 
 namespace AgencyPro.Services.Mapping

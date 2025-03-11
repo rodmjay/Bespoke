@@ -1,4 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿using AgencyPro.Shared.Models.Contracts;
+
+namespace AgencyPro.Shared.Models
 {
     public class RecruiterTimeMatrixComposedOutput
     {

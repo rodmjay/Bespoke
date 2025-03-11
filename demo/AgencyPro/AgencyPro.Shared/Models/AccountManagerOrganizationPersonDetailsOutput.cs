@@ -1,3 +1,5 @@
+using AgencyPro.Shared.Models.People;
+
 namespace AgencyPro.Shared.Models
 {
     public class AccountManagerOrganizationPersonDetailsOutput : AccountManagerOrganizationPersonOutput

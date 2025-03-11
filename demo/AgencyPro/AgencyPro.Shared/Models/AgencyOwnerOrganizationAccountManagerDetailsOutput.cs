@@ -1,3 +1,5 @@
+using AgencyPro.Shared.Models.Leads;
+
 namespace AgencyPro.Shared.Models
 {
     public class AgencyOwnerOrganizationAccountManagerDetailsOutput : OrganizationAccountManagerStatistics

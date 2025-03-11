@@ -1,3 +1,5 @@
+using AgencyPro.Shared.Models.Contracts;
+
 namespace AgencyPro.Shared.Models
 {
     public class CustomerCustomerAccountDetailsOutput : CustomerCustomerAccountOutput

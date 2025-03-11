@@ -1,4 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿using AgencyPro.Shared.Models.TimeTracking;
+
+namespace AgencyPro.Shared.Models
 {
     public class AccountManagerStoryDetailsOutput : AccountManagerStoryOutput
     {

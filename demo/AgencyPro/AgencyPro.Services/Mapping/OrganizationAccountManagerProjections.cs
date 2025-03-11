@@ -1,6 +1,6 @@
 ﻿using AgencyPro.Domain.Entities;
-using AgencyPro.Shared.Enums;
 using AgencyPro.Shared.Models;
+using AgencyPro.Shared.Models.Organizations;
 using AutoMapper;
 
 namespace AgencyPro.Services.Mapping

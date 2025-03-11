@@ -13,4 +13,10 @@
     <ProjectReference Include="..\AgencyPro.Shared\AgencyPro.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Contracts\EventHandlers\" />
+    <Folder Include="Contracts\Mapping\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 </Project>

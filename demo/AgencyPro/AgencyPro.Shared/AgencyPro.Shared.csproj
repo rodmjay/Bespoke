@@ -10,4 +10,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\src\Bespoke.Shared\Bespoke.Shared.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Models\Skills\" />
+	</ItemGroup>
 </Project>

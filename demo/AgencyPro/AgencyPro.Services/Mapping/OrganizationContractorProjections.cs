@@ -1,5 +1,4 @@
 ﻿using AgencyPro.Domain.Entities;
-using AgencyPro.Shared.Enums;
 using AgencyPro.Shared.Models;
 using AutoMapper;
 

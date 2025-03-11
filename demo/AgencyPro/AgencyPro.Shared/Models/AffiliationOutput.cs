@@ -37,19 +37,5 @@
         public bool RecruitingAgencyFeaturesEnabled { get; set; }
         public bool MarketingAgencyFeaturesEnabled { get; set; }
 
-        public bool IsAccountManagerProjectEnabled => CheckEnabled(SectionType.AccountManager, MenuType.Project);
-
-        public bool IsAccountManagerContractEnabled => CheckEnabled(SectionType.AccountManager, MenuType.Contract);
-
-        public bool IsAccountManagerStoryEnabled => CheckEnabled(SectionType.AccountManager, MenuType.Story);
-
-        public bool IsProjectManagerProjectEnabled => CheckEnabled(SectionType.ProjectManager, MenuType.Project);
-        public bool IsProjectManagerContractEnabled => CheckEnabled(SectionType.ProjectManager, MenuType.Contract);
-        public bool IsProjectManagerStoryEnabled => CheckEnabled(SectionType.ProjectManager, MenuType.Story);
-
-        private bool CheckEnabled(SectionType sectionType, MenuType menuType)
-        {
-            return OrganizationSettings?.Any(a => a.SectionType == sectionType && a.MenuType == menuType && a.IsEnabled) ?? false;
-        }
     }
 }
