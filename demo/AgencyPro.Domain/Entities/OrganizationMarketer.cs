@@ -11,7 +11,7 @@ namespace AgencyPro.Domain.Entities
         public Guid MarketerId { get; set; }
         public Marketer Marketer { get; set; }
 
-        public string ReferralCode { get; set; }
+        public string ReferralCode { get; set; } = null!;
 
         public decimal MarketerStream { get; set; }
 
@@ -22,7 +22,7 @@ namespace AgencyPro.Domain.Entities
 
         public bool IsSystemDefault { get; set; }
         public bool IsDeleted { get; set; }
-        public virtual string ConcurrencyStamp { get; set; }
+        public virtual string ConcurrencyStamp { get; set; } = null!;
 
 
         public Guid CreatedById { get; set; }

@@ -7,7 +7,7 @@
         public FinancialAccount FinancialAccount { get; set; }
         public Organization Organization { get; set; }
 
-        public string FinancialAccountId { get; set; }
+        public string FinancialAccountId { get; set; } = null!;
 
 
         public override void Configure(EntityTypeBuilder<OrganizationFinancialAccount> builder)

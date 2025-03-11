@@ -4,7 +4,7 @@ namespace AgencyPro.Domain.Entities
 {
     public class Person : BaseEntity<Person>, IPerson
     {
-        public string ReferralCode { get; set; }
+        public string ReferralCode { get; set; } = null!;
         public string SSNLast4;
         public Customer Customer { get; set; }
         public Contractor Contractor { get; set; }
@@ -21,16 +21,16 @@ namespace AgencyPro.Domain.Entities
         public ICollection<IndividualPayoutIntent> PayoutIntents { get; set; }
         public ICollection<IndividualBonusIntent> BonusIntents { get; set; }
         public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string ImageUrl { get; set; }
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
+        public string ImageUrl { get; set; } = null!;
 
-        public string Address { get; set; }
-        public string Address2 { get; set; }
-        public string City { get; set; }
-        public string Iso2 { get; set; }
-        public string ProvinceState { get; set; }
-        public string PostalCode { get; set; }
+        public string Address { get; set; } = null!;
+        public string Address2 { get; set; } = null!;
+        public string City { get; set; } = null!;
+        public string Iso2 { get; set; } = null!;
+        public string ProvinceState { get; set; } = null!;
+        public string PostalCode { get; set; } = null!;
         
         public PersonStatus Status { get; set; }
     
@@ -47,16 +47,16 @@ namespace AgencyPro.Domain.Entities
 
 
         public bool TosAcceptance { get; set; }
-        public string TaxId { get; set; }
+        public string TaxId { get; set; } = null!;
         public DateTime? TosShownAndAcceptedDate { get; set; }
-        public string TosIpAddress { get; set; }
-        public string TosUserAgent { get; set; }
+        public string TosIpAddress { get; set; } = null!;
+        public string TosUserAgent { get; set; } = null!;
         public bool DetailsSubmitted { get; set; }
         public long? DobDay { get; set; }
         public long? DobMonth { get; set; }
         public long? DobYear { get; set; }
-        public string Gender { get; set; }
-        public string MaidenName { get; set; }
+        public string Gender { get; set; } = null!;
+        public string MaidenName { get; set; } = null!;
         
         public Lead Lead { get; set; }
         public override void Configure(EntityTypeBuilder<Person> builder)

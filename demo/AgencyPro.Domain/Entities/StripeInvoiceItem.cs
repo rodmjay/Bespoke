@@ -11,15 +11,15 @@
             this.OrganizationPayoutIntents = new List<OrganizationPayoutIntent>();
         }
 
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
         public decimal Amount { get; set; }
 
-        public string CustomerId { get; set; }
+        public string CustomerId { get; set; } = null!;
         public BuyerAccount Customer { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
-        public string InvoiceId { get; set; }
+        public string InvoiceId { get; set; } = null!;
         public StripeInvoice Invoice { get; set; }
         
         public int Quantity { get; set; }

@@ -39,7 +39,7 @@
         public DateTimeOffset Updated { get; set; }
 
         public AccountManager AccountManager { get; set;  }
-        public string ConcurrencyStamp { get; set; }
+        public string ConcurrencyStamp { get; set; } = null!;
 
         public DateTimeOffset? AgencyOwnerDeactivationDate { get; set; }
         public DateTimeOffset? AccountManagerDeactivationDate { get; set; }
@@ -84,7 +84,7 @@
         public decimal MarketerStream { get; set; }
         public decimal MarketingAgencyStream { get; set; }
 
-        public string StripeCustomerId { get; set; }
+        public string StripeCustomerId { get; set; } = null!;
         public bool AutoApproveTimeEntries { get; set; }
         public ICollection<ProjectRetainerIntent> RetainerIntents { get; set; }
         public override void Configure(EntityTypeBuilder<CustomerAccount> builder)

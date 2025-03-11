@@ -7,7 +7,7 @@
         public int PositionId { get; set; }
         public Position Position { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         public ICollection<OrganizationContractor> Contractors { get; set; }
 

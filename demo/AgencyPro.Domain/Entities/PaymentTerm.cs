@@ -2,7 +2,7 @@
 {
     public class PaymentTerm : BaseEntity<PaymentTerm>
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
         public int NetValue { get; set; }
         public int PaymentTermId { get; set; }
 

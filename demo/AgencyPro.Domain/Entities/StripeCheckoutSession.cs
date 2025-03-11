@@ -2,9 +2,9 @@
 {
     public class StripeCheckoutSession : BaseEntity<StripeCheckoutSession>
     {
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
         public BuyerAccount Customer { get; set; }
-        public string CustomerId { get; set; }
+        public string CustomerId { get; set; } = null!;
         public bool IsDeleted { get; set; }
         public override void Configure(EntityTypeBuilder<StripeCheckoutSession> builder)
         {

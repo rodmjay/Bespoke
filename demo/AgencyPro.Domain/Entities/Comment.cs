@@ -3,7 +3,7 @@
     public class Comment : BaseEntity<Comment>, IComment
     {
         public Guid Id { get; set; }
-        public string Body { get; set; }
+        public string Body { get; set; } = null!;
 
         public bool Internal { get; set; }
 

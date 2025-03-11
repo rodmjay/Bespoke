@@ -34,16 +34,16 @@
         }
         
         public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
 
-        public string EmailAddress { get; set; }
-        public string OrganizationName { get; set; }
-        public string ReferralCode { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Iso2 { get; set; }
-        public string ProvinceState { get; set; }
-        public string Description { get; set; }
+        public string EmailAddress { get; set; } = null!;
+        public string OrganizationName { get; set; } = null!;
+        public string ReferralCode { get; set; } = null!;
+        public string PhoneNumber { get; set; } = null!;
+        public string Iso2 { get; set; } = null!;
+        public string ProvinceState { get; set; } = null!;
+        public string Description { get; set; } = null!;
         public decimal MarketerStream { get; set; }
         public DateTimeOffset Updated { get; set; }
         public decimal MarketerBonus { get; set; }
@@ -60,14 +60,14 @@
         public Guid? PersonId { get; set; }
         public Person Person { get; set; }
         public DateTime? CallbackDate { get; set; }
-        public string MeetingNotes { get; set; }
-        public string RejectionReason { get; set; }
+        public string MeetingNotes { get; set; } = null!;
+        public string RejectionReason { get; set; } = null!;
 
         public Guid CreatedById { get; set; }
 
         public Guid UpdatedById { get; set; }
         public DateTimeOffset Created { get; set; }
-        public string ConcurrencyStamp { get; set; }
+        public string ConcurrencyStamp { get; set; } = null!;
         public bool IsDeleted { get; set; }
 
         public IndividualBonusIntent IndividualBonusIntent { get; set; }

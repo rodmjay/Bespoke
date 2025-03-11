@@ -2,16 +2,16 @@
 {
     public class AccountCard : BaseEntity<AccountCard>
     {
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
 
-        public string AccountId { get; set; }
+        public string AccountId { get; set; } = null!;
         public FinancialAccount FinancialAccount { get; set; }
 
         public StripeCard StripeCard { get; set; }
         public bool IsDeleted { get; set; }
 
-        public string Status { get; set; }
-        public string Type { get; set; }
+        public string Status { get; set; } = null!;
+        public string Type { get; set; } = null!;
 
         public override void Configure(EntityTypeBuilder<AccountCard> builder)
         {

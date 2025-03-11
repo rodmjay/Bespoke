@@ -2,10 +2,10 @@
 {
     public class InvoiceTransfer : BaseEntity<InvoiceTransfer>
     {
-        public string TransferId { get; set; }
+        public string TransferId { get; set; } = null!;
         public StripeTransfer Transfer { get; set; }
 
-        public string InvoiceId { get; set; }
+        public string InvoiceId { get; set; } = null!;
         public StripeInvoice Invoice { get; set; }
 
         public ICollection<IndividualPayoutIntent> IndividualPayoutIntents { get; set; }

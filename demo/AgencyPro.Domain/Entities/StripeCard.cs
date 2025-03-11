@@ -2,22 +2,22 @@
 {
     public class StripeCard : BaseEntity<StripeCard>, IStripeCard
     {
-        public string Id { get; set; }
-        public string AddressCity { get; set; }
-        public string AddressCountry { get; set; }
-        public string AddressLine1 { get; set; }
-        public string AddressLine2 { get; set; }
+        public string Id { get; set; } = null!;
+        public string AddressCity { get; set; } = null!;
+        public string AddressCountry { get; set; } = null!;
+        public string AddressLine1 { get; set; } = null!;
+        public string AddressLine2 { get; set; } = null!;
       
-        public string Brand { get; set; }
-        public string Country { get; set; }
-        public string CvcCheck { get; set; }
-        public string DynamicLast4 { get; set; }
+        public string Brand { get; set; } = null!;
+        public string Country { get; set; } = null!;
+        public string CvcCheck { get; set; } = null!;
+        public string DynamicLast4 { get; set; } = null!;
         public int ExpMonth { get; set; }
         public int ExpYear { get; set; }
-        public string Fingerprint { get; set; }
-        public string Funding { get; set; }
-        public string Last4 { get; set; }
-        public string Name { get; set; }
+        public string Fingerprint { get; set; } = null!;
+        public string Funding { get; set; } = null!;
+        public string Last4 { get; set; } = null!;
+        public string Name { get; set; } = null!;
         public DateTimeOffset Created { get; set; }
         public DateTimeOffset Updated { get; set; }
         public bool IsDeleted { get; set; }

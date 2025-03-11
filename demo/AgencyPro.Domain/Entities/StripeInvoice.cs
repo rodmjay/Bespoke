@@ -13,10 +13,10 @@
 
 
 
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
         public ProjectInvoice ProjectInvoice { get; set; }
 
-        public string SubscriptionId { get; set; }
+        public string SubscriptionId { get; set; } = null!;
         public StripeSubscription SubscriptionInvoice { get; set; }
 
         public decimal AmountPaid { get; set; }
@@ -25,18 +25,18 @@
         public decimal AttemptCount { get; set; }
         public bool Attempted { get; set; }
         public bool AutomaticCollection { get; set; }
-        public string BillingReason { get; set; }
+        public string BillingReason { get; set; } = null!;
         public DateTimeOffset? DueDate { get; set; }
         public decimal EndingBalance { get; set; }
-        public string HostedInvoiceUrl { get; set; }
-        public string InvoicePdf { get; set; }
+        public string HostedInvoiceUrl { get; set; } = null!;
+        public string InvoicePdf { get; set; } = null!;
         public ICollection<StripeInvoiceItem> Items { get; set; }
         public bool IsDeleted { get; set; }
 
-        public string StripePaymentIntentId { get; set; }
+        public string StripePaymentIntentId { get; set; } = null!;
         public StripePaymentIntent PaymentIntent { get; set; }
        
-        public string CustomerId { get; set; }
+        public string CustomerId { get; set; } = null!;
         public BuyerAccount BuyerAccount { get; set; }
 
         public ICollection<StripeInvoiceLine> Lines { get; set; }
@@ -45,8 +45,8 @@
         public ICollection<IndividualPayoutIntent> IndividualPayoutIntents { get; set; }
         public ICollection<OrganizationPayoutIntent> OrganizationPayoutIntents { get; set; }
 
-        public string Status { get; set; }
-        public string Number { get; set; }
+        public string Status { get; set; } = null!;
+        public string Number { get; set; } = null!;
 
         public decimal Total { get; set; }
         public decimal Subtotal { get; set; }

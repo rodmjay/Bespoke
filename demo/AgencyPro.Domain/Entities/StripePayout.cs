@@ -2,7 +2,7 @@
 {
     public class StripePayout : BaseEntity<StripePayout>
     {
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
         public decimal Amount { get; set; }
         public DateTimeOffset ArrivalDate { get; set; }
         public bool Automatic { get; set; }

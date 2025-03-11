@@ -22,13 +22,13 @@
 
 
         public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string EmailAddress { get; set; }
-        public string PhoneNumber { get; set; }
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
+        public string EmailAddress { get; set; } = null!;
+        public string PhoneNumber { get; set; } = null!;
 
-        public string Iso2 { get; set; }
-        public string ProvinceState { get; set; }
+        public string Iso2 { get; set; } = null!;
+        public string ProvinceState { get; set; } = null!;
         public decimal RecruiterStream { get; set; }
         public DateTimeOffset Updated { get; set; }
         public decimal RecruiterBonus { get; set; }
@@ -44,13 +44,13 @@
         public Organization RecruiterOrganization { get; set; }
 
         public RejectionReason RejectionReason { get; set; }
-        public string RejectionDescription { get; set; }
+        public string RejectionDescription { get; set; } = null!;
 
         public Guid? ProjectManagerId { get; set; }
         public ProjectManager ProjectManager { get; set; }
         public Guid? ProjectManagerOrganizationId { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
         public Guid CreatedById { get; set; }
         public Guid UpdatedById { get; set; }

@@ -14,9 +14,9 @@
 
         public decimal? RetainerAmount { get; set; }
         
-        public string ProposalBlob { get; set; }
+        public string ProposalBlob { get; set; } = null!;
         public decimal CustomerRate { get; set; }
-        public string AgreementText { get; set; }
+        public string AgreementText { get; set; } = null!;
         public ProposalType ProposalType { get; set; }
         public decimal TotalDays { get; set; }
         public decimal Velocity { get; set; }

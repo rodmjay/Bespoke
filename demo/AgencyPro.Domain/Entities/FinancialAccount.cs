@@ -3,14 +3,14 @@
     public class FinancialAccount : BaseEntity<FinancialAccount>, IFinancialAccount
     {
   
-        public string RefreshToken { get; set; }
+        public string RefreshToken { get; set; } = null!;
 
-        public string AccessToken { get; set; }
+        public string AccessToken { get; set; } = null!;
 
-        public string AccountId { get; set; }
-        public string StripePublishableKey { get; set; }
+        public string AccountId { get; set; } = null!;
+        public string StripePublishableKey { get; set; } = null!;
 
-        public string AccountType { get; set; }
+        public string AccountType { get; set; } = null!;
         public FinancialAccountStatus Status { get; set; }
 
        // public ICollection<Payment> Payments { get; set; }
@@ -23,16 +23,16 @@
         public bool ChargesEnabled { get; set; }
         public bool PayoutsEnabled { get; set; }
 
-        public string CardIssuingCapabilityStatus { get; set; }
+        public string CardIssuingCapabilityStatus { get; set; } = null!;
 
-        public string CardPaymentsCapabilityStatus { get; set; }
-        public string TransfersCapabilityStatus { get; set; }
+        public string CardPaymentsCapabilityStatus { get; set; } = null!;
+        public string TransfersCapabilityStatus { get; set; } = null!;
 
        // public string Blob { get; set; }
-        public string DefaultCurrency { get; set; }
-        public string MerchantCategoryCode { get; set; }
-        public string SupportEmail { get; set; }
-        public string SupportPhone { get; set; }
+        public string DefaultCurrency { get; set; } = null!;
+        public string MerchantCategoryCode { get; set; } = null!;
+        public string SupportEmail { get; set; } = null!;
+        public string SupportPhone { get; set; } = null!;
 
         public ICollection<StripeCharge> DestinationCharges { get; set; }
 

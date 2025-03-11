@@ -3,7 +3,7 @@
     public class StripeSubscription : BaseEntity<StripeSubscription>
     {
         public OrganizationSubscription OrganizationSubscription { get; set; }
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
 
         public DateTime? CanceledAt { get; set; }
         public DateTime? StartDate { get; set; }
@@ -12,7 +12,7 @@
         public DateTime? CurrentPeriodEnd { get; set; }
         public DateTime? CurrentPeriodStart { get; set; }
 
-        public string CustomerId { get; set; }
+        public string CustomerId { get; set; } = null!;
 
         public bool CancelAtPeriodEnd { get; set; }
 

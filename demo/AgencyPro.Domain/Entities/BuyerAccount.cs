@@ -7,7 +7,7 @@
         public decimal Balance { get; set; }
         public bool Delinquent { get; set; }
 
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
         public DateTimeOffset Created { get; set; }
         public DateTimeOffset Updated { get; set; }
 

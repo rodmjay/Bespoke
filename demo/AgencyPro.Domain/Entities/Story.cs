@@ -12,7 +12,7 @@ namespace AgencyPro.Domain.Entities
         public ICollection<StoryNotification> Notifications { get; set; }
 
         public Guid Id { get; set; }
-        public string StoryId { get; set; }
+        public string StoryId { get; set; } = null!;
         public Guid ProjectId { get; set; }
         public Guid? ContractorId { get; set; }
         public Contractor Contractor { get; set; }
@@ -39,12 +39,12 @@ namespace AgencyPro.Domain.Entities
         public DateTimeOffset? ProjectManagerAcceptanceDate { get; set; }
         public DateTimeOffset? CustomerAcceptanceDate { get; set; }
 
-        [MaxLength(500)] public string Title { get; set; }
+        [MaxLength(500)] public string Title { get; set; } = null!;
 
-        [MaxLength(5000)] public string Description { get; set; }
+        [MaxLength(5000)] public string Description { get; set; } = null!;
         public DateTimeOffset Created { get; set; }
         public DateTimeOffset Updated { get; set; }
-        public string ConcurrencyStamp { get; set; }
+        public string ConcurrencyStamp { get; set; } = null!;
 
         public Guid? StoryTemplateId { get; set; }
         public StoryTemplate StoryTemplate { get; set; }

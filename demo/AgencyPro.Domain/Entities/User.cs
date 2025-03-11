@@ -19,8 +19,8 @@ public class User : IdentityUser<int>, IEntityTypeConfiguration<User>, IObjectSt
         UserClaims = new List<UserClaim>();
     }
 
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string FirstName { get; set; } = null!;
+    public string LastName { get; set; } = null!;
     public string FullName => FirstName + " " + LastName;
     public bool SendMail { get; set; }
     public ICollection<UserRole> UserRoles { get; set; }

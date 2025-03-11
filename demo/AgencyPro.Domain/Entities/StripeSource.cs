@@ -2,15 +2,15 @@
 {
     public class StripeSource : BaseEntity<StripeSource>
     {
-        public string Id { get; set; }
-        public string ClientSecret { get; set; }
-        public string Flow { get; set; }
+        public string Id { get; set; } = null!;
+        public string ClientSecret { get; set; } = null!;
+        public string Flow { get; set; } = null!;
 
-        public string CustomerId { get; set; }
+        public string CustomerId { get; set; } = null!;
         public BuyerAccount Customer { get; set; }
 
-        public string Type { get; set; }
-        public string Status { get; set; }
+        public string Type { get; set; } = null!;
+        public string Status { get; set; } = null!;
         public bool IsDeleted { get; set; }
         public long? Amount { get; set; }
         public override void Configure(EntityTypeBuilder<StripeSource> builder)

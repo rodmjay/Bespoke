@@ -22,7 +22,7 @@
 
         public decimal WeeklyMaxHourBasis { get; set; }
 
-        public string AgreementText { get; set; }
+        public string AgreementText { get; set; } = null!;
 
         public decimal? BudgetBasis { get; set; }
 
@@ -31,7 +31,7 @@
         public Guid CreatedById { get; set; }
         public Guid UpdatedById { get; set; }
 
-        public string ConcurrencyStamp { get; set; }
+        public string ConcurrencyStamp { get; set; } = null!;
         
         public ProposalType ProposalType { get; set; }
 
