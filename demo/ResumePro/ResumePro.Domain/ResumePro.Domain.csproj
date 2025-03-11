@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\tests\Bespoke.IntegrationTesting\Bespoke.IntegrationTesting.csproj" />
-    <ProjectReference Include="..\ResumePro.Api\ResumePro.Api.csproj" />
+    <ProjectReference Include="..\..\..\src\Bespoke.Data\Bespoke.Data.csproj" />
+    <ProjectReference Include="..\ResumePro.Shared\ResumePro.Shared.csproj" />
   </ItemGroup>
 
 </Project>

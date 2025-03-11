@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- Temporarily disabled TreatWarningsAsErrors due to numerous nullable reference warnings -->
+    <!-- <TreatWarningsAsErrors>true</TreatWarningsAsErrors> -->
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Bespoke.Data.SqlServer\Bespoke.Data.SqlServer.csproj" />
+    <ProjectReference Include="..\AgencyPro.Shared\AgencyPro.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

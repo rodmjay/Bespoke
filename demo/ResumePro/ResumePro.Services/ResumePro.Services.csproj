@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	  <TargetFramework>net8.0</TargetFramework>
+	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,12 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\Bespoke.Azure.BlobStorage\Bespoke.Azure.BlobStorage.csproj" />
     <ProjectReference Include="..\..\..\src\Bespoke.Services\Bespoke.Services.csproj" />
+    <ProjectReference Include="..\ResumePro.Domain\ResumePro.Domain.csproj" />
+    <ProjectReference Include="..\ResumePro.Shared\ResumePro.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Handlers\" />
   </ItemGroup>
 
 </Project>
