@@ -20,12 +20,12 @@
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.Cards)
                 .HasForeignKey(x => x.CustomerId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.StripeCard)
                 .WithOne(x => x.CustomerCard)
                 .HasForeignKey<CustomerCard>(x => x.Id)
-                .IsRequired();
+                .IsRequired(false);
         }
     }
 }

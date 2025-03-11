@@ -129,18 +129,18 @@ namespace AgencyPro.Domain.Entities
                 .HasOne(x => x.AccountManager)
                 .WithMany(x => x.Projects)
                 .HasForeignKey(x => x.AccountManagerId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder
                 .HasOne(x => x.ProjectManager)
                 .WithMany(x => x.Projects)
                 .HasForeignKey(x => x.ProjectManagerId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.ProviderOrganization)
                 .WithMany(x => x.Projects)
                 .HasForeignKey(x => x.ProjectManagerOrganizationId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
 
@@ -156,7 +156,7 @@ namespace AgencyPro.Domain.Entities
                     x.CustomerId,
                     x.AccountManagerOrganizationId,
                     x.AccountManagerId
-                }).IsRequired();
+                }).IsRequired(false);
 
             builder
                 .HasMany(x => x.Invoices)

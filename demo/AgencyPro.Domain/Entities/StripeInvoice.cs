@@ -86,22 +86,22 @@
             builder.HasMany(x => x.Lines)
                 .WithOne(x => x.Invoice)
                 .HasForeignKey(x => x.InvoiceId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasMany(x => x.Charges)
                 .WithOne(x => x.Invoice)
                 .HasForeignKey(x => x.InvoiceId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasMany(x => x.IndividualPayoutIntents)
                 .WithOne(x => x.Invoice)
                 .HasForeignKey(x => x.InvoiceId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasMany(x => x.OrganizationPayoutIntents)
                 .WithOne(x => x.Invoice)
                 .HasForeignKey(x => x.InvoiceId)
-                .IsRequired();
+                .IsRequired(false);
 
             
         }

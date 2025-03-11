@@ -117,7 +117,7 @@
                 {
                     x.MarketerOrganizationId,
                     x.MarketerId
-                }).IsRequired();
+                }).IsRequired(false);
 
             builder.HasOne(x => x.AccountManager)
                 .WithMany(x => x.Leads)
@@ -127,7 +127,7 @@
             builder.HasOne(x => x.Marketer)
                 .WithMany(x => x.Leads)
                 .HasForeignKey(x => x.MarketerId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.OrganizationAccountManager)
                 .WithMany(x => x.Leads)
@@ -145,7 +145,7 @@
             builder.HasOne(x => x.ProviderOrganization)
                 .WithMany(x => x.Leads)
                 .HasForeignKey(x => x.ProviderOrganizationId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.Person)
                 .WithOne(x => x.Lead)

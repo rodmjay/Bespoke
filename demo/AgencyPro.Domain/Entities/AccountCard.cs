@@ -23,7 +23,7 @@
             builder.HasOne(x => x.FinancialAccount)
                 .WithMany(x => x.Cards)
                 .HasForeignKey(x => x.AccountId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.StripeCard)
                 .WithOne(x => x.AccountCard)

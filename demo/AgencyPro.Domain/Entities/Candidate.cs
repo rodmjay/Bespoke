@@ -92,7 +92,7 @@
             builder.HasOne(x => x.Recruiter)
                 .WithMany(x => x.Candidates)
                 .HasForeignKey(x => x.RecruiterId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.ProjectManager)
                 .WithMany(x => x.Candidates)
@@ -112,7 +112,7 @@
             builder.HasOne(x => x.ProviderOrganization)
                 .WithMany(x => x.Candidates)
                 .HasForeignKey(x => x.ProviderOrganizationId)
-                .IsRequired();
+                .IsRequired(false);
 
             
         }

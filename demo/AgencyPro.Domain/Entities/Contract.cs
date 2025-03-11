@@ -276,19 +276,19 @@
             builder.HasOne(x => x.ProjectManager)
                 .WithMany(x => x.Contracts)
                 .HasForeignKey(x => x.ProjectManagerId)
-                .IsRequired(true);
+                .IsRequired(false);
 
             builder.HasOne(x => x.AccountManager)
                 .WithMany(x => x.Contracts)
                 .HasForeignKey(x => x.AccountManagerId)
-                .IsRequired(true);
+                .IsRequired(false);
 
 
             builder
                 .HasOne(x => x.Project)
                 .WithMany(x => x.Contracts)
                 .HasForeignKey(x => x.ProjectId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder
                 .HasOne(x => x.OrganizationContractor)
@@ -298,7 +298,7 @@
                     x.ContractorOrganizationId,
                     x.ContractorId
                 })
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.OrganizationRecruiter)
                 .WithMany(x => x.Contracts)
@@ -307,7 +307,7 @@
                     x.RecruiterOrganizationId,
                     x.RecruiterId
                 })
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasMany(x => x.InvoiceItems)
                 .WithOne(x => x.Contract)
@@ -333,12 +333,12 @@
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.Contracts)
                 .HasForeignKey(x => x.CustomerId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.BuyerOrganization)
                 .WithMany(x => x.BuyerContracts)
                 .HasForeignKey(x => x.BuyerOrganizationId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.OrganizationCustomer)
                 .WithMany(x => x.Contracts)
@@ -347,7 +347,7 @@
                     x.BuyerOrganizationId,
                     x.CustomerId
                 })
-                .IsRequired();
+                .IsRequired(false);
 
             
         }

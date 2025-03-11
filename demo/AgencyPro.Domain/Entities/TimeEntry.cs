@@ -205,12 +205,12 @@ namespace AgencyPro.Domain.Entities
                 .HasOne(x => x.Contract)
                 .WithMany(x => x.TimeEntries)
                 .HasForeignKey(x => x.ContractId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.BuyerTimeEntries)
                 .HasForeignKey(x => x.CustomerId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.OrganizationCustomer)
                 .WithMany(x => x.TimeEntries)
@@ -219,12 +219,12 @@ namespace AgencyPro.Domain.Entities
                     x.CustomerOrganizationId,
                     x.CustomerId
                 })
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.Project)
                 .WithMany(x => x.TimeEntries)
                 .HasForeignKey(x => x.ProjectId)
-                .IsRequired();
+                .IsRequired(false);
 
 
             builder.Property(x => x.InstantAccountManagerStream).HasColumnType("Money");
@@ -273,7 +273,7 @@ namespace AgencyPro.Domain.Entities
             builder.HasOne(x => x.Recruiter)
                 .WithMany(x => x.TimeEntries)
                 .HasForeignKey(x => x.RecruiterId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.OrganizationRecruiter)
                 .WithMany(x => x.TimeEntries)
@@ -286,7 +286,7 @@ namespace AgencyPro.Domain.Entities
             builder.HasOne(x => x.Contractor)
                 .WithMany(x => x.TimeEntries)
                 .HasForeignKey(x => x.ContractorId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.OrganizationContractor)
                 .WithMany(x => x.TimeEntries)
@@ -299,7 +299,7 @@ namespace AgencyPro.Domain.Entities
             builder.HasOne(x => x.Marketer)
                 .WithMany(x => x.TimeEntries)
                 .HasForeignKey(x => x.MarketerId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.OrganizationMarketer)
                 .WithMany(x => x.TimeEntries)
@@ -312,7 +312,7 @@ namespace AgencyPro.Domain.Entities
             builder.HasOne(x => x.ProjectManager)
                 .WithMany(x => x.TimeEntries)
                 .HasForeignKey(x => x.ProjectManagerId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.OrganizationProjectManager)
                 .WithMany(x => x.TimeEntries)
@@ -325,7 +325,7 @@ namespace AgencyPro.Domain.Entities
             builder.HasOne(x => x.AccountManager)
                 .WithMany(x => x.TimeEntries)
                 .HasForeignKey(x => x.AccountManagerId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(x => x.OrganizationAccountManager)
                 .WithMany(x => x.TimeEntries)
@@ -338,19 +338,19 @@ namespace AgencyPro.Domain.Entities
             builder.HasOne(x => x.RecruitingAgencyOwner)
                 .WithMany(x => x.RecruitingTimeEntries)
                 .HasForeignKey(x => x.RecruitingAgencyOwnerId)
-                .IsRequired()
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.MarketingAgencyOwner)
                 .WithMany(x => x.MarketingTimeEntries)
                 .HasForeignKey(x => x.MarketingAgencyOwnerId)
-                .IsRequired()
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.ProviderAgencyOwner)
                 .WithMany(x => x.ProviderTimeEntries)
                 .HasForeignKey(x => x.ProviderAgencyOwnerId)
-                .IsRequired()
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.Restrict);
 
             

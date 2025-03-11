@@ -16,7 +16,7 @@
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.CheckoutSessions)
                 .HasForeignKey(x => x.CustomerId)
-                .IsRequired();
+                .IsRequired(false);
 
             
         }

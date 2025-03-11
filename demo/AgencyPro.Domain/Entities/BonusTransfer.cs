@@ -13,7 +13,7 @@
             builder.HasOne(x => x.Transfer)
                 .WithOne(x => x.BonusTransfer)
                 .HasForeignKey<BonusTransfer>(x => x.TransferId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasMany(x => x.IndividualBonusIntents)
                 .WithOne(x => x.BonusTransfer)

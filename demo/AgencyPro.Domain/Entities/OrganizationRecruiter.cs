@@ -50,7 +50,7 @@
                     x.RecruiterOrganizationId,
                     x.RecruiterId
                 })
-                .IsRequired();
+                .IsRequired(false);
 
             builder
                 .HasMany(x => x.Contracts)
@@ -77,6 +77,7 @@
                     x.OrganizationId,
                     x.RecruiterId
                 })
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.Cascade);
 
             

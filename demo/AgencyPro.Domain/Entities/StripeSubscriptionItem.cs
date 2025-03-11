@@ -17,7 +17,7 @@
             builder.HasOne(x => x.Subscription)
                 .WithMany(x => x.Items)
                 .HasForeignKey(x => x.SubscriptionId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.HasQueryFilter(x => x.IsDeleted == false);
 

@@ -42,7 +42,7 @@
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.OrganizationCustomers)
                 .HasForeignKey(x => x.CustomerId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder
                 .HasMany(x => x.Accounts)
@@ -51,7 +51,7 @@
                 {
                     x.CustomerOrganizationId,
                     x.CustomerId
-                }).IsRequired();
+                }).IsRequired(false);
 
 
             builder
@@ -61,6 +61,7 @@
                     x.OrganizationId,
                     x.CustomerId
                 })
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.Cascade);
 
             
