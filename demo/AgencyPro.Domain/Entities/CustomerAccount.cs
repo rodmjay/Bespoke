@@ -160,30 +160,31 @@
                 .WithMany(x => x.CustomerAccounts)
                 .HasForeignKey(x => x.PaymentTermId);
 
-            builder.HasMany(x => x.Projects).WithOne(x => x.CustomerAccount).HasForeignKey(x => new
-            {
-                x.CustomerOrganizationId,
-                x.CustomerId,
-                x.AccountManagerOrganizationId,
-                x.AccountManagerId
-            }).IsRequired();
+            // Comment out HasMany calls to prevent duplicate relationship definitions
+            // builder.HasMany(x => x.Projects).WithOne(x => x.CustomerAccount).HasForeignKey(x => new
+            // {
+            //     x.CustomerOrganizationId,
+            //     x.CustomerId,
+            //     x.AccountManagerOrganizationId,
+            //     x.AccountManagerId
+            // }).IsRequired();
 
-            builder.HasMany(x => x.WorkOrders).WithOne(x => x.CustomerAccount).HasForeignKey(x => new
-            {
-                x.CustomerOrganizationId,
-                x.CustomerId,
-                x.AccountManagerOrganizationId,
-                x.AccountManagerId
-            }).IsRequired();
+            // builder.HasMany(x => x.WorkOrders).WithOne(x => x.CustomerAccount).HasForeignKey(x => new
+            // {
+            //     x.CustomerOrganizationId,
+            //     x.CustomerId,
+            //     x.AccountManagerOrganizationId,
+            //     x.AccountManagerId
+            // }).IsRequired();
 
-            builder.HasMany(x => x.Comments).WithOne(x => x.CustomerAccount).HasForeignKey(x => new
-            {
-                x.CustomerOrganizationId,
-                x.CustomerId,
-                x.AccountManagerOrganizationId,
-                x.AccountManagerId
-            }).IsRequired(false)
-                .OnDelete(DeleteBehavior.Cascade);
+            // builder.HasMany(x => x.Comments).WithOne(x => x.CustomerAccount).HasForeignKey(x => new
+            // {
+            //     x.CustomerOrganizationId,
+            //     x.CustomerId,
+            //     x.AccountManagerOrganizationId,
+            //     x.AccountManagerId
+            // }).IsRequired(false)
+            //     .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(x => x.ProviderOrganization)
                 .WithMany(x => x.CustomerAccounts)

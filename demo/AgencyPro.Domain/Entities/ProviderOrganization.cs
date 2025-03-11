@@ -68,42 +68,43 @@
                 .OnDelete(DeleteBehavior.Cascade);
 
 
-            builder.HasMany(x => x.Projects)
-                .WithOne(x => x.ProviderOrganization)
-                .HasForeignKey(x => x.ProjectManagerOrganizationId)
-                .OnDelete(DeleteBehavior.Restrict);
+            // Comment out HasMany calls to prevent duplicate relationship definitions
+            // builder.HasMany(x => x.Projects)
+            //     .WithOne(x => x.ProviderOrganization)
+            //     .HasForeignKey(x => x.ProjectManagerOrganizationId)
+            //     .OnDelete(DeleteBehavior.Restrict);
 
 
-            builder.HasMany(x => x.MarketingAgreements)
-                .WithOne(x => x.ProviderOrganization)
-                .HasForeignKey(x => x.ProviderOrganizationId)
-                .OnDelete(DeleteBehavior.Cascade);
+            // builder.HasMany(x => x.MarketingAgreements)
+            //     .WithOne(x => x.ProviderOrganization)
+            //     .HasForeignKey(x => x.ProviderOrganizationId)
+            //     .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany(x => x.Contracts)
-                .WithOne(x => x.ProviderOrganization)
-                .HasForeignKey(x => x.ContractorOrganizationId)
-                .OnDelete(DeleteBehavior.Restrict);
+            // builder.HasMany(x => x.Contracts)
+            //     .WithOne(x => x.ProviderOrganization)
+            //     .HasForeignKey(x => x.ContractorOrganizationId)
+            //     .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasMany(x => x.Leads)
-                .WithOne(x => x.ProviderOrganization)
-                .HasForeignKey(x => x.ProviderOrganizationId)
-                .IsRequired();
+            // builder.HasMany(x => x.Leads)
+            //     .WithOne(x => x.ProviderOrganization)
+            //     .HasForeignKey(x => x.ProviderOrganizationId)
+            //     .IsRequired();
 
-            builder.HasMany(x => x.Candidates)
-                .WithOne(x => x.ProviderOrganization)
-                .HasForeignKey(x => x.ProviderOrganizationId)
-                .IsRequired();
+            // builder.HasMany(x => x.Candidates)
+            //     .WithOne(x => x.ProviderOrganization)
+            //     .HasForeignKey(x => x.ProviderOrganizationId)
+            //     .IsRequired();
 
-            builder.HasMany(x => x.CustomerAccounts)
-                .WithOne(x => x.ProviderOrganization)
-                .HasForeignKey(x => x.AccountManagerOrganizationId)
-                .OnDelete(DeleteBehavior.Restrict);
+            // builder.HasMany(x => x.CustomerAccounts)
+            //     .WithOne(x => x.ProviderOrganization)
+            //     .HasForeignKey(x => x.AccountManagerOrganizationId)
+            //     .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasMany(x => x.Skills)
-                .WithOne(x => x.Organization)
-                .HasForeignKey(x => x.OrganizationId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+            // builder.HasMany(x => x.Skills)
+            //     .WithOne(x => x.Organization)
+            //     .HasForeignKey(x => x.OrganizationId)
+            //     .IsRequired()
+            //     .OnDelete(DeleteBehavior.Cascade);
 
 
             builder.Property(x => x.AccountManagerStream).HasColumnType("Money");
@@ -120,10 +121,10 @@
             builder.Property(x => x.SystemStream).HasColumnType("Money");
             builder.Property(x => x.ContractorStream).HasColumnType("Money");
 
-            builder.HasMany(x => x.WorkOrders)
-                .WithOne(x => x.ProviderOrganization)
-                .HasForeignKey(x => x.AccountManagerOrganizationId)
-                .OnDelete(DeleteBehavior.Restrict);
+            // builder.HasMany(x => x.WorkOrders)
+            //     .WithOne(x => x.ProviderOrganization)
+            //     .HasForeignKey(x => x.AccountManagerOrganizationId)
+            //     .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.DefaultContractor)
                 .WithMany(x => x.DefaultOrganizations)

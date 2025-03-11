@@ -92,9 +92,10 @@
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasMany(x => x.IndividualPayoutIntents)
-                .WithOne(x => x.Organization)
-                .HasForeignKey(x => x.OrganizationId);
+            // Comment out HasMany calls to prevent duplicate relationship definitions
+            // builder.HasMany(x => x.IndividualPayoutIntents)
+            //     .WithOne(x => x.Organization)
+            //     .HasForeignKey(x => x.OrganizationId);
 
             builder.Property(x => x.PrimaryColor).HasMaxLength(50);
             builder.Property(x => x.SecondaryColor).HasMaxLength(50);
@@ -117,34 +118,34 @@
 
             builder.Property(x => x.ImageUrl).HasMaxLength(2000);
 
-            builder.HasMany(x => x.BuyerProjects)
-                .WithOne(x => x.BuyerOrganization)
-                .HasForeignKey(x => x.CustomerOrganizationId)
-                .OnDelete(DeleteBehavior.Restrict);
+            // builder.HasMany(x => x.BuyerProjects)
+            //     .WithOne(x => x.BuyerOrganization)
+            //     .HasForeignKey(x => x.CustomerOrganizationId)
+            //     .OnDelete(DeleteBehavior.Restrict);
 
 
-            builder.HasMany(x => x.Customers)
-                .WithOne(x => x.Organization)
-                .HasForeignKey(x => x.OrganizationId);
+            // builder.HasMany(x => x.Customers)
+            //     .WithOne(x => x.Organization)
+            //     .HasForeignKey(x => x.OrganizationId);
 
-            builder.HasMany(x => x.Recruiters)
-                .WithOne(x => x.Organization)
-                .HasForeignKey(x => x.OrganizationId);
+            // builder.HasMany(x => x.Recruiters)
+            //     .WithOne(x => x.Organization)
+            //     .HasForeignKey(x => x.OrganizationId);
 
 
-            builder.HasMany(x => x.Marketers)
-                .WithOne(x => x.Organization)
-                .HasForeignKey(x => x.OrganizationId);
+            // builder.HasMany(x => x.Marketers)
+            //     .WithOne(x => x.Organization)
+            //     .HasForeignKey(x => x.OrganizationId);
 
-            builder.HasMany(x => x.Candidates)
-                .WithOne(x => x.RecruiterOrganization)
-                .HasForeignKey(x => x.RecruiterOrganizationId)
-                .OnDelete(DeleteBehavior.Restrict);
+            // builder.HasMany(x => x.Candidates)
+            //     .WithOne(x => x.RecruiterOrganization)
+            //     .HasForeignKey(x => x.RecruiterOrganizationId)
+            //     .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasMany(x => x.BuyerWorkOrders)
-                .WithOne(x => x.BuyerOrganization)
-                .HasForeignKey(x => x.CustomerOrganizationId)
-                .OnDelete(DeleteBehavior.Restrict);
+            // builder.HasMany(x => x.BuyerWorkOrders)
+            //     .WithOne(x => x.BuyerOrganization)
+            //     .HasForeignKey(x => x.CustomerOrganizationId)
+            //     .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.OrganizationSubscription)
                 .WithOne(x => x.Organization)
@@ -154,10 +155,10 @@
                 .WithOne(x => x.Organization)
                 .HasForeignKey<OrganizationBuyerAccount>(x => x.Id);
 
-            builder.HasMany(x => x.PayoutIntents)
-                .WithOne(x => x.Organization)
-                .HasForeignKey(x => x.OrganizationId)
-                .IsRequired();
+            // builder.HasMany(x => x.PayoutIntents)
+            //     .WithOne(x => x.Organization)
+            //     .HasForeignKey(x => x.OrganizationId)
+            //     .IsRequired();
 
 
             

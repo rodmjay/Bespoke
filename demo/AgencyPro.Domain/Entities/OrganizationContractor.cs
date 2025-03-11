@@ -54,23 +54,24 @@
                 .WithMany(x => x.Contractors)
                 .HasForeignKey(x => x.OrganizationId);
 
-            builder
-                .HasMany(x => x.Contracts)
-                .WithOne(x => x.OrganizationContractor)
-                .HasForeignKey(x => new
-                {
-                    x.ContractorOrganizationId,
-                    x.ContractorId
-                });
+            // Comment out HasMany calls to prevent duplicate relationship definitions
+            // builder
+            //     .HasMany(x => x.Contracts)
+            //     .WithOne(x => x.OrganizationContractor)
+            //     .HasForeignKey(x => new
+            //     {
+            //         x.ContractorOrganizationId,
+            //         x.ContractorId
+            //     });
 
-            builder
-                .HasMany(x => x.Stories)
-                .WithOne(x => x.OrganizationContractor)
-                .HasForeignKey(x => new
-                {
-                    x.ContractorOrganizationId,
-                    x.ContractorId
-                });
+            // builder
+            //     .HasMany(x => x.Stories)
+            //     .WithOne(x => x.OrganizationContractor)
+            //     .HasForeignKey(x => new
+            //     {
+            //         x.ContractorOrganizationId,
+            //         x.ContractorId
+            //     });
 
             builder.HasOne(x => x.OrganizationPerson)
                 .WithOne(x => x.Contractor);

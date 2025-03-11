@@ -26,10 +26,11 @@
         public ICollection<ContractorSkill> ContractorSkills { get; set; }
         public override void Configure(EntityTypeBuilder<Contractor> builder)
         {
-            builder
-                .HasMany(x => x.OrganizationContractors)
-                .WithOne(x => x.Contractor)
-                .HasForeignKey(x => x.ContractorId);
+            // Comment out HasMany calls to prevent duplicate relationship definitions
+            // builder
+            //     .HasMany(x => x.OrganizationContractors)
+            //     .WithOne(x => x.Contractor)
+            //     .HasForeignKey(x => x.ContractorId);
 
             builder.HasOne(x => x.Recruiter)
                 .WithMany(x => x.Contractors)
