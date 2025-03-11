@@ -17,7 +17,7 @@
         public decimal MarketerStream { get; set; }
         public bool RequireUniqueEmail { get; set; }
 
-        public string MarketerInformation { get; set; }
+        public string MarketerInformation { get; set; } = null!;
 
         public decimal MarketingStream
         {

@@ -3,7 +3,7 @@
     public class BillingCategory : BaseEntity<BillingCategory>
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
         public bool IsDeleted { get; set; }
         public bool IsEnabled { get; set; }
         public bool IsStoryBucket { get; set; }

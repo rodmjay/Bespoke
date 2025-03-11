@@ -2,9 +2,9 @@
 {
     public class CustomerCard : BaseEntity<CustomerCard>
     {
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
 
-        public string CustomerId { get; set; }
+        public string CustomerId { get; set; } = null!;
         public BuyerAccount Customer { get; set; }
 
         public StripeCard StripeCard { get; set; }

@@ -2,7 +2,7 @@
 {
     public class BonusTransfer : BaseEntity<BonusTransfer>
     {
-        public string TransferId { get; set; }
+        public string TransferId { get; set; } = null!;
         public StripeTransfer Transfer { get; set; }
 
         public ICollection<IndividualBonusIntent> IndividualBonusIntents { get; set; }

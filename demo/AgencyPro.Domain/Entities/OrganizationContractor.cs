@@ -14,15 +14,15 @@
         public Contractor Contractor { get; set; }
 
         public bool IsFeatured { get; set; }
-        public string Biography { get; set; }
-        public string PortfolioMediaUrl { get; set; }
+        public string Biography { get; set; } = null!;
+        public string PortfolioMediaUrl { get; set; } = null!;
 
         public ICollection<TimeEntry> TimeEntries { get; set; }
         public ICollection<Contract> Contracts { get; set; }
         public ICollection<Story> Stories { get; set; }
 
         public bool IsDeleted { get; set; }
-        public virtual string ConcurrencyStamp { get; set; }
+        public virtual string ConcurrencyStamp { get; set; } = null!;
 
 
         public Guid CreatedById { get; set; }

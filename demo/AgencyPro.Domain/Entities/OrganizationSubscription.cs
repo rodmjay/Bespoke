@@ -8,7 +8,7 @@
 
         public StripeSubscription StripeSubscription { get; set; }
 
-        public string StripeSubscriptionId { get; set; }
+        public string StripeSubscriptionId { get; set; } = null!;
 
         public override void Configure(EntityTypeBuilder<OrganizationSubscription> builder)
         {

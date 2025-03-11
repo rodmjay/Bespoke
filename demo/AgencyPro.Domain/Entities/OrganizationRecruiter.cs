@@ -21,7 +21,7 @@
         public Guid OrganizationId { get; set; }
 
         public Guid RecruiterId { get; set; }
-        public string ConcurrencyStamp { get; set; }
+        public string ConcurrencyStamp { get; set; } = null!;
 
 
         public Guid CreatedById { get; set; }

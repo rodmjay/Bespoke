@@ -6,9 +6,9 @@
 
         public Guid ProjectId { get; set; }
 
-        public string RefNo { get; set; }
+        public string RefNo { get; set; } = null!;
 
-        public string InvoiceId { get; set; }
+        public string InvoiceId { get; set; } = null!;
 
         public StripeInvoice Invoice { get; set; }
 

@@ -12,19 +12,19 @@
 
         public OrganizationPerson OrganizationPerson { get; set; }
 
-        public string InvoiceId { get; set; }
+        public string InvoiceId { get; set; } = null!;
         public StripeInvoice Invoice { get; set; }
 
-        public string InvoiceItemId { get; set; }
+        public string InvoiceItemId { get; set; } = null!;
         public StripeInvoiceItem InvoiceItem { get; set; }
 
         public decimal Amount { get; set; }
         public CommissionType Type { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
         
         public InvoiceTransfer InvoiceTransfer { get; set; }
-        public string InvoiceTransferId { get; set; }
+        public string InvoiceTransferId { get; set; } = null!;
         public DateTimeOffset Created { get; set; }
         public DateTimeOffset Updated { get; set; }
 

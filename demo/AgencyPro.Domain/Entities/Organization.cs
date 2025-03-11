@@ -46,22 +46,22 @@
         public ICollection<StoryTemplate> StoryTemplates { get; set; }
 
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string ImageUrl { get; set; }
+        public string Name { get; set; } = null!;
+        public string Description { get; set; } = null!;
+        public string ImageUrl { get; set; } = null!;
 
-        public string PrimaryColor { get; set; }
-        public string SecondaryColor { get; set; }
-        public string TertiaryColor { get; set; }
+        public string PrimaryColor { get; set; } = null!;
+        public string SecondaryColor { get; set; } = null!;
+        public string TertiaryColor { get; set; } = null!;
 
-        public string ColumnBgColor { get; set; }
-        public string MenuBgHoverColor { get; set; }
-        public string HoverItemColor { get; set; }
-        public string TextColor { get; set; }
-        public string ActiveItemColor { get; set; }
-        public string ActivePresenceColor { get; set; }
-        public string ActiveItemTextColor { get; set; }
-        public string MentionBadgeColor { get; set; }
+        public string ColumnBgColor { get; set; } = null!;
+        public string MenuBgHoverColor { get; set; } = null!;
+        public string HoverItemColor { get; set; } = null!;
+        public string TextColor { get; set; } = null!;
+        public string ActiveItemColor { get; set; } = null!;
+        public string ActivePresenceColor { get; set; } = null!;
+        public string ActiveItemTextColor { get; set; } = null!;
+        public string MentionBadgeColor { get; set; } = null!;
 
 
         public int CategoryId { get; set; }
@@ -74,15 +74,15 @@
         public Guid UpdatedById { get; set; }
         public Guid CreatedById { get; set; }
 
-        public string AffiliateInformation { get; set; }
-        public string ProviderInformation { get; set; }
+        public string AffiliateInformation { get; set; } = null!;
+        public string ProviderInformation { get; set; } = null!;
         
-        public string AddressLine1 { get; set; }
-        public string AddressLine2 { get; set; }
-        public string City { get; set; }
-        public string Iso2 { get; set; }
-        public string ProvinceState { get; set; }
-        public string PostalCode { get; set; }
+        public string AddressLine1 { get; set; } = null!;
+        public string AddressLine2 { get; set; } = null!;
+        public string City { get; set; } = null!;
+        public string Iso2 { get; set; } = null!;
+        public string ProvinceState { get; set; } = null!;
+        public string PostalCode { get; set; } = null!;
 
         public Guid CustomerId { get; set; }
         public Customer Customer { get; set; }

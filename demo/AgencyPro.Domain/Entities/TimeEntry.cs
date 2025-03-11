@@ -16,7 +16,7 @@ namespace AgencyPro.Domain.Entities
         public Contract Contract { get; set; }
         public Story Story { get; set; }
 
-        public string InvoiceItemId { get; set; }
+        public string InvoiceItemId { get; set; } = null!;
         public StripeInvoiceItem InvoiceItem { get; set; }
         
         public Guid ContractId { get; set; }
@@ -27,7 +27,7 @@ namespace AgencyPro.Domain.Entities
         public Guid? StoryId { get; set; }
 
         public Guid Id { get; set; }
-        public string Notes { get; set; }
+        public string Notes { get; set; } = null!;
         
         public int TimeType { get; set; }
         
@@ -35,7 +35,7 @@ namespace AgencyPro.Domain.Entities
         public TimeStatus Status { get; set; }
 
         public decimal InstantContractorStream { get; set; }
-        public string RejectionReason { get; set; }
+        public string RejectionReason { get; set; } = null!;
         public decimal InstantRecruiterStream { get; set; }
         public decimal InstantMarketerStream { get; set; }
         public decimal InstantProjectManagerStream { get; set; }
@@ -178,7 +178,7 @@ namespace AgencyPro.Domain.Entities
 
         public DateTimeOffset Created { get; set; }
 
-        public string ConcurrencyStamp { get; set; }
+        public string ConcurrencyStamp { get; set; } = null!;
 
         public Guid CreatedById { get; set; }
         public Guid UpdatedById { get; set; }

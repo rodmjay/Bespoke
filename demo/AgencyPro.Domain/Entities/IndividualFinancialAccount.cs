@@ -4,7 +4,7 @@
     {
         public Guid Id { get; set; }
 
-        public string FinancialAccountId { get; set; }
+        public string FinancialAccountId { get; set; } = null!;
        
         public FinancialAccount FinancialAccount { get; set; }
         

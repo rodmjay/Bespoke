@@ -20,12 +20,12 @@
 
         public decimal ContractorStream { get; set; }
 
-        public string ProviderInformation { get; set; }
-        public string ProjectManagerInformation { get; set; }
-        public string AccountManagerInformation { get; set; }
-        public string ContractorInformation { get; set; }
-        public string RecruiterInformation { get; set; }
-        public string MarketerInformation { get; set; }
+        public string ProviderInformation { get; set; } = null!;
+        public string ProjectManagerInformation { get; set; } = null!;
+        public string AccountManagerInformation { get; set; } = null!;
+        public string ContractorInformation { get; set; } = null!;
+        public string RecruiterInformation { get; set; } = null!;
+        public string MarketerInformation { get; set; } = null!;
 
         public bool Discoverable { get; set; }
 

@@ -9,21 +9,21 @@ namespace AgencyPro.Domain.Entities
         public ICollection<CategoryPosition> Positions { get; set; }
 
         public int CategoryId { get; set; }
-        public string Name { get; set; }
-        public string ContractorTitle { get; set; }
-        public string ContractorTitlePlural { get; set; }
-        public string AccountManagerTitle { get; set; }
-        public string AccountManagerTitlePlural { get; set; }
-        public string ProjectManagerTitle { get; set; }
-        public string ProjectManagerTitlePlural { get; set; }
-        public string RecruiterTitle { get; set; }
-        public string MarketerTitle { get; set; }
-        public string StoryTitle { get; set; }
-        public string StoryTitlePlural { get; set; }
-        public string RecruiterTitlePlural { get; set; }
-        public string MarketerTitlePlural { get; set; }
-        public string CustomerTitle { get; set; }
-        public string CustomerTitlePlural { get; set; }
+        public string Name { get; set; } = null!;
+        public string ContractorTitle { get; set; } = null!;
+        public string ContractorTitlePlural { get; set; } = null!;
+        public string AccountManagerTitle { get; set; } = null!;
+        public string AccountManagerTitlePlural { get; set; } = null!;
+        public string ProjectManagerTitle { get; set; } = null!;
+        public string ProjectManagerTitlePlural { get; set; } = null!;
+        public string RecruiterTitle { get; set; } = null!;
+        public string MarketerTitle { get; set; } = null!;
+        public string StoryTitle { get; set; } = null!;
+        public string StoryTitlePlural { get; set; } = null!;
+        public string RecruiterTitlePlural { get; set; } = null!;
+        public string MarketerTitlePlural { get; set; } = null!;
+        public string CustomerTitle { get; set; } = null!;
+        public string CustomerTitlePlural { get; set; } = null!;
         public bool Searchable { get; set; }
 
         public decimal DefaultRecruiterStream { get; set; }

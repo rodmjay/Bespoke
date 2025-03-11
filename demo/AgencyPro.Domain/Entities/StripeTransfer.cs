@@ -2,15 +2,15 @@
 {
     public class StripeTransfer : BaseEntity<StripeTransfer>, IStripeTransfer
     {
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
         public decimal Amount { get; set; }
         public decimal AmountReversed { get; set; }
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
-        public string DestinationId { get; set; }
+        public string DestinationId { get; set; } = null!;
         public FinancialAccount DestinationAccount { get; set; }
 
-        public string DestinationPaymentId { get; set; }
+        public string DestinationPaymentId { get; set; } = null!;
         public bool IsDeleted { get; set; }
         public InvoiceTransfer InvoiceTransfer { get; set; }
         public BonusTransfer BonusTransfer { get; set; }

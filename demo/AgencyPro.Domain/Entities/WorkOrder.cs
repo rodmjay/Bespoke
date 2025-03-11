@@ -25,7 +25,7 @@
         public int BuyerNumber { get; set; }
         public int ProviderNumber { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
         public DateTimeOffset? ProviderResponseTime { get; set; }
         

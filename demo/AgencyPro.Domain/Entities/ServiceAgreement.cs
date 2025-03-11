@@ -9,7 +9,7 @@
 
         public CustomerAccount CustomerAccount { get; set; }
 
-        public string DocumentId { get; set; }
+        public string DocumentId { get; set; } = null!;
         public override void Configure(EntityTypeBuilder<ServiceAgreement> builder)
         {
             builder.HasKey(x => x.DocumentId);

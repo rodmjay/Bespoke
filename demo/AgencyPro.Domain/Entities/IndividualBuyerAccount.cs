@@ -8,7 +8,7 @@
 
         public BuyerAccount BuyerAccount { get; set; }
 
-        public string BuyerAccountId { get; set; }
+        public string BuyerAccountId { get; set; } = null!;
         public override void Configure(EntityTypeBuilder<IndividualBuyerAccount> builder)
         {
             builder.HasOne(x => x.Customer)

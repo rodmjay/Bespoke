@@ -2,22 +2,22 @@
 {
     public class StripePaymentIntent : BaseEntity<StripePaymentIntent>, IStripePaymentIntent
     {
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
         public decimal? Amount { get; set; }
         public decimal? AmountCapturable { get; set; }
         public decimal? AmountReceived { get; set; }
         public DateTime? CancelledAt { get; set; }
-        public string CaptureMethod { get; set; }
+        public string CaptureMethod { get; set; } = null!;
 
         public ICollection<StripeCharge> Charges { get; set; }
 
-        public string InvoiceId { get; set; }
+        public string InvoiceId { get; set; } = null!;
         public StripeInvoice StripeInvoice { get; set; }
 
-        public string ConfirmationMethod { get; set; }
-        public string CustomerId { get; set; }
-        public string TransferGroup { get; set; }
-        public string Description { get; set; }
+        public string ConfirmationMethod { get; set; } = null!;
+        public string CustomerId { get; set; } = null!;
+        public string TransferGroup { get; set; } = null!;
+        public string Description { get; set; } = null!;
         public DateTimeOffset Created { get; set; }
         public DateTimeOffset Updated { get; set; }
         public bool IsDeleted { get; set; }

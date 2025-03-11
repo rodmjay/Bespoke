@@ -32,12 +32,12 @@
         public DateTimeOffset Created { get; set; }
         public DateTimeOffset Updated { get; set; }
 
-        public string ConcurrencyStamp { get; set; }
+        public string ConcurrencyStamp { get; set; } = null!;
 
         public Guid CreatedById { get; set; }
         public Guid UpdatedById { get; set; }
 
-        public string AffiliateCode { get; set; }
+        public string AffiliateCode { get; set; } = null!;
 
         public override void Configure(EntityTypeBuilder<OrganizationPerson> builder)
         {

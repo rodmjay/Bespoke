@@ -60,9 +60,9 @@ namespace AgencyPro.Domain.Entities
 
         public Guid Id { get; set; }
         public ProjectStatus Status { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
-        public string Abbreviation { get; set; }
+        public string Abbreviation { get; set; } = null!;
 
         public Guid CustomerOrganizationId { get; set; }
         public Guid CustomerId { get; set; }
@@ -115,7 +115,7 @@ namespace AgencyPro.Domain.Entities
         public bool AutoApproveTimeEntries { get; set; }
 
 
-        public string ConcurrencyStamp { get; set; }
+        public string ConcurrencyStamp { get; set; } = null!;
         public ProjectRetainerIntent ProjectRetainerIntent { get; set; }
         public override void Configure(EntityTypeBuilder<Project> builder)
         {

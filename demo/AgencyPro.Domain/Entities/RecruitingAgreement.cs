@@ -15,7 +15,7 @@
         public virtual decimal RecruiterBonus { get; set; }
         public virtual decimal RecruitingAgencyStream { get; set; }
 
-        public string RecruiterInformation { get; set; }
+        public string RecruiterInformation { get; set; } = null!;
 
 
         public decimal RecruitingStream

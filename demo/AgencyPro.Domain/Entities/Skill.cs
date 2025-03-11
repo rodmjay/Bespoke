@@ -3,8 +3,8 @@
     public class Skill : BaseEntity<Skill>
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string IconUrl { get; set; }
+        public string Name { get; set; } = null!;
+        public string IconUrl { get; set; } = null!;
         public int Priority { get; set; }
 
         public ICollection<OrganizationSkill> OrganizationSkill { get; set; }
