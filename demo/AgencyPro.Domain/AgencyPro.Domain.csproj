@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <!-- Temporarily disabled TreatWarningsAsErrors due to numerous nullable reference warnings -->
+    <!-- <TreatWarningsAsErrors>true</TreatWarningsAsErrors> -->
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
