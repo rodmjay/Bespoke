@@ -5,6 +5,7 @@
 #endregion
 
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection.Emit;
 using AgencyPro.Domain.Entities;
 using Bespoke.Data;
 using Bespoke.Data.Attributes;
@@ -33,6 +34,16 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
     protected override void PreModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(typeof(Organization).Assembly);
+        
+        foreach (var entityType in builder.Model.GetEntityTypes())
+        {
+            // Loop over all foreign keys for each entity type
+            foreach (var foreignKey in entityType.GetForeignKeys())
+            {
+                // Set the delete behavior to NoAction
+                foreignKey.DeleteBehavior = DeleteBehavior.NoAction;
+            }
+        }
     }
 
 

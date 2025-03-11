@@ -4,14 +4,6 @@
     {
         public bool IsDeleted { get; set; }
 
-        private ICollection<CustomerAccountStatusTransition> _statusTransitions;
-
-        public virtual ICollection<CustomerAccountStatusTransition> StatusTransitions
-        {
-            get => _statusTransitions ??= new Collection<CustomerAccountStatusTransition>();
-            set => _statusTransitions = value;
-        }
-
 
         public OrganizationCustomer OrganizationCustomer { get; set; }
 
@@ -205,21 +197,6 @@
                     x.AccountManagerOrganizationId,
                     x.AccountManagerId
                 });
-
-            builder.OwnsMany(x => x.StatusTransitions, a =>
-            {
-                a.WithOwner().HasForeignKey(x => new
-                {
-                    x.CustomerOrganizationId,
-                    x.CustomerId,
-                    x.AccountManagerOrganizationId,
-                    x.AccountManagerId
-                });
-                a.HasKey(x => x.Id);
-                a.Property(x => x.Id).ValueGeneratedOnAdd();
-                a.Ignore(x => x.ObjectState);
-                a.Property(x => x.Created).HasDefaultValueSql("SYSDATETIMEOFFSET()");
-            });
 
 
             builder.Property(x => x.MarketerStream).HasColumnType("Money");

@@ -25,13 +25,6 @@
 
         public ICollection<LeadNotification> LeadNotifications { get; set; }
 
-        private ICollection<LeadStatusTransition> _statusTransitions;
-
-        public virtual ICollection<LeadStatusTransition> StatusTransitions
-        {
-            get => _statusTransitions ??= new List<LeadStatusTransition>();
-            set => _statusTransitions = value;
-        }
         
         public Guid Id { get; set; }
         public string FirstName { get; set; } = null!;
@@ -103,14 +96,6 @@
                 .IsRequired(false);
 
 
-            builder.OwnsMany(x => x.StatusTransitions, a =>
-            {
-                a.WithOwner().HasForeignKey(x => x.LeadId);
-                a.HasKey(x => x.Id);
-                a.Property(x => x.Id).ValueGeneratedOnAdd();
-                a.Ignore(x => x.ObjectState);
-                a.Property(x => x.Created).HasDefaultValueSql("SYSDATETIMEOFFSET()");
-            });
 
             builder.Property(x => x.IsInternal)
                 .HasComputedColumnSql(@"case when [MarketerOrganizationId]=[ProviderOrganizationId] then cast(1 as bit) else cast(0 as bit) end");

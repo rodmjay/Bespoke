@@ -8,14 +8,6 @@
         public ICollection<ProposalWorkOrder> WorkOrders { get; set; }
         public ICollection<ProposalNotification> Notifications { get; set; }
 
-        private ICollection<ProposalStatusTransition> _statusTransitions;
-
-        public virtual ICollection<ProposalStatusTransition> StatusTransitions
-        {
-            get => _statusTransitions ??= new Collection<ProposalStatusTransition>();
-            set => _statusTransitions = value;
-        }
-
         public Guid Id { get; set; }
 
         public decimal VelocityBasis { get; set; }
@@ -94,15 +86,6 @@
                 .HasDefaultValue(0)
                 .HasColumnType("decimal(3,2)");
 
-
-            builder.OwnsMany(x => x.StatusTransitions, a =>
-            {
-                a.WithOwner().HasForeignKey(x => x.ProposalId);
-                a.HasKey(x => x.Id);
-                a.Property(x => x.Id).ValueGeneratedOnAdd();
-                a.Ignore(x => x.ObjectState);
-                a.Property(x => x.Created).HasDefaultValueSql("SYSDATETIMEOFFSET()");
-            });
 
             var storyPointBasis = $@"[{nameof(FixedPriceProposal.StoryPointBasis)}]";
             var estimationBasis = $@"[{nameof(FixedPriceProposal.EstimationBasis)}]";

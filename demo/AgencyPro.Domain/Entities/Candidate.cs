@@ -8,14 +8,6 @@
         public Guid ProviderOrganizationId { get; set; }
         public ICollection<Comment> Comments { get; set; } = null!;
         
-        private ICollection<CandidateStatusTransition> _statusTransitions;
-
-        public virtual ICollection<CandidateStatusTransition> StatusTransitions
-        {
-            get => _statusTransitions ??= new Collection<CandidateStatusTransition>();
-            set => _statusTransitions = value;
-        }
-
        public ICollection<CandidateNotification> CandidateNotifications { get; set; } = null!;
 
         public virtual CandidateStatus Status { get; set; }
@@ -106,15 +98,6 @@
                 .WithMany(x => x.Candidates)
                 .HasForeignKey(x => x.ProjectManagerId)
                 .IsRequired(false);
-
-            builder.OwnsMany(x => x.StatusTransitions, a =>
-            {
-                a.WithOwner().HasForeignKey(x => x.CandidateId);
-                a.HasKey(x => x.Id);
-                a.Property(x => x.Id).ValueGeneratedOnAdd();
-                a.Ignore(x => x.ObjectState);
-                a.Property(x => x.Created).HasDefaultValueSql("SYSDATETIMEOFFSET()");
-            });
 
             builder.HasQueryFilter(x => x.IsDeleted == false);
 

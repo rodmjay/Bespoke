@@ -3,14 +3,6 @@
     public class Contract : BaseEntity<Contract>, IContract
     {
 
-        private ICollection<ContractStatusTransition> _statusTransitions;
-
-        public virtual ICollection<ContractStatusTransition> StatusTransitions
-        {
-            get => _statusTransitions ??= new Collection<ContractStatusTransition>();
-            set => _statusTransitions = value;
-        }
-
         public OrganizationContractor OrganizationContractor { get; set; }
         public OrganizationMarketer OrganizationMarketer { get; set; }
         public OrganizationRecruiter OrganizationRecruiter { get; set; }
@@ -337,15 +329,6 @@
                     x.ProjectManagerOrganizationId,
                     x.ProjectManagerId
                 });
-
-            builder.OwnsMany(x => x.StatusTransitions, a =>
-            {
-                a.WithOwner().HasForeignKey(x => x.ContractId);
-                a.HasKey(x => x.Id);
-                a.Property(x => x.Id).ValueGeneratedOnAdd();
-                a.Ignore(x => x.ObjectState);
-                a.Property(x => x.Created).HasDefaultValueSql("SYSDATETIMEOFFSET()");
-            });
 
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.Contracts)

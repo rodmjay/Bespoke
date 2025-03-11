@@ -48,14 +48,6 @@ namespace AgencyPro.Domain.Entities
         
         public CustomerAccount CustomerAccount { get; set; }
 
-        private ICollection<ProjectStatusTransition> _statusTransitions;
-
-        public virtual ICollection<ProjectStatusTransition> StatusTransitions
-        {
-            get => _statusTransitions ??= new Collection<ProjectStatusTransition>();
-            set => _statusTransitions = value;
-        }
-
         public bool IsDeleted { get; set; }
 
         public Guid Id { get; set; }

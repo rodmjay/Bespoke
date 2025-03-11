@@ -4,14 +4,6 @@ namespace AgencyPro.Domain.Entities
     {
 
 
-        private ICollection<TimeEntryStatusTransition> _statusTransitions;
-
-        public virtual ICollection<TimeEntryStatusTransition> StatusTransitions
-        {
-            get => _statusTransitions ??= new Collection<TimeEntryStatusTransition>();
-            set => _statusTransitions = value;
-        }
-
         public BillingCategory BillingCategory { get; set; }
         public Contract Contract { get; set; }
         public Story Story { get; set; }
@@ -234,14 +226,6 @@ namespace AgencyPro.Domain.Entities
                 .HasForeignKey(x => x.ProjectId)
                 .IsRequired();
 
-            builder.OwnsMany(x => x.StatusTransitions, a =>
-            {
-                a.WithOwner().HasForeignKey(x => x.TimeEntryId);
-                a.HasKey(x => x.Id);
-                a.Property(x => x.Id).ValueGeneratedOnAdd();
-                a.Ignore(x => x.ObjectState);
-                a.Property(x => x.Created).HasDefaultValueSql("SYSDATETIMEOFFSET()");
-            });
 
             builder.Property(x => x.InstantAccountManagerStream).HasColumnType("Money");
             builder.Property(x => x.InstantProjectManagerStream).HasColumnType("Money");

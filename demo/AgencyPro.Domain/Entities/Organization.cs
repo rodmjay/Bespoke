@@ -43,7 +43,6 @@
         public ICollection<Lead> Leads { get; set; }
         public ICollection<Candidate> Candidates { get; set; }
         public ICollection<WorkOrder> BuyerWorkOrders { get; set; }
-        public ICollection<StoryTemplate> StoryTemplates { get; set; }
 
         public Guid Id { get; set; }
         public string Name { get; set; } = null!;

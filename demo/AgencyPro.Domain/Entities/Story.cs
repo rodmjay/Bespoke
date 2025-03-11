@@ -20,14 +20,6 @@ namespace AgencyPro.Domain.Entities
         public int? StoryPoints { get; set; }
 
 
-        private ICollection<StoryStatusTransition> _statusTransitions;
-
-        public virtual ICollection<StoryStatusTransition> StatusTransitions
-        {
-            get => _statusTransitions ??= new Collection<StoryStatusTransition>();
-            set => _statusTransitions = value;
-        }
-
         /// <summary>
         /// This gets set when the proposal is accepted
         /// </summary>
@@ -47,7 +39,6 @@ namespace AgencyPro.Domain.Entities
         public string ConcurrencyStamp { get; set; } = null!;
 
         public Guid? StoryTemplateId { get; set; }
-        public StoryTemplate StoryTemplate { get; set; }
         public bool IsDeleted { get; set; }
 
         public decimal TotalHoursLogged { get; set; }
@@ -62,14 +53,6 @@ namespace AgencyPro.Domain.Entities
                     x.ContractorId
                 }).OnDelete(DeleteBehavior.SetNull);
 
-            builder.OwnsMany(x => x.StatusTransitions, a =>
-            {
-                a.WithOwner().HasForeignKey(x => x.StoryId);
-                a.HasKey(x => x.Id);
-                a.Property(x => x.Id).ValueGeneratedOnAdd();
-                a.Ignore(x => x.ObjectState);
-                a.Property(x => x.Created).HasDefaultValueSql("SYSDATETIMEOFFSET()");
-            });
             builder.HasQueryFilter(x => !x.IsDeleted);
 
             builder.HasOne(x => x.Contractor)
