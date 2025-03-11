@@ -37,35 +37,15 @@ public sealed class Startup
                 .AddEventAggregator()
                 .AddAutomapper()
                 .AddStorage(
-                    configureDbSettings: dbSettings =>
-                    {
-                        dbSettings.MigrationsAssembly = "AgencyPro.Infrastructure.SqlServer";
-                        dbSettings.MaxRetryCount = 5;
-                    },
                     configureDataBuilder: dataBuilder =>
                     {
-                        dataBuilder.UseSqlServer<ApplicationContext>(sqlSettings =>
-                        {
-                            sqlSettings.ConnectionStringName = "DefaultConnection";
-                        });
+                        dataBuilder.UseSqlServer<ApplicationContext>();
                     }
                 )
                 .AddAzure(
-                    configureAzureSettings: azureSettings =>
-                    {
-                        azureSettings.UseAzureManagedIdentity = true;
-                        azureSettings.AccountName = "MyAzureStorageAccount";
-                        azureSettings.AccountKey = "SuperSecretKey";
-                    },
                     configureAzureBuilder: azureBuilder =>
                     {
-                        azureBuilder.AddAppInsights(
-                            configureAppInsightsSettings: appInsightsSettings =>
-                            {
-                                appInsightsSettings.CloudRoleName = "AGENCYPRO";
-                                appInsightsSettings.EnableAdaptiveSampling = true;
-                                appInsightsSettings.EnableDependencyTrackingTelemetryModule = false;
-                            });
+                        azureBuilder.AddAppInsights();
                     })
                 .AddRest(configureRestSettings: restSettings =>
                     {
@@ -82,23 +62,6 @@ public sealed class Startup
             //builder.Services.AddServices(config);
         });
 
-        //var thisAssembly = Assembly.GetAssembly(GetType());
-        //var businessAssembly = typeof(ApplicationContext).Assembly;
-
-        //var builder = services.ConfigureApp(Configuration).AddDatabase<ApplicationContext>()
-        //    .AddAutomapperProfilesFromAssemblies()
-        //    .RegisterHandlebarsExtensions()
-        //    .AddAppInsights()
-        //    .RegisterPdfGeneration()
-        //    .RegisterAllServices(businessAssembly);
-
-        //var webAppBuilder = builder.ConfigureWebApp(Environment);
-
-        //var restBuilder = webAppBuilder.ConfigureRest()
-        //    .AddCors()
-        //    .AddAuthorization()
-        //    .AddBearerAuthentication(_identityServerMessageHandler)
-        //    .AddSwagger(thisAssembly);
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext context,
