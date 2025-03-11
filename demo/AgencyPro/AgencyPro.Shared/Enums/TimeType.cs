@@ -1,5 +1,3 @@
-using System.ComponentModel;
-
 namespace AgencyPro.Shared.Enums
 {
     public enum TimeType

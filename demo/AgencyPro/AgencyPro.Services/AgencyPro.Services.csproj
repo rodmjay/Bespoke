@@ -9,10 +9,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\Bespoke.Services\Bespoke.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Mapping\" />
+    <ProjectReference Include="..\AgencyPro.Domain\AgencyPro.Domain.csproj" />
+    <ProjectReference Include="..\AgencyPro.Shared\AgencyPro.Shared.csproj" />
   </ItemGroup>
 
 </Project>
