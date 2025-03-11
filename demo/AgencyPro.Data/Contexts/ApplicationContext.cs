@@ -35,6 +35,14 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
     {
         builder.ApplyConfigurationsFromAssembly(typeof(Organization).Assembly);
         
+        // Configure a default column type for all decimal properties
+        foreach (var property in builder.Model.GetEntityTypes()
+                                        .SelectMany(t => t.GetProperties())
+                                        .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
+        {
+            property.SetColumnType("decimal(18,2)");
+        }
+        
         foreach (var entityType in builder.Model.GetEntityTypes())
         {
             // Loop over all foreign keys for each entity type

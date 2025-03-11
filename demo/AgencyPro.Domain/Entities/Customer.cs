@@ -55,6 +55,12 @@
             //     .HasForeignKey(x => x.CustomerId)
             //     .IsRequired();
 
+            // Configure Cards collection explicitly
+            builder.HasMany(x => x.Cards)
+                .WithOne(x => x.CustomerEntity)
+                .HasForeignKey(x => x.CustomerEntityId)
+                .IsRequired(false);
+
             builder.HasOne(x => x.BuyerAccount)
                 .WithOne(x => x.Customer)
                 .HasForeignKey<IndividualBuyerAccount>(x => x.Id);

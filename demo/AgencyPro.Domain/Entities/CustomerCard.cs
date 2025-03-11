@@ -7,6 +7,10 @@
         public string CustomerId { get; set; } = null!;
         public BuyerAccount Customer { get; set; }
 
+        // Add explicit navigation property to Customer entity with correct type
+        public Customer CustomerEntity { get; set; }
+        public Guid? CustomerEntityId { get; set; }
+
         public StripeCard StripeCard { get; set; }
         public bool IsDeleted { get; set; }
         public override void Configure(EntityTypeBuilder<CustomerCard> builder)
@@ -20,6 +24,12 @@
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.Cards)
                 .HasForeignKey(x => x.CustomerId)
+                .IsRequired(false);
+
+            // Configure the relationship to Customer entity explicitly
+            builder.HasOne(x => x.CustomerEntity)
+                .WithMany(x => x.Cards)
+                .HasForeignKey(x => x.CustomerEntityId)
                 .IsRequired(false);
 
             builder.HasOne(x => x.StripeCard)

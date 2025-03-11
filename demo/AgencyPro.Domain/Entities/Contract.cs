@@ -220,7 +220,7 @@
 
             var customerRateComputation =
                 @"[ContractorStream]+[RecruiterStream]+[ProjectManagerStream]+[AccountManagerStream]+[MarketerStream]+[AgencyStream]+[MarketingAgencyStream]+[RecruitingAgencyStream]+[SystemStream]";
-            builder.Property(x => x.CustomerRate).HasComputedColumnSql(customerRateComputation);
+            builder.Property(x => x.CustomerRate).HasComputedColumnSql(customerRateComputation).HasColumnType("Money");
 
             builder.Property(x => x.MaxCustomerWeekly).HasComputedColumnSql(
                 $@"({customerRateComputation})*[MaxWeeklyHours]");
