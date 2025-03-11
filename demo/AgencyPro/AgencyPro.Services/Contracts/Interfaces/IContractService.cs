@@ -1,5 +1,3 @@
-using AgencyPro.Domain.Entities;
-using AgencyPro.Shared.Models;
 using AgencyPro.Shared.Models.Contracts;
 using Bespoke.Shared.Common;
 

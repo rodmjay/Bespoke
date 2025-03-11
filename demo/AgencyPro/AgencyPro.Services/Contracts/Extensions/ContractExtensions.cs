@@ -1,6 +1,4 @@
-﻿using AgencyPro.Domain.Entities;
-
-namespace AgencyPro.Services.Contracts.Extensions
+﻿namespace AgencyPro.Services.Contracts.Extensions
 {
     public static class ContractExtensions
     {

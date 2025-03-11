@@ -32,7 +32,7 @@ public static class HostBuilderExtensions
             .Build();
     }
 
-    public static void Init(
+    public static IHost Init(
         this IHostBuilder hostBuilder,
         string initMessage = "Starting Application",
         string exceptionMessage = "Application terminated unexpectedly"
@@ -52,12 +52,17 @@ public static class HostBuilderExtensions
         {
             Log.CloseAndFlush();
         }
+
+        return host;
     }
 
     public static void ConfigureLogging(HostBuilderContext context, IServiceProvider serviceProvider,
         LoggerConfiguration loggerConfig)
     {
-        var telemetryConfig = serviceProvider.GetService<TelemetryConfiguration>();
+
+        var scope = serviceProvider.CreateScope();
+        
+        var telemetryConfig = scope.ServiceProvider.GetService<TelemetryConfiguration>();
 
         // Log a warning if telemetry configuration is not available.
         if (telemetryConfig == null)
@@ -67,7 +72,7 @@ public static class HostBuilderExtensions
         loggerConfig
             .ReadFrom.Configuration(context.Configuration)
             .Enrich.FromLogContext()
-            .Enrich.With(new ClaimsPrincipalEnricher(serviceProvider.GetService<IHttpContextAccessor>()))
+            .Enrich.With(new ClaimsPrincipalEnricher(scope.ServiceProvider.GetService<IHttpContextAccessor>()))
             .WriteTo.Async(a => a.Console(
                 LogEventLevel.Debug,
                 "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj} | UserId: {User}{NewLine}{Exception}"

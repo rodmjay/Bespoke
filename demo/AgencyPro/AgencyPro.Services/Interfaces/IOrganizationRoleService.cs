@@ -1,5 +1,4 @@
-﻿using AgencyPro.Shared.Models;
-using Bespoke.Shared.Common;
+﻿using Bespoke.Shared.Common;
 
 namespace AgencyPro.Services.Interfaces
 {

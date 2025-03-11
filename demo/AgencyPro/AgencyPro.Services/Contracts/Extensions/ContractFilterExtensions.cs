@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using AgencyPro.Domain.Entities;
 using Bespoke.Core.Builders;
 
 namespace AgencyPro.Services.Contracts.Extensions

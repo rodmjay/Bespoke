@@ -1,7 +1,4 @@
-﻿using AgencyPro.Domain.Entities;
-using AgencyPro.Shared.Models;
-
-namespace AgencyPro.Services.Mapping
+﻿namespace AgencyPro.Services.Mapping
 {
     public partial class OrganizationContractorProjections
     {

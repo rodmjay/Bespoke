@@ -1,6 +1,3 @@
-using AgencyPro.Domain.Entities;
-using AgencyPro.Shared.Models;
-
 namespace AgencyPro.Services.Interfaces
 {
     public interface IOrganizationMarketerService : IService<OrganizationMarketer>,

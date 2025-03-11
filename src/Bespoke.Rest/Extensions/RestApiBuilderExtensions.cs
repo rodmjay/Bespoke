@@ -86,38 +86,26 @@ public static class RestApiBuilderExtensions
     {
         var appSettings = settings.Value;
 
-        //IdentityModelEventSource.ShowPII = settings.Value.Sh;
-
-       // app.UseMiddleware<ExceptionMiddleware>();
-
-        app.UseStaticFiles();
-
         if (_swaggerAdded)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", appSettings.Name);
-                c.RoutePrefix = string.Empty;
+                c.SwaggerEndpoint($"/swagger/{settings.Value.Version}/swagger.json", appSettings.Name);
+                c.RoutePrefix = "swagger";  // Changed from string.Empty to "swagger"
             });
         }
 
+        // Serve Angular’s static files (index.html, etc.)
+        app.UseDefaultFiles();
+        app.UseStaticFiles();
+
         app.UseHttpsRedirection();
-
         app.UseRouting();
-
-        //if (settings.Value.UseAuthentication)
-        //{
-        //    app.UseAuthentication();
-        //    app.UseAuthorization();
-
-        //}
-
-        app.UseCors();
+        app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {
-
             endpoints.MapControllers();
         });
     }
