@@ -28,10 +28,17 @@ public class OperationalContextFactory : IApplicationContextFactory
 
         var options = new OptionsWrapper<DbSettings>(dbSettings);
 
-        var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>()
-            .EnableSensitiveDataLogging();
-            // Using in-memory database for testing purposes
-            // .UseSqlServer(config.GetConnectionString("SqlServer"));
+        var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+        
+        // Only enable sensitive data logging in development/debug environments
+        #if DEBUG
+        optionsBuilder.EnableSensitiveDataLogging(true);
+        #else
+        optionsBuilder.EnableSensitiveDataLogging(false);
+        #endif
+        
+        // Using in-memory database for testing purposes
+        // .UseSqlServer(config.GetConnectionString("SqlServer"));
         
 
         return new ApplicationContext(optionsBuilder.Options, options);

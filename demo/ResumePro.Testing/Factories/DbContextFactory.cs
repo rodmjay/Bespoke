@@ -20,7 +20,13 @@ public static class DbContextFactory
         var opts = new DbContextOptionsBuilder<ApplicationContext>();
         opts.UseSqlServer(connString,
             provider => provider.EnableRetryOnFailure());
-        opts.EnableSensitiveDataLogging();
+            
+        // Only enable sensitive data logging in development/debug environments
+        #if DEBUG
+        opts.EnableSensitiveDataLogging(true);
+        #else
+        opts.EnableSensitiveDataLogging(false);
+        #endif
 
         return opts.Options;
     }

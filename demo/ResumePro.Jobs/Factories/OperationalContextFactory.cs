@@ -21,9 +21,16 @@ public class OperationalContextFactory : IApplicationContextFactory
 
         var config = builder.Build();
 
-        var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>()
-            .EnableSensitiveDataLogging()
-            .UseSqlServer(config.GetConnectionString("DefaultConnection"));
+        var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+        
+        // Only enable sensitive data logging in development/debug environments
+        #if DEBUG
+        optionsBuilder.EnableSensitiveDataLogging(true);
+        #else
+        optionsBuilder.EnableSensitiveDataLogging(false);
+        #endif
+        
+        optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
 
         return new ApplicationContext(optionsBuilder.Options);
     }
