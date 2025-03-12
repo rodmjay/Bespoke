@@ -1,19 +1,9 @@
-﻿#region Header Info
+﻿#nullable enable
 
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Stripe;
 using Bespoke.Payments.Stripe.Interfaces;
-using Bespoke.Shared.Common;
-
-#nullable enable
+using Stripe;
 
 namespace Bespoke.Payments.Stripe.Services;
-
-using Stripe;
-using System.Threading.Tasks;
 
 public class StripeChargeClient : IStripeChargeClient
 {
@@ -23,14 +13,14 @@ public class StripeChargeClient : IStripeChargeClient
     {
         _chargeId = chargeId;
     }
-    
+
     public async Task<Refund> RefundChargeAsync(long? amount = null)
     {
         var refundService = new RefundService();
         var refund = await refundService.CreateAsync(new RefundCreateOptions
         {
             Charge = _chargeId,
-            Amount = amount,
+            Amount = amount
         });
 
         return refund;

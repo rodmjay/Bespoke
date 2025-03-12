@@ -14,26 +14,26 @@ public class FileWithOptionsOperationFilter : IOperationFilter
         {
             Content = new Dictionary<string, OpenApiMediaType>
             {
-                ["multipart/form-data"] = new OpenApiMediaType
+                ["multipart/form-data"] = new()
                 {
                     Schema = new OpenApiSchema
                     {
                         Type = "object",
                         Properties = new Dictionary<string, OpenApiSchema>
                         {
-                            ["file"] = new OpenApiSchema
+                            ["file"] = new()
                             {
                                 Type = "string",
                                 Format = "binary",
                                 Description = "File to upload"
                             },
-                            ["options"] = new OpenApiSchema
+                            ["options"] = new()
                             {
                                 Type = "object",
                                 Properties = new Dictionary<string, OpenApiSchema>
                                 {
-                                    ["name"] = new OpenApiSchema { Type = "string" },
-                                    ["description"] = new OpenApiSchema { Type = "string" }
+                                    ["name"] = new() { Type = "string" },
+                                    ["description"] = new() { Type = "string" }
                                 },
                                 Description = "Attachment options in JSON format"
                             }

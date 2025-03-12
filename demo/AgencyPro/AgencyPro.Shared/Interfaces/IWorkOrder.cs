@@ -1,20 +1,19 @@
-﻿namespace AgencyPro.Shared.Interfaces
+﻿namespace AgencyPro.Shared.Interfaces;
+
+public interface IWorkOrder
 {
-    public interface IWorkOrder
-    {
-        Guid Id { get; set; }
+    Guid Id { get; set; }
 
-        int BuyerNumber { get; set; }
-        int ProviderNumber { get; set; }
+    int BuyerNumber { get; set; }
+    int ProviderNumber { get; set; }
 
-        string Description { get; set; }
-        OrderStatus Status { get; set; }
+    string Description { get; set; }
+    OrderStatus Status { get; set; }
 
-        Guid AccountManagerId { get; set; }
-        Guid AccountManagerOrganizationId { get; set; }
+    Guid AccountManagerId { get; set; }
+    Guid AccountManagerOrganizationId { get; set; }
 
-        Guid CustomerId { get; set; }
-        Guid CustomerOrganizationId { get; set; }
-        DateTimeOffset? ProviderResponseTime { get; set; }
-    }
+    Guid CustomerId { get; set; }
+    Guid CustomerOrganizationId { get; set; }
+    DateTimeOffset? ProviderResponseTime { get; set; }
 }

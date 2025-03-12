@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Bespoke.Rest.Swagger;

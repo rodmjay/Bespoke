@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using AgencyPro.Domain.Entities;
 using Bespoke.Data;
 using Bespoke.Data.Attributes;
@@ -26,21 +20,18 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
 
     protected override void SeedDatabase(ModelBuilder builder)
     {
-       
     }
 
     protected override void PreModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(typeof(Organization).Assembly);
-        
+
         // Configure a default column type for all decimal properties
         foreach (var property in builder.Model.GetEntityTypes()
-                                        .SelectMany(t => t.GetProperties())
-                                        .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
-        {
+                     .SelectMany(t => t.GetProperties())
+                     .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
             property.SetColumnType("decimal(18,2)");
-        }
-        
+
 
         //builder.Ignore<User>();
         //builder.Ignore<Person>();
@@ -133,11 +124,9 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
         builder.Ignore<TimeEntry>();
         builder.Ignore<TimeEntryNotification>();
         builder.Ignore<TimeMatrix>();
-       
+
         builder.Ignore<UserNotification>();
         builder.Ignore<WorkOrder>();
         builder.Ignore<WorkOrderNotification>();
     }
-
-
 }

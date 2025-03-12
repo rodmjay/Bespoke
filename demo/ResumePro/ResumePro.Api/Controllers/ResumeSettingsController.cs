@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using ResumePro.Api.Interfaces;
+﻿using ResumePro.Api.Interfaces;
 using ResumePro.Services.Interfaces;
 
 namespace ResumePro.Api.Controllers;
@@ -14,7 +8,8 @@ public sealed class ResumeSettingsController : BaseController, IResumeSettingsCo
 {
     private readonly IResumeSettingsService _service;
 
-    public ResumeSettingsController(IServiceProvider serviceProvider, IResumeSettingsService service) : base(serviceProvider)
+    public ResumeSettingsController(IServiceProvider serviceProvider, IResumeSettingsService service) : base(
+        serviceProvider)
     {
         _service = service;
     }

@@ -1,12 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using Bespoke.Azure.Builders;
+﻿using Bespoke.Azure.Builders;
 
-namespace Bespoke.Azure.TableStorage.Builders
+namespace Bespoke.Azure.TableStorage.Builders;
+
+public class TableStorageBuilder
 {
-    public class TableStorageBuilder
+    public TableStorageBuilder(AzureBuilder builder)
     {
-        public TableStorageBuilder(AzureBuilder builder)
-        {
-        }
     }
 }

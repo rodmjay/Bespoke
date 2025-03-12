@@ -1,12 +1,6 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
+﻿using Bespoke.Core.Builders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Bespoke.Core.Builders;
 
 namespace Bespoke.Rest.Builders;
 

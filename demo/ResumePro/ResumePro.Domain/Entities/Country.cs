@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ResumePro.Domain.Entities;
 
@@ -15,7 +9,7 @@ public sealed class Country : BaseEntity<Country>, ICountry
 
     public string Name { get; set; } = null!;
     public string CapsName { get; set; } = null!;
-    public string Iso3 { get; set; } = null!;   
+    public string Iso3 { get; set; } = null!;
     public int? NumberCode { get; set; }
     public int PhoneCode { get; set; }
 

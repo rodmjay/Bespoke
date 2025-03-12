@@ -1,26 +1,20 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-#nullable enable
+﻿#nullable enable
 
 using System.Runtime.CompilerServices;
 using System.Security.Claims;
+using Bespoke.Core.Builders;
+using Bespoke.Core.Helpers;
+using Bespoke.Shared.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
-using Bespoke.Core.Builders;
-using Bespoke.Core.Helpers;
-using Bespoke.Shared.Common;
-using Microsoft.Extensions.Configuration;
 
 namespace Bespoke.Rest.Extensions;
 
@@ -30,7 +24,7 @@ public static class AppBuilderExtensions
     {
         return $"[{nameof(AppBuilderExtensions)}.{callerName}] - {message}";
     }
-    
+
     public static RestApiBuilder AddAuthorization(this RestApiBuilder builder)
     {
         builder.AddAuthorization(policy =>
@@ -100,9 +94,10 @@ public static class AppBuilderExtensions
         });
         return builder;
     }
+
     public static AppBuilder AddRest(this AppBuilder builder,
-            Action<RestSettings>? configureRestSettings = null,
-            Action<RestApiBuilder>? configureRestApi = null)
+        Action<RestSettings>? configureRestSettings = null,
+        Action<RestApiBuilder>? configureRestApi = null)
     {
         Log.Logger.Debug(GetLogMessage("ConfigureRestServices"));
 
@@ -129,10 +124,7 @@ public static class AppBuilderExtensions
         configureRestApi?.Invoke(restBuilder);
 
         // Configure controllers and JSON settings
-        builder.Services.AddControllers(options =>
-        {
-            options.EnableEndpointRouting = true;
-        })
+        builder.Services.AddControllers(options => { options.EnableEndpointRouting = true; })
             .AddNewtonsoftJson(o =>
             {
                 if (JsonSettings.Settings != null)
@@ -178,17 +170,14 @@ public static class AppBuilderExtensions
         Log.Logger.Debug(GetLogMessage("ConfigureRestServices"));
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddScoped<HttpContextAccessor>();
-        
+
         var restSettings = (builder.Configuration, builder.Services)
             .ConfigureSettings<RestSettings>("RestSettings");
 
         var restBuilder = new RestApiBuilder(builder, restSettings);
         configure?.Invoke(restBuilder);
 
-        builder.Services.AddControllers(x =>
-            {
-                x.EnableEndpointRouting = true;
-            })
+        builder.Services.AddControllers(x => { x.EnableEndpointRouting = true; })
             .AddNewtonsoftJson(o =>
             {
                 if (JsonSettings.Settings != null)
@@ -229,5 +218,4 @@ public static class AppBuilderExtensions
 
         return builder;
     }
-
 }

@@ -1,16 +1,10 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
 using Bespoke.Core.Builders;
 using Bespoke.Data.Interfaces;
 using Bespoke.Services.Interfaces;
 using Bespoke.Shared.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bespoke.Services.Extensions;
 

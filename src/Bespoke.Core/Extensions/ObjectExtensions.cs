@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
 namespace Bespoke.Core.Extensions;
@@ -34,6 +28,6 @@ public static class ObjectExtensions
 
     public static int GetQuarter(this DateTime dateTime)
     {
-        return (int) Math.Ceiling(dateTime.Month / 3.0);
+        return (int)Math.Ceiling(dateTime.Month / 3.0);
     }
 }

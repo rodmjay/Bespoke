@@ -6,6 +6,5 @@ public class StripePaymentsBuilder : BuilderBase
 {
     public StripePaymentsBuilder(IBuilder builder) : base(builder)
     {
-        
     }
 }

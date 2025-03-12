@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -22,5 +16,4 @@ public class BaseController : ControllerBase
     {
         AppSettings = serviceProvider.GetRequiredService<IOptions<AppSettings>>().Value;
     }
-
 }

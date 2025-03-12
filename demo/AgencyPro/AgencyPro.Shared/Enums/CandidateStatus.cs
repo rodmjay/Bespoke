@@ -1,10 +1,9 @@
-﻿namespace AgencyPro.Shared.Enums
+﻿namespace AgencyPro.Shared.Enums;
+
+public enum CandidateStatus : byte
 {
-    public enum CandidateStatus : byte
-    {
-        New = 0,
-        Qualified = 1,
-        Promoted = 2,
-        Rejected = 3
-    }
+    New = 0,
+    Qualified = 1,
+    Promoted = 2,
+    Rejected = 3
 }

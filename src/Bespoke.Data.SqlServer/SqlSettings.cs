@@ -1,7 +1,6 @@
-﻿namespace Bespoke.Data.SqlServer
+﻿namespace Bespoke.Data.SqlServer;
+
+public class SqlSettings
 {
-    public class SqlSettings
-    {
-        public string ConnectionStringName { get; set; } = null!;
-    }
+    public string ConnectionStringName { get; set; } = null!;
 }

@@ -1,7 +1,6 @@
-namespace AgencyPro.Shared.Models.People
+namespace AgencyPro.Shared.Models.People;
+
+public class AccountManagerOrganizationMembershipOutput : OrganizationMembershipOutput
 {
-    public class AccountManagerOrganizationMembershipOutput : OrganizationMembershipOutput
-    {
-        public override Guid TargetOrganizationId => OrganizationId;
-    }
+    public override Guid TargetOrganizationId => OrganizationId;
 }

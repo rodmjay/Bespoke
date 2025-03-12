@@ -1,6 +1,5 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class AgencyOwnerAgencyDistributionOutput
 {
-    public class AgencyOwnerAgencyDistributionOutput
-    {
-    }
 }

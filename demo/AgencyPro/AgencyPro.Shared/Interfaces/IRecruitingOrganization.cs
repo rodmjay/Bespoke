@@ -1,9 +1,8 @@
-﻿namespace AgencyPro.Shared.Interfaces
+﻿namespace AgencyPro.Shared.Interfaces;
+
+public interface IRecruitingOrganization
 {
-    public interface IRecruitingOrganization
-    {
-        decimal RecruiterStream { get; set; }
-        decimal RecruitingAgencyStream { get; set; }
-        Guid DefaultRecruiterId { get; set; }
-    }
+    decimal RecruiterStream { get; set; }
+    decimal RecruitingAgencyStream { get; set; }
+    Guid DefaultRecruiterId { get; set; }
 }

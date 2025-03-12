@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using ResumePro.Shared.Extensions;
+﻿using ResumePro.Shared.Extensions;
 
 namespace ResumePro.Shared.Models;
 
@@ -12,7 +6,7 @@ public class ResumeDetails : ResumeDto
 {
     public List<CompanyDetails> Companies { get; set; } = new();
 
-    public List<ResumeSkillDto> Skills { get; set; } = new();  
+    public List<ResumeSkillDto> Skills { get; set; } = new();
     public List<ReferenceDto> References { get; set; } = new();
     public List<SchoolDetails> Education { get; set; } = new();
     public List<PersonaLanguageDto> Languages { get; set; } = new();
@@ -31,7 +25,7 @@ public class ResumeDetails : ResumeDto
                 {
                     Category = category,
                     Skills = skills.OrderByDescending(a => a.Rating)
-                        .Select(x => new {x.Title, x.Rating})
+                        .Select(x => new { x.Title, x.Rating })
                         .ToList()
                 }).ToList();
         }

@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Filters
+﻿namespace AgencyPro.Shared.Filters;
+
+public class RecruiterFilters
 {
-    public class RecruiterFilters
-    {
-        public static readonly RecruiterFilters NoFilter = new RecruiterFilters();
-    }
+    public static readonly RecruiterFilters NoFilter = new();
 }

@@ -1,21 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Bespoke.Services\Bespoke.Services.csproj" />
-    <ProjectReference Include="..\AgencyPro.Domain\AgencyPro.Domain.csproj" />
-    <ProjectReference Include="..\AgencyPro.Shared\AgencyPro.Shared.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\src\Bespoke.Services\Bespoke.Services.csproj" />
+		<ProjectReference Include="..\AgencyPro.Domain\AgencyPro.Domain.csproj" />
+		<ProjectReference Include="..\AgencyPro.Shared\AgencyPro.Shared.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Contracts\EventHandlers\" />
-    <Folder Include="Contracts\Mapping\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Contracts\EventHandlers\" />
+		<Folder Include="Contracts\Mapping\" />
+	</ItemGroup>
 
 </Project>

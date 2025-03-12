@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-namespace ResumePro.Api.Controllers;
+﻿namespace ResumePro.Api.Controllers;
 
 public sealed class IdentityController : BaseController
 {
@@ -15,6 +9,6 @@ public sealed class IdentityController : BaseController
     [HttpGet]
     public IActionResult GetIdentity()
     {
-        return new JsonResult(from c in User.Claims select new {c.Type, c.Value});
+        return new JsonResult(from c in User.Claims select new { c.Type, c.Value });
     }
 }

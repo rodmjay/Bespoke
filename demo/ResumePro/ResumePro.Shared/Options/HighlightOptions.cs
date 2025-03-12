@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ResumePro.Shared.Options;
@@ -15,7 +9,8 @@ public class HighlightOptions
 
     [DisplayName("Highlight")]
     [MaxLength(512)]
-    [Required] public string Text { get; set; } = null!;
+    [Required]
+    public string Text { get; set; } = null!;
 
     public int? Order { get; set; }
 }

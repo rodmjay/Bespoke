@@ -1,6 +1,5 @@
-﻿namespace AgencyPro.Domain.Events
+﻿namespace AgencyPro.Domain.Events;
+
+public class AccountManagerCreatedEvent
 {
-    public class AccountManagerCreatedEvent
-    {
-    }
 }

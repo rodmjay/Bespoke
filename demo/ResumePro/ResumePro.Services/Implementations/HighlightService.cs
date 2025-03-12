@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +18,8 @@ public sealed class HighlightService : BaseService<Highlight>, IHighlightService
 
     private IQueryable<Highlight> Highlights => Repository.Queryable();
 
-    public Task<List<T>> GetHighlights<T>(int organizationId, int companyId, int positionId, int? projectId) where T : HighlightDto
+    public Task<List<T>> GetHighlights<T>(int organizationId, int companyId, int positionId, int? projectId)
+        where T : HighlightDto
     {
         return Highlights
             .AsNoTracking()
@@ -34,7 +29,8 @@ public sealed class HighlightService : BaseService<Highlight>, IHighlightService
             .ToListAsync();
     }
 
-    public Task<T> GetHighlight<T>(int organizationId, int companyId, int positionId, int highlightId) where T : HighlightDto
+    public Task<T> GetHighlight<T>(int organizationId, int companyId, int positionId, int highlightId)
+        where T : HighlightDto
     {
         return Highlights
             .AsNoTracking()
@@ -43,7 +39,8 @@ public sealed class HighlightService : BaseService<Highlight>, IHighlightService
             .FirstAsync();
     }
 
-    public async Task<OneOf<HighlightDto, Result>> CreateHighlight(int organizationId, int personId, int companyId, int positionId,
+    public async Task<OneOf<HighlightDto, Result>> CreateHighlight(int organizationId, int personId, int companyId,
+        int positionId,
         int? projectId, HighlightOptions options)
     {
         Logger.LogInformation(
@@ -78,7 +75,8 @@ public sealed class HighlightService : BaseService<Highlight>, IHighlightService
         return Result.Failed();
     }
 
-    public async Task<OneOf<HighlightDto, Result>> UpdateHighlight(int organizationId, int personId, int companyId, int positionId,
+    public async Task<OneOf<HighlightDto, Result>> UpdateHighlight(int organizationId, int personId, int companyId,
+        int positionId,
         int highlightId, HighlightOptions options)
     {
         Logger.LogInformation(
@@ -124,7 +122,8 @@ public sealed class HighlightService : BaseService<Highlight>, IHighlightService
         return Result.Failed();
     }
 
-    public async Task<Result> DeleteHighlight(int organizationId, int personId, int companyId, int positionId, int? projectId,
+    public async Task<Result> DeleteHighlight(int organizationId, int personId, int companyId, int positionId,
+        int? projectId,
         int highlightId)
     {
         Logger.LogInformation(

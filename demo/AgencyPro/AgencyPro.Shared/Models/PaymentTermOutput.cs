@@ -1,9 +1,8 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class PaymentTermOutput
 {
-    public class PaymentTermOutput
-    {
-        public string Name { get; set; }
-        public int NetValue { get; set; }
-        public int PaymentTermId { get; set; }
-    }
+    public string Name { get; set; }
+    public int NetValue { get; set; }
+    public int PaymentTermId { get; set; }
 }

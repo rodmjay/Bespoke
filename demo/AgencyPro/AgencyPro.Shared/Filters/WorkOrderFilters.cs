@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Filters
+﻿namespace AgencyPro.Shared.Filters;
+
+public class WorkOrderFilters : CommonFilters
 {
-    public class WorkOrderFilters : CommonFilters
-    {
-        public Guid? AccountManagerOrganizationId { get; set; }
-    }
+    public Guid? AccountManagerOrganizationId { get; set; }
 }

@@ -2,34 +2,33 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Bespoke.Rest.Swagger.Extensions
-{
-    public static class SwaggerGenOptionsExtensions
-    {
-        public static void SwaggerGenDemoMode(this SwaggerGenOptions options, string userIdHeader = "X-User-Id")
-        {
-            options.AddSecurityDefinition(userIdHeader, new OpenApiSecurityScheme
-            {
-                Name = userIdHeader, // Name of the header
-                In = ParameterLocation.Header, // Location of the header
-                Type = SecuritySchemeType.ApiKey, // Specify it's a header
-                Description = "Custom header to pass the User ID"
-            });
+namespace Bespoke.Rest.Swagger.Extensions;
 
-            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+public static class SwaggerGenOptionsExtensions
+{
+    public static void SwaggerGenDemoMode(this SwaggerGenOptions options, string userIdHeader = "X-User-Id")
+    {
+        options.AddSecurityDefinition(userIdHeader, new OpenApiSecurityScheme
+        {
+            Name = userIdHeader, // Name of the header
+            In = ParameterLocation.Header, // Location of the header
+            Type = SecuritySchemeType.ApiKey, // Specify it's a header
+            Description = "Custom header to pass the User ID"
+        });
+
+        options.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
             {
+                new OpenApiSecurityScheme
                 {
-                    new OpenApiSecurityScheme
+                    Reference = new OpenApiReference
                     {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id =userIdHeader
-                        }
-                    },
-                    Array.Empty<string>()
-                }
-            });
-        }
+                        Type = ReferenceType.SecurityScheme,
+                        Id = userIdHeader
+                    }
+                },
+                Array.Empty<string>()
+            }
+        });
     }
 }

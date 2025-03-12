@@ -4,6 +4,5 @@ namespace ResumePro.Shared.Interfaces;
 
 public interface IEmail
 {
-    [EmailAddress]
-    string Email { get; set; }
+    [EmailAddress] string Email { get; set; }
 }

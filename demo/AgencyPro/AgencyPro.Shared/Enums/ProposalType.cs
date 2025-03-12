@@ -1,9 +1,8 @@
-﻿namespace AgencyPro.Shared.Enums
+﻿namespace AgencyPro.Shared.Enums;
+
+public enum ProposalType
 {
-    public enum ProposalType
-    {
-        Ongoing = 0,
-        Fixed = 1,
-        Proposal = 2,
-    }
+    Ongoing = 0,
+    Fixed = 1,
+    Proposal = 2
 }

@@ -29,8 +29,8 @@ public class SubscriptionItem : BaseEntity<SubscriptionItem>
 
         builder.HasOne(x => x.Subscription).WithMany(x => x.Items).HasForeignKey(x => x.UserId);
 
-        builder.HasOne(x=>x.Product)
-            .WithMany(x=>x.SubscriptionItems)
+        builder.HasOne(x => x.Product)
+            .WithMany(x => x.SubscriptionItems)
             .HasForeignKey(x => x.ProductId);
 
         builder.HasOne(x => x.Plan)

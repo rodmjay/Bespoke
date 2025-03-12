@@ -1,8 +1,8 @@
-﻿using Bespoke.Azure.AD.Builders;
+﻿#nullable enable
+
+using Bespoke.Azure.AD.Builders;
 using Bespoke.Azure.Builders;
 using Bespoke.Core.Helpers;
-
-#nullable enable
 
 namespace Bespoke.Azure.AD.Extensions;
 

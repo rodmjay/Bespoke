@@ -1,9 +1,8 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class OrganizationSettingOutput
 {
-    public class OrganizationSettingOutput
-    {
-        public bool IsProjectAllowed { get; set; }
-        public bool IsContractAllowed { get; set; }
-        public bool IsStoryAllowed { get; set; }
-    }
+    public bool IsProjectAllowed { get; set; }
+    public bool IsContractAllowed { get; set; }
+    public bool IsStoryAllowed { get; set; }
 }

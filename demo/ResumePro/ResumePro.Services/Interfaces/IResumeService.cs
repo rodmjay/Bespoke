@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.Services.Interfaces;
+﻿using Bespoke.Services.Interfaces;
 using ResumePro.Shared.Models;
 using ResumePro.Shared.Options;
 
@@ -23,6 +17,6 @@ public interface IResumeService : IService<Resume>
     Task<MemoryStream> Generate2(ResumeDetails resume);
 
     Task<Result> DeleteResume(int organizationId, int personId, int resumeId);
-   // Task<OneOf<string, Result>> Generate(ResumeDetails resumeDetails, int templateId);
-   // Task<ResumeDetails> Generate(int organizationId, int personId, int resumeId);
+    // Task<OneOf<string, Result>> Generate(ResumeDetails resumeDetails, int templateId);
+    // Task<ResumeDetails> Generate(int organizationId, int personId, int resumeId);
 }

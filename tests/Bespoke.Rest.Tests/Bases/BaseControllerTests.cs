@@ -1,43 +1,39 @@
-using NUnit.Framework;
-using Bespoke.Rest.Bases;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
+using NUnit.Framework;
 
-namespace Bespoke.Rest.Tests.Bases
+namespace Bespoke.Rest.Tests.Bases;
+
+[TestFixture]
+public class BaseControllerTests
 {
-    [TestFixture]
-    public class BaseControllerTests
+    [SetUp]
+    public void Setup()
     {
-        private Mock<ILogger> _mockLogger;
+        _mockLogger = new Mock<ILogger>();
+    }
 
-        [SetUp]
-        public void Setup()
+    private Mock<ILogger> _mockLogger;
+
+    [TestFixture]
+    public class ConstructorTests : BaseControllerTests
+    {
+        [Test]
+        public void Should_Initialize_With_Logger()
         {
-            _mockLogger = new Mock<ILogger>();
+            // This is a stub test since we can't easily instantiate BaseController
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class ConstructorTests : BaseControllerTests
+    [TestFixture]
+    public class ActionMethodsTests : BaseControllerTests
+    {
+        [Test]
+        public void Should_Return_Appropriate_ActionResults()
         {
-            [Test]
-            public void Should_Initialize_With_Logger()
-            {
-                // This is a stub test since we can't easily instantiate BaseController
-                Assert.IsTrue(true);
-            }
-        }
-
-        [TestFixture]
-        public class ActionMethodsTests : BaseControllerTests
-        {
-            [Test]
-            public void Should_Return_Appropriate_ActionResults()
-            {
-                // This is a stub test for controller action methods
-                Assert.IsTrue(true);
-            }
+            // This is a stub test for controller action methods
+            Assert.IsTrue(true);
         }
     }
 }

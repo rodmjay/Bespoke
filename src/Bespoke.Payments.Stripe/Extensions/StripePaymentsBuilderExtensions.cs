@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.Core.Helpers;
+﻿using Bespoke.Core.Helpers;
 using Bespoke.Payments.Stripe.Builders;
 
 namespace Bespoke.Payments.Stripe.Extensions;
@@ -16,7 +10,7 @@ public static class StripePaymentsBuilderExtensions
         var settings =
             (builder.Configuration, builder.Services).ConfigureSettings<StripeWebHookSettings>(
                 "StripeSettings:WebHooks");
-        
+
         // configure webhooks here...
     }
 }

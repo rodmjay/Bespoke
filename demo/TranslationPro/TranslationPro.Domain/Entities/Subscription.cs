@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2023 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace TranslationPro.Domain.Entities;
@@ -33,11 +27,11 @@ public class Subscription : BaseEntity<Subscription>
     public DateTime? CanceledAt { get; set; }
     public bool CancelAtPeriodEnd { get; set; }
     public DateTime? CancelAt { get; set; }
+
     public override void Configure(EntityTypeBuilder<Subscription> builder)
     {
         builder.ToTable(nameof(Subscription), "Stripe");
 
         builder.HasKey(x => x.UserId);
-
     }
 }

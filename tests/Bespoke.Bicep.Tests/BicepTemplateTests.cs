@@ -1,32 +1,29 @@
 ﻿using NUnit.Framework;
-using Bespoke.Bicep;
-using System;
 
-namespace Bespoke.Bicep.Tests
+namespace Bespoke.Bicep.Tests;
+
+[TestFixture]
+public class BicepTemplateTests
 {
     [TestFixture]
-    public class BicepTemplateTests
+    public class ConstructorTests : BicepTemplateTests
     {
-        [TestFixture]
-        public class ConstructorTests : BicepTemplateTests
+        [Test]
+        public void Should_Initialize_With_Default_Values()
         {
-            [Test]
-            public void Should_Initialize_With_Default_Values()
-            {
-                // This is a stub test
-                Assert.IsTrue(true);
-            }
+            // This is a stub test
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class PropertiesTests : BicepTemplateTests
+    [TestFixture]
+    public class PropertiesTests : BicepTemplateTests
+    {
+        [Test]
+        public void Should_Set_And_Get_Values_Correctly()
         {
-            [Test]
-            public void Should_Set_And_Get_Values_Correctly()
-            {
-                // This is a stub test
-                Assert.IsTrue(true);
-            }
+            // This is a stub test
+            Assert.IsTrue(true);
         }
     }
 }

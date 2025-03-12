@@ -1,157 +1,156 @@
-using NUnit.Framework;
+using System.Threading.Tasks;
 using Bespoke.Azure.Queue.Interfaces;
 using Moq;
-using System.Threading.Tasks;
+using NUnit.Framework;
 
-namespace Bespoke.Azure.Queue.Tests.Interfaces
+namespace Bespoke.Azure.Queue.Tests.Interfaces;
+
+[TestFixture]
+public class IQueueServiceTests
 {
-    [TestFixture]
-    public class IQueueServiceTests
+    [SetUp]
+    public void Setup()
     {
-        private Mock<IQueueService> _mockQueueService;
+        _mockQueueService = new Mock<IQueueService>();
+    }
 
-        [SetUp]
-        public void Setup()
+    private Mock<IQueueService> _mockQueueService;
+
+    [TestFixture]
+    public class CreateIfNotExistsAsyncTests : IQueueServiceTests
+    {
+        [Test]
+        public async Task Should_Call_CreateIfNotExistsAsync()
         {
-            _mockQueueService = new Mock<IQueueService>();
+            // Arrange
+            _mockQueueService.Setup(x => x.CreateIfNotExistsAsync())
+                .Returns(Task.CompletedTask);
+
+            // Act
+            await _mockQueueService.Object.CreateIfNotExistsAsync();
+
+            // Assert
+            _mockQueueService.Verify(x => x.CreateIfNotExistsAsync(), Times.Once);
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class CreateIfNotExistsAsyncTests : IQueueServiceTests
+    [TestFixture]
+    public class AddMessageAsyncTests : IQueueServiceTests
+    {
+        [Test]
+        public async Task Should_Call_AddMessageAsync()
         {
-            [Test]
-            public async Task Should_Call_CreateIfNotExistsAsync()
-            {
-                // Arrange
-                _mockQueueService.Setup(x => x.CreateIfNotExistsAsync())
-                    .Returns(Task.CompletedTask);
+            // Arrange
+            var message = "Test message";
+            _mockQueueService.Setup(x => x.AddMessageAsync(message))
+                .Returns(Task.CompletedTask);
 
-                // Act
-                await _mockQueueService.Object.CreateIfNotExistsAsync();
+            // Act
+            await _mockQueueService.Object.AddMessageAsync(message);
 
-                // Assert
-                _mockQueueService.Verify(x => x.CreateIfNotExistsAsync(), Times.Once);
-                Assert.IsTrue(true);
-            }
+            // Assert
+            _mockQueueService.Verify(x => x.AddMessageAsync(message), Times.Once);
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class AddMessageAsyncTests : IQueueServiceTests
+    [TestFixture]
+    public class PeekMessageAsyncTests : IQueueServiceTests
+    {
+        [Test]
+        public async Task Should_Call_PeekMessageAsync()
         {
-            [Test]
-            public async Task Should_Call_AddMessageAsync()
-            {
-                // Arrange
-                string message = "Test message";
-                _mockQueueService.Setup(x => x.AddMessageAsync(message))
-                    .Returns(Task.CompletedTask);
+            // Arrange
+            _mockQueueService.Setup(x => x.PeekMessageAsync())
+                .Returns(Task.CompletedTask);
 
-                // Act
-                await _mockQueueService.Object.AddMessageAsync(message);
+            // Act
+            await _mockQueueService.Object.PeekMessageAsync();
 
-                // Assert
-                _mockQueueService.Verify(x => x.AddMessageAsync(message), Times.Once);
-                Assert.IsTrue(true);
-            }
+            // Assert
+            _mockQueueService.Verify(x => x.PeekMessageAsync(), Times.Once);
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class PeekMessageAsyncTests : IQueueServiceTests
+    [TestFixture]
+    public class GetMessageAsyncTests : IQueueServiceTests
+    {
+        [Test]
+        public async Task Should_Call_GetMessageAsync()
         {
-            [Test]
-            public async Task Should_Call_PeekMessageAsync()
-            {
-                // Arrange
-                _mockQueueService.Setup(x => x.PeekMessageAsync())
-                    .Returns(Task.CompletedTask);
+            // Arrange
+            _mockQueueService.Setup(x => x.GetMessageAsync())
+                .Returns(Task.CompletedTask);
 
-                // Act
-                await _mockQueueService.Object.PeekMessageAsync();
+            // Act
+            await _mockQueueService.Object.GetMessageAsync();
 
-                // Assert
-                _mockQueueService.Verify(x => x.PeekMessageAsync(), Times.Once);
-                Assert.IsTrue(true);
-            }
+            // Assert
+            _mockQueueService.Verify(x => x.GetMessageAsync(), Times.Once);
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class GetMessageAsyncTests : IQueueServiceTests
+    [TestFixture]
+    public class UpdateMessageAsyncTests : IQueueServiceTests
+    {
+        [Test]
+        public async Task Should_Call_UpdateMessageAsync()
         {
-            [Test]
-            public async Task Should_Call_GetMessageAsync()
-            {
-                // Arrange
-                _mockQueueService.Setup(x => x.GetMessageAsync())
-                    .Returns(Task.CompletedTask);
+            // Arrange
+            var oldMessage = "Old message";
+            var newMessage = "New message";
+            _mockQueueService.Setup(x => x.UpdateMessageAsync(oldMessage, newMessage))
+                .Returns(Task.CompletedTask);
 
-                // Act
-                await _mockQueueService.Object.GetMessageAsync();
+            // Act
+            await _mockQueueService.Object.UpdateMessageAsync(oldMessage, newMessage);
 
-                // Assert
-                _mockQueueService.Verify(x => x.GetMessageAsync(), Times.Once);
-                Assert.IsTrue(true);
-            }
+            // Assert
+            _mockQueueService.Verify(x => x.UpdateMessageAsync(oldMessage, newMessage), Times.Once);
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class UpdateMessageAsyncTests : IQueueServiceTests
+    [TestFixture]
+    public class DeleteMessageAsyncTests : IQueueServiceTests
+    {
+        [Test]
+        public async Task Should_Call_DeleteMessageAsync()
         {
-            [Test]
-            public async Task Should_Call_UpdateMessageAsync()
-            {
-                // Arrange
-                string oldMessage = "Old message";
-                string newMessage = "New message";
-                _mockQueueService.Setup(x => x.UpdateMessageAsync(oldMessage, newMessage))
-                    .Returns(Task.CompletedTask);
+            // Arrange
+            var messageId = "messageId";
+            var popReceipt = "popReceipt";
+            _mockQueueService.Setup(x => x.DeleteMessageAsync(messageId, popReceipt))
+                .Returns(Task.CompletedTask);
 
-                // Act
-                await _mockQueueService.Object.UpdateMessageAsync(oldMessage, newMessage);
+            // Act
+            await _mockQueueService.Object.DeleteMessageAsync(messageId, popReceipt);
 
-                // Assert
-                _mockQueueService.Verify(x => x.UpdateMessageAsync(oldMessage, newMessage), Times.Once);
-                Assert.IsTrue(true);
-            }
+            // Assert
+            _mockQueueService.Verify(x => x.DeleteMessageAsync(messageId, popReceipt), Times.Once);
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class DeleteMessageAsyncTests : IQueueServiceTests
+    [TestFixture]
+    public class ClearQueueAsyncTests : IQueueServiceTests
+    {
+        [Test]
+        public async Task Should_Call_ClearQueueAsync()
         {
-            [Test]
-            public async Task Should_Call_DeleteMessageAsync()
-            {
-                // Arrange
-                string messageId = "messageId";
-                string popReceipt = "popReceipt";
-                _mockQueueService.Setup(x => x.DeleteMessageAsync(messageId, popReceipt))
-                    .Returns(Task.CompletedTask);
+            // Arrange
+            _mockQueueService.Setup(x => x.ClearQueueAsync())
+                .Returns(Task.CompletedTask);
 
-                // Act
-                await _mockQueueService.Object.DeleteMessageAsync(messageId, popReceipt);
+            // Act
+            await _mockQueueService.Object.ClearQueueAsync();
 
-                // Assert
-                _mockQueueService.Verify(x => x.DeleteMessageAsync(messageId, popReceipt), Times.Once);
-                Assert.IsTrue(true);
-            }
-        }
-
-        [TestFixture]
-        public class ClearQueueAsyncTests : IQueueServiceTests
-        {
-            [Test]
-            public async Task Should_Call_ClearQueueAsync()
-            {
-                // Arrange
-                _mockQueueService.Setup(x => x.ClearQueueAsync())
-                    .Returns(Task.CompletedTask);
-
-                // Act
-                await _mockQueueService.Object.ClearQueueAsync();
-
-                // Assert
-                _mockQueueService.Verify(x => x.ClearQueueAsync(), Times.Once);
-                Assert.IsTrue(true);
-            }
+            // Assert
+            _mockQueueService.Verify(x => x.ClearQueueAsync(), Times.Once);
+            Assert.IsTrue(true);
         }
     }
 }

@@ -1,6 +1,5 @@
-﻿namespace AgencyPro.Shared.Models.Categories
+﻿namespace AgencyPro.Shared.Models.Categories;
+
+public class AccountManagerCategoryOutput : CategoryOutput
 {
-    public class AccountManagerCategoryOutput : CategoryOutput
-    {
-    }
 }

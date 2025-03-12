@@ -1,17 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class LinkCustomerInput
 {
-    public class LinkCustomerInput
-    {
-         public Guid AccountManagerId { get; set; }
+    public Guid AccountManagerId { get; set; }
 
-        [Required]
-        [DataType(DataType.EmailAddress)]
-        public string EmailAddress { get; set; }
+    [Required]
+    [DataType(DataType.EmailAddress)]
+    public string EmailAddress { get; set; }
 
-        public Guid AccountManagerOrganizationId { get; set; }
+    public Guid AccountManagerOrganizationId { get; set; }
 
-        public int? PaymentTermId { get; set; }
-    }
+    public int? PaymentTermId { get; set; }
 }

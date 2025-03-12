@@ -1,11 +1,10 @@
-namespace AgencyPro.Shared.Interfaces
+namespace AgencyPro.Shared.Interfaces;
+
+public interface IAgencyOwner
 {
-    public interface IAgencyOwner
-    {
-        Guid OrganizationId { get; }
-        Guid CustomerId { get; }
-        bool IsMarketingOwner { get; set; }
-        bool IsRecruitingOwner { get; set; }
-        bool IsProviderOwner { get; set; }
-    }
+    Guid OrganizationId { get; }
+    Guid CustomerId { get; }
+    bool IsMarketingOwner { get; set; }
+    bool IsRecruitingOwner { get; set; }
+    bool IsProviderOwner { get; set; }
 }

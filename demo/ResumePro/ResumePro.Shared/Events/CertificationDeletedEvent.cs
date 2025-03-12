@@ -7,5 +7,4 @@ public class CertificationDeletedEvent : BaseEvent
     }
 
     protected override string Name => "Certification";
-
 }

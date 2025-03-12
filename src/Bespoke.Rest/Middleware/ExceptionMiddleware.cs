@@ -1,23 +1,17 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-#nullable enable
+﻿#nullable enable
 
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Security.Authentication;
+using Bespoke.Core.Extensions;
+using Bespoke.Shared.Common;
 using Dawn;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Bespoke.Core.Extensions;
-using Bespoke.Shared.Common;
 
 namespace Bespoke.Rest.Middleware;
 
@@ -75,14 +69,13 @@ public class ExceptionMiddleware(
             var exLogger = loggerFactory.CreateLogger(exception.TargetSite.DeclaringType.FullName!);
             exLogger.LogError(exception, exception.Message);
         }
+
         if (modelResult.Errors != null)
-        {
             modelResult.Errors.Add(new Error
             {
                 Code = GetErrorCode(exception).ToString(),
                 Description = exception.Message
             });
-        }
     }
 
     private Task HandleExceptionAsync(HttpContext context, Exception exception)

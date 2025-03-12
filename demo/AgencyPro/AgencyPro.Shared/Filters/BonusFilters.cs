@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Filters
+﻿namespace AgencyPro.Shared.Filters;
+
+public class BonusFilters
 {
-    public class BonusFilters
-    {
-        public Guid ProviderOrganizationId { get; set; }
-    }
+    public Guid ProviderOrganizationId { get; set; }
 }

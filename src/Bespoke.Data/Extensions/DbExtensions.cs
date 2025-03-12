@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
@@ -64,7 +58,7 @@ public static class DbExtensions
             var normalized = $"%{keyword}%";
             var constant = Expression.Constant(normalized);
 
-            string methodName = caseInsensitive ? "ILike" : "Like";
+            var methodName = caseInsensitive ? "ILike" : "Like";
             var methodCallExpression = Expression.Call(
                 typeof(DbFunctionsExtensions),
                 methodName,
@@ -80,5 +74,4 @@ public static class DbExtensions
 
         return Expression.Lambda<Func<T, bool>>(expression, parameterExpression);
     }
-
 }

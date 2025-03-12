@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2023 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace TranslationPro.Domain.Entities;
@@ -13,9 +7,9 @@ public class Invoice : BaseEntity<Invoice>
 {
     public Invoice()
     {
-        this.Items = new List<InvoiceItem>();
-        this.Lines = new List<InvoiceLine>();
-        this.UsageRecordSummaries = new List<UsageRecordSummary>();
+        Items = new List<InvoiceItem>();
+        Lines = new List<InvoiceLine>();
+        UsageRecordSummaries = new List<UsageRecordSummary>();
     }
 
     public int UserId { get; set; }

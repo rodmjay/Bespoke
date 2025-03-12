@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using AutoMapper;
+﻿using AutoMapper;
 using ResumePro.Shared.Models;
 
 namespace ResumePro.Services.Mapping;
@@ -22,6 +16,7 @@ public class ResumeCompanyMapping : Profile
             .ForMember(x => x.StartDate, opt => opt.MapFrom(x => x.Company.StartDate))
             .ForMember(x => x.EndDate, opt => opt.MapFrom(x => x.Company.EndDate))
             .ForMember(x => x.Skills, opt => opt.MapFrom(x => x.Company.Skills))
-            .ForMember(x => x.Positions, opt => opt.MapFrom(x => x.Company.Positions.OrderByDescending(p => p.StartDate)));
+            .ForMember(x => x.Positions,
+                opt => opt.MapFrom(x => x.Company.Positions.OrderByDescending(p => p.StartDate)));
     }
 }

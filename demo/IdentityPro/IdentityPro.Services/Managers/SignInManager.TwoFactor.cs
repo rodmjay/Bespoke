@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -50,7 +44,7 @@ public partial class SignInManager
         // Cleanup external cookie
         if (loginProvider != null) await Context.SignOutAsync(IdentityConstants.ExternalScheme);
         if (loginProvider == null)
-            await SignInWithClaimsAsync(user, isPersistent, new[] {new Claim("amr", "pwd")});
+            await SignInWithClaimsAsync(user, isPersistent, new[] { new Claim("amr", "pwd") });
         else
             await SignInAsync(user, isPersistent, loginProvider);
         return SignInResult.Success;
@@ -105,7 +99,7 @@ public partial class SignInManager
         // When token is verified correctly, clear the access failed count used for lockout
         await ResetLockout(user);
 
-        var claims = new List<Claim> {new("amr", "mfa")};
+        var claims = new List<Claim> { new("amr", "mfa") };
 
         // Cleanup external cookie
         if (twoFactorInfo.LoginProvider != null)
@@ -125,7 +119,7 @@ public partial class SignInManager
         var principal = await StoreRememberClient(user);
         await Context.SignInAsync(IdentityConstants.TwoFactorRememberMeScheme,
             principal,
-            new AuthenticationProperties {IsPersistent = true});
+            new AuthenticationProperties { IsPersistent = true });
     }
 
     internal async Task<ClaimsPrincipal> StoreRememberClient(User user)

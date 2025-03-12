@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class ContractorSkillInput
 {
-    public class ContractorSkillInput
-    {
-        public int Priority { get; set; }
-    }
+    public int Priority { get; set; }
 }

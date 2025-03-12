@@ -1,17 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Bespoke.Services\Bespoke.Services.csproj" />
-    <ProjectReference Include="..\IdentityPro.Data\IdentityPro.Data.csproj" />
-    <ProjectReference Include="..\IdentityPro.Domain\IdentityPro.Domain.csproj" />
-    <ProjectReference Include="..\IdentityPro.Shared\IdentityPro.Shared.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\src\Bespoke.Services\Bespoke.Services.csproj" />
+		<ProjectReference Include="..\IdentityPro.Data\IdentityPro.Data.csproj" />
+		<ProjectReference Include="..\IdentityPro.Domain\IdentityPro.Domain.csproj" />
+		<ProjectReference Include="..\IdentityPro.Shared\IdentityPro.Shared.csproj" />
+	</ItemGroup>
 
 
 </Project>

@@ -1,12 +1,5 @@
-﻿#region Header Info
-
-// Copyright 2024 BespokeTalent.  All rights reserved
-
-#endregion
-
-using Microsoft.AspNetCore.Hosting;
+﻿using Bespoke.Core.Extensions;
 using Microsoft.Extensions.Configuration;
-using Bespoke.Core.Extensions;
 using Microsoft.Extensions.Hosting;
 
 namespace Bespoke.IntegrationTesting.Extensions;

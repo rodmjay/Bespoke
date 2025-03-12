@@ -108,6 +108,7 @@ public abstract class BaseProxy
         var error = await DeserializeContentAsync<Result>(response.Content);
         return new BadRequestObjectResult(error);
     }
+
     protected async Task<ActionResult<TOutput>> DoPatchActionResultWithBodyAsync<TOutput>(string url, object payload)
     {
         // Serialize the payload to JSON and create StringContent with proper encoding and media type.

@@ -1,65 +1,61 @@
-using NUnit.Framework;
-using Bespoke.Azure.Queue.Extensions;
 using Bespoke.Azure.Builders;
-using Bespoke.Azure.Queue.Builders;
 using Bespoke.Core.Builders;
 using Bespoke.Core.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using System;
+using NUnit.Framework;
 
-namespace Bespoke.Azure.Queue.Tests.Extensions
+namespace Bespoke.Azure.Queue.Tests.Extensions;
+
+[TestFixture]
+public class QueueStorageExtensionsTests
 {
-    [TestFixture]
-    public class QueueStorageExtensionsTests
+    [SetUp]
+    public void Setup()
     {
-        private AzureBuilder _azureBuilder;
-        private AppBuilder _appBuilder;
-        private Mock<IServiceCollection> _mockServices;
-        private Mock<IConfiguration> _mockConfiguration;
+        _mockServices = new Mock<IServiceCollection>();
+        _mockConfiguration = new Mock<IConfiguration>();
 
-        [SetUp]
-        public void Setup()
+        // Create a real AppBuilder instance with mocked dependencies
+        _appBuilder = new AppBuilder(
+            _mockServices.Object,
+            new AppSettings(),
+            _mockConfiguration.Object);
+
+        // Create a real AzureBuilder instance with the real AppBuilder
+        _azureBuilder = new AzureBuilder(_appBuilder, new AzureSettings());
+    }
+
+    private AzureBuilder _azureBuilder;
+    private AppBuilder _appBuilder;
+    private Mock<IServiceCollection> _mockServices;
+    private Mock<IConfiguration> _mockConfiguration;
+
+    [TestFixture]
+    public class AddQueueStorageTests : QueueStorageExtensionsTests
+    {
+        [Test]
+        public void Should_Return_AzureBuilder()
         {
-            _mockServices = new Mock<IServiceCollection>();
-            _mockConfiguration = new Mock<IConfiguration>();
-            
-            // Create a real AppBuilder instance with mocked dependencies
-            _appBuilder = new AppBuilder(
-                _mockServices.Object,
-                new AppSettings(),
-                _mockConfiguration.Object);
-                
-            // Create a real AzureBuilder instance with the real AppBuilder
-            _azureBuilder = new AzureBuilder(_appBuilder, new AzureSettings());
+            // Commented out due to configuration issues
+            // var result = QueueStorageExtensions.AddQueueStorage(_azureBuilder);
+            // Assert.NotNull(result);
+            Assert.IsTrue(true);
         }
 
-        [TestFixture]
-        public class AddQueueStorageTests : QueueStorageExtensionsTests
+        [Test]
+        public void Should_Invoke_Action_When_Provided()
         {
-            [Test]
-            public void Should_Return_AzureBuilder()
-            {
-                // Commented out due to configuration issues
-                // var result = QueueStorageExtensions.AddQueueStorage(_azureBuilder);
-                // Assert.NotNull(result);
-                Assert.IsTrue(true);
-            }
+            // Commented out due to configuration issues
+            // bool actionInvoked = false;
+            // var result = QueueStorageExtensions.AddQueueStorage(_azureBuilder, builder => {
+            //     actionInvoked = true;
+            // });
 
-            [Test]
-            public void Should_Invoke_Action_When_Provided()
-            {
-                // Commented out due to configuration issues
-                // bool actionInvoked = false;
-                // var result = QueueStorageExtensions.AddQueueStorage(_azureBuilder, builder => {
-                //     actionInvoked = true;
-                // });
-                
-                // Assert.IsTrue(actionInvoked);
-                // Assert.NotNull(result);
-                Assert.IsTrue(true);
-            }
+            // Assert.IsTrue(actionInvoked);
+            // Assert.NotNull(result);
+            Assert.IsTrue(true);
         }
     }
 }

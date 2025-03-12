@@ -1,8 +1,7 @@
-﻿namespace AgencyPro.Shared.Filters
+﻿namespace AgencyPro.Shared.Filters;
+
+public class ContractorFilters
 {
-    public class ContractorFilters
-    {
-        public static readonly ContractorFilters NoFilter = new ContractorFilters();
-        public Guid? ProjectId { get; set; }
-    }
+    public static readonly ContractorFilters NoFilter = new();
+    public Guid? ProjectId { get; set; }
 }

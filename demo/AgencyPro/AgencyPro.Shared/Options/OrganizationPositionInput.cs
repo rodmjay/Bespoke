@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Options
+﻿namespace AgencyPro.Shared.Options;
+
+public class OrganizationPositionInput
 {
-    public class OrganizationPositionInput
-    {
-        public int[] Positions { get; set; }
-    }
+    public int[] Positions { get; set; }
 }

@@ -1,16 +1,15 @@
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class OrganizationContractorStatistics : OrganizationContractorOutput
 {
-    public class OrganizationContractorStatistics : OrganizationContractorOutput
-    {
-        public virtual int TotalContracts { get; set; }
-        public virtual int TotalStories { get; set; }
+    public virtual int TotalContracts { get; set; }
+    public virtual int TotalStories { get; set; }
 
-        public int MaxBillableHours { get; set; }
-        public int MaxWeeklyHours { get; set; }
+    public int MaxBillableHours { get; set; }
+    public int MaxWeeklyHours { get; set; }
 
-        public int AvailableHours => MaxWeeklyHours - MaxBillableHours;
+    public int AvailableHours => MaxWeeklyHours - MaxBillableHours;
 
-        public Dictionary<TimeStatus, decimal> TimeEntryHours { get; set; }
-        public Dictionary<TimeStatus, decimal> TimeEntryEarnings { get; set; }
-    }
+    public Dictionary<TimeStatus, decimal> TimeEntryHours { get; set; }
+    public Dictionary<TimeStatus, decimal> TimeEntryEarnings { get; set; }
 }

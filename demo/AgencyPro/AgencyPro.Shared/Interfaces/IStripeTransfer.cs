@@ -1,12 +1,11 @@
-﻿namespace AgencyPro.Shared.Interfaces
+﻿namespace AgencyPro.Shared.Interfaces;
+
+public interface IStripeTransfer
 {
-    public interface IStripeTransfer
-    {
-        string Id { get; set; }
-        decimal Amount { get; set; }
-        decimal AmountReversed { get; set; }
-        string Description { get; set; }
-        string DestinationId { get; set; }
-        string DestinationPaymentId { get; set; }
-    }
+    string Id { get; set; }
+    decimal Amount { get; set; }
+    decimal AmountReversed { get; set; }
+    string Description { get; set; }
+    string DestinationId { get; set; }
+    string DestinationPaymentId { get; set; }
 }

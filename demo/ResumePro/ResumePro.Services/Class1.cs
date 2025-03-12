@@ -1,7 +1,5 @@
-﻿namespace ResumePro.Services
-{
-    public class Class1
-    {
+﻿namespace ResumePro.Services;
 
-    }
+public class Class1
+{
 }

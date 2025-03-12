@@ -1,9 +1,8 @@
-﻿namespace Bespoke.Azure
+﻿namespace Bespoke.Azure;
+
+public class AzureSettings
 {
-    public class AzureSettings
-    {
-        public bool UseAzureManagedIdentity { get; set; }
-        public string AccountName { get; set; }
-        public string AccountKey { get; set; }
-    }
+    public bool UseAzureManagedIdentity { get; set; }
+    public string AccountName { get; set; }
+    public string AccountKey { get; set; }
 }

@@ -1,7 +1,5 @@
-﻿namespace TranslationPro.Shared
-{
-    public class Class1
-    {
+﻿namespace TranslationPro.Shared;
 
-    }
+public class Class1
+{
 }

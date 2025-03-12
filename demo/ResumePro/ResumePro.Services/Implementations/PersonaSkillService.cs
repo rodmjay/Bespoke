@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
 using Bespoke.Data.Interfaces;
@@ -20,7 +14,8 @@ public sealed class PersonaSkillService : BaseService<PersonaSkill>, IPersonaSki
 {
     private readonly IRepositoryAsync<Resume> _resumeRepo;
 
-    public PersonaSkillService(IServiceProvider serviceProvider, IRepositoryAsync<Resume> resumeRepo) : base(serviceProvider)
+    public PersonaSkillService(IServiceProvider serviceProvider, IRepositoryAsync<Resume> resumeRepo) : base(
+        serviceProvider)
     {
         _resumeRepo = resumeRepo;
     }

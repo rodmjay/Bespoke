@@ -1,43 +1,38 @@
-using NUnit.Framework;
-using Bespoke.Users.Services;
-using Bespoke.Users.Entities;
-using Microsoft.Extensions.Logging;
 using Moq;
-using System;
+using NUnit.Framework;
 
-namespace Bespoke.Users.Tests.Services
+namespace Bespoke.Users.Tests.Services;
+
+[TestFixture]
+public class UserServiceTests
 {
-    [TestFixture]
-    public class UserServiceTests
+    [SetUp]
+    public void Setup()
     {
-        private Mock<ILogger<UserService>> _mockLogger;
+        _mockLogger = new Mock<ILogger<UserService>>();
+    }
 
-        [SetUp]
-        public void Setup()
+    private Mock<ILogger<UserService>> _mockLogger;
+
+    [TestFixture]
+    public class ConstructorTests : UserServiceTests
+    {
+        [Test]
+        public void Should_Initialize_With_Dependencies()
         {
-            _mockLogger = new Mock<ILogger<UserService>>();
+            // This is a stub test since we can't easily instantiate UserService
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class ConstructorTests : UserServiceTests
+    [TestFixture]
+    public class UserStoreMethodsTests : UserServiceTests
+    {
+        [Test]
+        public void Should_Implement_User_Store_Methods()
         {
-            [Test]
-            public void Should_Initialize_With_Dependencies()
-            {
-                // This is a stub test since we can't easily instantiate UserService
-                Assert.IsTrue(true);
-            }
-        }
-
-        [TestFixture]
-        public class UserStoreMethodsTests : UserServiceTests
-        {
-            [Test]
-            public void Should_Implement_User_Store_Methods()
-            {
-                // This is a stub test for user store methods
-                Assert.IsTrue(true);
-            }
+            // This is a stub test for user store methods
+            Assert.IsTrue(true);
         }
     }
 }

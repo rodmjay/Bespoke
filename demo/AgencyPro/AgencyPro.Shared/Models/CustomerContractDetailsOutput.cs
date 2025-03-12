@@ -1,11 +1,10 @@
 ﻿using AgencyPro.Shared.Models.Contracts;
 
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class CustomerContractDetailsOutput : CustomerContractOutput
 {
-    public class CustomerContractDetailsOutput : CustomerContractOutput
-    {
-        public ICollection<CustomerTimeEntryOutput> ApprovedTimeEntries { get; set; }
-        public ICollection<CustomerStoryOutput> Stories { get; set; }
-        public ICollection<CommentOutput> Comments { get; set; }
-    }
+    public ICollection<CustomerTimeEntryOutput> ApprovedTimeEntries { get; set; }
+    public ICollection<CustomerStoryOutput> Stories { get; set; }
+    public ICollection<CommentOutput> Comments { get; set; }
 }

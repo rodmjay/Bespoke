@@ -5,8 +5,8 @@ namespace TranslationPro.Domain.Entities;
 
 public class Plan : BaseEntity<Plan>
 {
-    public string Id { get; set; } = null!; 
-    public string ProductId { get; set; } = null!;  
+    public string Id { get; set; } = null!;
+    public string ProductId { get; set; } = null!;
     public Product Product { get; set; } = null!;
     public bool Active { get; set; }
     public long? Amount { get; set; }

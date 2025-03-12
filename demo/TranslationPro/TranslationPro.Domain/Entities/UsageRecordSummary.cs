@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2023 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace TranslationPro.Domain.Entities;
@@ -25,7 +19,8 @@ public class UsageRecordSummary : BaseEntity<UsageRecordSummary>
         builder.ToTable(nameof(UsageRecordSummary), "Stripe");
 
         builder.HasKey(x => x.Id);
-        builder.HasOne(x => x.SubscriptionItem).WithMany(x => x.UsageRecordSummaries).HasForeignKey(x => x.SubscriptionItemId);
+        builder.HasOne(x => x.SubscriptionItem).WithMany(x => x.UsageRecordSummaries)
+            .HasForeignKey(x => x.SubscriptionItemId);
 
         builder.HasOne(x => x.Invoice).WithMany(x => x.UsageRecordSummaries).HasForeignKey(x => x.InvoiceId)
             .IsRequired(false);

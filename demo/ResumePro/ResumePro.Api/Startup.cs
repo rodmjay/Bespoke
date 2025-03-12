@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.Azure.AppInsights.Extensions;
+﻿using Bespoke.Azure.AppInsights.Extensions;
 using Bespoke.Azure.BlobStorage;
 using Bespoke.Azure.Extensions;
 using Bespoke.Core.Extensions;
@@ -14,7 +8,6 @@ using Bespoke.Data.SqlServer;
 using Bespoke.Rest.Extensions;
 using Bespoke.Rest.Middleware;
 using Bespoke.Rest.Swagger.Extensions;
-using Bespoke.Shared.Enums;
 using Microsoft.Extensions.Options;
 using ResumePro.Data.Contexts;
 using ResumePro.Services.Extensions;
@@ -41,12 +34,12 @@ public sealed class Startup
                 .AddEventAggregator()
                 .AddAutomapper()
                 .AddStorage(
-                    configureDbSettings: dbSettings =>
+                    dbSettings =>
                     {
                         dbSettings.MigrationsAssembly = "ResumePro.Infrastructure.SqlServer";
                         dbSettings.MaxRetryCount = 5;
                     },
-                    configureDataBuilder: dataBuilder =>
+                    dataBuilder =>
                     {
                         dataBuilder.UseSqlServer<ApplicationContext>(sqlSettings =>
                         {
@@ -55,16 +48,16 @@ public sealed class Startup
                     }
                 )
                 .AddAzure(
-                    configureAzureSettings: azureSettings =>
+                    azureSettings =>
                     {
                         azureSettings.UseAzureManagedIdentity = true;
                         azureSettings.AccountName = "MyAzureStorageAccount";
                         azureSettings.AccountKey = "SuperSecretKey";
                     },
-                    configureAzureBuilder: azureBuilder =>
+                    azureBuilder =>
                     {
                         azureBuilder.AddAppInsights(
-                            configureAppInsightsSettings: appInsightsSettings =>
+                            appInsightsSettings =>
                             {
                                 appInsightsSettings.CloudRoleName = "RESUMEPRO";
                                 appInsightsSettings.EnableAdaptiveSampling = true;
@@ -72,17 +65,8 @@ public sealed class Startup
                             });
                         azureBuilder.AddBlobStorage();
                     })
-                .AddRest(configureRestSettings: restSettings =>
-                    {
-                        restSettings.Cors.AllowAnyOrigin = true;
-                    },
-                    configureRestApi: restBuilder =>
-                    {
-                        restBuilder.AddSwagger(options =>
-                        {
-                            options.SwaggerGenDemoMode();
-                        });
-                    });
+                .AddRest(restSettings => { restSettings.Cors.AllowAnyOrigin = true; },
+                    restBuilder => { restBuilder.AddSwagger(options => { options.SwaggerGenDemoMode(); }); });
 
             builder.Services.AddServices(Configuration);
         });
@@ -109,7 +93,6 @@ public sealed class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext context,
         IOptions<AppSettings> settings)
     {
-
         app.UseMiddleware<ExceptionMiddleware>();
 
         //if (settings.Value.Mode == OperationMode.Demo)
@@ -124,7 +107,7 @@ public sealed class Startup
         app.UseSwaggerUI(c =>
         {
             c.SwaggerEndpoint($"/swagger/{settings.Value.Version}/swagger.json", appSettings.Name);
-            c.RoutePrefix = "swagger";  // Changed from string.Empty to "swagger"
+            c.RoutePrefix = "swagger"; // Changed from string.Empty to "swagger"
         });
 
         // Serve Angular’s static files (index.html, etc.)
@@ -135,9 +118,6 @@ public sealed class Startup
         app.UseRouting();
         app.UseAuthorization();
 
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllers();
-        });
+        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
 }

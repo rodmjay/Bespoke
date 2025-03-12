@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class ProjectInvoiceDetails : ProjectInvoiceSummaryItem
 {
-    public class ProjectInvoiceDetails : ProjectInvoiceSummaryItem
-    {
-        public ICollection<ContractInvoiceSummaryItem> Contracts { get; set; }
-    }
+    public ICollection<ContractInvoiceSummaryItem> Contracts { get; set; }
 }

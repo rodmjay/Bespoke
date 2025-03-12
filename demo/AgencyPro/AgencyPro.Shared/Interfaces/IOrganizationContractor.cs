@@ -1,8 +1,7 @@
-namespace AgencyPro.Shared.Interfaces
+namespace AgencyPro.Shared.Interfaces;
+
+public interface IOrganizationContractor
 {
-    public interface IOrganizationContractor
-    {
-        Guid OrganizationId { get; }
-        Guid ContractorId { get; }
-    }
+    Guid OrganizationId { get; }
+    Guid ContractorId { get; }
 }

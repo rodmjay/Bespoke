@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
 namespace IdentityPro.Services.Managers;
@@ -15,7 +9,7 @@ public partial class SignInManager
         string redirectUrl,
         string userId = null)
     {
-        var properties = new AuthenticationProperties {RedirectUri = redirectUrl};
+        var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
         properties.Items[LoginProviderKey] = provider;
         if (userId != null) properties.Items[XsrfKey] = userId;
         return properties;

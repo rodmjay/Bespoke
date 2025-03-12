@@ -1,8 +1,7 @@
-namespace AgencyPro.Shared.Models.People
+namespace AgencyPro.Shared.Models.People;
+
+public class AccountManagerOrganizationRecruiterOutput
+    : OrganizationRecruiterOutput
 {
-    public class AccountManagerOrganizationRecruiterOutput
-        : OrganizationRecruiterOutput
-    {
-        public override decimal RecruiterStream { get; set; }
-    }
+    public override decimal RecruiterStream { get; set; }
 }

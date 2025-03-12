@@ -1,14 +1,7 @@
-﻿#region Header Info
+﻿#nullable enable
 
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.AspNetCore.Authentication;
-using Stripe;
 using Bespoke.Payments.Stripe.Interfaces;
-
-#nullable enable
+using Stripe;
 
 namespace Bespoke.Payments.Stripe.Services;
 
@@ -71,7 +64,7 @@ public class StripeCustomerClient : StripeClient, IStripeCustomerClient
             Customer = _customerId,
             Amount = Convert.ToInt64(amount * 100),
             Currency = currency,
-            Description = description,
+            Description = description
         }, RequestOptions);
 
         return charge;
@@ -86,7 +79,7 @@ public class StripeCustomerClient : StripeClient, IStripeCustomerClient
             Customer = _customerId,
             Items = new List<SubscriptionItemOptions>
             {
-                new SubscriptionItemOptions
+                new()
                 {
                     Price = priceId
                 }
@@ -97,4 +90,3 @@ public class StripeCustomerClient : StripeClient, IStripeCustomerClient
         return await subscriptionService.CreateAsync(options);
     }
 }
-

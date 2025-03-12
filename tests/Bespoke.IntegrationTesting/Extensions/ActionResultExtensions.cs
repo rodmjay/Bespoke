@@ -1,13 +1,7 @@
-﻿#region Header Info
-
-// Copyright 2024 BespokeTalent.  All rights reserved
-
-#endregion
-
+﻿using Bespoke.Core.Settings;
+using Bespoke.Shared.Common;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Bespoke.Core.Settings;
-using Bespoke.Shared.Common;
 
 namespace Bespoke.IntegrationTesting.Extensions;
 
@@ -15,12 +9,12 @@ public static class ActionResultExtensions
 {
     public static T GetObject<T>(this ActionResult<object> actionResult)
     {
-        var obj = (actionResult.Result as OkObjectResult);
+        var obj = actionResult.Result as OkObjectResult;
         var str = obj.Value.ToString();
-        
+
         return JsonConvert.DeserializeObject<T>(str, JsonSettings.Settings);
     }
-    
+
     public static bool IsSuccessStatusCode<T>(this ActionResult<T> result)
     {
         return result.Result is OkObjectResult;

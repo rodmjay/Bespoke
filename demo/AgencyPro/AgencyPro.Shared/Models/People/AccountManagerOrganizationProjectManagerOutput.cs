@@ -1,7 +1,6 @@
-namespace AgencyPro.Shared.Models.People
+namespace AgencyPro.Shared.Models.People;
+
+public sealed class AccountManagerOrganizationProjectManagerOutput
+    : OrganizationProjectManagerOutput
 {
-    public sealed class AccountManagerOrganizationProjectManagerOutput
-        : OrganizationProjectManagerOutput
-    {
-    }
 }

@@ -1,7 +1,6 @@
-﻿using Stripe;
-using Bespoke.Shared.Common;
+﻿#nullable enable
 
-#nullable enable
+using Stripe;
 
 namespace Bespoke.Payments.Stripe.Interfaces;
 
@@ -14,6 +13,4 @@ public interface IStripeCustomerClient
     Task<Card> UpdateCard(string cardId, CardUpdateOptions options);
     Task<Card> DeleteCard(string cardId, CardDeleteOptions options);
     Task<Subscription> CreateSubscriptionAsync(string priceId, Dictionary<string, string>? metadata = null);
-
-
 }

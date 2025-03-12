@@ -1,11 +1,6 @@
-﻿#region Header Info
+﻿namespace ResumePro.Shared.Interfaces;
 
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-namespace ResumePro.Shared.Interfaces;
-
-public interface IPersona : IId, IOrganizationId, IFirstAndLastName, IEmail, IPhoneNumber, ILinkedIn, IGitHub, ICity, IStateId
+public interface IPersona : IId, IOrganizationId, IFirstAndLastName, IEmail, IPhoneNumber, ILinkedIn, IGitHub, ICity,
+    IStateId
 {
 }

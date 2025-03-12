@@ -1,7 +1,6 @@
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class CustomerTimeEntryDetailsOutput : CustomerTimeEntryOutput
 {
-    public class CustomerTimeEntryDetailsOutput : CustomerTimeEntryOutput
-    {
-        public Dictionary<DateTimeOffset, TimeStatus> StatusTransitions { get; set; }
-    }
+    public Dictionary<DateTimeOffset, TimeStatus> StatusTransitions { get; set; }
 }

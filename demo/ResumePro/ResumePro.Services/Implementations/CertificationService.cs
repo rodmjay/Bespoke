@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +15,8 @@ public sealed class CertificationService : BaseService<Certification>, ICertific
 {
     private CertificationErrorDescriber _errors;
 
-    public CertificationService(IServiceProvider serviceProvider, CertificationErrorDescriber errors) : base(serviceProvider)
+    public CertificationService(IServiceProvider serviceProvider, CertificationErrorDescriber errors) : base(
+        serviceProvider)
     {
         _errors = errors;
     }

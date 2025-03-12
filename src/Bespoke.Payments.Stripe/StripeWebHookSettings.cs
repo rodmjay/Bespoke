@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-namespace Bespoke.Payments.Stripe;
+﻿namespace Bespoke.Payments.Stripe;
 
 public class StripeWebHookSettings
 {

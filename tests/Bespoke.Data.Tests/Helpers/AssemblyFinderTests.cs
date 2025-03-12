@@ -1,22 +1,18 @@
 using NUnit.Framework;
-using Bespoke.Data.Helpers;
-using System;
-using System.Reflection;
 
-namespace Bespoke.Data.Tests.Helpers
+namespace Bespoke.Data.Tests.Helpers;
+
+[TestFixture]
+public class AssemblyFinderTests
 {
     [TestFixture]
-    public class AssemblyFinderTests
+    public class FindAssembliesWithAttributeTests : AssemblyFinderTests
     {
-        [TestFixture]
-        public class FindAssembliesWithAttributeTests : AssemblyFinderTests
+        [Test]
+        public void Should_Find_Assemblies_With_Attribute()
         {
-            [Test]
-            public void Should_Find_Assemblies_With_Attribute()
-            {
-                // This is a stub test
-                Assert.IsTrue(true);
-            }
+            // This is a stub test
+            Assert.IsTrue(true);
         }
     }
 }

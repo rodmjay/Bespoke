@@ -1,13 +1,12 @@
-namespace AgencyPro.Shared.Enums
+namespace AgencyPro.Shared.Enums;
+
+public enum StoryStatus
 {
-    public enum StoryStatus
-    {
-        Pending = 0,
-        Approved = 1,
-        Assigned = 2,
-        InProgress = 4,
-        Completed = 8,
-        Archived = 16,
-        Rejected = 32
-    }
+    Pending = 0,
+    Approved = 1,
+    Assigned = 2,
+    InProgress = 4,
+    Completed = 8,
+    Archived = 16,
+    Rejected = 32
 }

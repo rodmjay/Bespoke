@@ -1,7 +1,5 @@
-﻿namespace AgencyPro.Shared.Options
-{
-    public class WorkOrderAcceptInput
-    {
+﻿namespace AgencyPro.Shared.Options;
 
-    }
+public class WorkOrderAcceptInput
+{
 }

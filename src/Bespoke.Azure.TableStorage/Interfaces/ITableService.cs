@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Azure.Data.Tables;
+﻿using Azure.Data.Tables;
 
 namespace Bespoke.Azure.TableStorage.Interfaces;
 
@@ -16,4 +10,3 @@ public interface ITableService<T> where T : class, ITableEntity, new()
     Task DeleteEntityAsync(string partitionKey, string rowKey);
     Task<IEnumerable<T>> QueryEntitiesAsync(string filter);
 }
-

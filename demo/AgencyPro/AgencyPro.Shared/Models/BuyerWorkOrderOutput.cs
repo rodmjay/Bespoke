@@ -1,14 +1,11 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class BuyerWorkOrderOutput : WorkOrderOutput
 {
-    public class BuyerWorkOrderOutput : WorkOrderOutput
-    {
-        [JsonProperty("number")]
-        public override int BuyerNumber { get; set; }
+    [JsonProperty("number")] public override int BuyerNumber { get; set; }
 
-        [JsonIgnore]
-        public override int ProviderNumber { get; set; }
+    [JsonIgnore] public override int ProviderNumber { get; set; }
 
-        public override Guid TargetOrganizationId => this.CustomerOrganizationId;
-        public override Guid TargetPersonId => this.CustomerId;
-    }
+    public override Guid TargetOrganizationId => CustomerOrganizationId;
+    public override Guid TargetPersonId => CustomerId;
 }

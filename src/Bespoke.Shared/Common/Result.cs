@@ -1,12 +1,6 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
+﻿#nullable enable
 
 using Newtonsoft.Json;
-
-#nullable enable
 
 namespace Bespoke.Shared.Common;
 
@@ -52,7 +46,7 @@ public class Result
 
     public static Result Failed(params Error[] errors)
     {
-        var result = new Result {Succeeded = false};
+        var result = new Result { Succeeded = false };
         if (errors != null) result._errors.AddRange(errors);
         return result;
     }
@@ -61,6 +55,7 @@ public class Result
     {
         return Succeeded
             ? "Succeeded"
-            : string.Format("{0} : {1}", "Failed", Errors != null ? string.Join(",", Errors.Select(x => x.Code).ToList()) : "");
+            : string.Format("{0} : {1}", "Failed",
+                Errors != null ? string.Join(",", Errors.Select(x => x.Code).ToList()) : "");
     }
 }

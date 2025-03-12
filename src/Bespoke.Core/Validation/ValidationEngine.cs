@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Bespoke.Core.Validation.Interfaces;
@@ -36,7 +30,7 @@ public static class ValidationEngine
         // DataAnnotations
         foreach (var pi in entity.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
         foreach (
-            var attribute in (ValidationAttribute[]) pi.GetCustomAttributes(typeof(ValidationAttribute), false)
+            var attribute in (ValidationAttribute[])pi.GetCustomAttributes(typeof(ValidationAttribute), false)
         )
         {
             if (attribute.IsValid(pi.GetValue(entity, null))) continue;

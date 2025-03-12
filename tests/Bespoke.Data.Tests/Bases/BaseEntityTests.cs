@@ -1,27 +1,25 @@
-using NUnit.Framework;
 using Bespoke.Data.Bases;
-using System;
+using NUnit.Framework;
 
-namespace Bespoke.Data.Tests.Bases
+namespace Bespoke.Data.Tests.Bases;
+
+[TestFixture]
+public class BaseEntityTests
 {
     [TestFixture]
-    public class BaseEntityTests
+    public class ConstructorTests : BaseEntityTests
     {
-        [TestFixture]
-        public class ConstructorTests : BaseEntityTests
+        [Test]
+        public void Should_Initialize_With_Default_Values()
         {
-            [Test]
-            public void Should_Initialize_With_Default_Values()
-            {
-                var entity = new TestBaseEntity();
-                Assert.NotNull(entity);
-                Assert.IsTrue(true);
-            }
+            var entity = new TestBaseEntity();
+            Assert.NotNull(entity);
+            Assert.IsTrue(true);
         }
+    }
 
-        // Test class that inherits from BaseEntity for testing
-        private class TestBaseEntity : BaseEntity
-        {
-        }
+    // Test class that inherits from BaseEntity for testing
+    private class TestBaseEntity : BaseEntity
+    {
     }
 }

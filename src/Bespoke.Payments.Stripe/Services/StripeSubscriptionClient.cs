@@ -1,13 +1,7 @@
-﻿#region Header Info
+﻿#nullable enable
 
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Stripe;
 using Bespoke.Payments.Stripe.Interfaces;
-
-#nullable enable
+using Stripe;
 
 namespace Bespoke.Payments.Stripe.Services;
 
@@ -15,7 +9,7 @@ public class StripeSubscriptionClient : StripeClient, IStripeSubscriptionClient
 {
     private readonly string _subscriptionId;
 
-    public StripeSubscriptionClient(string subscriptionId, string? connectId) :base(connectId)
+    public StripeSubscriptionClient(string subscriptionId, string? connectId) : base(connectId)
     {
         _subscriptionId = subscriptionId;
     }
@@ -26,13 +20,13 @@ public class StripeSubscriptionClient : StripeClient, IStripeSubscriptionClient
         return await subscriptionService.GetAsync(_subscriptionId, options, RequestOptions);
     }
 
-    public async Task<Subscription> UpdateSubscriptionAsync( SubscriptionUpdateOptions options)
+    public async Task<Subscription> UpdateSubscriptionAsync(SubscriptionUpdateOptions options)
     {
         var subscriptionService = new SubscriptionService();
         return await subscriptionService.UpdateAsync(_subscriptionId, options, RequestOptions);
     }
 
-    public async Task<bool> CancelSubscriptionAsync( SubscriptionCancelOptions options)
+    public async Task<bool> CancelSubscriptionAsync(SubscriptionCancelOptions options)
     {
         var subscriptionService = new SubscriptionService();
 

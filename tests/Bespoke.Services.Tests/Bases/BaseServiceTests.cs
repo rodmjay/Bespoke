@@ -1,42 +1,39 @@
-using NUnit.Framework;
-using Bespoke.Services.Bases;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
+using NUnit.Framework;
 
-namespace Bespoke.Services.Tests.Bases
+namespace Bespoke.Services.Tests.Bases;
+
+[TestFixture]
+public class BaseServiceTests
 {
-    [TestFixture]
-    public class BaseServiceTests
+    [SetUp]
+    public void Setup()
     {
-        private Mock<ILogger> _mockLogger;
+        _mockLogger = new Mock<ILogger>();
+    }
 
-        [SetUp]
-        public void Setup()
+    private Mock<ILogger> _mockLogger;
+
+    [TestFixture]
+    public class ConstructorTests : BaseServiceTests
+    {
+        [Test]
+        public void Should_Initialize_With_Logger()
         {
-            _mockLogger = new Mock<ILogger>();
+            // This is a stub test since we can't easily instantiate BaseService
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class ConstructorTests : BaseServiceTests
+    [TestFixture]
+    public class ServiceMethodsTests : BaseServiceTests
+    {
+        [Test]
+        public void Should_Execute_Service_Operations()
         {
-            [Test]
-            public void Should_Initialize_With_Logger()
-            {
-                // This is a stub test since we can't easily instantiate BaseService
-                Assert.IsTrue(true);
-            }
-        }
-
-        [TestFixture]
-        public class ServiceMethodsTests : BaseServiceTests
-        {
-            [Test]
-            public void Should_Execute_Service_Operations()
-            {
-                // This is a stub test for service methods
-                Assert.IsTrue(true);
-            }
+            // This is a stub test for service methods
+            Assert.IsTrue(true);
         }
     }
 }

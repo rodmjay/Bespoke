@@ -1,8 +1,7 @@
-﻿namespace AgencyPro.Shared.Interfaces
+﻿namespace AgencyPro.Shared.Interfaces;
+
+public interface IOrganizationPersonTarget
 {
-    public interface IOrganizationPersonTarget
-    {
-        Guid TargetOrganizationId { get; }
-        Guid TargetPersonId { get;  }
-    }
+    Guid TargetOrganizationId { get; }
+    Guid TargetPersonId { get; }
 }

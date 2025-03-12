@@ -1,43 +1,40 @@
-using NUnit.Framework;
-using Bespoke.Services.Extensions;
 using Bespoke.Core.Builders;
 using Bespoke.Core.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using System;
+using NUnit.Framework;
 
-namespace Bespoke.Services.Tests.Extensions
+namespace Bespoke.Services.Tests.Extensions;
+
+[TestFixture]
+public class AppBuilderExtensionsTests
 {
-    [TestFixture]
-    public class AppBuilderExtensionsTests
+    [SetUp]
+    public void Setup()
     {
-        private AppBuilder _appBuilder;
-        private Mock<IServiceCollection> _mockServices;
-        private Mock<IConfiguration> _mockConfiguration;
+        _mockServices = new Mock<IServiceCollection>();
+        _mockConfiguration = new Mock<IConfiguration>();
 
-        [SetUp]
-        public void Setup()
-        {
-            _mockServices = new Mock<IServiceCollection>();
-            _mockConfiguration = new Mock<IConfiguration>();
-            
-            // Create a real AppBuilder instance with mocked dependencies
-            _appBuilder = new AppBuilder(
-                _mockServices.Object,
-                new AppSettings(),
-                _mockConfiguration.Object);
-        }
+        // Create a real AppBuilder instance with mocked dependencies
+        _appBuilder = new AppBuilder(
+            _mockServices.Object,
+            new AppSettings(),
+            _mockConfiguration.Object);
+    }
 
-        [TestFixture]
-        public class AddServicesTests : AppBuilderExtensionsTests
+    private AppBuilder _appBuilder;
+    private Mock<IServiceCollection> _mockServices;
+    private Mock<IConfiguration> _mockConfiguration;
+
+    [TestFixture]
+    public class AddServicesTests : AppBuilderExtensionsTests
+    {
+        [Test]
+        public void Should_Register_Services()
         {
-            [Test]
-            public void Should_Register_Services()
-            {
-                // This is a stub test
-                Assert.IsTrue(true);
-            }
+            // This is a stub test
+            Assert.IsTrue(true);
         }
     }
 }

@@ -1,10 +1,9 @@
-﻿namespace AgencyPro.Domain.Events
+﻿namespace AgencyPro.Domain.Events;
+
+public class ContractRestartedEvent : ContractEvent
 {
-    public class ContractRestartedEvent : ContractEvent
-    {
-        // contractor
-        // account manager
-        // project manager
-        // customer
-    }
+    // contractor
+    // account manager
+    // project manager
+    // customer
 }

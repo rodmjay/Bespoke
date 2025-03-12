@@ -1,7 +1,5 @@
-﻿namespace AgencyPro.Shared.Models
-{
-    public class RecruitingAgencyOwnerTimeMatrixOutput : TimeMatrixOutput
-    {
+﻿namespace AgencyPro.Shared.Models;
 
-    }
+public class RecruitingAgencyOwnerTimeMatrixOutput : TimeMatrixOutput
+{
 }

@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class CustomerOrganizationDetailsOutput : CustomerOrganizationOutput
 {
-    public class CustomerOrganizationDetailsOutput : CustomerOrganizationOutput
-    {
-        public BuyerAccountOutput BuyerAccount { get; set; }
-    }
+    public BuyerAccountOutput BuyerAccount { get; set; }
 }

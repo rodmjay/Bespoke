@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ResumePro.Shared.Enums;
 
@@ -22,12 +16,12 @@ public sealed class PersonaLanguage : BaseEntity<PersonaLanguage>, IPersonaLangu
 
     public override void Configure(EntityTypeBuilder<PersonaLanguage> builder)
     {
-        builder.HasKey(x => new {x.OrganizationId, x.PersonId, x.Code3});
+        builder.HasKey(x => new { x.OrganizationId, x.PersonId, x.Code3 });
 
         builder.HasOne(x => x.Persona)
             .WithMany(x => x.Languages)
-            .HasForeignKey(x => new {x.OrganizationId, x.PersonId})
-            .HasPrincipalKey(x => new {x.OrganizationId, x.Id})
+            .HasForeignKey(x => new { x.OrganizationId, x.PersonId })
+            .HasPrincipalKey(x => new { x.OrganizationId, x.Id })
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(x => x.Language)

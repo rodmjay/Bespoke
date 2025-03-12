@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Bespoke.Core.Builders;
 using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
@@ -23,9 +17,9 @@ namespace ResumePro.Services.Implementations;
 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
 public sealed class PeopleService : BaseService<Persona>, IPeopleService
 {
+    private readonly GeographyErrorDescriber _geoErrors;
     private readonly PersonErrorDescriber _personErrors;
     private readonly IRepositoryAsync<StateProvince> _stateRepo;
-    private readonly GeographyErrorDescriber _geoErrors;
 
     public PeopleService(IServiceProvider serviceProvider,
         PersonErrorDescriber personErrors,
@@ -109,18 +103,14 @@ public sealed class PeopleService : BaseService<Persona>, IPeopleService
         };
 
         foreach (var lang in options.LanguageOptions)
-        {
             if (!person.Languages.Select(x => x.Code3).Contains(lang.LanguageId))
-            {
-                person.Languages.Add(new PersonaLanguage()
+                person.Languages.Add(new PersonaLanguage
                 {
                     Code3 = lang.LanguageId,
                     OrganizationId = organizationId,
                     ObjectState = ObjectState.Added,
                     Proficiency = lang.Proficiency
                 });
-            }
-        }
 
         var result = Repository.InsertOrUpdateGraph(person, true);
         if (result > 0) return await GetPerson<PersonaDetails>(organizationId, person.Id);
@@ -136,7 +126,7 @@ public sealed class PeopleService : BaseService<Persona>, IPeopleService
             organizationId, personId, options);
 
         var person = await People
-            .Include(x=>x.Languages)
+            .Include(x => x.Languages)
             .Where(x => x.OrganizationId == organizationId && x.Id == personId)
             .FirstOrDefaultAsync();
 
@@ -151,10 +141,7 @@ public sealed class PeopleService : BaseService<Persona>, IPeopleService
         if (errors.Any())
             return Result.Failed(errors.ToArray());
 
-        foreach (var lang in person.Languages)
-        {
-            lang.ObjectState = ObjectState.Deleted;
-        }
+        foreach (var lang in person.Languages) lang.ObjectState = ObjectState.Deleted;
 
         person.ObjectState = ObjectState.Modified;
         person.Email = options.Email;
@@ -170,14 +157,14 @@ public sealed class PeopleService : BaseService<Persona>, IPeopleService
             var language = person.Languages.FirstOrDefault(x => x.Code3 == lang.LanguageId);
             if (language == null)
             {
-                language = new PersonaLanguage()
+                language = new PersonaLanguage
                 {
                     ObjectState = ObjectState.Added,
                     OrganizationId = organizationId,
                     PersonId = personId,
                     Code3 = lang.LanguageId
                 };
-                
+
                 person.Languages.Add(language);
             }
             else

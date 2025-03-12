@@ -1,12 +1,9 @@
 using AgencyPro.Shared.Models.Leads;
 
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class AgencyOwnerOrganizationAccountManagerDetailsOutput : OrganizationAccountManagerStatistics
 {
-    public class AgencyOwnerOrganizationAccountManagerDetailsOutput : OrganizationAccountManagerStatistics
-    {
-        public virtual IList<AgencyOwnerCustomerAccountOutput> Accounts { get; set; }
-        public virtual IList<AgencyOwnerLeadOutput> Leads { get; set; }
-
-
-    }
+    public virtual IList<AgencyOwnerCustomerAccountOutput> Accounts { get; set; }
+    public virtual IList<AgencyOwnerLeadOutput> Leads { get; set; }
 }

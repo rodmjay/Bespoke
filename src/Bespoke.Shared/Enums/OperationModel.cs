@@ -1,8 +1,7 @@
-﻿namespace Bespoke.Shared.Enums
+﻿namespace Bespoke.Shared.Enums;
+
+public enum OperationMode
 {
-    public enum OperationMode
-    {
-        Demo,
-        Live
-    }
+    Demo,
+    Live
 }

@@ -40,13 +40,13 @@ public class ApplicationContextFactory : IDesignTimeDbContextFactory<Application
 
         // Only enable sensitive data logging in development/debug environments
 #if DEBUG
-        optionsBuilder.EnableSensitiveDataLogging(true);
+        optionsBuilder.EnableSensitiveDataLogging();
 #else
         optionsBuilder.EnableSensitiveDataLogging(false);
 #endif
 
         optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"),
-                opt => { opt.MigrationsAssembly(settings.Value.MigrationsAssembly); });
+            opt => { opt.MigrationsAssembly(settings.Value.MigrationsAssembly); });
 
         return new ApplicationContext(optionsBuilder.Options, settings);
     }

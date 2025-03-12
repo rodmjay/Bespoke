@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class MarketerTimeEntryDetailsOutput : MarketerTimeEntryOutput
 {
-    public class MarketerTimeEntryDetailsOutput : MarketerTimeEntryOutput
-    {
-        public Dictionary<DateTimeOffset, TimeStatus> StatusTransitions { get; set; }
-    }
+    public Dictionary<DateTimeOffset, TimeStatus> StatusTransitions { get; set; }
 }

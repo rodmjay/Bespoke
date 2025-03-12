@@ -1,14 +1,8 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.Extensions.Options;
-using Stripe;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using Bespoke.Payments.Stripe.Interfaces;
 using Bespoke.Payments.Stripe.Services;
+using Microsoft.Extensions.Options;
+using Stripe;
 
 namespace Bespoke.Payments.Stripe.Factories;
 
@@ -17,6 +11,7 @@ public class StripeConnectFactory : IStripeConnectFactory
     private readonly ConcurrentDictionary<string, StripeCustomerClient> _customerServiceCache;
 
     private readonly IOptions<StripeSettings> _settings;
+
     public StripeConnectFactory(IOptions<StripeSettings> settings)
     {
         _settings = settings;
@@ -30,6 +25,7 @@ public class StripeConnectFactory : IStripeConnectFactory
             var customerService = new StripeCustomerClient(customerId, connectId);
             _customerServiceCache[customerId] = customerService;
         }
+
         return _customerServiceCache[customerId];
     }
 
@@ -49,8 +45,8 @@ public class StripeConnectFactory : IStripeConnectFactory
         var customer = await customerService.CreateAsync(new CustomerCreateOptions
         {
             Email = email,
-            Name = name,
-        }, new RequestOptions()
+            Name = name
+        }, new RequestOptions
         {
             StripeAccount = connectId
         });

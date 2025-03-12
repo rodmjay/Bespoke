@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Bespoke.Core;
 using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
@@ -18,15 +12,14 @@ using ResumePro.Shared.Options;
 
 namespace ResumePro.Services.Implementations;
 
-
 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
 public sealed class ResumeService : BaseService<Resume>, IResumeService
 {
-    private readonly ResumeErrorDescriber _resumeErrors;
-    private readonly TemplateErrorDescriber _templateErrors;
+    private readonly IIdGenerationService _idGenerationService;
     private readonly IRepositoryAsync<Company> _jobRepo;
     private readonly IRepositoryAsync<PersonaSkill> _personalSkillsRepo;
-    private readonly IIdGenerationService _idGenerationService;
+    private readonly ResumeErrorDescriber _resumeErrors;
+    private readonly TemplateErrorDescriber _templateErrors;
 
     public ResumeService(ResumeErrorDescriber resumeErrors,
         TemplateErrorDescriber templateErrors,
@@ -388,5 +381,4 @@ public sealed class ResumeService : BaseService<Resume>, IResumeService
 
         return Result.Failed();
     }
-
 }

@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Security.Claims;
 using System.Security.Principal;
 
@@ -26,7 +20,7 @@ public static class PrincipalExtensions
     [DebuggerStepThrough]
     public static bool IsAuthenticated(this IPrincipal principal)
     {
-        return principal is {Identity: {IsAuthenticated: true}};
+        return principal is { Identity: { IsAuthenticated: true } };
     }
 
     public static int UserId(this ClaimsPrincipal principal)
@@ -39,7 +33,7 @@ public static class PrincipalExtensions
             return userId;
         throw new Exception("The userId claim is missing or not a valid integer.");
     }
-    
+
     public static int OrganizationId(this ClaimsPrincipal principal)
     {
         // Attempt to retrieve the organizationId claim as a string

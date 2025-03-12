@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Options
+﻿namespace AgencyPro.Shared.Options;
+
+public class OrganizationSkillInput
 {
-    public class OrganizationSkillInput
-    {
-        public int Priority { get; set; }
-    }
+    public int Priority { get; set; }
 }

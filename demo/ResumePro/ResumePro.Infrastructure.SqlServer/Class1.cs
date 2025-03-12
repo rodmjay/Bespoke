@@ -1,7 +1,5 @@
-﻿namespace ResumePro.Infrastructure.SqlServer
-{
-    public class Class1
-    {
+﻿namespace ResumePro.Infrastructure.SqlServer;
 
-    }
+public class Class1
+{
 }

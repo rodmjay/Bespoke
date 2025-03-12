@@ -1,8 +1,7 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class TimeEntryResult : Result
 {
-    public class TimeEntryResult : Result
-    {
-        public Guid? TimeEntryId { get; set; }
-        public Guid[] TimeEntryIds { get; set; }
-    }
+    public Guid? TimeEntryId { get; set; }
+    public Guid[] TimeEntryIds { get; set; }
 }

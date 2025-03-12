@@ -1,21 +1,14 @@
-#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using Bespoke.Data.Extensions;
+using Bespoke.Data.Helpers;
+using Bespoke.Shared.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Extensions.Logging;
-using Bespoke.Data.Helpers;
-using Bespoke.Shared.Interfaces;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Bespoke.Data.Bases;
 
@@ -66,11 +59,8 @@ public abstract class BaseContext<TContext> : DbContext, IDataContextAsync where
 
     public override int SaveChanges()
     {
-        if (_settings.Value.ValidateSaves)
-        {
-            Validate();
-        }
-        
+        if (_settings.Value.ValidateSaves) Validate();
+
         SyncObjectsStatePreCommit();
         var changes = base.SaveChanges();
         SyncObjectsStatePostCommit();
@@ -93,11 +83,8 @@ public abstract class BaseContext<TContext> : DbContext, IDataContextAsync where
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {
-        if (_settings.Value.ValidateSaves)
-        {
-            Validate();
-        }
-        
+        if (_settings.Value.ValidateSaves) Validate();
+
         await SyncObjectsStatePreCommitAsync();
         var changes = await base.SaveChangesAsync(cancellationToken);
         await SyncObjectsStatePostCommitAsync();
@@ -149,9 +136,7 @@ public abstract class BaseContext<TContext> : DbContext, IDataContextAsync where
         builder.ApplyNamingConventions(_settings.Value);
 
         if (!string.IsNullOrWhiteSpace(_settings.Value.DefaultSchema))
-        {
             builder.HasDefaultSchema(_settings.Value.DefaultSchema);
-        }
 
         // Apply various conventions via extension methods
         builder.ApplyConcurrencyTokenConvention();
@@ -161,7 +146,7 @@ public abstract class BaseContext<TContext> : DbContext, IDataContextAsync where
         builder.ApplyModifiedConvention();
         builder.ApplyModifiedTimestampConvention();
         builder.IgnoreObjectState();
-        
+
         SeedDatabase(builder);
     }
 
@@ -195,10 +180,10 @@ public abstract class BaseContext<TContext> : DbContext, IDataContextAsync where
                     case EntityState.Added:
                         if (entityEntry.Entity is ICreated created)
                             created.CreatedOn = DateTime.UtcNow;
-                        
+
                         if (entityEntry.Entity is ICreatedTimestamp createdTimestamp)
                             createdTimestamp.CreatedTimestamp = (int)DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-                        
+
                         break;
 
                     case EntityState.Modified:
@@ -207,7 +192,7 @@ public abstract class BaseContext<TContext> : DbContext, IDataContextAsync where
 
                         if (entityEntry.Entity is IModifiedTimestamp modifiedTimestamp)
                             modifiedTimestamp.ModifiedTimestamp = (int)DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-                        
+
                         break;
                 }
             }

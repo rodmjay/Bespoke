@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class CategoryDetailsOutput : CategoryOutput
 {
-    public class CategoryDetailsOutput : CategoryOutput
-    {
-        public List<OrganizationDto> Organizations { get; set; }
-    }
+    public List<OrganizationDto> Organizations { get; set; }
 }

@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class ProposalRejectionInput
 {
-    public class ProposalRejectionInput
-    {
-        public string RejectionReason { get; set; }
-    }
+    public string RejectionReason { get; set; }
 }

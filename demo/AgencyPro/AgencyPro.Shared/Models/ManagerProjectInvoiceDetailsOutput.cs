@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class ManagerProjectInvoiceDetailsOutput : ManagerProjectInvoiceOutput
 {
-    public class ManagerProjectInvoiceDetailsOutput : ManagerProjectInvoiceOutput
-    {
-        public ICollection<InvoiceLineOutput> Lines { get; set; }
-    }
+    public ICollection<InvoiceLineOutput> Lines { get; set; }
 }

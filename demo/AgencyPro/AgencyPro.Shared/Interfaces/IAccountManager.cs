@@ -1,9 +1,8 @@
-﻿namespace AgencyPro.Shared.Interfaces
+﻿namespace AgencyPro.Shared.Interfaces;
+
+public interface IAccountManager
 {
-    public interface IAccountManager
-    {
-        Guid Id { get; set; }
-        DateTimeOffset Created { get; set; }
-        DateTimeOffset Updated { get; set; }
-    }
+    Guid Id { get; set; }
+    DateTimeOffset Created { get; set; }
+    DateTimeOffset Updated { get; set; }
 }

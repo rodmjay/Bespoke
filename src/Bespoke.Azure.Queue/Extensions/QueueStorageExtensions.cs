@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿#nullable enable
+
 using Bespoke.Azure.Builders;
 using Bespoke.Azure.Queue.Builders;
 using Bespoke.Azure.Queue.Factories;
 using Bespoke.Azure.Queue.Interfaces;
-
-#nullable enable
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Bespoke.Azure.Queue.Extensions;
 

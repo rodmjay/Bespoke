@@ -1,12 +1,7 @@
-﻿namespace AgencyPro.Domain.Events
+﻿namespace AgencyPro.Domain.Events;
+
+public class CandidatePromotedEvent
 {
-    public class CandidatePromotedEvent
-    {
-        // recruiter
-        // agency owner
-        public CandidatePromotedEvent()
-        {
-            
-        }
-    }
+    // recruiter
+    // agency owner
 }

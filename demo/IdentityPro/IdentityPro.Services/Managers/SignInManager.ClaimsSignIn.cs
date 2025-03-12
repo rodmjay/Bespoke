@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
@@ -32,7 +26,7 @@ public partial class SignInManager
 
     public override Task SignInWithClaimsAsync(User user, bool isPersistent, IEnumerable<Claim> additionalClaims)
     {
-        return SignInWithClaimsAsync(user, new AuthenticationProperties {IsPersistent = isPersistent},
+        return SignInWithClaimsAsync(user, new AuthenticationProperties { IsPersistent = isPersistent },
             additionalClaims);
     }
 

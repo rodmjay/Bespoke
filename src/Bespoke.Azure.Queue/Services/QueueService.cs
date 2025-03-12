@@ -1,25 +1,20 @@
-﻿using Azure;
+﻿using System.Runtime.CompilerServices;
 using Azure.Storage.Queues;
 using Azure.Storage.Queues.Models;
-using System.Runtime.CompilerServices;
-using Microsoft.Extensions.Logging;
 using Bespoke.Azure.Queue.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Bespoke.Azure.Queue.Services;
 
 public class QueueService : IQueueService
 {
-    protected string GetLogMessage(string message, [CallerMemberName] string callerName = null)
-    {
-        var className = GetType().Name;
-        return $"[{className}.{callerName}] - {message}";
-    }
+    private readonly string _connectionString;
 
     private readonly QueueStorageSettings _queueSettings;
-    private readonly string _connectionString;
     private readonly string queueName;
 
-    public QueueService(ILogger<QueueService> logger, QueueStorageSettings queueSettings, string connectionString, string queueName)
+    public QueueService(ILogger<QueueService> logger, QueueStorageSettings queueSettings, string connectionString,
+        string queueName)
     {
         _queueSettings = queueSettings;
         _connectionString = connectionString;
@@ -28,14 +23,14 @@ public class QueueService : IQueueService
 
     public async Task CreateIfNotExistsAsync()
     {
-        QueueClient queueClient = new QueueClient(_connectionString, queueName);
+        var queueClient = new QueueClient(_connectionString, queueName);
         await queueClient.CreateIfNotExistsAsync();
         Console.WriteLine($"Queue '{queueName}' is ready.");
     }
 
-    public async Task AddMessageAsync( string message)
+    public async Task AddMessageAsync(string message)
     {
-        QueueClient queueClient = new QueueClient(_connectionString, queueName);
+        var queueClient = new QueueClient(_connectionString, queueName);
         await queueClient.SendMessageAsync(message);
         Console.WriteLine($"Message added to queue '{queueName}': {message}");
     }
@@ -45,15 +40,11 @@ public class QueueService : IQueueService
     public async Task PeekMessageAsync()
     {
         var queueClient = new QueueClient(_connectionString, queueName);
-        Response<PeekedMessage[]> peekedMessages = await queueClient.PeekMessagesAsync(1);
+        var peekedMessages = await queueClient.PeekMessagesAsync(1);
         if (peekedMessages.Value.Length > 0)
-        {
             Console.WriteLine($"Peeked Message from '{queueName}': {peekedMessages.Value[0].MessageText}");
-        }
         else
-        {
             Console.WriteLine($"No messages to peek in queue '{queueName}'.");
-        }
     }
 
     // Get and Dequeue (Read and Remove) a message
@@ -63,7 +54,7 @@ public class QueueService : IQueueService
         QueueMessage[] retrievedMessages = await queueClient.ReceiveMessagesAsync(1);
         if (retrievedMessages.Length > 0)
         {
-            QueueMessage message = retrievedMessages[0];
+            var message = retrievedMessages[0];
             Console.WriteLine($"Retrieved Message from '{queueName}': {message.MessageText}");
 
             // Delete the message after processing (Delete)
@@ -80,9 +71,8 @@ public class QueueService : IQueueService
     public async Task UpdateMessageAsync(string oldMessageText, string newMessageText)
     {
         var queueClient = new QueueClient(_connectionString, queueName);
-        QueueMessage[] retrievedMessages = await queueClient.ReceiveMessagesAsync(10);  // Retrieves up to 10 messages
+        QueueMessage[] retrievedMessages = await queueClient.ReceiveMessagesAsync(10); // Retrieves up to 10 messages
         foreach (var message in retrievedMessages)
-        {
             if (message.MessageText == oldMessageText)
             {
                 // Delete the old message
@@ -94,7 +84,6 @@ public class QueueService : IQueueService
                 Console.WriteLine($"New message '{newMessageText}' added to '{queueName}'.");
                 return;
             }
-        }
 
         Console.WriteLine($"Message '{oldMessageText}' not found for update in queue '{queueName}'.");
     }
@@ -115,4 +104,9 @@ public class QueueService : IQueueService
         Console.WriteLine($"All messages cleared from queue '{queueName}'.");
     }
 
+    protected string GetLogMessage(string message, [CallerMemberName] string callerName = null)
+    {
+        var className = GetType().Name;
+        return $"[{className}.{callerName}] - {message}";
+    }
 }

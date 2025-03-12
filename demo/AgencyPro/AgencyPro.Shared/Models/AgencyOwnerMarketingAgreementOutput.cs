@@ -1,18 +1,12 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class AgencyOwnerMarketingAgreementOutput : MarketingAgreementOutput
 {
-    public class AgencyOwnerMarketingAgreementOutput : MarketingAgreementOutput
-    {
-        [JsonIgnore]
-        public override decimal MarketerStream { get; set; }
+    [JsonIgnore] public override decimal MarketerStream { get; set; }
 
-        [JsonIgnore]
-        public override decimal MarketerBonus { get; set; }
+    [JsonIgnore] public override decimal MarketerBonus { get; set; }
 
-        [JsonIgnore]
-        public override decimal MarketingAgencyStream { get; set; }
+    [JsonIgnore] public override decimal MarketingAgencyStream { get; set; }
 
-        [JsonIgnore]
-        public override decimal MarketingAgencyBonus { get; set; }
-        
-    }
+    [JsonIgnore] public override decimal MarketingAgencyBonus { get; set; }
 }

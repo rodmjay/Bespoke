@@ -1,9 +1,8 @@
-﻿namespace AgencyPro.Shared.Options
-{
-    public class SwitchOrganizationInput
-    {
-        public Guid PersonId { get; set; }
+﻿namespace AgencyPro.Shared.Options;
 
-        public Guid OrganizationId { get; set; }
-    }
+public class SwitchOrganizationInput
+{
+    public Guid PersonId { get; set; }
+
+    public Guid OrganizationId { get; set; }
 }

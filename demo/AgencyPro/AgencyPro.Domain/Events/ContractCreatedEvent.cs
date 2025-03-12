@@ -1,7 +1,5 @@
-﻿namespace AgencyPro.Domain.Events
-{
-    public class ContractCreatedEvent : ContractEvent
-    {
+﻿namespace AgencyPro.Domain.Events;
 
-    }
+public class ContractCreatedEvent : ContractEvent
+{
 }

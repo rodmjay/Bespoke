@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Web;
+﻿using System.Web;
 
 namespace ResumePro.Shared.Helpers;
 

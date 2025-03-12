@@ -1,19 +1,13 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Bespoke.Core.Serilog.Enrichers;
 using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
-using Microsoft.AspNetCore.Http;
 
 namespace Bespoke.Core.Extensions;
 
@@ -59,14 +53,14 @@ public static class HostBuilderExtensions
     public static void ConfigureLogging(HostBuilderContext context, IServiceProvider serviceProvider,
         LoggerConfiguration loggerConfig)
     {
-
         var scope = serviceProvider.CreateScope();
-        
+
         var telemetryConfig = scope.ServiceProvider.GetService<TelemetryConfiguration>();
 
         // Log a warning if telemetry configuration is not available.
         if (telemetryConfig == null)
-            Debug.Print("Warning: TelemetryConfiguration is not available; ApplicationInsights sink will not be configured.");
+            Debug.Print(
+                "Warning: TelemetryConfiguration is not available; ApplicationInsights sink will not be configured.");
 
         // Create the logger configuration with additional enrichers.
         loggerConfig

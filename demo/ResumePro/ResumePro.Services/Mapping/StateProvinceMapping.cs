@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using AutoMapper;
+﻿using AutoMapper;
 using ResumePro.Shared.Models;
 
 namespace ResumePro.Services.Mapping;
@@ -14,7 +8,7 @@ public sealed class StateProvinceMapping : Profile
     public StateProvinceMapping()
     {
         CreateMap<StateProvince, StateProvinceOutput>()
-            .ForMember(x=>x.Id, opt=>opt.MapFrom(x=>x.Id))
+            .ForMember(x => x.Id, opt => opt.MapFrom(x => x.Id))
             .IncludeAllDerived();
 
         CreateMap<StateProvince, DropdownItem>()

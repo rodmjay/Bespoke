@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using ResumePro.Shared.Enums;
+﻿using ResumePro.Shared.Enums;
 
 namespace ResumePro.Shared.Options;
 

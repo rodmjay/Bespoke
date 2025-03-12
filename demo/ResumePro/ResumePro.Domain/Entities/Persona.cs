@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.Data.Enums;
+﻿using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -22,10 +16,10 @@ public sealed class Persona : BaseEntity<Persona>, IPersona
     public ICollection<Certification> Certifications { get; set; } = new List<Certification>();
     public ICollection<PersonaLanguage> Languages { get; set; } = new List<PersonaLanguage>();
     public StateProvince State { get; set; } = null!;
-    public int StateId { get; set; }
     public bool IsDeleted { get; set; }
 
     public ICollection<Reference> References { get; set; } = new List<Reference>();
+    public int StateId { get; set; }
 
     public int OrganizationId { get; set; }
     public int Id { get; set; }
@@ -39,7 +33,7 @@ public sealed class Persona : BaseEntity<Persona>, IPersona
 
     public override void Configure(EntityTypeBuilder<Persona> builder)
     {
-        builder.HasKey(x => new {x.OrganizationId, x.Id});
+        builder.HasKey(x => new { x.OrganizationId, x.Id });
 
         builder.HasOne(x => x.State)
             .WithMany(x => x.People)

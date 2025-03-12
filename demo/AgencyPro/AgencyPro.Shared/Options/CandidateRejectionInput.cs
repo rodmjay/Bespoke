@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Options
+﻿namespace AgencyPro.Shared.Options;
+
+public class CandidateRejectionInput
 {
-    public class CandidateRejectionInput
-    {
-        private string RejectionReason { get; set; } = null!;
-    }
+    private string RejectionReason { get; set; } = null!;
 }

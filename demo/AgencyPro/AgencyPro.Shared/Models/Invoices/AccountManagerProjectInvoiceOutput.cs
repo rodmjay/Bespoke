@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Models.Invoices
+﻿namespace AgencyPro.Shared.Models.Invoices;
+
+public class AccountManagerProjectInvoiceOutput : ProjectInvoiceOutput
 {
-    public class AccountManagerProjectInvoiceOutput : ProjectInvoiceOutput
-    {
-        public override Guid TargetOrganizationId => ProviderOrganizationId;
-    }
+    public override Guid TargetOrganizationId => ProviderOrganizationId;
 }

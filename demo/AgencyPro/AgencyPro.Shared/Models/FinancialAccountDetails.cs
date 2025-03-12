@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class FinancialAccountDetails : FinancialAccountOutput
 {
-    public class FinancialAccountDetails : FinancialAccountOutput
-    {
-        public ICollection<TransferOutput> Transfers { get; set; } 
-    }
+    public ICollection<TransferOutput> Transfers { get; set; }
 }

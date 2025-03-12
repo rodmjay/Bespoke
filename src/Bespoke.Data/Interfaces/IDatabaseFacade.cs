@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.EntityFrameworkCore.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Bespoke.Data.Interfaces;
@@ -12,7 +6,6 @@ namespace Bespoke.Data.Interfaces;
 public interface IDatabaseFacade
 {
     Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
-    
 }
 
 public class DatabaseFacadeWrapper : IDatabaseFacade

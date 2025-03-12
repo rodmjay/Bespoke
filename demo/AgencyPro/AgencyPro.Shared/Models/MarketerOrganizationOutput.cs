@@ -1,8 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class MarketerOrganizationOutput : MarketingOrganizationOutput
 {
-    public class MarketerOrganizationOutput : MarketingOrganizationOutput
-    {
-        [JsonIgnore]
-        public override decimal ServiceFeePerLead { get; set; }
-    }
+    [JsonIgnore] public override decimal ServiceFeePerLead { get; set; }
 }

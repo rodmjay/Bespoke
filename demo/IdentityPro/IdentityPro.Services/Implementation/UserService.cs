@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Bespoke.Services.Bases;
 using IdentityPro.Shared.Models;
 using Microsoft.AspNetCore.Identity;
@@ -60,7 +54,7 @@ public partial class UserService : BaseService<User>, IUserService
     private int ConvertIdFromString(string id)
     {
         if (id == null) return default;
-        return (int) TypeDescriptor.GetConverter(typeof(int)).ConvertFromInvariantString(id)!;
+        return (int)TypeDescriptor.GetConverter(typeof(int)).ConvertFromInvariantString(id)!;
     }
 
     protected void ThrowIfDisposed()

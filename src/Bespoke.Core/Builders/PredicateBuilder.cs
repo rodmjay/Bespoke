@@ -1,15 +1,9 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 
 namespace Bespoke.Core.Builders;
 
-[ExcludeFromCodeCoverage] 
+[ExcludeFromCodeCoverage]
 public static class PredicateBuilder
 {
     public static Expression<Func<T, bool>> True<T>()

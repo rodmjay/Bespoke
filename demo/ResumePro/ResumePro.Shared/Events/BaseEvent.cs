@@ -10,7 +10,7 @@ public abstract class BaseEvent
     public EventType EventType { get; }
 
     protected abstract string Name { get; }
-    
+
     public string GetMessage()
     {
         return EventType switch

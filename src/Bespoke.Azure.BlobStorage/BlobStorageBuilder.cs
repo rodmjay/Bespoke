@@ -1,13 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
-using Bespoke.Azure.Builders;
+﻿using Bespoke.Azure.Builders;
 using Bespoke.Core.Builders;
 
-namespace Bespoke.Azure.BlobStorage
+namespace Bespoke.Azure.BlobStorage;
+
+public class BlobStorageBuilder : BuilderBase
 {
-    public class BlobStorageBuilder : BuilderBase
+    public BlobStorageBuilder(AzureBuilder builder) : base(builder)
     {
-        public BlobStorageBuilder(AzureBuilder builder) : base(builder)
-        {
-        }
     }
 }

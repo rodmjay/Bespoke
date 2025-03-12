@@ -1,7 +1,5 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class AgencyOwnerRecruitingOrganizationDetailsOutput : RecruitingOrganizationOutput
 {
-    public class AgencyOwnerRecruitingOrganizationDetailsOutput : RecruitingOrganizationOutput
-    {
-       
-    }
 }

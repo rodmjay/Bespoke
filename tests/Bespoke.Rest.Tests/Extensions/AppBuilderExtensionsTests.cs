@@ -1,50 +1,47 @@
-using NUnit.Framework;
-using Bespoke.Rest.Extensions;
 using Bespoke.Core.Builders;
 using Bespoke.Core.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using System;
+using NUnit.Framework;
 
-namespace Bespoke.Rest.Tests.Extensions
+namespace Bespoke.Rest.Tests.Extensions;
+
+[TestFixture]
+public class AppBuilderExtensionsTests
 {
-    [TestFixture]
-    public class AppBuilderExtensionsTests
+    [SetUp]
+    public void Setup()
     {
-        private AppBuilder _appBuilder;
-        private Mock<IServiceCollection> _mockServices;
-        private Mock<IConfiguration> _mockConfiguration;
+        _mockServices = new Mock<IServiceCollection>();
+        _mockConfiguration = new Mock<IConfiguration>();
 
-        [SetUp]
-        public void Setup()
+        // Create a real AppBuilder instance with mocked dependencies
+        _appBuilder = new AppBuilder(
+            _mockServices.Object,
+            new AppSettings(),
+            _mockConfiguration.Object);
+    }
+
+    private AppBuilder _appBuilder;
+    private Mock<IServiceCollection> _mockServices;
+    private Mock<IConfiguration> _mockConfiguration;
+
+    [TestFixture]
+    public class AddRestApiTests : AppBuilderExtensionsTests
+    {
+        [Test]
+        public void Should_Return_AppBuilder()
         {
-            _mockServices = new Mock<IServiceCollection>();
-            _mockConfiguration = new Mock<IConfiguration>();
-            
-            // Create a real AppBuilder instance with mocked dependencies
-            _appBuilder = new AppBuilder(
-                _mockServices.Object,
-                new AppSettings(),
-                _mockConfiguration.Object);
+            // This is a stub test
+            Assert.IsTrue(true);
         }
 
-        [TestFixture]
-        public class AddRestApiTests : AppBuilderExtensionsTests
+        [Test]
+        public void Should_Invoke_Action_When_Provided()
         {
-            [Test]
-            public void Should_Return_AppBuilder()
-            {
-                // This is a stub test
-                Assert.IsTrue(true);
-            }
-
-            [Test]
-            public void Should_Invoke_Action_When_Provided()
-            {
-                // This is a stub test
-                Assert.IsTrue(true);
-            }
+            // This is a stub test
+            Assert.IsTrue(true);
         }
     }
 }

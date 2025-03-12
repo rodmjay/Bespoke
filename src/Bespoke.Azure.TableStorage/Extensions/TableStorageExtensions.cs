@@ -1,15 +1,14 @@
-﻿using Azure.Data.Tables;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
+﻿#nullable enable
+
+using Azure.Data.Tables;
 using Bespoke.Azure.Builders;
 using Bespoke.Azure.TableStorage.Builders;
 using Bespoke.Azure.TableStorage.Factories;
 using Bespoke.Azure.TableStorage.Interfaces;
-using Bespoke.Azure.TableStorage.Services;
 using Bespoke.Core.Helpers;
-
-#nullable enable
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Bespoke.Azure.TableStorage.Extensions;
 
@@ -19,7 +18,7 @@ public static class TableStorageExtensions
     {
         builder.GetAppBuilder().ConfigureSettings<TableStorageSettings>("AzureSettings:TableStorage");
 
-        TableStorageBuilder blobStorageBuilder = new TableStorageBuilder(builder);
+        var blobStorageBuilder = new TableStorageBuilder(builder);
 
         builder.Services.AddSingleton(x =>
         {
@@ -27,7 +26,7 @@ public static class TableStorageExtensions
             var connectionString = builder.Configuration.GetConnectionString(options.Value.ConnectionStringName);
             return new TableServiceClient(connectionString);
         });
-        
+
 
         builder.Services.AddSingleton(typeof(ITableServiceFactory), typeof(TableServiceFactory));
 

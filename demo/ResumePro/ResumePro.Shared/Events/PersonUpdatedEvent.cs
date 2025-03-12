@@ -8,5 +8,4 @@ public class PersonUpdatedEvent : BaseEvent
     }
 
     protected override string Name { get; }
-
 }

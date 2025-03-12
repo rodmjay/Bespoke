@@ -1,12 +1,9 @@
 using Bespoke.Core.Builders;
-using Bespoke.Core.Helpers;
-using Bespoke.Data.Repositories;
 using Bespoke.Data.Builders;
-using Microsoft.EntityFrameworkCore;
+using Bespoke.Data.Repositories;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Bespoke.Data.Extensions;
 

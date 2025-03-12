@@ -4,12 +4,6 @@
 
 #endregion
 
-#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
 namespace ResumePro.Shared.Models;
 
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
@@ -55,12 +49,12 @@ public class CompanyDto : ICompany
         }
     }
 
+    public string JobTitle { get; set; } = null!;
+
     public int Id { get; set; }
 
     public DateTime StartDate { get; set; }
     public DateTime? EndDate { get; set; }
-
-    public string JobTitle { get; set; } = null!;
     public string CompanyName { get; set; } = null!;
     public string Location { get; set; } = null!;
     public string Description { get; set; } = null!;

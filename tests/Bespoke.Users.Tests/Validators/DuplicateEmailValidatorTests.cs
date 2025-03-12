@@ -1,33 +1,27 @@
-using NUnit.Framework;
-using Bespoke.Users.Validators;
-using Bespoke.Users.Entities;
-using Microsoft.AspNetCore.Identity;
 using Moq;
-using System;
-using System.Threading.Tasks;
+using NUnit.Framework;
 
-namespace Bespoke.Users.Tests.Validators
+namespace Bespoke.Users.Tests.Validators;
+
+[TestFixture]
+public class DuplicateEmailValidatorTests
 {
-    [TestFixture]
-    public class DuplicateEmailValidatorTests
+    [SetUp]
+    public void Setup()
     {
-        private Mock<IUserEmailStore<User>> _mockUserEmailStore;
+        _mockUserEmailStore = new Mock<IUserEmailStore<User>>();
+    }
 
-        [SetUp]
-        public void Setup()
-        {
-            _mockUserEmailStore = new Mock<IUserEmailStore<User>>();
-        }
+    private Mock<IUserEmailStore<User>> _mockUserEmailStore;
 
-        [TestFixture]
-        public class ValidateAsyncTests : DuplicateEmailValidatorTests
+    [TestFixture]
+    public class ValidateAsyncTests : DuplicateEmailValidatorTests
+    {
+        [Test]
+        public void Should_Validate_Email_Is_Not_Duplicate()
         {
-            [Test]
-            public void Should_Validate_Email_Is_Not_Duplicate()
-            {
-                // This is a stub test
-                Assert.IsTrue(true);
-            }
+            // This is a stub test
+            Assert.IsTrue(true);
         }
     }
 }

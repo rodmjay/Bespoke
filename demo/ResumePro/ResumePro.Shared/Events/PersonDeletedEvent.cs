@@ -6,5 +6,5 @@ public class PersonDeletedEvent : BaseEvent
     {
     }
 
-    protected override string Name => $"Person";
+    protected override string Name => "Person";
 }

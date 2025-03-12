@@ -1,33 +1,32 @@
-﻿namespace AgencyPro.Domain.Entities
+﻿namespace AgencyPro.Domain.Entities;
+
+public class AccountCard : BaseEntity<AccountCard>
 {
-    public class AccountCard : BaseEntity<AccountCard>
+    public string Id { get; set; } = null!;
+
+    public string AccountId { get; set; } = null!;
+    public FinancialAccount FinancialAccount { get; set; }
+
+    public StripeCard StripeCard { get; set; }
+    public bool IsDeleted { get; set; }
+
+    public string Status { get; set; } = null!;
+    public string Type { get; set; } = null!;
+
+    public override void Configure(EntityTypeBuilder<AccountCard> builder)
     {
-        public string Id { get; set; } = null!;
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id).IsRequired();
 
-        public string AccountId { get; set; } = null!;
-        public FinancialAccount FinancialAccount { get; set; }
+        builder.HasQueryFilter(x => x.IsDeleted == false);
 
-        public StripeCard StripeCard { get; set; }
-        public bool IsDeleted { get; set; }
+        builder.HasOne(x => x.FinancialAccount)
+            .WithMany(x => x.Cards)
+            .HasForeignKey(x => x.AccountId)
+            .IsRequired(false);
 
-        public string Status { get; set; } = null!;
-        public string Type { get; set; } = null!;
-
-        public override void Configure(EntityTypeBuilder<AccountCard> builder)
-        {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).IsRequired();
-
-            builder.HasQueryFilter(x => x.IsDeleted == false);
-
-            builder.HasOne(x => x.FinancialAccount)
-                .WithMany(x => x.Cards)
-                .HasForeignKey(x => x.AccountId)
-                .IsRequired(false);
-
-            builder.HasOne(x => x.StripeCard)
-                .WithOne(x => x.AccountCard)
-                .HasForeignKey<AccountCard>(x => x.Id);
-        }
+        builder.HasOne(x => x.StripeCard)
+            .WithOne(x => x.AccountCard)
+            .HasForeignKey<AccountCard>(x => x.Id);
     }
 }

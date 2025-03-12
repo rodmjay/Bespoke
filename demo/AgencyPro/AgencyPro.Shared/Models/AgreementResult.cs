@@ -1,9 +1,8 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class AgreementResult : Result
 {
-    public class AgreementResult : Result
-    {
-        public Guid? MarketingOrganizationId { get; set; }
-        public Guid? ProviderOrganizationId { get; set; }
-        public Guid? RecruitingOrganizationId { get; set; }
-    }
+    public Guid? MarketingOrganizationId { get; set; }
+    public Guid? ProviderOrganizationId { get; set; }
+    public Guid? RecruitingOrganizationId { get; set; }
 }

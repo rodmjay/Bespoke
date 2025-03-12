@@ -1,8 +1,7 @@
-namespace AgencyPro.Shared.Enums
+namespace AgencyPro.Shared.Enums;
+
+public enum AccountStatus
 {
-    public enum AccountStatus
-    {
-        Active = 0,
-        Inactive = 1
-    }
+    Active = 0,
+    Inactive = 1
 }

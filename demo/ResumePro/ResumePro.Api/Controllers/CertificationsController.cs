@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using ResumePro.Api.Interfaces;
+﻿using ResumePro.Api.Interfaces;
 using ResumePro.Services.Interfaces;
 
 namespace ResumePro.Api.Controllers;

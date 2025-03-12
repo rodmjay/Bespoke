@@ -37,16 +37,16 @@ public class ApplicationContextFactory : IDesignTimeDbContextFactory<Application
 
         // Configure the DbContext options with explicit migration assembly settings.
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-        
+
         // Only enable sensitive data logging in development/debug environments
-        #if DEBUG
-        optionsBuilder.EnableSensitiveDataLogging(true);
-        #else
+#if DEBUG
+        optionsBuilder.EnableSensitiveDataLogging();
+#else
         optionsBuilder.EnableSensitiveDataLogging(false);
-        #endif
-        
+#endif
+
         optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"),
-                opt => { opt.MigrationsAssembly(settings.Value.MigrationsAssembly); });
+            opt => { opt.MigrationsAssembly(settings.Value.MigrationsAssembly); });
 
         return new ApplicationContext(optionsBuilder.Options, settings);
     }

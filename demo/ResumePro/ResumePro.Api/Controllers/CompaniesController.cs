@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using ResumePro.Api.Interfaces;
+﻿using ResumePro.Api.Interfaces;
 using ResumePro.Services.Interfaces;
 
 namespace ResumePro.Api.Controllers;
@@ -34,7 +28,8 @@ public sealed class CompaniesController : BaseController, ICompaniesController
     }
 
     [HttpPost]
-    public async Task<ActionResult<CompanyDetails>> CreateCompany([FromRoute] int personId, [FromBody] CompanyOptions options)
+    public async Task<ActionResult<CompanyDetails>> CreateCompany([FromRoute] int personId,
+        [FromBody] CompanyOptions options)
     {
         var result = await _companyService.CreateCompany(OrganizationId, personId, options)
             .ConfigureAwait(false);

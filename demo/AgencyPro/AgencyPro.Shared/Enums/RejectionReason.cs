@@ -1,10 +1,9 @@
-﻿namespace AgencyPro.Shared.Enums
+﻿namespace AgencyPro.Shared.Enums;
+
+public enum RejectionReason
 {
-    public enum RejectionReason
-    {
-        NoReason,
-        NoOpenings,
-        NotQualified,
-        PreferredOthers
-    }
+    NoReason,
+    NoOpenings,
+    NotQualified,
+    PreferredOthers
 }

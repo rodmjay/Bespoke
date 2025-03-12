@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2023 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using Bespoke.Shared.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +26,6 @@ public class UsageRecord : BaseEntity<UsageRecord>
     }
 }
 
-
 [ExcludeFromCodeCoverage]
 public class ApplicationPhrase : BaseEntity<ApplicationPhrase>, ISoftDelete, ICreated
 {
@@ -40,34 +33,35 @@ public class ApplicationPhrase : BaseEntity<ApplicationPhrase>, ISoftDelete, ICr
     {
         Translations = new List<ApplicationTranslation>();
     }
+
     public Guid ApplicationId { get; set; }
     public ICollection<ApplicationTranslation> Translations { get; set; }
     public int Id { get; set; }
-
-    public bool IsDeleted { get; set; }
     public string Text { get; set; }
 
-    
-    
+
     public string UsageRecordId { get; set; }
     public UsageRecord UsageRecord { get; set; }
 
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public int ActualLength { get; set; }
 
+    public DateTimeOffset CreatedOn { get; set; }
+
+    public bool IsDeleted { get; set; }
+
     public override void Configure(EntityTypeBuilder<ApplicationPhrase> builder)
     {
         builder.ToTable(nameof(ApplicationPhrase), "TranslationPro");
 
-        builder.HasKey(t => new {t.ApplicationId, t.Id});
+        builder.HasKey(t => new { t.ApplicationId, t.Id });
 
         builder.HasOne(x => x.UsageRecord).WithMany(x => x.Phrases).HasForeignKey(x => x.UsageRecordId);
 
         builder.Property(x => x.ActualLength)
-            .HasComputedColumnSql("CASE WHEN TranslationPro.IsAscii([Text]) = 1 THEN IIF([Text] is not null, CAST(LEN([Text]) AS INT), 0) ELSE IIF([Text] is not null, CAST(DATALENGTH([Text]) AS INT), 0) END");
+            .HasComputedColumnSql(
+                "CASE WHEN TranslationPro.IsAscii([Text]) = 1 THEN IIF([Text] is not null, CAST(LEN([Text]) AS INT), 0) ELSE IIF([Text] is not null, CAST(DATALENGTH([Text]) AS INT), 0) END");
 
         builder.HasQueryFilter(x => !x.IsDeleted);
     }
-
-    public DateTimeOffset CreatedOn { get; set; }
 }

@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class TimeSegmentRejectModel
 {
-    public class TimeSegmentRejectModel
-    {
-        [Required] public string Reason { get; set; }
-    }
+    [Required] public string Reason { get; set; }
 }

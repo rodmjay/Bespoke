@@ -1,9 +1,8 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class LeadRequirementsModel
 {
-    public class LeadRequirementsModel
-    {
-        public string Idea { get; set; }
-        public string Summary { get; set; }
-        public Guid[] Skills { get; set; }
-    }
+    public string Idea { get; set; }
+    public string Summary { get; set; }
+    public Guid[] Skills { get; set; }
 }

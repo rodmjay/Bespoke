@@ -1,9 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class RecruiterOrganizationOutput : RecruitingOrganizationOutput
 {
-    public class RecruiterOrganizationOutput : RecruitingOrganizationOutput
-    {
-       
-        [JsonIgnore]
-        public override decimal RecruitingAgencyStream { get; set; }
-    }
+    [JsonIgnore] public override decimal RecruitingAgencyStream { get; set; }
 }

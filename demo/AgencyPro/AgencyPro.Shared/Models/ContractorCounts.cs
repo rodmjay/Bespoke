@@ -1,10 +1,9 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class ContractorCounts
 {
-    public class ContractorCounts
-    {
-        public int Contracts { get; set; }
-        public int Stories { get; set; }
-        public int TimeEntries { get; set; }
-        public int Totals => Stories + Contracts + TimeEntries;
-    }
+    public int Contracts { get; set; }
+    public int Stories { get; set; }
+    public int TimeEntries { get; set; }
+    public int Totals => Stories + Contracts + TimeEntries;
 }

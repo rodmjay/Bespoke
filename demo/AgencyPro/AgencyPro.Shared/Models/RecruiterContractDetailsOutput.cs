@@ -1,9 +1,8 @@
 ﻿using AgencyPro.Shared.Models.Contracts;
 
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class RecruiterContractDetailsOutput : RecruiterContractOutput
 {
-    public class RecruiterContractDetailsOutput : RecruiterContractOutput
-    {
-        public Dictionary<DateTimeOffset, ContractStatus> StatusTransitions { get; set; }
-    }
+    public Dictionary<DateTimeOffset, ContractStatus> StatusTransitions { get; set; }
 }

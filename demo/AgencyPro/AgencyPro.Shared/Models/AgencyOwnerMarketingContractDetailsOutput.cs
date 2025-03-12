@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class AgencyOwnerMarketingContractDetailsOutput : AgencyOwnerMarketingContractOutput
 {
-    public class AgencyOwnerMarketingContractDetailsOutput : AgencyOwnerMarketingContractOutput
-    {
-        public ICollection<CommentOutput> Comments { get; set; } = new List<CommentOutput>();
-    }
+    public ICollection<CommentOutput> Comments { get; set; } = new List<CommentOutput>();
 }

@@ -1,9 +1,8 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+public abstract class BaseResult
 {
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public abstract class BaseResult
-    {
-        public bool Succeeded { get; set; }
-        public string ErrorMessage { get; set; }
-    }
+    public bool Succeeded { get; set; }
+    public string ErrorMessage { get; set; }
 }

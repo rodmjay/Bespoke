@@ -1,12 +1,6 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System.Reflection;
 using Bespoke.Core.Builders;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Bespoke.Services.Extensions;
 
@@ -35,8 +29,8 @@ public static class AppBuilderExtensions
 
 
         foreach (var type in typesWithInterfaces)
-            foreach (var service in type.Services)
-                builder.Services.AddScoped(service, type.Implementation);
+        foreach (var service in type.Services)
+            builder.Services.AddScoped(service, type.Implementation);
         return builder;
     }
 

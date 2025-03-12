@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Domain.Events
+﻿namespace AgencyPro.Domain.Events;
+
+public abstract class ContractEvent
 {
-    public abstract class ContractEvent 
-    {
-       public Guid ContractId { get; set; }
-    }
+    public Guid ContractId { get; set; }
 }

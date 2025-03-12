@@ -1,8 +1,7 @@
-﻿namespace AgencyPro.Shared.Interfaces
+﻿namespace AgencyPro.Shared.Interfaces;
+
+public interface IComment
 {
-    public interface IComment
-    {
-        string Body { get; set; }
-        bool Internal { get; set; }
-    }
+    string Body { get; set; }
+    bool Internal { get; set; }
 }

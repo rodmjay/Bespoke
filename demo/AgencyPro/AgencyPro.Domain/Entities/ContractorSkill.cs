@@ -1,25 +1,25 @@
-namespace AgencyPro.Domain.Entities
+namespace AgencyPro.Domain.Entities;
+
+public class ContractorSkill : BaseEntity<ContractorSkill>
 {
-    public class ContractorSkill : BaseEntity<ContractorSkill>
+    public Contractor Contractor { get; set; }
+    public Skill Skill { get; set; }
+
+    public Guid SkillId { get; set; }
+    public Guid ContractorId { get; set; }
+
+    public int SelfAssessment { get; set; }
+
+    public override void Configure(EntityTypeBuilder<ContractorSkill> builder)
     {
-        public Contractor Contractor { get; set; }
-        public Skill Skill { get; set; }
+        builder.HasKey(sc => new { sc.SkillId, sc.ContractorId });
 
-        public Guid SkillId { get; set; }
-        public Guid ContractorId { get; set; }
+        builder.HasOne(x => x.Skill)
+            .WithMany(x => x.ContractorSkills)
+            .HasForeignKey(x => x.SkillId);
 
-        public int SelfAssessment { get; set; }
-        public override void Configure(EntityTypeBuilder<ContractorSkill> builder)
-        {
-            builder.HasKey(sc => new { sc.SkillId, sc.ContractorId });
-
-            builder.HasOne(x => x.Skill)
-                .WithMany(x => x.ContractorSkills)
-                .HasForeignKey(x => x.SkillId);
-
-            builder.HasOne(x => x.Contractor)
-                .WithMany(x => x.ContractorSkills)
-                .HasForeignKey(x => x.ContractorId);
-        }
+        builder.HasOne(x => x.Contractor)
+            .WithMany(x => x.ContractorSkills)
+            .HasForeignKey(x => x.ContractorId);
     }
 }

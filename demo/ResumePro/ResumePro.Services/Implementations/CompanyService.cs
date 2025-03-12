@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
 using Bespoke.Data.Interfaces;
@@ -19,11 +13,11 @@ namespace ResumePro.Services.Implementations;
 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
 public sealed class CompanyService : BaseService<Company>, ICompanyService
 {
-    private readonly IRepositoryAsync<Project> _projectRepo;
-    private readonly IRepositoryAsync<Resume> _resumeRepo;
+    private readonly IRepositoryAsync<Highlight> _highlightRepo;
     private readonly IRepositoryAsync<PersonaSkill> _personSkillRepo;
     private readonly IRepositoryAsync<Position> _positionRepo;
-    private readonly IRepositoryAsync<Highlight> _highlightRepo;
+    private readonly IRepositoryAsync<Project> _projectRepo;
+    private readonly IRepositoryAsync<Resume> _resumeRepo;
 
     public CompanyService(IServiceProvider serviceProvider,
         IRepositoryAsync<Project> projectRepo,
@@ -60,7 +54,8 @@ public sealed class CompanyService : BaseService<Company>, ICompanyService
             .ProjectTo<T>(Mapper).FirstAsync();
     }
 
-    public async Task<OneOf<CompanyDetails, Result>> CreateCompany(int organizationId, int personId, CompanyOptions options)
+    public async Task<OneOf<CompanyDetails, Result>> CreateCompany(int organizationId, int personId,
+        CompanyOptions options)
     {
         Logger.LogInformation(
             GetLogMessage("OrganizationId: {@organizationId}, PersonId: {@personId}, Options: {@options}"),
@@ -94,11 +89,11 @@ public sealed class CompanyService : BaseService<Company>, ICompanyService
             });
 
 
-        for (int i = 0; i < options.Positions.Count; i++)
+        for (var i = 0; i < options.Positions.Count; i++)
         {
             var positionOptions = options.Positions[i];
 
-            var ent = new Position()
+            var ent = new Position
             {
                 Id = i + 1,
                 StartDate = positionOptions.StartDate,
@@ -110,9 +105,9 @@ public sealed class CompanyService : BaseService<Company>, ICompanyService
             for (var j = 0; j < positionOptions.Highlights.Count; j++)
             {
                 var highlight = positionOptions.Highlights[j];
-                ent.Highlights.Add(new Highlight()
+                ent.Highlights.Add(new Highlight
                 {
-                    Id = j+ 1,
+                    Id = j + 1,
                     ObjectState = ObjectState.Added,
                     Order = j + 1,
                     Text = highlight.Text,
@@ -123,7 +118,7 @@ public sealed class CompanyService : BaseService<Company>, ICompanyService
             for (var k = 0; k < positionOptions.Projects.Count; k++)
             {
                 var projectOptions = positionOptions.Projects[k];
-                var project = new Project()
+                var project = new Project
                 {
                     ObjectState = ObjectState.Added,
                     Order = k + 1,
@@ -151,7 +146,6 @@ public sealed class CompanyService : BaseService<Company>, ICompanyService
             }
 
             company.Positions.Add(ent);
-
         }
 
 
@@ -257,19 +251,15 @@ public sealed class CompanyService : BaseService<Company>, ICompanyService
             // todo: add stuff here
             var position = company.Positions.FirstOrDefault(x => x.Id == positionOptions.Id);
             if (position == null)
-            {
-                position = new Position()
+                position = new Position
                 {
                     ObjectState = ObjectState.Added,
                     CompanyId = companyId,
                     PersonId = personId,
-                    Id = nextPositionId++,
+                    Id = nextPositionId++
                 };
-            }
             else
-            {
                 position.ObjectState = ObjectState.Modified;
-            }
 
             position.StartDate = positionOptions.StartDate;
             position.EndDate = positionOptions.EndDate;
@@ -360,7 +350,8 @@ public sealed class CompanyService : BaseService<Company>, ICompanyService
 
     public async Task<Result> DeleteCompany(int organizationId, int personId, int companyId)
     {
-        Logger.LogInformation(GetLogMessage("OrganizationId: {@organizationId}, PersonId: {@personId}, CompanyId: {companyId}"),
+        Logger.LogInformation(
+            GetLogMessage("OrganizationId: {@organizationId}, PersonId: {@personId}, CompanyId: {companyId}"),
             organizationId, personId, companyId);
 
         var company = await Companies
@@ -411,7 +402,6 @@ public sealed class CompanyService : BaseService<Company>, ICompanyService
             .FirstOrDefaultAsync();
 
         return id + 1;
-
     }
 
     private async Task<int> GetNextProjectId(int organizationId)

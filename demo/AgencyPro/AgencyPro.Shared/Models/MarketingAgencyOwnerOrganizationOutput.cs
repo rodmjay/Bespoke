@@ -1,8 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
-{
-    public class MarketingAgencyOwnerOrganizationOutput : MarketingOrganizationOutput
-    {
+﻿namespace AgencyPro.Shared.Models;
 
-        public override decimal ServiceFeePerLead { get; set; }
-    }
+public class MarketingAgencyOwnerOrganizationOutput : MarketingOrganizationOutput
+{
+    public override decimal ServiceFeePerLead { get; set; }
 }

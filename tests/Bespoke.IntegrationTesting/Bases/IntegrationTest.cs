@@ -1,16 +1,10 @@
-﻿#region Header Info
-
-// Copyright 2024 BespokeTalent.  All rights reserved
-
-#endregion
-
+﻿using Bespoke.Core.Extensions;
+using Bespoke.Data.Interfaces;
+using Bespoke.IntegrationTesting.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Bespoke.Data.Interfaces;
-using Bespoke.IntegrationTesting.Extensions;
-using Bespoke.Core.Extensions;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
@@ -18,13 +12,13 @@ namespace Bespoke.IntegrationTesting.Bases;
 
 public abstract class IntegrationTest<TFixture, TStartup> where TStartup : class
 {
-    public int UserId { get; set; } = 1;
-
     protected IntegrationTest()
     {
         Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development");
         InitializeApi();
     }
+
+    public int UserId { get; set; } = 1;
     public int LoggedInUser { get; set; } = 1;
 
     protected IServiceProvider ServiceProvider { get; private set; }
@@ -62,8 +56,8 @@ public abstract class IntegrationTest<TFixture, TStartup> where TStartup : class
         {
             BaseAddress = testServer.BaseAddress
         };
-
     }
+
     protected async Task ResetDatabase()
     {
         using var scope = ServiceProvider.CreateScope();

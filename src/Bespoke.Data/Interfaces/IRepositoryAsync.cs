@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace Bespoke.Data.Interfaces;
 

@@ -1,56 +1,55 @@
 ﻿using System.Linq.Expressions;
 using Bespoke.Core.Builders;
 
-namespace AgencyPro.Services.Contracts.Extensions
+namespace AgencyPro.Services.Contracts.Extensions;
+
+public static class ContractFilterExtensions
 {
-    public static class ContractFilterExtensions
+    public static IQueryable<Contract> ApplyWhereFilters(this IQueryable<Contract> entities,
+        ContractFilters filters)
     {
-        public static IQueryable<Contract> ApplyWhereFilters(this IQueryable<Contract> entities,
-            ContractFilters filters)
-        {
-            return entities.Where(WhereFilter(filters));
-        }
+        return entities.Where(WhereFilter(filters));
+    }
 
-        private static Expression<Func<Contract, bool>> WhereFilter(ContractFilters filters)
-        {
-            var expr = PredicateBuilder.True<Contract>();
+    private static Expression<Func<Contract, bool>> WhereFilter(ContractFilters filters)
+    {
+        var expr = PredicateBuilder.True<Contract>();
 
-            if (filters.CustomerId.HasValue)
-                expr = expr.And(x => x.CustomerId == filters.CustomerId);
+        if (filters.CustomerId.HasValue)
+            expr = expr.And(x => x.CustomerId == filters.CustomerId);
 
-            if (filters.CustomerOrganizationId.HasValue)
-                expr = expr.And(x => x.BuyerOrganizationId == filters.CustomerOrganizationId);
+        if (filters.CustomerOrganizationId.HasValue)
+            expr = expr.And(x => x.BuyerOrganizationId == filters.CustomerOrganizationId);
 
-            if (filters.ProjectManagerId.HasValue)
-                expr = expr.And(x => x.ProjectManagerId == filters.ProjectManagerId);
+        if (filters.ProjectManagerId.HasValue)
+            expr = expr.And(x => x.ProjectManagerId == filters.ProjectManagerId);
 
-            if (filters.ProjectManagerOrganizationId.HasValue)
-                expr = expr.And(x => x.ProjectManagerOrganizationId == filters.ProjectManagerOrganizationId);
+        if (filters.ProjectManagerOrganizationId.HasValue)
+            expr = expr.And(x => x.ProjectManagerOrganizationId == filters.ProjectManagerOrganizationId);
 
-            if (filters.AccountManagerId.HasValue)
-                expr = expr.And(x => x.AccountManagerId == filters.AccountManagerId);
+        if (filters.AccountManagerId.HasValue)
+            expr = expr.And(x => x.AccountManagerId == filters.AccountManagerId);
 
-            if (filters.AccountManagerOrganizationId.HasValue)
-                expr = expr.And(x => x.AccountManagerOrganizationId == filters.AccountManagerOrganizationId);
-            
-            if (filters.ProjectId.HasValue)
-                expr = expr.And(x => x.ProjectId == filters.ProjectId);
+        if (filters.AccountManagerOrganizationId.HasValue)
+            expr = expr.And(x => x.AccountManagerOrganizationId == filters.AccountManagerOrganizationId);
 
-            if (filters.ContractorId.HasValue)
-                expr = expr.And(x => x.ContractorId == filters.ContractorId);
+        if (filters.ProjectId.HasValue)
+            expr = expr.And(x => x.ProjectId == filters.ProjectId);
 
-            if (filters.ContractorOrganizationId.HasValue)
-                expr = expr.And(x => x.ContractorOrganizationId == filters.ContractorOrganizationId);
-            
-            if (filters.Statuses.Any())
-                expr = expr.And(x => filters.Statuses.Contains(x.Status));
+        if (filters.ContractorId.HasValue)
+            expr = expr.And(x => x.ContractorId == filters.ContractorId);
 
-            return expr;
-        }
+        if (filters.ContractorOrganizationId.HasValue)
+            expr = expr.And(x => x.ContractorOrganizationId == filters.ContractorOrganizationId);
 
-        public static IQueryable<Contract> FindById(this IQueryable<Contract> entities, Guid id)
-        {
-            return entities.Where(x => x.Id == id);
-        }
+        if (filters.Statuses.Any())
+            expr = expr.And(x => filters.Statuses.Contains(x.Status));
+
+        return expr;
+    }
+
+    public static IQueryable<Contract> FindById(this IQueryable<Contract> entities, Guid id)
+    {
+        return entities.Where(x => x.Id == id);
     }
 }

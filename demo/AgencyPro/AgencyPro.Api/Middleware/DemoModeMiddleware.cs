@@ -4,8 +4,8 @@ namespace AgencyPro.Api.Middleware;
 
 public class LiveModeMiddleware
 {
-    
 }
+
 public class DemoModeMiddleware
 {
     private readonly RequestDelegate _next;
@@ -27,7 +27,7 @@ public class DemoModeMiddleware
 
         // Create a scope for resolving services
         using var scope = _serviceProvider.CreateScope();
-        
+
         //todo: fix this
         //var agencyService = scope.ServiceProvider.GetRequiredService<IAgencyService>();
 

@@ -1,11 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-
-namespace Bespoke.Azure.TableStorage;
+﻿namespace Bespoke.Azure.TableStorage;
 
 public class TableStorageSettings
 {

@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.Data.Enums;
+﻿using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -23,7 +17,7 @@ public sealed class Certification : BaseEntity<Certification>, ICertification
 
     public override void Configure(EntityTypeBuilder<Certification> builder)
     {
-        builder.HasKey(x => new {x.OrganizationId, x.Id});
+        builder.HasKey(x => new { x.OrganizationId, x.Id });
 
         builder.Property(x => x.Name)
             .ConfigureColumn(StringColumnSize.Small);
@@ -33,8 +27,8 @@ public sealed class Certification : BaseEntity<Certification>, ICertification
 
         builder.HasOne(x => x.Persona)
             .WithMany(x => x.Certifications)
-            .HasForeignKey(x => new {x.OrganizationId, x.PersonId})
-            .HasPrincipalKey(x => new {x.OrganizationId, x.Id})
+            .HasForeignKey(x => new { x.OrganizationId, x.PersonId })
+            .HasPrincipalKey(x => new { x.OrganizationId, x.Id })
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -12,8 +6,8 @@ namespace Bespoke.Core.Helpers;
 
 public static class ConfigurationHelper
 {
-
-    public static T ConfigureSettings<T>(this (IConfiguration, IServiceCollection) builder, string name, Action<T> modifySettings = null) where T : class, new()
+    public static T ConfigureSettings<T>(this (IConfiguration, IServiceCollection) builder, string name,
+        Action<T> modifySettings = null) where T : class, new()
     {
         // Retrieve the settings from the configuration
         var settingsInstance = builder.Item1.GetSection(name).Get<T>() ?? new T();
@@ -32,5 +26,4 @@ public static class ConfigurationHelper
         // Return the options instance (wrapped)
         return new OptionsWrapper<T>(settingsInstance).Value;
     }
-
 }

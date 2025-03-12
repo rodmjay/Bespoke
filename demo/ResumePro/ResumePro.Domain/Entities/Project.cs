@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.Data.Enums;
+﻿using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -15,8 +9,6 @@ public sealed class Project : BaseEntity<Project>, IProject
 {
     public int OrganizationId { get; set; }
     public ICollection<ProjectHighlight> Highlights { get; set; } = new List<ProjectHighlight>();
-    public int Id { get; set; }
-    public int CompanyId { get; set; }
 
     public Company Company { get; set; } = null!;
 
@@ -24,6 +16,8 @@ public sealed class Project : BaseEntity<Project>, IProject
     public Position Position { get; set; } = null!;
 
     public int PersonId { get; set; }
+    public int Id { get; set; }
+    public int CompanyId { get; set; }
     public int Order { get; set; }
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
@@ -41,14 +35,14 @@ public sealed class Project : BaseEntity<Project>, IProject
 
         builder.HasOne(x => x.Company)
             .WithMany(x => x.Projects)
-            .HasForeignKey(x => new {x.OrganizationId, x.PersonId, x.CompanyId})
-            .HasPrincipalKey(x => new {x.OrganizationId, x.PersonId, x.Id})
+            .HasForeignKey(x => new { x.OrganizationId, x.PersonId, x.CompanyId })
+            .HasPrincipalKey(x => new { x.OrganizationId, x.PersonId, x.Id })
             .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasOne(x => x.Position)
             .WithMany(x => x.Projects)
-            .HasForeignKey(x => new {x.OrganizationId, x.PersonId, x.CompanyId, x.PositionId})
-            .HasPrincipalKey(x => new {x.OrganizationId, x.PersonId, x.CompanyId, x.Id})
+            .HasForeignKey(x => new { x.OrganizationId, x.PersonId, x.CompanyId, x.PositionId })
+            .HasPrincipalKey(x => new { x.OrganizationId, x.PersonId, x.CompanyId, x.Id })
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

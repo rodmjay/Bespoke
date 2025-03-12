@@ -1,15 +1,14 @@
-﻿namespace Bespoke.Core.Interfaces
-{
-    public interface IFileStorage
-    {
-        Task<string> SaveFile(byte[] content, string fileName, string extension, string location);
-    }
+﻿namespace Bespoke.Core.Interfaces;
 
-    public class FileStorageService : IFileStorage
+public interface IFileStorage
+{
+    Task<string> SaveFile(byte[] content, string fileName, string extension, string location);
+}
+
+public class FileStorageService : IFileStorage
+{
+    public Task<string> SaveFile(byte[] content, string fileName, string extension, string location)
     {
-        public Task<string> SaveFile(byte[] content, string fileName, string extension, string location)
-        {
-            throw new NotImplementedException();
-        }
+        throw new NotImplementedException();
     }
 }

@@ -1,7 +1,6 @@
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class AgencyOwnerOrganizationMarketerOutput
+    : OrganizationMarketerOutput
 {
-    public class AgencyOwnerOrganizationMarketerOutput
-        : OrganizationMarketerOutput
-    {
-    }
 }

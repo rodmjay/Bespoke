@@ -1,9 +1,8 @@
-namespace AgencyPro.Services.Interfaces
+namespace AgencyPro.Services.Interfaces;
+
+public interface IOrganizationProjectManagerService : IService<OrganizationProjectManager>,
+    IOrganizationRoleService<OrganizationProjectManagerInput, OrganizationProjectManagerOutput,
+        IOrganizationProjectManager, ProjectManagerFilters, ProjectManagerOrganizationOutput, ProjectManagerCounts>
 {
-    public interface IOrganizationProjectManagerService : IService<OrganizationProjectManager>,
-        IOrganizationRoleService<OrganizationProjectManagerInput, OrganizationProjectManagerOutput,
-            IOrganizationProjectManager, ProjectManagerFilters, ProjectManagerOrganizationOutput, ProjectManagerCounts>
-    {
-        Task<T> GetProjectManagerForProject<T>(Guid projectId) where T : OrganizationProjectManagerOutput;
-    }
+    Task<T> GetProjectManagerForProject<T>(Guid projectId) where T : OrganizationProjectManagerOutput;
 }

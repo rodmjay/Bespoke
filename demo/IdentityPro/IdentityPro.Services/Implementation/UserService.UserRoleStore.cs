@@ -1,11 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Globalization;
-using Bespoke.Data.Enums;
+﻿using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 
 namespace IdentityPro.Services.Implementation;

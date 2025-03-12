@@ -1,42 +1,40 @@
 ﻿using NUnit.Framework;
-using System;
 
-namespace Bespoke.Data.Tests.UnitOfWork
+namespace Bespoke.Data.Tests.UnitOfWork;
+
+[TestFixture]
+public class UnitOfWorkTests
 {
     [TestFixture]
-    public class UnitOfWorkTests
+    public class ConstructorTests : UnitOfWorkTests
     {
-        [TestFixture]
-        public class ConstructorTests : UnitOfWorkTests
+        [Test]
+        public void Should_Initialize_With_Dependencies()
         {
-            [Test]
-            public void Should_Initialize_With_Dependencies()
-            {
-                // This is a stub test
-                Assert.IsTrue(true);
-            }
+            // This is a stub test
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class CommitTests : UnitOfWorkTests
+    [TestFixture]
+    public class CommitTests : UnitOfWorkTests
+    {
+        [Test]
+        public void Should_Commit_Changes()
         {
-            [Test]
-            public void Should_Commit_Changes()
-            {
-                // This is a stub test
-                Assert.IsTrue(true);
-            }
+            // This is a stub test
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class RollbackTests : UnitOfWorkTests
+    [TestFixture]
+    public class RollbackTests : UnitOfWorkTests
+    {
+        [Test]
+        public void Should_Rollback_Changes()
         {
-            [Test]
-            public void Should_Rollback_Changes()
-            {
-                // This is a stub test
-                Assert.IsTrue(true);
-            }
+            // This is a stub test
+            Assert.IsTrue(true);
         }
     }
 }

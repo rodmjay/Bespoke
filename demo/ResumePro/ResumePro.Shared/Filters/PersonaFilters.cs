@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-namespace ResumePro.Shared.Filters;
+﻿namespace ResumePro.Shared.Filters;
 
 public class PersonaFilters
 {

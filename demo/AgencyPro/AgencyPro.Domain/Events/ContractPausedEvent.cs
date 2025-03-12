@@ -1,10 +1,9 @@
-﻿namespace AgencyPro.Domain.Events
+﻿namespace AgencyPro.Domain.Events;
+
+public class ContractPausedEvent : ContractEvent
 {
-    public class ContractPausedEvent : ContractEvent
-    {
-        // contractor
-        // account manager
-        // project manager
-        // customer
-    }
+    // contractor
+    // account manager
+    // project manager
+    // customer
 }

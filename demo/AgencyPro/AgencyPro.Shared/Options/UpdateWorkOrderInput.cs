@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Options
+﻿namespace AgencyPro.Shared.Options;
+
+public class UpdateWorkOrderInput
 {
-    public class UpdateWorkOrderInput
-    {
-        public string Description { get; set; }
-    }
+    public string Description { get; set; }
 }

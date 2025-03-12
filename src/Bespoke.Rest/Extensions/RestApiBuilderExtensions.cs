@@ -1,13 +1,8 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-#nullable enable
+﻿#nullable enable
 
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using Bespoke.Rest.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +10,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using Bespoke.Rest.Swagger;
 
 namespace Bespoke.Rest.Extensions;
 
@@ -29,7 +23,8 @@ public static class RestApiBuilderExtensions
         return $"[{nameof(RestApiBuilderExtensions)}.{callerName}] - {message}";
     }
 
-    public static RestApiBuilder AddSwagger(this RestApiBuilder builder, Action<SwaggerGenOptions>? configureSwagger = default)
+    public static RestApiBuilder AddSwagger(this RestApiBuilder builder,
+        Action<SwaggerGenOptions>? configureSwagger = default)
     {
         Log.Logger.Debug(GetLogMessage("Adding swagger"));
         _swaggerAdded = true;
@@ -49,9 +44,8 @@ public static class RestApiBuilderExtensions
             //c.IncludeXmlComments(xmlPath);
             c.SchemaFilter<SwaggerExcludeFilter>();
             c.DocumentFilter<LowercaseDocumentFilter>();
-            
-            configureSwagger?.Invoke(c);
 
+            configureSwagger?.Invoke(c);
         });
         builder.Services.AddEndpointsApiExplorer();
 
@@ -66,13 +60,9 @@ public static class RestApiBuilderExtensions
                 opts =>
                 {
                     if (builder.RestSetings.Cors.AllowAnyOrigin)
-                    {
                         opts.AllowAnyOrigin();
-                    }
                     else
-                    {
                         opts.WithOrigins(builder.RestSetings.Cors.AllowedOrigins);
-                    }
                     opts.AllowAnyMethod();
                     opts.AllowAnyHeader();
                 });
@@ -92,7 +82,7 @@ public static class RestApiBuilderExtensions
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint($"/swagger/{settings.Value.Version}/swagger.json", appSettings.Name);
-                c.RoutePrefix = "swagger";  // Changed from string.Empty to "swagger"
+                c.RoutePrefix = "swagger"; // Changed from string.Empty to "swagger"
             });
         }
 
@@ -104,10 +94,6 @@ public static class RestApiBuilderExtensions
         app.UseRouting();
         app.UseAuthorization();
 
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllers();
-        });
+        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
-
 }

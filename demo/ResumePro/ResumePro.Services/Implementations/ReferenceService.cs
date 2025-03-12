@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +16,8 @@ public sealed class ReferenceService : BaseService<Reference>, IReferenceService
 {
     private readonly ReferenceErrorDescriber _referenceErrors;
 
-    public ReferenceService(IServiceProvider serviceProvider, ReferenceErrorDescriber referenceErrors) : base(serviceProvider)
+    public ReferenceService(IServiceProvider serviceProvider, ReferenceErrorDescriber referenceErrors) : base(
+        serviceProvider)
     {
         _referenceErrors = referenceErrors;
     }

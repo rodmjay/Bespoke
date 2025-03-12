@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 
 namespace IdentityPro.Services.Implementation;
@@ -49,10 +43,7 @@ public partial class UserService
                 .ToListAsync(cancellationToken);
             // _userClaimsRepository.DeleteMany(matchedClaims); // todo reimplement this
 
-            foreach (var item in matchedClaims)
-            {
-                _userClaimsRepository.Delete(item, false);
-            }
+            foreach (var item in matchedClaims) _userClaimsRepository.Delete(item);
 
             _userClaimsRepository.Commit();
         }

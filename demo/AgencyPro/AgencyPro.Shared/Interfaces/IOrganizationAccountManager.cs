@@ -1,8 +1,7 @@
-﻿namespace AgencyPro.Shared.Interfaces
+﻿namespace AgencyPro.Shared.Interfaces;
+
+public interface IOrganizationAccountManager
 {
-    public interface IOrganizationAccountManager
-    {
-        Guid OrganizationId { get; }
-        Guid AccountManagerId { get; }
-    }
+    Guid OrganizationId { get; }
+    Guid AccountManagerId { get; }
 }

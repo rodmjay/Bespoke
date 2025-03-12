@@ -1,35 +1,32 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Stripe;
+﻿#nullable enable
+
 using Bespoke.Core.Helpers;
 using Bespoke.Payments.Stripe.Builders;
 using Bespoke.Payments.Stripe.Factories;
 using Bespoke.Payments.Stripe.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using Stripe;
 
-#nullable enable
+namespace Bespoke.Payments.Stripe.Extensions;
 
-namespace Bespoke.Payments.Stripe.Extensions
+public static class PaymentsBuilderExtensions
 {
-    public static class PaymentsBuilderExtensions
+    public static PaymentsBuilder AddStripe(this PaymentsBuilder builder,
+        Action<StripePaymentsBuilder>? build = default)
     {
-        public static PaymentsBuilder AddStripe(this PaymentsBuilder builder, Action<StripePaymentsBuilder>? build = default)
-        {
-            var stripeSettings = (builder.Configuration, builder.Services)
-                .ConfigureSettings<StripeSettings>("PaymentSettings:Stripe");
-            
-            var paymentsBuilder = new StripePaymentsBuilder(builder);
+        var stripeSettings = (builder.Configuration, builder.Services)
+            .ConfigureSettings<StripeSettings>("PaymentSettings:Stripe");
 
-            StripeConfiguration.ApiKey = stripeSettings.ApiKey;
+        var paymentsBuilder = new StripePaymentsBuilder(builder);
 
-            if (stripeSettings.UseStripeConnect)
-            {
-                builder.Services.AddSingleton<IStripeConnectFactory, StripeConnectFactory>();
-            }
-            builder.Services.AddSingleton<IStripeFactory, StripeFactory>();
-            
-            build?.Invoke(paymentsBuilder);
+        StripeConfiguration.ApiKey = stripeSettings.ApiKey;
 
-            return builder;
-        }
+        if (stripeSettings.UseStripeConnect)
+            builder.Services.AddSingleton<IStripeConnectFactory, StripeConnectFactory>();
+        builder.Services.AddSingleton<IStripeFactory, StripeFactory>();
 
+        build?.Invoke(paymentsBuilder);
+
+        return builder;
     }
 }

@@ -1,9 +1,7 @@
-﻿namespace AgencyPro.Shared.Models.Contracts
-{
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+﻿namespace AgencyPro.Shared.Models.Contracts;
 
-    public class ContractResult  : BaseResult
-    {
-        public Guid? ContractId { get; set; }
-    }
+[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+public class ContractResult : BaseResult
+{
+    public Guid? ContractId { get; set; }
 }

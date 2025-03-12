@@ -1,8 +1,7 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class MarketerLeadDetailsOutput : MarketerLeadOutput
 {
-    public class MarketerLeadDetailsOutput : MarketerLeadOutput
-    {
-        public ICollection<CommentOutput> Comments { get; set; }
-        public Dictionary<DateTimeOffset, LeadStatus> StatusTransitions { get; set; }
-    }
+    public ICollection<CommentOutput> Comments { get; set; }
+    public Dictionary<DateTimeOffset, LeadStatus> StatusTransitions { get; set; }
 }

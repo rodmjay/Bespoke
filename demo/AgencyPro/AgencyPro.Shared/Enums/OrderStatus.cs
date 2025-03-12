@@ -1,10 +1,9 @@
-﻿namespace AgencyPro.Shared.Enums
+﻿namespace AgencyPro.Shared.Enums;
+
+public enum OrderStatus
 {
-    public enum OrderStatus
-    {
-        Draft = 0,
-        Sent = 1,
-        AwaitingProposal = 2,
-        Rejected = 3
-    }
+    Draft = 0,
+    Sent = 1,
+    AwaitingProposal = 2,
+    Rejected = 3
 }

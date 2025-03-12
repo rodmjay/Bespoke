@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Bespoke.Data;
 using Bespoke.Data.Attributes;
 using Bespoke.Data.Bases;
@@ -12,7 +6,6 @@ using Bespoke.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using ResumePro.Domain.Entities;
-using ResumePro.Entities;
 
 [assembly: SeedAssembly]
 
@@ -25,7 +18,7 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
         DbContextOptions<ApplicationContext> options, IOptions<DbSettings> settings) : base(options, settings)
     {
     }
-    
+
     protected override void SeedDatabase(ModelBuilder builder)
     {
         // these should be placed in the Seeding/csv folder for it to work
@@ -34,7 +27,7 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
         builder.Entity<StateProvince>().Seed("state_provinces.csv");
         builder.Entity<Skill>().Seed("skills.csv");
         builder.Entity<Language>().Seed("languages.csv");
-        
+
         //builder.Entity<ProjectHighlight>().Seed("project_highlights.csv");
         //builder.Entity<CompanySkill>().Seed("company_skills.csv");
         //builder.Entity<Project>().Seed("projects.csv");
@@ -64,6 +57,4 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
     {
         builder.ApplyConfigurationsFromAssembly(typeof(Resume).Assembly);
     }
-    
-    
 }

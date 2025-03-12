@@ -1,15 +1,7 @@
-﻿#region Header Info
+﻿#nullable enable
 
-// Copyright 2023 Rod Johnson.  All rights reserved
-
-#endregion
-
-using AutoMapper;
-using Stripe;
 using Bespoke.Payments.Stripe.Interfaces;
-using Bespoke.Shared.Common;
-
-#nullable enable
+using Stripe;
 
 namespace Bespoke.Payments.Stripe.Services;
 

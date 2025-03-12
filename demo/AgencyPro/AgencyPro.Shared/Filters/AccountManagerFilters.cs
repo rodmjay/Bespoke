@@ -1,8 +1,7 @@
-﻿namespace AgencyPro.Shared.Filters
+﻿namespace AgencyPro.Shared.Filters;
+
+public class AccountManagerFilters
 {
-    public class AccountManagerFilters
-    {
-        public static readonly AccountManagerFilters NoFilter = new AccountManagerFilters();
-        public Guid? CustomerId { get; set; }
-    }
+    public static readonly AccountManagerFilters NoFilter = new();
+    public Guid? CustomerId { get; set; }
 }

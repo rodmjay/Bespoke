@@ -1,9 +1,8 @@
-﻿namespace AgencyPro.Shared.Enums
+﻿namespace AgencyPro.Shared.Enums;
+
+public enum AgreementStatus
 {
-    public enum AgreementStatus
-    {
-        AwaitingApproval = 0,
-        Approved = 1,
-        Rejected = 2
-    }
+    AwaitingApproval = 0,
+    Approved = 1,
+    Rejected = 2
 }

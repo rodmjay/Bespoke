@@ -1,41 +1,39 @@
-using NUnit.Framework;
 using Bespoke.Data.Bases;
 using Bespoke.Data.Enums;
-using System;
+using NUnit.Framework;
 
-namespace Bespoke.Data.Tests.Bases
+namespace Bespoke.Data.Tests.Bases;
+
+[TestFixture]
+public class BaseObjectStateTests
 {
     [TestFixture]
-    public class BaseObjectStateTests
+    public class ConstructorTests : BaseObjectStateTests
     {
-        [TestFixture]
-        public class ConstructorTests : BaseObjectStateTests
+        [Test]
+        public void Should_Initialize_With_Default_Values()
         {
-            [Test]
-            public void Should_Initialize_With_Default_Values()
-            {
-                var objectState = new TestBaseObjectState();
-                Assert.NotNull(objectState);
-                Assert.IsTrue(true);
-            }
+            var objectState = new TestBaseObjectState();
+            Assert.NotNull(objectState);
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class ObjectStateTests : BaseObjectStateTests
+    [TestFixture]
+    public class ObjectStateTests : BaseObjectStateTests
+    {
+        [Test]
+        public void Should_Set_And_Get_Value_Correctly()
         {
-            [Test]
-            public void Should_Set_And_Get_Value_Correctly()
-            {
-                var objectState = new TestBaseObjectState();
-                objectState.ObjectState = ObjectState.Added;
-                Assert.AreEqual(ObjectState.Added, objectState.ObjectState);
-                Assert.IsTrue(true);
-            }
+            var objectState = new TestBaseObjectState();
+            objectState.ObjectState = ObjectState.Added;
+            Assert.AreEqual(ObjectState.Added, objectState.ObjectState);
+            Assert.IsTrue(true);
         }
+    }
 
-        // Test class that inherits from BaseObjectState for testing
-        private class TestBaseObjectState : BaseObjectState
-        {
-        }
+    // Test class that inherits from BaseObjectState for testing
+    private class TestBaseObjectState : BaseObjectState
+    {
     }
 }

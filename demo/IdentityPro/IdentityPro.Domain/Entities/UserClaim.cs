@@ -1,12 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.Serialization;
-using Bespoke.Data.Enums;
+﻿using Bespoke.Data.Enums;
 using Bespoke.Data.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

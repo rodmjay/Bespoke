@@ -4,6 +4,5 @@ namespace ResumePro.Shared.Interfaces;
 
 public interface IPhoneNumber
 {
-    [Phone]
-    string PhoneNumber { get; set; }
+    [Phone] string PhoneNumber { get; set; }
 }

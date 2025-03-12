@@ -1,22 +1,16 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Azure.Data.Tables;
+﻿using Azure.Data.Tables;
 using Azure.Identity;
-using Microsoft.Extensions.Logging;
 using Bespoke.Azure.TableStorage.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Bespoke.Azure.TableStorage.Services;
 
 public class TableService<T> : ITableService<T> where T : class, ITableEntity, new()
 {
-    public string TableName { get; }
     private readonly TableServiceClient _tableServiceClient;
 
-    public TableService(ILogger<TableService<T>> logger, TableStorageSettings settings, AzureSettings azureSettings, string tableName)
+    public TableService(ILogger<TableService<T>> logger, TableStorageSettings settings, AzureSettings azureSettings,
+        string tableName)
     {
         if (settings == null) throw new ArgumentNullException(nameof(settings));
         TableName = tableName;
@@ -24,9 +18,7 @@ public class TableService<T> : ITableService<T> where T : class, ITableEntity, n
         if (azureSettings.UseAzureManagedIdentity)
         {
             if (string.IsNullOrEmpty(settings.TableEndpoint))
-            {
                 throw new InvalidOperationException("TableEndpoint is required when using Azure Managed Identity.");
-            }
 
             var credential = new DefaultAzureCredential();
             _tableServiceClient = new TableServiceClient(new Uri(settings.TableEndpoint), credential);
@@ -36,6 +28,8 @@ public class TableService<T> : ITableService<T> where T : class, ITableEntity, n
             throw new InvalidOperationException("Only Azure Managed Identity is supported in this configuration.");
         }
     }
+
+    public string TableName { get; }
 
     public async Task InsertEntityAsync(T entity)
     {
@@ -68,10 +62,7 @@ public class TableService<T> : ITableService<T> where T : class, ITableEntity, n
         var entities = tableClient.QueryAsync<T>(filter);
         var result = new List<T>();
 
-        await foreach (var entity in entities)
-        {
-            result.Add(entity);
-        }
+        await foreach (var entity in entities) result.Add(entity);
 
         return result;
     }

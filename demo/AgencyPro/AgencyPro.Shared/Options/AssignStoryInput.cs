@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Options
+﻿namespace AgencyPro.Shared.Options;
+
+public class AssignStoryInput
 {
-    public class AssignStoryInput
-    {
-        public Guid? ContractorId { get; set; }
-    }
+    public Guid? ContractorId { get; set; }
 }

@@ -1,8 +1,7 @@
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class VerificationResult
 {
-    public class VerificationResult
-    {
-        public bool Succeeded { get; set; }
-        public string VerificationUrl { get; set; }
-    }
+    public bool Succeeded { get; set; }
+    public string VerificationUrl { get; set; }
 }

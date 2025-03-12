@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using ResumePro.Api.Interfaces;
+﻿using ResumePro.Api.Interfaces;
 using ResumePro.Services.Interfaces;
 
 namespace ResumePro.Api.Controllers;
@@ -23,19 +17,22 @@ public sealed class ProjectsController : BaseController, IProjectsController
     public async Task<ProjectDetails> GetProject([FromRoute] int personId, [FromRoute] int companyId,
         [FromRoute] int positionId, [FromRoute] int projectId)
     {
-        return await _projectService.GetProject<ProjectDetails>(OrganizationId, personId, companyId, positionId, projectId)
+        return await _projectService
+            .GetProject<ProjectDetails>(OrganizationId, personId, companyId, positionId, projectId)
             .ConfigureAwait(false);
     }
 
     [HttpGet]
-    public async Task<List<ProjectDetails>> GetList([FromRoute] int personId, [FromRoute] int companyId, [FromRoute] int positionId)
+    public async Task<List<ProjectDetails>> GetList([FromRoute] int personId, [FromRoute] int companyId,
+        [FromRoute] int positionId)
     {
         return await _projectService.GetProjects<ProjectDetails>(OrganizationId, positionId, companyId, positionId)
             .ConfigureAwait(false);
     }
 
     [HttpPost]
-    public async Task<ActionResult<ProjectDetails>> CreateProject([FromRoute] int personId, [FromRoute] int companyId, [FromRoute] int positionId,
+    public async Task<ActionResult<ProjectDetails>> CreateProject([FromRoute] int personId, [FromRoute] int companyId,
+        [FromRoute] int positionId,
         [FromBody] ProjectOptions options)
     {
         var result = await _projectService.CreateProject(OrganizationId, personId, companyId, positionId, options)
@@ -46,10 +43,12 @@ public sealed class ProjectsController : BaseController, IProjectsController
     }
 
     [HttpPut("{projectId}")]
-    public async Task<ActionResult<ProjectDetails>> Update([FromRoute] int personId, [FromRoute] int companyId, [FromRoute] int positionId,
+    public async Task<ActionResult<ProjectDetails>> Update([FromRoute] int personId, [FromRoute] int companyId,
+        [FromRoute] int positionId,
         [FromRoute] int projectId, [FromBody] ProjectOptions options)
     {
-        var result = await _projectService.UpdateProject(OrganizationId, personId, companyId, positionId, projectId, options)
+        var result = await _projectService
+            .UpdateProject(OrganizationId, personId, companyId, positionId, projectId, options)
             .ConfigureAwait(false);
         if (result.IsT0) return Ok(result.AsT0);
 

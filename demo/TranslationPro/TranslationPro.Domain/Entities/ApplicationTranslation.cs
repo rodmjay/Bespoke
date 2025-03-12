@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2023 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using Bespoke.Shared.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -32,30 +26,31 @@ public class ApplicationTranslation : BaseEntity<ApplicationTranslation>, ISoftD
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public int ActualLength { get; set; }
 
+    public DateTimeOffset CreatedOn { get; set; }
+
+
+    public bool IsDeleted { get; set; }
+
     public override void Configure(EntityTypeBuilder<ApplicationTranslation> builder)
     {
         builder.ToTable(nameof(ApplicationTranslation), "TranslationPro");
 
-        builder.HasKey(x => new {x.ApplicationId, x.PhraseId, x.LanguageId});
+        builder.HasKey(x => new { x.ApplicationId, x.PhraseId, x.LanguageId });
 
         builder.HasOne(x => x.ApplicationPhrase)
             .WithMany(x => x.Translations)
-            .HasForeignKey(x => new {x.ApplicationId, x.PhraseId});
+            .HasForeignKey(x => new { x.ApplicationId, x.PhraseId });
 
         builder.HasOne(x => x.ApplicationLanguage)
             .WithMany(x => x.Translations)
-            .HasForeignKey(x => new {x.ApplicationId, x.LanguageId})
+            .HasForeignKey(x => new { x.ApplicationId, x.LanguageId })
             .OnDelete(DeleteBehavior.NoAction);
 
 
         builder.HasOne(x => x.UsageRecord).WithMany(x => x.Translations).HasForeignKey(x => x.UsageRecordId);
-        
+
         builder.Property(x => x.ActualLength)
-            .HasComputedColumnSql("CASE WHEN TranslationPro.IsAscii([Text]) = 1 THEN IIF([Text] is not null, CAST(LEN([Text]) AS INT), 0) ELSE IIF([Text] is not null, CAST(DATALENGTH([Text]) AS INT), 0) END");
-
+            .HasComputedColumnSql(
+                "CASE WHEN TranslationPro.IsAscii([Text]) = 1 THEN IIF([Text] is not null, CAST(LEN([Text]) AS INT), 0) ELSE IIF([Text] is not null, CAST(DATALENGTH([Text]) AS INT), 0) END");
     }
-
-
-    public bool IsDeleted { get; set; }
-    public DateTimeOffset CreatedOn { get; set; }
 }

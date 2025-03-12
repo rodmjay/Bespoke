@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using ResumePro.Api.Interfaces;
+﻿using ResumePro.Api.Interfaces;
 using ResumePro.Services.Interfaces;
 
 namespace ResumePro.Api.Controllers;
@@ -14,7 +8,8 @@ public sealed class ReferencesController : BaseController, IReferencesController
 {
     private readonly IReferenceService _referenceService;
 
-    public ReferencesController(IServiceProvider serviceProvider, IReferenceService referenceService) : base(serviceProvider)
+    public ReferencesController(IServiceProvider serviceProvider, IReferenceService referenceService) : base(
+        serviceProvider)
     {
         _referenceService = referenceService;
     }

@@ -1,6 +1,5 @@
-﻿namespace IdentityPro.Shared
+﻿namespace IdentityPro.Shared;
+
+public class UserSettings
 {
-    public class UserSettings
-    {
-    }
 }

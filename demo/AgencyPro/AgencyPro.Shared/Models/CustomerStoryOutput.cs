@@ -1,8 +1,7 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class CustomerStoryOutput : StoryOutput
 {
-    public class CustomerStoryOutput : StoryOutput
-    {
-        public override Guid TargetOrganizationId => this.CustomerOrganizationId;
-        public override Guid TargetPersonId => this.CustomerId;
-    }
+    public override Guid TargetOrganizationId => CustomerOrganizationId;
+    public override Guid TargetPersonId => CustomerId;
 }

@@ -1,13 +1,7 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
+﻿#nullable enable
 
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
-
-#nullable enable
 
 namespace Bespoke.Data;
 
@@ -18,9 +12,9 @@ public class DbSettings
     {
         None,
         SnakeCase,
-        PascalCase,
+        PascalCase
     }
-    
+
     public string? MigrationsAssembly { get; set; } = null!;
     public int Timeout { get; set; } = 20;
     public int MaxRetryCount { get; set; } = 5;

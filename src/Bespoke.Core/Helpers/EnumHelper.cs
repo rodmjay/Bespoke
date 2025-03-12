@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
-using System.Reflection;
+﻿#nullable enable
 
-#nullable enable
+using System.ComponentModel;
+using System.Reflection;
 
 namespace Bespoke.Core.Helpers;
 

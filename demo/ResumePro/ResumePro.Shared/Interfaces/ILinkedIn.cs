@@ -4,6 +4,5 @@ namespace ResumePro.Shared.Interfaces;
 
 public interface ILinkedIn
 {
-    [Url]
-    string LinkedIn { get; set; }
+    [Url] string LinkedIn { get; set; }
 }

@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.Core.Settings;
+﻿using Bespoke.Core.Settings;
 using Microsoft.Extensions.Options;
 using ResumePro.Shared.Extensions;
 

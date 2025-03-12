@@ -1,38 +1,34 @@
-﻿using NUnit.Framework;
-using Bespoke.Azure.TableStorage.Factories;
-using Bespoke.Azure.TableStorage;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Moq;
-using System;
+using NUnit.Framework;
 
-namespace Bespoke.Azure.TableStorage.Tests.Factories
+namespace Bespoke.Azure.TableStorage.Tests.Factories;
+
+[TestFixture]
+public class TableServiceFactoryTests
 {
-    [TestFixture]
-    public class TableServiceFactoryTests
+    [SetUp]
+    public void Setup()
     {
-        private Mock<IConfiguration> _mockConfiguration;
-        private TableStorageSettings _settings;
-
-        [SetUp]
-        public void Setup()
+        _mockConfiguration = new Mock<IConfiguration>();
+        _settings = new TableStorageSettings
         {
-            _mockConfiguration = new Mock<IConfiguration>();
-            _settings = new TableStorageSettings
-            {
-                // Initialize with test values
-                // Note: Assuming ConnectionStringName has a getter
-            };
-        }
+            // Initialize with test values
+            // Note: Assuming ConnectionStringName has a getter
+        };
+    }
 
-        [TestFixture]
-        public class CreateTests : TableServiceFactoryTests
+    private Mock<IConfiguration> _mockConfiguration;
+    private TableStorageSettings _settings;
+
+    [TestFixture]
+    public class CreateTests : TableServiceFactoryTests
+    {
+        [Test]
+        public void Should_Create_TableService_Instance()
         {
-            [Test]
-            public void Should_Create_TableService_Instance()
-            {
-                // This is a stub test
-                Assert.IsTrue(true);
-            }
+            // This is a stub test
+            Assert.IsTrue(true);
         }
     }
 }

@@ -1,6 +1,5 @@
-namespace AgencyPro.Shared.Models.People
+namespace AgencyPro.Shared.Models.People;
+
+public class AccountManagerPersonOutput : PersonOutput
 {
-    public class AccountManagerPersonOutput : PersonOutput
-    {
-    }
 }

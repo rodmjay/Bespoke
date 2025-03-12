@@ -1,9 +1,8 @@
-namespace AgencyPro.Shared.Options
-{
-    public class JoinAsCustomerInput
-    {
-        public Guid ProviderOrganizationId { get; set; }
+namespace AgencyPro.Shared.Options;
 
-        public string WorkOrderDescription { get; set; }
-    }
+public class JoinAsCustomerInput
+{
+    public Guid ProviderOrganizationId { get; set; }
+
+    public string WorkOrderDescription { get; set; }
 }

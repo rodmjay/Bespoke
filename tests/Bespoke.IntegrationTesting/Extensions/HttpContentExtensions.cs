@@ -1,13 +1,5 @@
-﻿#region Header Info
-
-// Copyright 2024 BespokeTalent.  All rights reserved
-
-#endregion
-
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using Bespoke.Core.Settings;
 using Newtonsoft.Json;
-using Bespoke.Core.Settings;
 
 namespace Bespoke.IntegrationTesting.Extensions;
 

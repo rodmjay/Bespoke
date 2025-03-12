@@ -1,7 +1,5 @@
-﻿namespace AgencyPro.Domain.Events
+﻿namespace AgencyPro.Domain.Events;
+
+public class CandidateDeletedEvent
 {
-    public class CandidateDeletedEvent 
-    {
-        
-    }
 }

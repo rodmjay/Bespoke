@@ -2,6 +2,5 @@
 
 public interface IOrganizationId
 {
-    [JsonIgnore]
-    int OrganizationId { get; set; }
+    [JsonIgnore] int OrganizationId { get; set; }
 }

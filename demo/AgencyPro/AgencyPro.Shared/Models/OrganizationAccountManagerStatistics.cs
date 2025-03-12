@@ -1,11 +1,10 @@
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class OrganizationAccountManagerStatistics : OrganizationAccountManagerOutput
 {
-    public class OrganizationAccountManagerStatistics : OrganizationAccountManagerOutput
-    {
-        public virtual int TotalAccounts { get; set; }
-        public virtual int TotalProjects { get; set; }
-        public virtual int TotalContracts { get; set; }
-        public virtual int TotalLeads { get; set; }
-        public virtual int MaxWeeklyHours { get; set; }
-    }
+    public virtual int TotalAccounts { get; set; }
+    public virtual int TotalProjects { get; set; }
+    public virtual int TotalContracts { get; set; }
+    public virtual int TotalLeads { get; set; }
+    public virtual int MaxWeeklyHours { get; set; }
 }

@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.IntegrationTesting.Bases;
+﻿using Bespoke.IntegrationTesting.Bases;
 using Microsoft.AspNetCore.Mvc;
 using ResumePro.Api.Interfaces;
 using ResumePro.Shared.Models;
@@ -18,17 +12,17 @@ public sealed class TemplatesProxy : BaseProxy, ITemplatesController
     {
     }
 
-    public  Task<List<TemplateDto>> GetTemplates()
+    public Task<List<TemplateDto>> GetTemplates()
     {
         throw new NotImplementedException();
     }
 
-    public  Task<ActionResult<TemplateDto>> CreateTemplate(TemplateOptions options)
+    public Task<ActionResult<TemplateDto>> CreateTemplate(TemplateOptions options)
     {
         throw new NotImplementedException();
     }
 
-    public  Task<ActionResult<TemplateDto>> UpdateTemplate(int templateId, TemplateOptions options)
+    public Task<ActionResult<TemplateDto>> UpdateTemplate(int templateId, TemplateOptions options)
     {
         throw new NotImplementedException();
     }

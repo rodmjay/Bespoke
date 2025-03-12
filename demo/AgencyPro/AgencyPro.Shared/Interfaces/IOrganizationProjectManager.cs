@@ -1,8 +1,7 @@
-namespace AgencyPro.Shared.Interfaces
+namespace AgencyPro.Shared.Interfaces;
+
+public interface IOrganizationProjectManager
 {
-    public interface IOrganizationProjectManager
-    {
-        Guid ProjectManagerId { get; set; }
-        Guid OrganizationId { get; set; }
-    }
+    Guid ProjectManagerId { get; set; }
+    Guid OrganizationId { get; set; }
 }

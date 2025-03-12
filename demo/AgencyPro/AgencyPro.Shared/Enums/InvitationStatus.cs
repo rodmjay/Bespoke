@@ -1,10 +1,9 @@
-﻿namespace AgencyPro.Shared.Enums
+﻿namespace AgencyPro.Shared.Enums;
+
+public enum InvitationStatus
 {
-    public enum InvitationStatus
-    {
-        Created = 0,
-        Accepted = 1,
-        Rejected = 2,
-        Expired = 3
-    }
+    Created = 0,
+    Accepted = 1,
+    Rejected = 2,
+    Expired = 3
 }

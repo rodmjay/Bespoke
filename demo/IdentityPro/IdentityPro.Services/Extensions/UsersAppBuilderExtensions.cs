@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.Core.Builders;
+﻿using Bespoke.Core.Builders;
 using IdentityPro.Data.Contexts;
 using IdentityPro.Services.Factories;
 using IdentityPro.Services.Implementation;
@@ -15,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace IdentityPro.Services.Extensions;
+
 public static class UsersAppBuilderExtensions
 {
     public static AppBuilder AddIdentity(this AppBuilder builder)
@@ -93,5 +88,4 @@ public static class UsersAppBuilderExtensions
 
         return builder;
     }
-
 }

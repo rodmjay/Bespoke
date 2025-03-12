@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Data.Common;
+﻿using System.Data.Common;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Bespoke.Data.Interceptors;

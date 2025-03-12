@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 
 namespace IdentityPro.Services.Managers;
@@ -36,7 +30,7 @@ public partial class UserManager
         if (user == null) throw new ArgumentNullException(nameof(user));
         if (claim == null) throw new ArgumentNullException(nameof(claim));
 
-        return RemoveClaimsAsync(user, new[] {claim});
+        return RemoveClaimsAsync(user, new[] { claim });
     }
 
     public override async Task<IdentityResult> AddClaimsAsync(User user, IEnumerable<Claim> claims)
@@ -55,7 +49,7 @@ public partial class UserManager
         if (claim == null) throw new ArgumentNullException(nameof(claim));
         if (user == null) throw new ArgumentNullException(nameof(user));
 
-        return AddClaimsAsync(user, new[] {claim});
+        return AddClaimsAsync(user, new[] { claim });
     }
 
     public override async Task<IdentityResult> RemoveClaimsAsync(User user, IEnumerable<Claim> claims)

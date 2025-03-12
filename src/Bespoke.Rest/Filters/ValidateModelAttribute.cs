@@ -40,7 +40,7 @@ public class ValidateModelAttribute : ActionFilterAttribute
         if (obj == null) return;
 
         var context = new ValidationContext(obj, null, null);
-        Validator.TryValidateObject(obj, context, validationResults, validateAllProperties: true);
+        Validator.TryValidateObject(obj, context, validationResults, true);
 
         // Check nested properties
         var properties = obj.GetType().GetProperties()
@@ -53,16 +53,11 @@ public class ValidateModelAttribute : ActionFilterAttribute
             var value = property.GetValue(obj);
 
             if (value is IEnumerable enumerable)
-            {
                 foreach (var item in enumerable)
-                {
                     ValidateObject(item, validationResults);
-                }
-            }
             else if (value is IValidatableObject validatableObject)
-            {
-                Validator.TryValidateObject(validatableObject, new ValidationContext(validatableObject), validationResults, true);
-            }
+                Validator.TryValidateObject(validatableObject, new ValidationContext(validatableObject),
+                    validationResults, true);
         }
     }
 }

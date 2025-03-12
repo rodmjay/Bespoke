@@ -1,9 +1,8 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class PositionOutput
 {
-    public class PositionOutput
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public ICollection<LevelOutput> Levels { get; set; }
-    }
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ICollection<LevelOutput> Levels { get; set; }
 }

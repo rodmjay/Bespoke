@@ -1,11 +1,6 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Bespoke.Core.Validation.Interfaces;
+
 namespace Bespoke.Core.Validation;
 
 [ExcludeFromCodeCoverage]

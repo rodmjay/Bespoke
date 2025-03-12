@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using ResumePro.Api.Interfaces;
+﻿using ResumePro.Api.Interfaces;
 using ResumePro.Services.Interfaces;
 
 namespace ResumePro.Api.Controllers;
@@ -14,7 +8,8 @@ public sealed class PositionsController : BaseController, IPositionsController
 {
     private readonly IPositionService _positionService;
 
-    public PositionsController(IServiceProvider serviceProvider, IPositionService positionService) : base(serviceProvider)
+    public PositionsController(IServiceProvider serviceProvider, IPositionService positionService) : base(
+        serviceProvider)
     {
         _positionService = positionService;
     }
@@ -31,7 +26,8 @@ public sealed class PositionsController : BaseController, IPositionsController
     }
 
     [HttpPut("{positionId}")]
-    public async Task<ActionResult<CompanyDetails>> UpdatePosition(int personId, int companyId, int positionId, PositionOptions options)
+    public async Task<ActionResult<CompanyDetails>> UpdatePosition(int personId, int companyId, int positionId,
+        PositionOptions options)
     {
         var result = await _positionService.UpdatePosition(OrganizationId, personId, companyId, positionId, options)
             .ConfigureAwait(false);

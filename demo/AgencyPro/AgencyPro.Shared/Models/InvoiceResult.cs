@@ -1,8 +1,7 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class InvoiceResult : Result
 {
-    public class InvoiceResult : Result
-    {
-        public string InvoiceId { get; set; }
-        public Guid? ProjectId { get; set; }
-    }
+    public string InvoiceId { get; set; }
+    public Guid? ProjectId { get; set; }
 }

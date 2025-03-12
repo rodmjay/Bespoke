@@ -1,7 +1,5 @@
-﻿namespace Bespoke.Azure.AppInsights
-{
-    public class Class1
-    {
+﻿namespace Bespoke.Azure.AppInsights;
 
-    }
+public class Class1
+{
 }

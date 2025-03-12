@@ -1,10 +1,9 @@
-namespace AgencyPro.Shared.Enums
+namespace AgencyPro.Shared.Enums;
+
+public enum TimeType
 {
-    public enum TimeType
-    {
-        [Description("Tasks")] Consulting = 1,
-        [Description("Meetings")] Meetings = 2,
-        [Description("Research")] Research = 3,
-        [Description("Training")] Training = 4
-    }
+    [Description("Tasks")] Consulting = 1,
+    [Description("Meetings")] Meetings = 2,
+    [Description("Research")] Research = 3,
+    [Description("Training")] Training = 4
 }

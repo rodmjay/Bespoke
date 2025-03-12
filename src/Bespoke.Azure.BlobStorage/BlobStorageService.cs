@@ -18,7 +18,7 @@ public class BlobStorageService : IBlobStorageService
         await containerClient.CreateIfNotExistsAsync(PublicAccessType.Blob);
 
         var blobClient = containerClient.GetBlobClient(blobName);
-        await blobClient.UploadAsync(content, overwrite: true);
+        await blobClient.UploadAsync(content, true);
     }
 
     public async Task<Stream> DownloadBlobAsync(string containerName, string blobName)

@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using ResumePro.Api.Interfaces;
+﻿using ResumePro.Api.Interfaces;
 using ResumePro.Services.Interfaces;
 
 namespace ResumePro.Api.Controllers;
@@ -14,7 +8,8 @@ public sealed class PersonLanguagesController : BaseController, IPersonLanguages
 {
     private readonly IPersonaLanguageService _languageService;
 
-    public PersonLanguagesController(IServiceProvider serviceProvider, IPersonaLanguageService languageService) : base(serviceProvider)
+    public PersonLanguagesController(IServiceProvider serviceProvider, IPersonaLanguageService languageService) : base(
+        serviceProvider)
     {
         _languageService = languageService;
     }

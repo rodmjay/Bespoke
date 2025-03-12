@@ -1,7 +1,5 @@
-﻿namespace IdentityPro.Infrastructure.SqlServer
-{
-    public class Class1
-    {
+﻿namespace IdentityPro.Infrastructure.SqlServer;
 
-    }
+public class Class1
+{
 }

@@ -5,7 +5,7 @@ namespace Bespoke.Core.Helpers;
 public static class EnvironmentHelpers
 {
     /// <summary>
-    /// Determines if the current environment is in Debug mode.
+    ///     Determines if the current environment is in Debug mode.
     /// </summary>
     public static bool IsDebug()
     {
@@ -17,7 +17,7 @@ public static class EnvironmentHelpers
     }
 
     /// <summary>
-    /// Retrieves the current environment name (e.g., Development, Production).
+    ///     Retrieves the current environment name (e.g., Development, Production).
     /// </summary>
     public static string GetEnvironmentName(this IHostEnvironment environment)
     {
@@ -25,7 +25,7 @@ public static class EnvironmentHelpers
     }
 
     /// <summary>
-    /// Checks if the current environment matches a given name.
+    ///     Checks if the current environment matches a given name.
     /// </summary>
     public static bool IsEnvironment(this IHostEnvironment environment, string environmentName)
     {
@@ -36,7 +36,7 @@ public static class EnvironmentHelpers
     }
 
     /// <summary>
-    /// Determines if the current environment is Development.
+    ///     Determines if the current environment is Development.
     /// </summary>
     public static bool IsDevelopment(this IHostEnvironment environment)
     {
@@ -44,7 +44,7 @@ public static class EnvironmentHelpers
     }
 
     /// <summary>
-    /// Determines if the current environment is Production.
+    ///     Determines if the current environment is Production.
     /// </summary>
     public static bool IsProduction(this IHostEnvironment environment)
     {
@@ -52,7 +52,7 @@ public static class EnvironmentHelpers
     }
 
     /// <summary>
-    /// Determines if the current environment is Staging.
+    ///     Determines if the current environment is Staging.
     /// </summary>
     public static bool IsStaging(this IHostEnvironment environment)
     {
@@ -60,7 +60,7 @@ public static class EnvironmentHelpers
     }
 
     /// <summary>
-    /// Retrieves an environment variable by key, optionally providing a default value if not set.
+    ///     Retrieves an environment variable by key, optionally providing a default value if not set.
     /// </summary>
     public static string GetEnvironmentVariable(string key, string defaultValue = null)
     {
@@ -69,7 +69,7 @@ public static class EnvironmentHelpers
     }
 
     /// <summary>
-    /// Retrieves a boolean environment variable value.
+    ///     Retrieves a boolean environment variable value.
     /// </summary>
     public static bool GetEnvironmentVariableAsBool(string key, bool defaultValue = false)
     {
@@ -78,7 +78,7 @@ public static class EnvironmentHelpers
     }
 
     /// <summary>
-    /// Retrieves an integer environment variable value.
+    ///     Retrieves an integer environment variable value.
     /// </summary>
     public static int GetEnvironmentVariableAsInt(string key, int defaultValue = 0)
     {

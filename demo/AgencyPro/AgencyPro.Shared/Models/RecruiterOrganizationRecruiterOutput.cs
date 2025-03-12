@@ -1,6 +1,5 @@
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class RecruiterOrganizationRecruiterOutput : OrganizationRecruiterOutput
 {
-    public class RecruiterOrganizationRecruiterOutput : OrganizationRecruiterOutput
-    {
-    }
 }

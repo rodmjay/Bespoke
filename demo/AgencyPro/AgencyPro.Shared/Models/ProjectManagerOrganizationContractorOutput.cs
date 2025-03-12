@@ -1,9 +1,8 @@
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class ProjectManagerOrganizationContractorOutput
+    : OrganizationContractorOutput
 {
-    public class ProjectManagerOrganizationContractorOutput
-        : OrganizationContractorOutput
-    {
-        [JsonIgnore] public override decimal ContractorStream { get; set; }
-        [JsonIgnore] public override bool IsFeatured { get; set; }
-    }
+    [JsonIgnore] public override decimal ContractorStream { get; set; }
+    [JsonIgnore] public override bool IsFeatured { get; set; }
 }

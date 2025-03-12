@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class AgencyOwnerFixedPriceProposalModel : AgencyOwnerFixedPriceProposalOutput
 {
-    public class AgencyOwnerFixedPriceProposalModel : AgencyOwnerFixedPriceProposalOutput
-    {
-        public ProposalAcceptanceOutput ProposalAcceptance { get; set; }
-    }
+    public ProposalAcceptanceOutput ProposalAcceptance { get; set; }
 }

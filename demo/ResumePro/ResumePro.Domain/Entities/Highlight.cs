@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.Data.Enums;
+﻿using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -39,20 +33,20 @@ public sealed class Highlight : BaseEntity<Highlight>, IHighlight
             .HasForeignKey(x => new { x.OrganizationId, x.PersonId, x.CompanyId, x.PositionId })
             .HasPrincipalKey(x => new { x.OrganizationId, x.PersonId, x.CompanyId, x.Id })
             .OnDelete(DeleteBehavior.NoAction)
-            .IsRequired(true);
+            .IsRequired();
 
         builder.HasOne(x => x.Company)
             .WithMany(x => x.Highlights)
-            .HasForeignKey(x => new {x.OrganizationId, x.PersonId, x.CompanyId})
-            .HasPrincipalKey(x => new {x.OrganizationId, x.PersonId, x.Id})
+            .HasForeignKey(x => new { x.OrganizationId, x.PersonId, x.CompanyId })
+            .HasPrincipalKey(x => new { x.OrganizationId, x.PersonId, x.Id })
             .OnDelete(DeleteBehavior.NoAction)
-            .IsRequired(true);
+            .IsRequired();
 
         builder.HasOne(x => x.Person)
             .WithMany(x => x.Highlights)
             .HasForeignKey(x => new { x.OrganizationId, x.PersonId })
             .HasPrincipalKey(x => new { x.OrganizationId, x.Id })
             .OnDelete(DeleteBehavior.NoAction)
-            .IsRequired(true);
+            .IsRequired();
     }
 }

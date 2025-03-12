@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.Data.Enums;
+﻿using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -26,7 +20,7 @@ public sealed class Resume : BaseEntity<Resume>, IResume
 
     public override void Configure(EntityTypeBuilder<Resume> builder)
     {
-        builder.HasKey(x => new {x.OrganizationId, x.Id});
+        builder.HasKey(x => new { x.OrganizationId, x.Id });
 
         builder.Property(x => x.JobTitle)
             .ConfigureColumn(StringColumnSize.Small);
@@ -36,8 +30,8 @@ public sealed class Resume : BaseEntity<Resume>, IResume
 
         builder.HasOne(x => x.Persona)
             .WithMany(x => x.Resumes)
-            .HasForeignKey(x => new {x.OrganizationId, x.PersonId})
-            .HasPrincipalKey(x => new {x.OrganizationId, x.Id})
+            .HasForeignKey(x => new { x.OrganizationId, x.PersonId })
+            .HasPrincipalKey(x => new { x.OrganizationId, x.Id })
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

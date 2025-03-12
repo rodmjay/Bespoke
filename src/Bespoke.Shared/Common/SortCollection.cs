@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -17,7 +11,7 @@ public class SortCollection<TSource>
     }
 
     public SortCollection(string value)
-        : this(value?.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries))
+        : this(value?.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries))
     {
     }
 

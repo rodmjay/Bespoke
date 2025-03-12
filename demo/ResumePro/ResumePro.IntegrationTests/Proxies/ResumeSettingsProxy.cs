@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.IntegrationTesting.Bases;
+﻿using Bespoke.IntegrationTesting.Bases;
 using Microsoft.AspNetCore.Mvc;
 using ResumePro.Api.Interfaces;
 using ResumePro.Shared.Models;
@@ -18,7 +12,8 @@ public sealed class ResumeSettingsProxy : BaseProxy, IResumeSettingsController
     {
     }
 
-    public Task<ActionResult<ResumeSettingsDto>> UpdateSettings(int personId, int resumeId, ResumeSettingsOptions options)
+    public Task<ActionResult<ResumeSettingsDto>> UpdateSettings(int personId, int resumeId,
+        ResumeSettingsOptions options)
     {
         throw new NotImplementedException();
     }

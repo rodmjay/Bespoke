@@ -1,7 +1,5 @@
-﻿namespace AgencyPro.Shared.Models
-{
-    public class ProjectManagerTimeMatrixOutput : TimeMatrixOutput
-    {
+﻿namespace AgencyPro.Shared.Models;
 
-    }
+public class ProjectManagerTimeMatrixOutput : TimeMatrixOutput
+{
 }

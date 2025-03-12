@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using AgencyPro.Data.Contexts;
+﻿using AgencyPro.Data.Contexts;
 using Bespoke.Azure.AppInsights.Extensions;
 using Bespoke.Azure.Extensions;
 using Bespoke.Core.Extensions;
@@ -39,37 +33,21 @@ public sealed class Startup
                 .AddEventAggregator()
                 .AddAutomapper()
                 .AddStorage(
-                    configureDbSettings: dataSettings =>
+                    dataSettings =>
                     {
                         dataSettings.DefaultDeleteBehavior = DeleteBehavior.NoAction;
                         dataSettings.DefaultSchema = "AgencyPro";
                         dataSettings.NamingConventionType = DbSettings.NamingConvention.SnakeCase;
                     },
-                    configureDataBuilder: dataBuilder =>
-                    {
-                        dataBuilder.UseSqlServer<ApplicationContext>();
-                    }
+                    dataBuilder => { dataBuilder.UseSqlServer<ApplicationContext>(); }
                 )
                 .AddAzure(
-                    configureAzureBuilder: azureBuilder =>
-                    {
-                        azureBuilder.AddAppInsights();
-                    })
-                .AddRest(configureRestSettings: restSettings =>
-                    {
-                        restSettings.Cors.AllowAnyOrigin = true;
-                    },
-                    configureRestApi: restBuilder =>
-                    {
-                        restBuilder.AddSwagger(options =>
-                        {
-                            options.SwaggerGenDemoMode();
-                        });
-                    });
+                    configureAzureBuilder: azureBuilder => { azureBuilder.AddAppInsights(); })
+                .AddRest(restSettings => { restSettings.Cors.AllowAnyOrigin = true; },
+                    restBuilder => { restBuilder.AddSwagger(options => { options.SwaggerGenDemoMode(); }); });
 
             //builder.Services.AddServices(config);
         });
-
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext context,

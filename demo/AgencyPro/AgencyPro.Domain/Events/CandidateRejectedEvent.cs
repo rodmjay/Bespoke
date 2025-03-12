@@ -1,9 +1,5 @@
-﻿namespace AgencyPro.Domain.Events
+﻿namespace AgencyPro.Domain.Events;
+
+public class CandidateRejectedEvent
 {
-    public class CandidateRejectedEvent
-    {
-        public CandidateRejectedEvent()
-        {
-        }
-    }
 }

@@ -1,11 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.ComponentModel;
-using Bespoke.Data.Interfaces;
+﻿using System.ComponentModel;
 using Bespoke.Services.Bases;
 using Microsoft.AspNetCore.Identity;
 
@@ -58,6 +51,6 @@ public partial class RoleService : BaseService<Role>, IRoleService
     public virtual int ConvertIdFromString(string id)
     {
         if (id == null) return default;
-        return (int) TypeDescriptor.GetConverter(typeof(int)).ConvertFromInvariantString(id);
+        return (int)TypeDescriptor.GetConverter(typeof(int)).ConvertFromInvariantString(id);
     }
 }

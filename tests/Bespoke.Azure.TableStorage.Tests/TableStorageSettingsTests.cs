@@ -1,45 +1,43 @@
 using NUnit.Framework;
-using Bespoke.Azure.TableStorage;
 
-namespace Bespoke.Azure.TableStorage.Tests
+namespace Bespoke.Azure.TableStorage.Tests;
+
+[TestFixture]
+public class TableStorageSettingsTests
 {
     [TestFixture]
-    public class TableStorageSettingsTests
+    public class ConstructorTests : TableStorageSettingsTests
     {
-        [TestFixture]
-        public class ConstructorTests : TableStorageSettingsTests
+        [Test]
+        public void Should_Initialize_With_Default_Values()
         {
-            [Test]
-            public void Should_Initialize_With_Default_Values()
-            {
-                var settings = new TableStorageSettings();
-                Assert.NotNull(settings);
-                Assert.IsTrue(true);
-            }
+            var settings = new TableStorageSettings();
+            Assert.NotNull(settings);
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class ConnectionStringNameTests : TableStorageSettingsTests
+    [TestFixture]
+    public class ConnectionStringNameTests : TableStorageSettingsTests
+    {
+        [Test]
+        public void Should_Set_And_Get_Value_Correctly()
         {
-            [Test]
-            public void Should_Set_And_Get_Value_Correctly()
-            {
-                var settings = new TableStorageSettings();
-                settings.ConnectionStringName = "TestConnectionString";
-                Assert.IsTrue(true);
-            }
+            var settings = new TableStorageSettings();
+            settings.ConnectionStringName = "TestConnectionString";
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class TableEndpointTests : TableStorageSettingsTests
+    [TestFixture]
+    public class TableEndpointTests : TableStorageSettingsTests
+    {
+        [Test]
+        public void Should_Set_And_Get_Value_Correctly()
         {
-            [Test]
-            public void Should_Set_And_Get_Value_Correctly()
-            {
-                var settings = new TableStorageSettings();
-                settings.TableEndpoint = "https://test.table.core.windows.net";
-                Assert.AreEqual("https://test.table.core.windows.net", settings.TableEndpoint);
-            }
+            var settings = new TableStorageSettings();
+            settings.TableEndpoint = "https://test.table.core.windows.net";
+            Assert.AreEqual("https://test.table.core.windows.net", settings.TableEndpoint);
         }
     }
 }

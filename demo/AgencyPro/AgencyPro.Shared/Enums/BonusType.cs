@@ -1,10 +1,9 @@
-﻿namespace AgencyPro.Shared.Enums
+﻿namespace AgencyPro.Shared.Enums;
+
+public enum BonusType
 {
-    public enum BonusType
-    {
-        LeadQualificationBonus,
-        CandidateQualificationBonus,
-        CandidateMilestoneBonus,
-        InterviewerBonus
-    }
+    LeadQualificationBonus,
+    CandidateQualificationBonus,
+    CandidateMilestoneBonus,
+    InterviewerBonus
 }

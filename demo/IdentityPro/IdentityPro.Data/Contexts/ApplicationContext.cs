@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.Data;
+﻿using Bespoke.Data;
 using Bespoke.Data.Bases;
 using Bespoke.Data.Extensions;
 using Duende.IdentityServer.EntityFramework.Entities;
@@ -18,8 +12,11 @@ using Microsoft.Extensions.Options;
 
 namespace IdentityPro.Data.Contexts;
 
-public class ApplicationContext(DbContextOptions<ApplicationContext> options, IOptions<DbSettings> settings, ILoggerFactory loggerFactory)
-    : BaseContext<ApplicationContext>(options , settings), IConfigurationDbContext, IPersistedGrantDbContext
+public class ApplicationContext(
+    DbContextOptions<ApplicationContext> options,
+    IOptions<DbSettings> settings,
+    ILoggerFactory loggerFactory)
+    : BaseContext<ApplicationContext>(options, settings), IConfigurationDbContext, IPersistedGrantDbContext
 {
     private static readonly string IdentityServerSchema = "IdentityServer";
 

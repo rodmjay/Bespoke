@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 
 namespace IdentityPro.Services.Implementation;
@@ -43,6 +37,6 @@ public partial class RoleService
 
     protected virtual RoleClaim CreateRoleClaim(Role role, Claim claim)
     {
-        return new RoleClaim {RoleId = role.Id, ClaimType = claim.Type, ClaimValue = claim.Value};
+        return new RoleClaim { RoleId = role.Id, ClaimType = claim.Type, ClaimValue = claim.Value };
     }
 }

@@ -1,9 +1,7 @@
-﻿namespace AgencyPro.Shared.Models
+﻿namespace AgencyPro.Shared.Models;
+
+public class AgencyOwnerFixedPriceProposalOutput : FixedPriceProposalOutput
 {
-    public class AgencyOwnerFixedPriceProposalOutput : FixedPriceProposalOutput
-    {
-        public override Guid TargetOrganizationId => this.ProjectManagerOrganizationId;
-        public override Guid TargetPersonId => this.ProviderOrganizationOwnerId;
-        
-    }
+    public override Guid TargetOrganizationId => ProjectManagerOrganizationId;
+    public override Guid TargetPersonId => ProviderOrganizationOwnerId;
 }

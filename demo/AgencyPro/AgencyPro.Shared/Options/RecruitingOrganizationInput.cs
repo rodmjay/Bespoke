@@ -1,12 +1,8 @@
 ﻿using AgencyPro.Shared.Models;
 
-namespace AgencyPro.Shared.Options
+namespace AgencyPro.Shared.Options;
+
+public class RecruitingOrganizationInput : RecruitingOrganizationUpgradeInput
 {
-    public class RecruitingOrganizationInput : RecruitingOrganizationUpgradeInput
-    {
-        public virtual Guid DefaultRecruiterId { get; set; }
-
-
-
-    }
+    public virtual Guid DefaultRecruiterId { get; set; }
 }

@@ -1,11 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Web;
-using System.Collections.Generic;
+﻿using System.Web;
 
 namespace Bespoke.IntegrationTesting.Helpers;
 
@@ -17,7 +10,6 @@ public class UrlHelper
 
         foreach (var obj in dataObjects)
         {
-
             var properties = obj.GetType().GetProperties();
             var query = HttpUtility.ParseQueryString(string.Empty);
 
@@ -30,7 +22,6 @@ public class UrlHelper
             queryParams.Add(query.ToString());
 
             return string.Join("&", queryParams);
-
         }
 
         return string.Join("&", queryParams);

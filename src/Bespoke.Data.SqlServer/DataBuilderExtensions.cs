@@ -1,14 +1,13 @@
-using Microsoft.EntityFrameworkCore;
-using Serilog;
 using System.Runtime.CompilerServices;
+using Bespoke.Core.Helpers;
+using Bespoke.Data.Builders;
+using Bespoke.Data.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
-using Bespoke.Core.Helpers;
-using Bespoke.Data.Builders;
-using Bespoke.Data.Interfaces;
+using Serilog;
 
 namespace Bespoke.Data.SqlServer;
 
@@ -74,12 +73,8 @@ public static class DataBuilderExtensions
 
         // Add DbContext with or without pooling based on settings
         if (builder.Settings.UseContextPooling)
-        {
             builder.Services.AddDbContextPool<TContext>(optionsAction);
-        }
         else
-        {
             builder.Services.AddDbContext<TContext>(optionsAction);
-        }
     }
 }

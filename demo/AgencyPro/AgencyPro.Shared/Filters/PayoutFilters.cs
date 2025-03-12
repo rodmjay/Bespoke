@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Shared.Filters
+﻿namespace AgencyPro.Shared.Filters;
+
+public class PayoutFilters
 {
-    public class PayoutFilters
-    {
-        public string InvoiceId { get; set; }
-    }
+    public string InvoiceId { get; set; }
 }

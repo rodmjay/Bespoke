@@ -1,8 +1,7 @@
-﻿namespace AgencyPro.Shared.Interfaces
+﻿namespace AgencyPro.Shared.Interfaces;
+
+public interface IInvoiceMatrix
 {
-    public interface IInvoiceMatrix
-    {
-        Guid CustomerId { get; set; }
-        Guid CustomerOrganizationId { get; set; }
-    }
+    Guid CustomerId { get; set; }
+    Guid CustomerOrganizationId { get; set; }
 }

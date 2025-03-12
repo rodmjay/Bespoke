@@ -1,15 +1,9 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Reflection;
+﻿using System.Reflection;
 using AutoMapper;
+using Bespoke.Core.Helpers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
-using Bespoke.Core.Helpers;
 
 namespace Bespoke.Core.Extensions;
 
@@ -21,7 +15,8 @@ public static class ServiceCollectionExtensions
         return builder;
     }
 
-    public static AppBuilder AddCompositeRoot(this IServiceCollection services, IConfiguration configuration, Action<AppBuilder> configure = default)
+    public static AppBuilder AddCompositeRoot(this IServiceCollection services, IConfiguration configuration,
+        Action<AppBuilder> configure = default)
     {
         var builder = CreateAppBuilder(services, configuration);
         configure?.Invoke(builder);
@@ -38,6 +33,7 @@ public static class ServiceCollectionExtensions
 
         return new AppBuilder(services, appSettings, configuration);
     }
+
     public static AppBuilder AddAutomapper(
         this AppBuilder builder)
     {
@@ -58,10 +54,7 @@ public static class ServiceCollectionExtensions
 
     {
         var filteredAssemblies = assemblies.Where(a => a.GetName().Name != "Microsoft.Data.SqlClient");
-        var mapperConfig = new MapperConfiguration(cfg =>
-        {
-            cfg.AddMaps(filteredAssemblies);
-        });
+        var mapperConfig = new MapperConfiguration(cfg => { cfg.AddMaps(filteredAssemblies); });
         var mapper = mapperConfig.CreateMapper();
         builder.Services.AddSingleton(mapper);
         //builder.Services.TryAddScoped(sp => mapper);
@@ -79,7 +72,6 @@ public static class ServiceCollectionExtensions
             .ToList();
 
         foreach (var assembly in assemblies)
-        {
             try
             {
                 // Search for types that inherit from AutoMapper.Profile
@@ -90,10 +82,7 @@ public static class ServiceCollectionExtensions
                 if (profiles.Any())
                 {
                     Console.WriteLine($"Assembly: {assembly.FullName}");
-                    foreach (var profile in profiles)
-                    {
-                        Console.WriteLine($"  Found Profile: {profile.FullName}");
-                    }
+                    foreach (var profile in profiles) Console.WriteLine($"  Found Profile: {profile.FullName}");
                 }
             }
             catch (ReflectionTypeLoadException ex)
@@ -101,11 +90,8 @@ public static class ServiceCollectionExtensions
                 // Handle cases where types in an assembly cannot be loaded
                 Console.WriteLine($"Error loading types from assembly: {assembly.FullName}");
                 foreach (var loaderException in ex.LoaderExceptions)
-                {
                     Console.WriteLine($"  Loader Exception: {loaderException.Message}");
-                }
             }
-        }
 
         return assemblies.ToList();
     }

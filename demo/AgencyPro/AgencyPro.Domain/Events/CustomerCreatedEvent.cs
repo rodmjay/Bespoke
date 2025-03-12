@@ -1,7 +1,6 @@
-﻿namespace AgencyPro.Domain.Events
+﻿namespace AgencyPro.Domain.Events;
+
+public class CustomerCreatedEvent
 {
-    public class CustomerCreatedEvent
-    {
-        // marketer
-    }
+    // marketer
 }

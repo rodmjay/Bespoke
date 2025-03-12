@@ -1,11 +1,11 @@
-﻿using Azure.Storage.Blobs;
+﻿#nullable enable
+
+using Azure.Storage.Blobs;
+using Bespoke.Azure.Builders;
+using Bespoke.Core.Helpers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Bespoke.Azure.Builders;
-using Bespoke.Core.Helpers;
-
-#nullable enable
 
 namespace Bespoke.Azure.BlobStorage;
 

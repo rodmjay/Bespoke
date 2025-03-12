@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-namespace ResumePro.Api.Interfaces;
+﻿namespace ResumePro.Api.Interfaces;
 
 public interface IResumeController
 {
@@ -21,5 +15,4 @@ public interface IResumeController
 
     Task<Result> DeleteResume(int personId,
         int resumeId);
-
 }

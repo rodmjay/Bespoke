@@ -1,7 +1,6 @@
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class CustomerOrganizationProjectManagerOutput
+    : OrganizationProjectManagerOutput
 {
-    public class CustomerOrganizationProjectManagerOutput
-        : OrganizationProjectManagerOutput
-    {
-    }
 }

@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.Shared.Common;
+﻿using Bespoke.Shared.Common;
 
 namespace Bespoke.Services.Extensions;
 

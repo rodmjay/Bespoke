@@ -1,7 +1,6 @@
-namespace AgencyPro.Shared.Options
+namespace AgencyPro.Shared.Options;
+
+public class CandidateAcceptInput : CandidateInput
 {
-    public class CandidateAcceptInput : CandidateInput
-    {
-        public decimal Rate { get; set; }
-    }
+    public decimal Rate { get; set; }
 }

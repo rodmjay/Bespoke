@@ -1,7 +1,5 @@
-﻿namespace AgencyPro.IntegrationTests
-{
-    public class Class1
-    {
+﻿namespace AgencyPro.IntegrationTests;
 
-    }
+public class Class1
+{
 }

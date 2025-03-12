@@ -1,9 +1,3 @@
-#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -36,7 +30,7 @@ public class UnitOfWork : IUnitOfWorkAsync
             _repositories.Add(typeName, repository);
         }
 
-        return (IRepository<TEntity>) _repositories[typeName];
+        return (IRepository<TEntity>)_repositories[typeName];
     }
 
     public Task<int> SaveChangesAsync()
@@ -51,7 +45,7 @@ public class UnitOfWork : IUnitOfWorkAsync
 
     public IRepositoryAsync<TEntity> RepositoryAsync<TEntity>() where TEntity : class, IObjectState
     {
-        return (IRepositoryAsync<TEntity>) _serviceProvider!.GetRequiredService(typeof(IRepositoryAsync<TEntity>));
+        return (IRepositoryAsync<TEntity>)_serviceProvider!.GetRequiredService(typeof(IRepositoryAsync<TEntity>));
     }
 
     #region Private Fields
@@ -69,7 +63,7 @@ public class UnitOfWork : IUnitOfWorkAsync
         _serviceProvider = serviceProvider;
         _repositories = new Dictionary<string, object>();
 
-        if (dataContext is DbContext) Database = new DatabaseFacadeWrapper(((DbContext) _dataContext).Database);
+        if (dataContext is DbContext) Database = new DatabaseFacadeWrapper(((DbContext)_dataContext).Database);
     }
 
     #endregion Private Fields

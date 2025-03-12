@@ -1,57 +1,58 @@
-﻿using Microsoft.Extensions.Options;
-using Stripe;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using Bespoke.Payments.Stripe.Interfaces;
 using Bespoke.Payments.Stripe.Services;
+using Microsoft.Extensions.Options;
+using Stripe;
 
-namespace Bespoke.Payments.Stripe.Factories
+namespace Bespoke.Payments.Stripe.Factories;
+
+public class StripeFactory : IStripeFactory
 {
-    public class StripeFactory : IStripeFactory
+    private readonly ConcurrentDictionary<string, StripeCustomerClient> _customerServiceCache;
+
+    private readonly IOptions<StripeSettings> _settings;
+
+    public StripeFactory(IOptions<StripeSettings> settings)
     {
-        private readonly ConcurrentDictionary<string, StripeCustomerClient> _customerServiceCache;
+        _settings = settings;
+        _customerServiceCache = new ConcurrentDictionary<string, StripeCustomerClient>();
+    }
 
-        private readonly IOptions<StripeSettings> _settings;
-        public StripeFactory(IOptions<StripeSettings> settings)
+    public IStripeCustomerClient GetCustomerClient(string customerId)
+    {
+        if (!_customerServiceCache.ContainsKey(customerId))
         {
-            _settings = settings;
-            _customerServiceCache = new ConcurrentDictionary<string, StripeCustomerClient>();
-        }
-        
-        public IStripeCustomerClient GetCustomerClient(string customerId)
-        {
-            if (!_customerServiceCache.ContainsKey(customerId))
-            {
-                var customerService = new StripeCustomerClient(customerId);
-                _customerServiceCache[customerId] = customerService;
-            }
-            return _customerServiceCache[customerId];
+            var customerService = new StripeCustomerClient(customerId);
+            _customerServiceCache[customerId] = customerService;
         }
 
-        public IStripeChargeClient GetChargeClient(string chargeId)
-        {
-            return new StripeChargeClient(chargeId);
-        }
+        return _customerServiceCache[customerId];
+    }
 
-        public IStripeCardClient GetCardClient(string cardId)
-        {
-            return new StripeCardClient(cardId);
-        }
+    public IStripeChargeClient GetChargeClient(string chargeId)
+    {
+        return new StripeChargeClient(chargeId);
+    }
 
-        public IStripeSubscriptionClient GetSubscriptionClient(string subscriptionId)
-        {
-            throw new NotImplementedException();
-        }
+    public IStripeCardClient GetCardClient(string cardId)
+    {
+        return new StripeCardClient(cardId);
+    }
 
-        public async Task<Customer> CreateCustomerAsync(string email, string name)
-        {
-            var customerService = new CustomerService();
-            var customer = await customerService.CreateAsync(new CustomerCreateOptions
-            {
-                Email = email,
-                Name = name,
-            });
+    public IStripeSubscriptionClient GetSubscriptionClient(string subscriptionId)
+    {
+        throw new NotImplementedException();
+    }
 
-            return customer;
-        }
+    public async Task<Customer> CreateCustomerAsync(string email, string name)
+    {
+        var customerService = new CustomerService();
+        var customer = await customerService.CreateAsync(new CustomerCreateOptions
+        {
+            Email = email,
+            Name = name
+        });
+
+        return customer;
     }
 }

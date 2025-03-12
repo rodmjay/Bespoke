@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ResumePro.Shared.Enums;
 
@@ -29,11 +23,11 @@ public sealed class ResumeSettings : BaseEntity<ResumeSettings>, IResumeSettings
 
     public override void Configure(EntityTypeBuilder<ResumeSettings> builder)
     {
-        builder.HasKey(x => new {x.OrganizationId, x.ResumeId});
+        builder.HasKey(x => new { x.OrganizationId, x.ResumeId });
 
         builder.HasOne(x => x.Resume)
             .WithOne(x => x.ResumeSettings)
-            .HasForeignKey<ResumeSettings>(x => new {x.OrganizationId, x.ResumeId})
+            .HasForeignKey<ResumeSettings>(x => new { x.OrganizationId, x.ResumeId })
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(x => x.Template)

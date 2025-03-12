@@ -1,11 +1,8 @@
-﻿namespace AgencyPro.Shared.Models
-{
-    public class MarketerLeadMatrixOutput : LeadMatrixOutput
-    {
-        [JsonIgnore]
-        public override Guid MarketerId { get; set; }
+﻿namespace AgencyPro.Shared.Models;
 
-        [JsonIgnore]
-        public override Guid MarketerOrganizationId { get; set; }
-    }
+public class MarketerLeadMatrixOutput : LeadMatrixOutput
+{
+    [JsonIgnore] public override Guid MarketerId { get; set; }
+
+    [JsonIgnore] public override Guid MarketerOrganizationId { get; set; }
 }

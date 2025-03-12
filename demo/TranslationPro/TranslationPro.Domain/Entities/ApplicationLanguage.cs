@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2023 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.Shared.Interfaces;
+﻿using Bespoke.Shared.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,9 +10,9 @@ public class ApplicationLanguage : BaseEntity<ApplicationLanguage>, ISoftDelete
 
     public string LanguageId { get; set; } = null!;
     public Language Language { get; set; } = null!;
-    public bool IsDeleted { get; set; }
 
     public ICollection<ApplicationTranslation> Translations { get; set; } = new List<ApplicationTranslation>();
+    public bool IsDeleted { get; set; }
 
     public override void Configure(EntityTypeBuilder<ApplicationLanguage> builder)
     {

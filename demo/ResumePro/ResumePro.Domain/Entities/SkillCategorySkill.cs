@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ResumePro.Domain.Entities;
 
@@ -18,7 +12,7 @@ public sealed class SkillCategorySkill : BaseEntity<SkillCategorySkill>
 
     public override void Configure(EntityTypeBuilder<SkillCategorySkill> builder)
     {
-        builder.HasKey(x => new {x.SkillCategoryId, x.SkillId});
+        builder.HasKey(x => new { x.SkillCategoryId, x.SkillId });
 
         builder.HasOne(x => x.Skill)
             .WithMany(x => x.Categories)

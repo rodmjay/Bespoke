@@ -1,15 +1,8 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Validation;
 using IdentityPro.Services.Factories;
-using IdentityPro.Shared;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -115,7 +108,7 @@ public partial class SignInManager : SignInManager<User>, IResourceOwnerPassword
 
     public override Task SignInAsync(User user, bool isPersistent, string authenticationMethod = null)
     {
-        return SignInAsync(user, new AuthenticationProperties {IsPersistent = isPersistent}, authenticationMethod);
+        return SignInAsync(user, new AuthenticationProperties { IsPersistent = isPersistent }, authenticationMethod);
     }
 
     public override Task SignInAsync(User user, AuthenticationProperties authenticationProperties,

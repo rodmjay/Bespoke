@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace ResumePro.Shared.Extensions;
 
@@ -15,7 +9,7 @@ public static class EnumExtensions
     {
         var field = value.GetType().GetField(value.ToString());
 
-        var attributes = (DescriptionAttribute[]) field!.GetCustomAttributes(typeof(DescriptionAttribute), false);
+        var attributes = (DescriptionAttribute[])field!.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
         return attributes.Length > 0 ? attributes[0].Description : value.ToString();
     }

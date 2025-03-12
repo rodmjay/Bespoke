@@ -1,8 +1,4 @@
-#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
+#nullable enable
 
 using System.Collections.Concurrent;
 using System.Diagnostics;
@@ -10,8 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Bespoke.Shared.Interfaces;
 using Microsoft.EntityFrameworkCore;
-
-#nullable enable
 
 namespace Bespoke.Data.Repositories;
 
@@ -148,7 +142,7 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
     public virtual int Delete(TEntity entity, bool? commit = false)
     {
         if (entity == null) return 0;
-        
+
         ArgumentNullException.ThrowIfNull(entity);
 
         if (entity is ISoftDelete deletableEntity)
@@ -314,7 +308,7 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
     {
         if (entity == null)
             return;
-            
+
         if (_entitesChecked == null)
             _entitesChecked = new HashSet<object>();
 
@@ -325,11 +319,11 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
 
         var objectState = entity as IObjectState;
 
-        if (objectState is {ObjectState: ObjectState.Added})
+        if (objectState is { ObjectState: ObjectState.Added })
         {
             if (entity is ICreated timestamp) timestamp.CreatedOn = DateTimeOffset.UtcNow;
 
-            _context.SyncObjectState((IObjectState) entity);
+            _context.SyncObjectState((IObjectState)entity);
         }
 
         // Set tracking state for child collections
@@ -339,7 +333,7 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
             var trackableRef = prop.GetValue(entity, null) as IObjectState;
             if (trackableRef != null)
             {
-                if (trackableRef.ObjectState == ObjectState.Added) _context.SyncObjectState((IObjectState) entity);
+                if (trackableRef.ObjectState == ObjectState.Added) _context.SyncObjectState((IObjectState)entity);
                 var propValue = prop.GetValue(entity, null);
                 if (propValue != null)
                     SyncObjectGraph(propValue);

@@ -1,7 +1,5 @@
-﻿namespace TranslationPro.Data
-{
-    public class Class1
-    {
+﻿namespace TranslationPro.Data;
 
-    }
+public class Class1
+{
 }

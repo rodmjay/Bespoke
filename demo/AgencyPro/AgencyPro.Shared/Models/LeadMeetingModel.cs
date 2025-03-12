@@ -1,8 +1,7 @@
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class LeadMeetingModel
 {
-    public class LeadMeetingModel
-    {
-        public DateTime? DateTime { get; set; }
-        public string Notes { get; set; }
-    }
+    public DateTime? DateTime { get; set; }
+    public string Notes { get; set; }
 }

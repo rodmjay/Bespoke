@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Bespoke.Data.Enums;
 using Bespoke.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -15,12 +9,13 @@ using ResumePro.Shared.Options;
 namespace ResumePro.Services.Implementations;
 
 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-
 public sealed class ResumeSettingsService : BaseService<ResumeSettings>, IResumeSettingsService
 {
     public ResumeSettingsService(IServiceProvider serviceProvider) : base(serviceProvider)
     {
     }
+
+    private IQueryable<ResumeSettings> ResumeSettings => Repository.Queryable();
 
     public async Task<ResumeSettingsDto> GetResumeSettings(int organizationId, int personId, int resumeId)
     {
@@ -31,27 +26,22 @@ public sealed class ResumeSettingsService : BaseService<ResumeSettings>, IResume
             .FirstAsync();
     }
 
-    private IQueryable<ResumeSettings> ResumeSettings => Repository.Queryable();
-
-    public async Task<OneOf<ResumeSettingsDto, Result>> AddOrUpdateUpdateResumeSettings(int organizationId, int personId, int resumeId,
+    public async Task<OneOf<ResumeSettingsDto, Result>> AddOrUpdateUpdateResumeSettings(int organizationId,
+        int personId, int resumeId,
         ResumeSettingsOptions options)
     {
         var settings = await ResumeSettings.Where(x => x.OrganizationId == organizationId && x.ResumeId == resumeId)
             .FirstOrDefaultAsync();
 
         if (settings == null)
-        {
-            settings = new ResumeSettings()
+            settings = new ResumeSettings
             {
                 ObjectState = ObjectState.Added,
                 OrganizationId = organizationId,
                 ResumeId = resumeId
             };
-        }
         else
-        {
             settings.ObjectState = ObjectState.Modified;
-        }
 
         settings.AttachAllJobs = options.AttachAllJobs;
         settings.ResumeYearHistory = options.ResumeYearHistory;
@@ -64,10 +54,7 @@ public sealed class ResumeSettingsService : BaseService<ResumeSettings>, IResume
         settings.SkillView = options.SkillView;
 
         var records = Repository.InsertOrUpdateGraph(settings, true);
-        if (records > 0)
-        {
-            return await GetResumeSettings(organizationId, personId, resumeId);
-        }
+        if (records > 0) return await GetResumeSettings(organizationId, personId, resumeId);
 
         return Result.Failed();
     }

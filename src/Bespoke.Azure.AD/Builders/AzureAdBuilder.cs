@@ -7,6 +7,5 @@ public class AzureAdBuilder : BuilderBase
 {
     public AzureAdBuilder(AzureBuilder builder) : base(builder)
     {
-
     }
 }

@@ -1,13 +1,5 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Microsoft.AspNetCore.Authorization;
-using ResumePro.Api.Interfaces;
+﻿using ResumePro.Api.Interfaces;
 using ResumePro.Services.Interfaces;
-using ResumePro.Shared.Extensions;
 
 namespace ResumePro.Api.Controllers;
 
@@ -41,7 +33,7 @@ public sealed class ResumesController : BaseController, IResumeController
     //{
     //    var resume = await _resumeService.GetResume<ResumeDetails>(OrganizationId, personId, resumeId);
     //    var fileName = resume.GetFileName();
-        
+
     //    var response = await _resumeService.Generate2(resume)
     //        .ConfigureAwait(true);
 
@@ -57,7 +49,7 @@ public sealed class ResumesController : BaseController, IResumeController
 
     //    var resumeStream = await _resumeService.Generate2(resume)
     //        .ConfigureAwait(true);
-        
+
     //    Response.Headers.Add("Content-Disposition", $"inline; filename={fileName}");
 
     //    return File(resumeStream, "application/pdf");

@@ -1,9 +1,8 @@
-﻿namespace AgencyPro.Shared.Enums
+﻿namespace AgencyPro.Shared.Enums;
+
+public enum AffiliateType
 {
-    public enum AffiliateType
-    {
-        None = 0,
-        Marketer = 1,
-        Recruiter = 2
-    }
+    None = 0,
+    Marketer = 1,
+    Recruiter = 2
 }

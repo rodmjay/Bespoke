@@ -1,7 +1,6 @@
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public class LeadQualifyInput
 {
-    public class LeadQualifyInput
-    {
-        public Guid AccountManagerId { get; set; }
-    }
+    public Guid AccountManagerId { get; set; }
 }

@@ -1,8 +1,7 @@
-namespace AgencyPro.Shared.Interfaces
+namespace AgencyPro.Shared.Interfaces;
+
+public interface IOrganizationMarketer
 {
-    public interface IOrganizationMarketer
-    {
-        Guid MarketerId { get; set; }
-        Guid OrganizationId { get; set; }
-    }
+    Guid MarketerId { get; set; }
+    Guid OrganizationId { get; set; }
 }

@@ -1,36 +1,33 @@
 using NUnit.Framework;
-using Bespoke.Payments.Stripe;
-using System;
 
-namespace Bespoke.Payments.Stripe.Tests
+namespace Bespoke.Payments.Stripe.Tests;
+
+[TestFixture]
+public class StripeSettingsTests
 {
     [TestFixture]
-    public class StripeSettingsTests
+    public class ConstructorTests : StripeSettingsTests
     {
-        [TestFixture]
-        public class ConstructorTests : StripeSettingsTests
+        [Test]
+        public void Should_Initialize_With_Default_Values()
         {
-            [Test]
-            public void Should_Initialize_With_Default_Values()
-            {
-                var settings = new StripeSettings();
-                Assert.NotNull(settings);
-                Assert.IsTrue(true);
-            }
+            var settings = new StripeSettings();
+            Assert.NotNull(settings);
+            Assert.IsTrue(true);
         }
+    }
 
-        [TestFixture]
-        public class PropertiesTests : StripeSettingsTests
+    [TestFixture]
+    public class PropertiesTests : StripeSettingsTests
+    {
+        [Test]
+        public void Should_Set_And_Get_Values_Correctly()
         {
-            [Test]
-            public void Should_Set_And_Get_Values_Correctly()
-            {
-                var settings = new StripeSettings();
-                
-                // Test property setters and getters
-                // Note: This is a stub test since we don't know the actual properties
-                Assert.IsTrue(true);
-            }
+            var settings = new StripeSettings();
+
+            // Test property setters and getters
+            // Note: This is a stub test since we don't know the actual properties
+            Assert.IsTrue(true);
         }
     }
 }

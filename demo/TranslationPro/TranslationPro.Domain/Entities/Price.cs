@@ -9,6 +9,7 @@ public class Price : BaseEntity<Price>
     {
         Tiers = new List<PriceTier>();
     }
+
     public string Id { get; set; }
     public string ProductId { get; set; }
     public bool Active { get; set; }

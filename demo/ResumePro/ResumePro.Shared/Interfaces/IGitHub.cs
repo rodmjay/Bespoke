@@ -4,6 +4,5 @@ namespace ResumePro.Shared.Interfaces;
 
 public interface IGitHub
 {
-    [Url]
-    string GitHub { get; set; }
+    [Url] string GitHub { get; set; }
 }

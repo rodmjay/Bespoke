@@ -1,6 +1,5 @@
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Models;
+
+public sealed class CustomerPersonOutput : PersonOutput
 {
-    public sealed class CustomerPersonOutput : PersonOutput
-    {
-    }
 }

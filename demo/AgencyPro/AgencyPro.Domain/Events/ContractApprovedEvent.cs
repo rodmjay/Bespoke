@@ -1,11 +1,10 @@
-﻿namespace AgencyPro.Domain.Events
+﻿namespace AgencyPro.Domain.Events;
+
+public class ContractApprovedEvent : ContractEvent
 {
-    public class ContractApprovedEvent : ContractEvent
-    {
-        // contractor
-        // recruiter
-        // marketer
-        // account manager
-        // project manager
-    }
+    // contractor
+    // recruiter
+    // marketer
+    // account manager
+    // project manager
 }

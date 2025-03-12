@@ -1,7 +1,5 @@
-﻿namespace AgencyPro.Shared.Interfaces
+﻿namespace AgencyPro.Shared.Interfaces;
+
+public interface INotification
 {
-    public interface INotification
-    {
-      
-    }
 }

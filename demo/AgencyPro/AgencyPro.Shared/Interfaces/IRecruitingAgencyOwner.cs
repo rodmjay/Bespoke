@@ -1,8 +1,7 @@
-namespace AgencyPro.Shared.Interfaces
+namespace AgencyPro.Shared.Interfaces;
+
+public interface IRecruitingAgencyOwner
 {
-    public interface IRecruitingAgencyOwner
-    {
-        Guid OrganizationId { get; }
-        Guid CustomerId { get; }
-    }
+    Guid OrganizationId { get; }
+    Guid CustomerId { get; }
 }

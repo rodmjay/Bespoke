@@ -1,10 +1,4 @@
-﻿#region Header Info
-
-// Copyright 2024 Rod Johnson.  All rights reserved
-
-#endregion
-
-using Bespoke.IntegrationTesting.Bases;
+﻿using Bespoke.IntegrationTesting.Bases;
 using Bespoke.Shared.Common;
 using Microsoft.AspNetCore.Mvc;
 using ResumePro.Api.Interfaces;
@@ -19,12 +13,12 @@ public sealed class SchoolsProxy : BaseProxy, ISchoolsController
     {
     }
 
-    public  Task<List<SchoolDetails>> GetSchools(int personId)
+    public Task<List<SchoolDetails>> GetSchools(int personId)
     {
         throw new NotImplementedException();
     }
 
-    public  Task<SchoolDetails> GetSchool(int personId, int schoolId)
+    public Task<SchoolDetails> GetSchool(int personId, int schoolId)
     {
         throw new NotImplementedException();
     }
