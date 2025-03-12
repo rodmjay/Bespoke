@@ -103,26 +103,7 @@ public class ApplicationContext : BaseContext<ApplicationContext>, IConfiguratio
 
     private void SeedIdentityServer(ModelBuilder builder)
     {
-        builder.Entity<Client>()
-            .Seed("clients.csv");
-        builder.Entity<ApiScope>()
-            .Seed("apiScopes.csv");
-        builder.Entity<ClientGrantType>()
-            .Seed("clientGrantTypes.csv");
-        builder.Entity<ClientPostLogoutRedirectUri>()
-            .Seed("clientPostLogoutRedirectUris.csv");
-        builder.Entity<ClientRedirectUri>()
-            .Seed("clientRedirectUris.csv");
-        builder.Entity<ClientScope>()
-            .Seed("clientScopes.csv");
-        builder.Entity<ClientSecret>()
-            .Seed("clientSecrets.csv");
-        builder.Entity<ClientCorsOrigin>()
-            .Seed("clientCorsOrigins.csv");
-        builder.Entity<IdentityResource>()
-            .Seed("identityResources.csv");
-        builder.Entity<IdentityResourceClaim>()
-            .Seed("identityResourceClaims.csv");
+        // Seeding is disabled since there are no seed files.
     }
 
     private void SeedUsersAndRoles(ModelBuilder builder)
