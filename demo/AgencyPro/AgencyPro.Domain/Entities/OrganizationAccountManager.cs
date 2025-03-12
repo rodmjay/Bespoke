@@ -11,7 +11,7 @@
         public ICollection<WorkOrder> WorkOrders { get; set; }
         public ICollection<ProjectInvoice> Invoices { get; set; }
 
-        public OrganizationPerson OrganizationPerson { get; set; }
+        public OrganizationMembership OrganizationMembership { get; set; }
         public ICollection<TimeEntry> TimeEntries { get; set; }
         public decimal AccountManagerStream { get; set; }
 
@@ -64,7 +64,7 @@
             //     }).IsRequired(false);
 
             builder
-                .HasOne(x => x.OrganizationPerson)
+                .HasOne(x => x.OrganizationMembership)
                 .WithOne(x => x.AccountManager)
                 .HasForeignKey<OrganizationAccountManager>(x => new
                 {

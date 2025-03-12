@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using AgencyPro.Shared.Models;
 
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Options
 {
     public class LinkCustomerWithCompanyInput : LinkCustomerInput
     {

@@ -2,7 +2,6 @@
 {
     public class StripeSubscription : BaseEntity<StripeSubscription>
     {
-        public OrganizationSubscription OrganizationSubscription { get; set; }
         public string Id { get; set; } = null!;
 
         public DateTime? CanceledAt { get; set; }
@@ -22,10 +21,6 @@
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).IsRequired();
-
-            builder.HasOne(x => x.OrganizationSubscription)
-                .WithOne(x => x.StripeSubscription)
-                .HasForeignKey<OrganizationSubscription>(x => x.StripeSubscriptionId);
 
             builder.HasMany(x => x.Items)
                 .WithOne(x => x.Subscription)

@@ -1,4 +1,6 @@
-﻿namespace AgencyPro.Shared.Models
+﻿using AgencyPro.Shared.Options;
+
+namespace AgencyPro.Shared.Models
 {
     public abstract class MarketingOrganizationOutput : MarketingOrganizationInput, IMarketingOrganization,
         IOrganization

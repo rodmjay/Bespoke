@@ -3,7 +3,7 @@
     /// <summary>
     /// Customer's view of a provider organization
     /// </summary>
-    public class CustomerProviderOrganizationOutput : OrganizationOutput
+    public class CustomerProviderOrganizationOutput : OrganizationDto
     {
         [JsonIgnore]
         public override OrganizationType OrganizationType { get; set; }

@@ -8,6 +8,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
+using Bespoke.Shared.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 #nullable enable
@@ -295,7 +296,7 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
 
     private void _Insert(TEntity entity)
     {
-        if (entity is ICreated timestamp) timestamp.Created = DateTimeOffset.UtcNow;
+        if (entity is ICreated timestamp) timestamp.CreatedOn = DateTimeOffset.UtcNow;
 
         entity.ObjectState = ObjectState.Added;
         _dbSet.Add(entity);
@@ -326,7 +327,7 @@ public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : cla
 
         if (objectState is {ObjectState: ObjectState.Added})
         {
-            if (entity is ICreated timestamp) timestamp.Created = DateTimeOffset.UtcNow;
+            if (entity is ICreated timestamp) timestamp.CreatedOn = DateTimeOffset.UtcNow;
 
             _context.SyncObjectState((IObjectState) entity);
         }

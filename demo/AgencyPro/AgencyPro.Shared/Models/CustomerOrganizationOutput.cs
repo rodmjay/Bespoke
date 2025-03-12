@@ -1,6 +1,6 @@
 ﻿namespace AgencyPro.Shared.Models
 {
-    public class CustomerOrganizationOutput : OrganizationOutput
+    public class CustomerOrganizationOutput : OrganizationDto
     {
 
     }

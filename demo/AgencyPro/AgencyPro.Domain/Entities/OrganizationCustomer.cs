@@ -8,7 +8,7 @@
         public Customer Customer { get; set; }
 
         public Organization Organization { get; set; }
-        public OrganizationPerson OrganizationPerson { get; set; }
+        public OrganizationMembership OrganizationMembership { get; set; }
         public ICollection<Contract> Contracts { get; set; }
 
         public ICollection<CustomerAccount> Accounts { get; set; }
@@ -55,7 +55,7 @@
 
 
             builder
-                .HasOne(x => x.OrganizationPerson)
+                .HasOne(x => x.OrganizationMembership)
                 .WithOne(x => x.Customer).HasForeignKey<OrganizationCustomer>(x => new
                 {
                     x.OrganizationId,

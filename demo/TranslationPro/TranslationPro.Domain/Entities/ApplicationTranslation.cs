@@ -6,6 +6,7 @@
 
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using Bespoke.Shared.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -56,5 +57,5 @@ public class ApplicationTranslation : BaseEntity<ApplicationTranslation>, ISoftD
 
 
     public bool IsDeleted { get; set; }
-    public DateTimeOffset Created { get; set; }
+    public DateTimeOffset CreatedOn { get; set; }
 }

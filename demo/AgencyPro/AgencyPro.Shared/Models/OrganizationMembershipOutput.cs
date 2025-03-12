@@ -2,7 +2,7 @@
 
 namespace AgencyPro.Shared.Models
 {
-    public class OrganizationPersonOutput : OrganizationPersonInput, IOrganizationPerson, IOrganizationPersonTarget
+    public class OrganizationMembershipOutput : OrganizationPersonInput, IOrganizationMembership, IOrganizationPersonTarget
     {
         public virtual bool IsDefaultAccountManager { get; set; }
         public virtual bool IsDefaultProjectManager { get; set; }
@@ -37,5 +37,6 @@ namespace AgencyPro.Shared.Models
 
         [JsonIgnore] public virtual Guid TargetOrganizationId => this.OrganizationId;
         [JsonIgnore] public virtual Guid TargetPersonId => this.PersonId;
+        [JsonIgnore] public bool IsDeleted { get; set; }
     }
 }

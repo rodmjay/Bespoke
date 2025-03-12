@@ -2,7 +2,7 @@ using AgencyPro.Shared.Models.People;
 
 namespace AgencyPro.Shared.Models
 {
-    public class AccountManagerOrganizationPersonDetailsOutput : AccountManagerOrganizationPersonOutput
+    public class AccountManagerOrganizationMembershipDetailsOutput : AccountManagerOrganizationMembershipOutput
     {
         public AccountManagerOrganizationContractorOutput Contractor { get; set; }
         public AccountManagerOrganizationMarketerOutput Marketer { get; set; }

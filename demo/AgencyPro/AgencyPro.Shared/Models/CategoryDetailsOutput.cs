@@ -2,6 +2,6 @@
 {
     public class CategoryDetailsOutput : CategoryOutput
     {
-        public List<OrganizationOutput> Organizations { get; set; }
+        public List<OrganizationDto> Organizations { get; set; }
     }
 }

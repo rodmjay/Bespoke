@@ -1,6 +1,9 @@
-﻿namespace AgencyPro.Shared.Models
+﻿using System.ComponentModel.DataAnnotations;
+using AgencyPro.Shared.Options;
+
+namespace AgencyPro.Shared.Models
 {
-    public class OrganizationOutput : OrganizationCreateInput, IOrganization
+    public class OrganizationDto : IOrganization
     {
         public virtual string CategoryName { get; set; }
 
@@ -17,7 +20,11 @@
         public string PrimaryColor { get; set; }
         public string SecondaryColor { get; set; }
         public string TertiaryColor { get; set; }
+        [Required] public virtual string Name { get; set; }
 
+        public virtual string Description { get; set; }
+        public string Iso2 { get; set; }
+        public string ProvinceState { get; set; }
 
     }
 }

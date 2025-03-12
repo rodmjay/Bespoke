@@ -4,9 +4,9 @@
 
 #endregion
 
-namespace Bespoke.Data.Interfaces;
+namespace Bespoke.Shared.Interfaces;
 
 public interface ICreated
 {
-    DateTimeOffset Created { get; set; }
+    DateTimeOffset CreatedOn { get; set; }
 }

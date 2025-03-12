@@ -1,6 +1,8 @@
-﻿namespace AgencyPro.Shared.Interfaces
+﻿using Bespoke.Shared.Interfaces;
+
+namespace AgencyPro.Shared.Interfaces
 {
-    public interface IOrganizationPerson
+    public interface IOrganizationMembership: ISoftDelete
     {
         Guid OrganizationId { get; set; }
         Guid PersonId { get; set; }

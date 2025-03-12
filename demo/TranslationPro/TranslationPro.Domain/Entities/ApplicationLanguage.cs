@@ -4,6 +4,7 @@
 
 #endregion
 
+using Bespoke.Shared.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -4,9 +4,9 @@
 
 #endregion
 
-namespace Bespoke.Data.Interfaces;
+namespace Bespoke.Shared.Interfaces;
 
-public interface IHasModificationTime
+public interface IModified
 {
     /// <summary>The last modified time for this entity.</summary>
     DateTime? Updated { get; set; }

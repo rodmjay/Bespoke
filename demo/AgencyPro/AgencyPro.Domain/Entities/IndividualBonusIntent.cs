@@ -9,7 +9,7 @@
         public Guid OrganizationId { get; set; }
 
         public Person Person { get; set; }
-        public OrganizationPerson OrganizationPerson { get; set; }
+        public OrganizationMembership OrganizationMembership { get; set; }
 
         public BonusType BonusType { get; set; }
 
@@ -39,8 +39,8 @@
                 .HasForeignKey(x => x.PersonId)
                 .IsRequired();
 
-            builder.HasOne(x => x.OrganizationPerson)
-                .WithMany(x => x.BonusIntents)
+            builder.HasOne(x => x.OrganizationMembership)
+                .WithMany(x => x.Bonuses)
                 .HasForeignKey(x => new
                 {
                     x.OrganizationId,

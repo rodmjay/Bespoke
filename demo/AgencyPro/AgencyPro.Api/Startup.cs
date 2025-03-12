@@ -9,10 +9,12 @@ using Bespoke.Azure.AppInsights.Extensions;
 using Bespoke.Azure.Extensions;
 using Bespoke.Core.Extensions;
 using Bespoke.Core.Settings;
+using Bespoke.Data;
 using Bespoke.Data.Extensions;
 using Bespoke.Data.SqlServer;
 using Bespoke.Rest.Extensions;
 using Bespoke.Rest.Swagger.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace AgencyPro.Api;
@@ -37,6 +39,12 @@ public sealed class Startup
                 .AddEventAggregator()
                 .AddAutomapper()
                 .AddStorage(
+                    configureDbSettings: dataSettings =>
+                    {
+                        dataSettings.DefaultDeleteBehavior = DeleteBehavior.NoAction;
+                        dataSettings.DefaultSchema = "AgencyPro";
+                        dataSettings.NamingConventionType = DbSettings.NamingConvention.SnakeCase;
+                    },
                     configureDataBuilder: dataBuilder =>
                     {
                         dataBuilder.UseSqlServer<ApplicationContext>();

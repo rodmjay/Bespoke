@@ -5,7 +5,7 @@
         public Organization Organization { get; set; }
         public Recruiter Recruiter { get; set; }
 
-        public OrganizationPerson OrganizationPerson { get; set; }
+        public OrganizationMembership OrganizationMembership { get; set; }
 
         public decimal RecruiterStream { get; set; }
 
@@ -71,7 +71,7 @@
                 });
 
             builder
-                .HasOne(x => x.OrganizationPerson)
+                .HasOne(x => x.OrganizationMembership)
                 .WithOne(x => x.Recruiter).HasForeignKey<OrganizationRecruiter>(x => new
                 {
                     x.OrganizationId,

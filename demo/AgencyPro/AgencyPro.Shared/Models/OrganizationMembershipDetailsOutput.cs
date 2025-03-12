@@ -1,6 +1,6 @@
 ﻿namespace AgencyPro.Shared.Models
 {
-    public class OrganizationPersonDetailsOutput : OrganizationPersonOutput
+    public class OrganizationMembershipDetailsOutput : OrganizationMembershipOutput
     {
         public virtual decimal TotalAmountEarned { get; set; }
 

@@ -15,7 +15,6 @@
         public ICollection<OrganizationCustomer> Customers { get; set; } = new List<OrganizationCustomer>();
         public ICollection<OrganizationRecruiter> Recruiters { get; set; }
         public ICollection<OrganizationMarketer> Marketers { get; set; }
-        public ICollection<OrganizationPosition> Positions { get; set; }
 
         public ICollection<ProjectInvoice> ProviderInvoices { get; set; }
         public ICollection<ProjectInvoice> BuyerInvoices { get; set; }
@@ -23,7 +22,7 @@
         public ICollection<Contract> BuyerContracts { get; set; }
 
 
-        public ICollection<OrganizationPerson> OrganizationPeople { get; set; }
+        public ICollection<OrganizationMembership> OrganizationPeople { get; set; }
         public ICollection<OrganizationBillingCategory> BillingCategories { get; set; }
         public ICollection<OrganizationPaymentTerm> PaymentTerms { get; set; }
 
@@ -31,7 +30,6 @@
 
         public OrganizationFinancialAccount OrganizationFinancialAccount { get; set; }
         public OrganizationBuyerAccount OrganizationBuyerAccount { get; set; }
-        public OrganizationSubscription OrganizationSubscription { get; set; }
 
         public ICollection<CustomerAccount> BuyerCustomerAccounts { get; set; }
 
@@ -145,10 +143,6 @@
             //     .WithOne(x => x.BuyerOrganization)
             //     .HasForeignKey(x => x.CustomerOrganizationId)
             //     .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(x => x.OrganizationSubscription)
-                .WithOne(x => x.Organization)
-                .HasForeignKey<OrganizationSubscription>(x => x.Id);
 
             builder.HasOne(x => x.OrganizationBuyerAccount)
                 .WithOne(x => x.Organization)

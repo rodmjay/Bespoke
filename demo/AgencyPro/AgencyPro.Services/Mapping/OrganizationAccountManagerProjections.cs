@@ -12,7 +12,7 @@ namespace AgencyPro.Services.Mapping
                 .ForMember(x => x.ImageUrl, opt => opt.MapFrom(x => x.AccountManager.Person.ImageUrl))
                 .ForMember(x => x.Email, opt => opt.MapFrom(x => x.AccountManager.Person.User.Email))
                 .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(x => x.AccountManager.Person.User.PhoneNumber))
-                .ForMember(x => x.Status, opt => opt.MapFrom(x => x.OrganizationPerson.Status))
+                .ForMember(x => x.Status, opt => opt.MapFrom(x => x.OrganizationMembership.Status))
                 .IncludeAllDerived();
 
             CreateMap<OrganizationAccountManager, OrganizationAccountManagerStatistics>()

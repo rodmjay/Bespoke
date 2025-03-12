@@ -1,8 +1,8 @@
 namespace AgencyPro.Shared.Models
 {
 
-    public class AgencyOwnerOrganizationPersonOutput
-        : OrganizationPersonOutput
+    public class AgencyOwnerOrganizationMembershipOutput
+        : OrganizationMembershipOutput
     {
         public override Guid TargetOrganizationId => this.OrganizationId;
     }

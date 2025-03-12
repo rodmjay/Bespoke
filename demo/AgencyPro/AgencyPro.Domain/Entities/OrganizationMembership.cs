@@ -1,24 +1,24 @@
 ﻿namespace AgencyPro.Domain.Entities
 {
-    public class OrganizationPerson : BaseEntity<OrganizationPerson>, IOrganizationPerson
+    public class OrganizationMembership : BaseEntity<OrganizationMembership>, IOrganizationMembership
     {
-        public Organization Organization { get; set; }
-        public Person Person { get; set; }
+        public Organization Organization { get; set; } = null!;
+        public Guid OrganizationId { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
-        public ICollection<IndividualPayoutIntent> Payouts { get; set; } 
-        public ICollection<IndividualBonusIntent> BonusIntents { get; set; }
+        public Person Person { get; set; } = null!;
+        public Guid PersonId { get; set; }
 
-        public OrganizationAccountManager AccountManager { get; set; }
-        public OrganizationProjectManager ProjectManager { get; set; }
-        public OrganizationCustomer Customer { get; set; }
-        public OrganizationContractor Contractor { get; set; }
-        public OrganizationRecruiter Recruiter { get; set; }
-        public OrganizationMarketer Marketer { get; set; }
+        public ICollection<IndividualPayoutIntent> Payouts { get; set; } = new List<IndividualPayoutIntent>();
+        public ICollection<IndividualBonusIntent> Bonuses { get; set; } = new List<IndividualBonusIntent>();
+
+        public OrganizationAccountManager AccountManager { get; set; } = null!;
+        public OrganizationProjectManager ProjectManager { get; set; } = null!;
+        public OrganizationCustomer Customer { get; set; } = null!;
+        public OrganizationContractor Contractor { get; set; } = null!;
+        public OrganizationRecruiter Recruiter { get; set; } = null!;
+        public OrganizationMarketer Marketer { get; set; } = null!;
 
         public bool IsDeleted { get; set; }
-        public Guid OrganizationId { get; set; }
-        public Guid PersonId { get; set; }
 
         public PersonStatus Status { get; set; }
 
@@ -39,7 +39,7 @@
 
         public string AffiliateCode { get; set; } = null!;
 
-        public override void Configure(EntityTypeBuilder<OrganizationPerson> builder)
+        public override void Configure(EntityTypeBuilder<OrganizationMembership> builder)
         {
             builder
                 .HasKey(x => new {x.OrganizationId, x.PersonId});
@@ -48,7 +48,7 @@
             builder.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
 
             builder.HasMany(x => x.Payouts)
-                .WithOne(x => x.OrganizationPerson)
+                .WithOne(x => x.OrganizationMembership)
                 .HasForeignKey(x => new
                 {
                     x.OrganizationId,

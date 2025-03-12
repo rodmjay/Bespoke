@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AgencyPro.Shared.Models
+namespace AgencyPro.Shared.Options
 {
     public class MarketingOrganizationUpgradeInput
     {
@@ -12,7 +12,7 @@ namespace AgencyPro.Shared.Models
         public virtual decimal MarketingAgencyBonus { get; set; }
         [Range(0, 100)]
         public virtual decimal MarketerStream { get; set; }
-        
+
         public bool Discoverable { get; set; }
 
 

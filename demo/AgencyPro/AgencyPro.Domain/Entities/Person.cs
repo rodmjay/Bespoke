@@ -17,7 +17,7 @@ namespace AgencyPro.Domain.Entities
 
         public User User { get; set; }
         public ICollection<PersonNotification> PersonNotifications { get; set; }
-        public ICollection<OrganizationPerson> OrganizationPeople { get; set; }
+        public ICollection<OrganizationMembership> OrganizationPeople { get; set; }
         public ICollection<IndividualPayoutIntent> PayoutIntents { get; set; }
         public ICollection<IndividualBonusIntent> BonusIntents { get; set; }
         public Guid Id { get; set; }

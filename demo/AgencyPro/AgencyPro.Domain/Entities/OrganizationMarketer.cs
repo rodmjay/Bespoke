@@ -18,7 +18,7 @@ namespace AgencyPro.Domain.Entities
         public ICollection<Contract> Contracts { get; set; }
         public ICollection<Customer> Customers { get; set; }
         public ICollection<Lead> Leads { get; set; }
-        public OrganizationPerson OrganizationPerson { get; set; }
+        public OrganizationMembership OrganizationMembership { get; set; }
 
         public bool IsSystemDefault { get; set; }
         public bool IsDeleted { get; set; }
@@ -64,7 +64,7 @@ namespace AgencyPro.Domain.Entities
                 });
 
             builder
-                .HasOne(x => x.OrganizationPerson)
+                .HasOne(x => x.OrganizationMembership)
                 .WithOne(x => x.Marketer)
                 .HasForeignKey<OrganizationMarketer>(x => new
                 {

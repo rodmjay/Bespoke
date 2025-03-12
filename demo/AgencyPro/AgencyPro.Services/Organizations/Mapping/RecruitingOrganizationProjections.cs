@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace AgencyPro.Services.Mapping
+namespace AgencyPro.Services.Organizations.Mapping
 {
     public class RecruitingOrganizationProjections : Profile
     {
@@ -21,7 +21,7 @@ namespace AgencyPro.Services.Mapping
             CreateMap<RecruitingOrganization, ProviderAgencyOwnerRecruitingOrganizationOutput>()
                 .IncludeMembers(x => x.Organization)
                 .IncludeAllDerived();
-            
+
         }
 
     }

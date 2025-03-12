@@ -7,7 +7,7 @@
 
         public decimal ContractorStream { get; set; }
 
-        public OrganizationPerson OrganizationPerson { get; set; }
+        public OrganizationMembership OrganizationMembership { get; set; }
 
         public ICollection<ProviderOrganization> DefaultOrganizations { get; set; }
         public Organization Organization { get; set; }
@@ -28,10 +28,6 @@
         public Guid CreatedById { get; set; }
         public Guid UpdatedById { get; set; }
 
-        public int? LevelId { get; set; }
-        public Level Level { get; set; }
-        public int? PositionId { get; set; }
-        public Position Position { get; set; }
 
         public bool AutoApproveTimeEntries { get; set; }
         public override void Configure(EntityTypeBuilder<OrganizationContractor> builder)
@@ -73,11 +69,11 @@
             //         x.ContractorId
             //     });
 
-            builder.HasOne(x => x.OrganizationPerson)
+            builder.HasOne(x => x.OrganizationMembership)
                 .WithOne(x => x.Contractor);
 
             builder
-                .HasOne(x => x.OrganizationPerson)
+                .HasOne(x => x.OrganizationMembership)
                 .WithOne(x => x.Contractor)
                 .HasForeignKey<OrganizationContractor>(x => new
                 {
@@ -87,15 +83,6 @@
                 .OnDelete(DeleteBehavior.Cascade);
 
 
-            builder.HasOne(x => x.Position)
-                .WithMany(x => x.Contractors)
-                .HasForeignKey(x => x.PositionId)
-                .IsRequired(false);
-
-            builder.HasOne(x => x.Level)
-                .WithMany(x => x.Contractors)
-                .HasForeignKey(x => x.LevelId)
-                .IsRequired(false);
 
             
         }

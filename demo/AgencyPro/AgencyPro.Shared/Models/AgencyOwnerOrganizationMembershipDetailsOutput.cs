@@ -1,6 +1,6 @@
 namespace AgencyPro.Shared.Models
 {
-    public class AgencyOwnerOrganizationPersonDetailsOutput : AgencyOwnerOrganizationPersonOutput
+    public class AgencyOwnerOrganizationMembershipDetailsOutput : AgencyOwnerOrganizationMembershipOutput
     {
         public AgencyOwnerOrganizationContractorOutput Contractor { get; set; }
         public AgencyOwnerOrganizationMarketerOutput Marketer { get; set; }

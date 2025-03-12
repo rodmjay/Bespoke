@@ -14,7 +14,7 @@ namespace AgencyPro.Services.Mapping
 
 
             CreateMap<OrganizationContractor, OrganizationContractorOutput>()
-                .ForMember(x => x.Status, opt => opt.MapFrom(x => x.OrganizationPerson.Status))
+                .ForMember(x => x.Status, opt => opt.MapFrom(x => x.OrganizationMembership.Status))
                 .ForMember(x => x.DisplayName, opt => opt.MapFrom(x => x.Contractor.Person.FirstName))
                 .ForMember(x => x.Email, opt => opt.MapFrom(x => x.Contractor.Person.User.Email))
                 .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(x => x.Contractor.Person.User.PhoneNumber))

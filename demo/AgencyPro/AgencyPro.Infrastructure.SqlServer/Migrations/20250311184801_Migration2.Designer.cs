@@ -4,6 +4,7 @@ using AgencyPro.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgencyPro.Infrastructure.SqlServer.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20250311184801_Migration2")]
+    partial class Migration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,7 +157,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.ToTable("Organization");
                 });
 
-            modelBuilder.Entity("AgencyPro.Domain.Entities.OrganizationMembership", b =>
+            modelBuilder.Entity("AgencyPro.Domain.Entities.OrganizationPerson", b =>
                 {
                     b.Property<Guid>("OrganizationId")
                         .HasColumnType("uniqueidentifier");
@@ -208,7 +211,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("OrganizationMembership");
+                    b.ToTable("OrganizationPerson");
                 });
 
             modelBuilder.Entity("AgencyPro.Domain.Entities.Person", b =>
@@ -384,7 +387,7 @@ namespace AgencyPro.Infrastructure.SqlServer.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("AgencyPro.Domain.Entities.OrganizationMembership", b =>
+            modelBuilder.Entity("AgencyPro.Domain.Entities.OrganizationPerson", b =>
                 {
                     b.HasOne("AgencyPro.Domain.Entities.Organization", "Organization")
                         .WithMany("OrganizationPeople")

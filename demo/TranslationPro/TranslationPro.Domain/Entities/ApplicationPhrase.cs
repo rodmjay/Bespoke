@@ -6,6 +6,7 @@
 
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using Bespoke.Shared.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -68,5 +69,5 @@ public class ApplicationPhrase : BaseEntity<ApplicationPhrase>, ISoftDelete, ICr
         builder.HasQueryFilter(x => !x.IsDeleted);
     }
 
-    public DateTimeOffset Created { get; set; }
+    public DateTimeOffset CreatedOn { get; set; }
 }

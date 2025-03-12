@@ -4,9 +4,9 @@
 
 #endregion
 
-namespace Bespoke.Data.Interfaces;
+namespace Bespoke.Shared.Interfaces;
 
 public interface ICreatedTimestamp
 {
-    int Created { get; set; }
+    int CreatedTimestamp { get; set; }
 }

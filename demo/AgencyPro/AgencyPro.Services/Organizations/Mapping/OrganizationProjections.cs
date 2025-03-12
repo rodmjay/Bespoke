@@ -10,7 +10,7 @@ namespace AgencyPro.Services.Mapping
             AllowNullCollections = true;
             AllowNullDestinationValues = true;
 
-            CreateMap<Organization, OrganizationOutput>()
+            CreateMap<Organization, OrganizationDto>()
 
                 .ForMember(x => x.CategoryName, opt => opt.MapFrom(x => x.Category.Name))
 
@@ -89,9 +89,7 @@ namespace AgencyPro.Services.Mapping
                 .ForMember(x => x.RecruitingOrganizationDetails, opt => opt.MapFrom(x => x.RecruitingOrganization));
 
             CreateMap<Organization, AgencyOwnerProviderOrganizationDetailsOutput>()
-                .ForMember(x => x.AvailablePositions, opt => opt.MapFrom(x => x.Category.Positions.Select(y => y.Position)))
                 .ForMember(x => x.AvailablePaymentTerms, opt => opt.MapFrom(x => x.Category.AvailablePaymentTerms.Select(y => y.PaymentTerm)))
-                .ForMember(x => x.Positions, opt => opt.MapFrom(x => x.Positions.Select(y => y.PositionId)))
                 .ForMember(x => x.AvailableBillingCategories,
                     opt => opt.MapFrom(x => x.Category.AvailableBillingCategories.Select(y => y.BillingCategory)))
                 .ForMember(x => x.AvailableSkills,

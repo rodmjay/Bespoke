@@ -5,7 +5,7 @@
         public Organization Organization { get; set; }
         public ProjectManager ProjectManager { get; set; }
 
-        public OrganizationPerson OrganizationPerson { get; set; }
+        public OrganizationMembership OrganizationMembership { get; set; }
 
         public ICollection<ProviderOrganization> DefaultOrganizations { get; set; }
         public ICollection<Contract> Contracts { get; set; }
@@ -44,7 +44,7 @@
                 .WithOne(x => x.OrganizationProjectManager)
                 .HasForeignKey(x => new { x.ProjectManagerOrganizationId, x.ProjectManagerId });
 
-            builder.HasOne(x => x.OrganizationPerson)
+            builder.HasOne(x => x.OrganizationMembership)
                 .WithOne(x => x.ProjectManager)
                 .HasForeignKey<OrganizationProjectManager>(x => new { x.OrganizationId, x.ProjectManagerId })
                 .OnDelete(DeleteBehavior.Cascade);

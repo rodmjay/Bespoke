@@ -9,7 +9,7 @@ namespace AgencyPro.Services.Mapping
             CreateMap<OrganizationCustomer, CustomerOrganizationOutput>()
                 .IncludeMembers(x => x.Organization)
                 .IncludeAllDerived();
-            
+
             CreateMap<OrganizationCustomer, OrganizationCustomerOutput>()
                 .ForMember(x => x.IsProviderOwner, opt => opt.MapFrom(x => x.Organization.ProviderOrganization != null))
                 .ForMember(x => x.IsRecruitingOwner, opt => opt.MapFrom(x => x.Organization.RecruitingOrganization != null))

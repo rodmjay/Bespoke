@@ -6,6 +6,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using Bespoke.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
@@ -13,6 +14,8 @@ using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Extensions.Logging;
 using Bespoke.Data.Helpers;
+using Bespoke.Shared.Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Bespoke.Data.Bases;
 
@@ -142,21 +145,25 @@ public abstract class BaseContext<TContext> : DbContext, IDataContextAsync where
         PreModelCreating(builder);
         base.OnModelCreating(builder);
 
-        //// Apply query filter for soft delete to all entities that implement ISoftDelete
-        //foreach (var entityType in builder.Model.GetEntityTypes())
-        //{
-        //    if (typeof(ISoftDelete).IsAssignableFrom(entityType.ClrType))
-        //    {
-        //        var method = typeof(TContext)
-        //            .GetMethod(nameof(SetSoftDeleteFilter), BindingFlags.NonPublic | BindingFlags.Static)
-        //            ?.MakeGenericMethod(entityType.ClrType);
+        builder.ApplyDefaultDeleteBehavior(_settings.Value);
+        builder.ApplyNamingConventions(_settings.Value);
 
-        //        method.Invoke(null, new object[] { builder });
-        //    }
-        //}
+        if (!string.IsNullOrWhiteSpace(_settings.Value.DefaultSchema))
+        {
+            builder.HasDefaultSchema(_settings.Value.DefaultSchema);
+        }
+
+        // Apply various conventions via extension methods
+        builder.ApplyConcurrencyTokenConvention();
+        builder.ApplySoftDeleteConvention();
+        builder.ApplyCreatedConvention();
+        builder.ApplyCreatedTimestampConvention();
+        builder.ApplyModifiedConvention();
+        builder.ApplyModifiedTimestampConvention();
 
         SeedDatabase(builder);
     }
+
 
     private void Validate()
     {
@@ -185,16 +192,21 @@ public abstract class BaseContext<TContext> : DbContext, IDataContextAsync where
                 switch (entityEntry.State)
                 {
                     case EntityState.Added:
-                        if (entityEntry.Entity is IHasCreationTime createdEntity)
-                            createdEntity.Created = DateTime.UtcNow;
-
                         if (entityEntry.Entity is ICreated created)
-                            created.Created = DateTime.UtcNow;
+                            created.CreatedOn = DateTime.UtcNow;
+                        
+                        if (entityEntry.Entity is ICreatedTimestamp createdTimestamp)
+                            createdTimestamp.CreatedTimestamp = (int)DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                        
                         break;
 
                     case EntityState.Modified:
-                        if (entityEntry.Entity is IHasModificationTime modifiedEntity)
+                        if (entityEntry.Entity is IModified modifiedEntity)
                             modifiedEntity.Updated = DateTime.UtcNow;
+
+                        if (entityEntry.Entity is IModifiedTimestamp modifiedTimestamp)
+                            modifiedTimestamp.ModifiedTimestamp = (int)DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                        
                         break;
                 }
             }

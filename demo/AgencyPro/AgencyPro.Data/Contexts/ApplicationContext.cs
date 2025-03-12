@@ -5,12 +5,10 @@
 #endregion
 
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection.Emit;
 using AgencyPro.Domain.Entities;
 using Bespoke.Data;
 using Bespoke.Data.Attributes;
 using Bespoke.Data.Bases;
-using Bespoke.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -43,16 +41,12 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
             property.SetColumnType("decimal(18,2)");
         }
         
-        foreach (var entityType in builder.Model.GetEntityTypes())
-        {
-            // Loop over all foreign keys for each entity type
-            foreach (var foreignKey in entityType.GetForeignKeys())
-            {
-                // Set the delete behavior to NoAction
-                foreignKey.DeleteBehavior = DeleteBehavior.NoAction;
-            }
-        }
-        
+
+        //builder.Ignore<User>();
+        //builder.Ignore<Person>();
+        //builder.Ignore<Organization>();
+        //builder.Ignore<OrganizationPerson>();
+
         // Manually ignore all entities
         builder.Ignore<AccountCard>();
         builder.Ignore<AccountManager>();
@@ -64,7 +58,6 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
         builder.Ignore<Category>();
         builder.Ignore<CategoryBillingCategory>();
         builder.Ignore<CategoryPaymentTerm>();
-        builder.Ignore<CategoryPosition>();
         builder.Ignore<CategorySkill>();
         builder.Ignore<Comment>();
         builder.Ignore<Contract>();
@@ -85,12 +78,9 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
         builder.Ignore<Lead>();
         builder.Ignore<LeadMatrix>();
         builder.Ignore<LeadNotification>();
-        builder.Ignore<Level>();
         builder.Ignore<Marketer>();
         builder.Ignore<MarketingAgreement>();
         builder.Ignore<MarketingOrganization>();
-        builder.Ignore<Notification>();
-        builder.Ignore<Organization>();
         builder.Ignore<OrganizationAccountManager>();
         builder.Ignore<OrganizationBillingCategory>();
         builder.Ignore<OrganizationBonusIntent>();
@@ -101,17 +91,12 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
         builder.Ignore<OrganizationMarketer>();
         builder.Ignore<OrganizationPaymentTerm>();
         builder.Ignore<OrganizationPayoutIntent>();
-        builder.Ignore<OrganizationPerson>();
-        builder.Ignore<OrganizationPosition>();
         builder.Ignore<OrganizationProjectManager>();
         builder.Ignore<OrganizationRecruiter>();
         builder.Ignore<OrganizationSetting>();
         builder.Ignore<OrganizationSkill>();
-        builder.Ignore<OrganizationSubscription>();
         builder.Ignore<PaymentTerm>();
-        builder.Ignore<Person>();
         builder.Ignore<PersonNotification>();
-        builder.Ignore<Position>();
         builder.Ignore<PremiumOrganization>();
         builder.Ignore<Project>();
         builder.Ignore<ProjectBillingCategory>();
@@ -148,7 +133,7 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
         builder.Ignore<TimeEntry>();
         builder.Ignore<TimeEntryNotification>();
         builder.Ignore<TimeMatrix>();
-        builder.Ignore<User>();
+       
         builder.Ignore<UserNotification>();
         builder.Ignore<WorkOrder>();
         builder.Ignore<WorkOrderNotification>();

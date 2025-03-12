@@ -11,7 +11,7 @@ namespace AgencyPro.Services.Mapping
                 .ForMember(x => x.Email, opt => opt.MapFrom(x => x.Recruiter.Person.User.Email))
                 .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(x => x.Recruiter.Person.User.PhoneNumber))
                 .ForMember(x => x.ImageUrl, opt => opt.MapFrom(x => x.Recruiter.Person.ImageUrl))
-                .ForMember(x => x.Status, opt => opt.MapFrom(x => x.OrganizationPerson.Status))
+                .ForMember(x => x.Status, opt => opt.MapFrom(x => x.OrganizationMembership.Status))
                 .IncludeAllDerived();
 
             CreateMap<OrganizationRecruiter, OrganizationRecruiterStatistics>()

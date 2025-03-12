@@ -10,7 +10,7 @@
         public Guid OrganizationId { get; set; }
         public Organization Organization { get; set; }
 
-        public OrganizationPerson OrganizationPerson { get; set; }
+        public OrganizationMembership OrganizationMembership { get; set; }
 
         public string InvoiceId { get; set; } = null!;
         public StripeInvoice Invoice { get; set; }
@@ -44,7 +44,7 @@
                 .WithMany(x => x.IndividualPayoutIntents)
                 .HasForeignKey(x => x.OrganizationId);
 
-            builder.HasOne(x => x.OrganizationPerson)
+            builder.HasOne(x => x.OrganizationMembership)
                 .WithMany(x => x.Payouts)
                 .HasForeignKey(x => new
                 {

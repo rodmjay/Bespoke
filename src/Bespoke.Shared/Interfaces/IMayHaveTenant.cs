@@ -4,7 +4,7 @@
 
 #endregion
 
-namespace Bespoke.Data.Interfaces;
+namespace Bespoke.Shared.Interfaces;
 
 public interface IMayHaveTenant
 {

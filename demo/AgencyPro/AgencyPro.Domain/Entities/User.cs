@@ -16,7 +16,7 @@ public class User : IdentityUser<Guid>, IEntityTypeConfiguration<User>, IObjectS
     public string FullName => FirstName + " " + LastName;
     public bool SendMail { get; set; }
 
-    public Person Person { get; set; }
+    public Person Person { get; set; } = null;
     public virtual ICollection<UserNotification> Notifications { get; set; }
     public void Configure(EntityTypeBuilder<User> builder)
     {
@@ -26,26 +26,6 @@ public class User : IdentityUser<Guid>, IEntityTypeConfiguration<User>, IObjectS
         builder.Property(f => f.Id)
             .ValueGeneratedOnAdd();
 
-        //builder.HasMany(x => x.UserRoles)
-        //    .WithOne(x => x.User)
-        //    .HasForeignKey(x => x.UserId)
-        //    .OnDelete(DeleteBehavior.Cascade);
-
-        //builder.HasMany(x => x.UserTokens)
-        //    .WithOne(x => x.User)
-        //    .HasForeignKey(x => x.UserId)
-        //    .OnDelete(DeleteBehavior.Cascade);
-
-        //builder.HasMany(x => x.UserLogins)
-        //    .WithOne(x => x.User)
-        //    .HasForeignKey(x => x.UserId)
-        //    .OnDelete(DeleteBehavior.Cascade);
-
-        //builder.HasMany(x => x.UserClaims)
-        //    .WithOne(x => x.User)
-        //    .HasForeignKey(x => x.UserId)
-        //    .OnDelete(DeleteBehavior.Cascade);
-        
     }
 
     [NotMapped] [IgnoreDataMember] public ObjectState ObjectState { get; set; }

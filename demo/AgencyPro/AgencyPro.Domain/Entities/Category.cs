@@ -6,7 +6,6 @@ namespace AgencyPro.Domain.Entities
         public ICollection<Organization> Organizations { get; set; }
         public ICollection<CategoryPaymentTerm> AvailablePaymentTerms { get; set; }
         public ICollection<CategoryBillingCategory> AvailableBillingCategories { get; set; }
-        public ICollection<CategoryPosition> Positions { get; set; }
 
         public int CategoryId { get; set; }
         public string Name { get; set; } = null!;

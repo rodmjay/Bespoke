@@ -34,7 +34,7 @@
         /// </summary>
         public Guid OrganizationId { get; set; }
 
-        public OrganizationPerson Creator { get; set; }
+        public OrganizationMembership Creator { get; set; }
 
         public bool IsDeleted { get; set; }
         public DateTimeOffset Created { get; set; }
@@ -74,7 +74,7 @@
                 .OnDelete(DeleteBehavior.Cascade);
 
 
-            builder.HasOne(x => x.Creator).WithMany(x => x.Comments)
+            builder.HasOne(x => x.Creator).WithMany()
                 .HasForeignKey(x => new
                 {
                     x.OrganizationId,
