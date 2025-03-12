@@ -8,8 +8,28 @@ namespace ResumePro.IntegrationTests.Tests;
 
 public abstract partial class BaseApiTest : IntegrationTest<BaseApiTest, Startup>
 {
-    // todo:devin add proxy for each controller interface like... Any interface that ends with Controller in the ResumePro.Api.Interfaces
+    protected ICertificationsController CertificationsController => new CertificationsProxy(ApiClient);
+    protected ICompaniesController CompaniesController => new CompaniesProxy(ApiClient);
+    protected ICompanySkillsController CompanySkillsController => new CompanySkillsProxy(ApiClient);
+    protected IDegreesController DegreesController => new DegreesProxy(ApiClient);
+    protected IFiltersController FiltersController => new FiltersProxy(ApiClient);
+    protected IHighlightsController HighlightsController => new HighlightsProxy(ApiClient);
+    protected IOrganizationSettingsController OrganizationSettingsController => new OrganizationSettingsProxy(ApiClient);
+    protected IPeopleController PeopleController => new PeopleProxy(ApiClient);
+    protected IPersonLanguagesController PersonLanguagesController => new PersonLanguagesProxy(ApiClient);
+    protected IPersonSkillsController PersonSkillsController => new PersonSkillsProxy(ApiClient);
+    protected IPositionsController PositionsController => new PositionsProxy(ApiClient);
+    protected IProjectHighlightsController ProjectHighlightsController => new ProjectHighlightsProxy(ApiClient);
+    protected IProjectsController ProjectsController => new ProjectsProxy(ApiClient);
+    protected IReferencesController ReferencesController => new ReferencesProxy(ApiClient);
     protected IResumeController ResumeController => new ResumeProxy(ApiClient);
+    protected IResumeSettingsController ResumeSettingsController => new ResumeSettingsProxy(ApiClient);
+    protected IResumeSkillsController ResumeSkillsController => new ResumeSkillsProxy(ApiClient);
+    protected ISchoolsController SchoolsController => new SchoolsProxy(ApiClient);
+    protected ISkillsController SkillsController => new SkillsProxy(ApiClient);
+    protected ITemplatesController TemplatesController => new TemplatesProxy(ApiClient);
+    protected ITextController TextController => new TextProxy(ApiClient);
+    protected IUserController UserController => new UserProxy(ApiClient);
 
     [OneTimeSetUp]
     public virtual async Task SetupFixture()
