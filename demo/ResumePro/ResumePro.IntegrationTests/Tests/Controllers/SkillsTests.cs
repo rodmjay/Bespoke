@@ -16,7 +16,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 // TODO: Implement test logic later.
                 // For now, just stub in the test so that it passes.
                 await Task.CompletedTask;
-                await Task.CompletedTask;
                 Assert.Pass("Stub: GetSkills passed.");
             }
         }

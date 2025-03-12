@@ -16,7 +16,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 // TODO: Implement test logic later.
                 // For now, just stub in the test so that it passes.
                 await Task.CompletedTask;
-                await Task.CompletedTask;
                 Assert.Pass("Stub: GetResume passed.");
             }
         }
@@ -29,7 +28,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             public async Task GetResumes_ShouldReturnResumes()
             {
                 // TODO: Add logic to test invalid input scenarios.
-                await Task.CompletedTask;
                 await Task.CompletedTask;
                 Assert.Pass("Stub: GetResumes passed.");
             }
@@ -44,7 +42,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             {
                 // TODO: Add test logic later.
                 await Task.CompletedTask;
-                await Task.CompletedTask;
                 Assert.Pass("Stub: CreateResume with valid options passed.");
             }
         }
@@ -58,7 +55,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             {
                 // TODO: Add test logic later.
                 await Task.CompletedTask;
-                await Task.CompletedTask;
                 Assert.Pass("Stub: UpdateResume passed.");
             }
         }
@@ -71,7 +67,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             public async Task DeleteResume_ShouldReturnSuccess()
             {
                 // TODO: Add test logic later.
-                await Task.CompletedTask;
                 await Task.CompletedTask;
                 Assert.Pass("Stub: DeleteResume passed.");
             }
