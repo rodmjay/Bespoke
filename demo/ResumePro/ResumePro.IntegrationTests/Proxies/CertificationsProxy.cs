@@ -9,32 +9,34 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class CertificationsProxy : BaseProxy, ICertificationsController
 {
+    private const string RootUrl = "v1.0/people/{0}/certifications";
+
     public CertificationsProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<CertificationDto> Get(int personId, int certificationId)
+    public async Task<CertificationDto> Get(int personId, int certificationId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<CertificationDto>($"{string.Format(RootUrl, personId)}/{certificationId}");
     }
 
-    public Task<List<CertificationDto>> Get(int personId)
+    public async Task<List<CertificationDto>> Get(int personId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<List<CertificationDto>>(string.Format(RootUrl, personId));
     }
 
-    public Task<ActionResult<CertificationDto>> CreateCertification(int personId, CertificationOptions options)
+    public async Task<ActionResult<CertificationDto>> CreateCertification(int personId, CertificationOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPostActionResultAsync<CertificationOptions, CertificationDto>(string.Format(RootUrl, personId), options);
     }
 
-    public Task<ActionResult<CertificationDto>> Update(int personId, int certificationId, CertificationOptions options)
+    public async Task<ActionResult<CertificationDto>> Update(int personId, int certificationId, CertificationOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPutActionResultAsync<CertificationOptions, CertificationDto>($"{string.Format(RootUrl, personId)}/{certificationId}", options);
     }
 
-    public Task<Result> Delete(int personId, int certificationId)
+    public async Task<Result> Delete(int personId, int certificationId)
     {
-        throw new NotImplementedException();
+        return await DoDeleteAsync<Result>($"{string.Format(RootUrl, personId)}/{certificationId}");
     }
 }

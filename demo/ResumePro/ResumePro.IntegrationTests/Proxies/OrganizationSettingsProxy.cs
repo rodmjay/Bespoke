@@ -8,17 +8,19 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class OrganizationSettingsProxy : BaseProxy, IOrganizationSettingsController
 {
+    private const string RootUrl = "v1.0/settings";
+
     public OrganizationSettingsProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<ActionResult<OrganizationSettingsDto>> CreateSettings(OrganizationSettingsOptions options)
+    public async Task<ActionResult<OrganizationSettingsDto>> CreateSettings(OrganizationSettingsOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPostActionResultAsync<OrganizationSettingsOptions, OrganizationSettingsDto>(RootUrl, options);
     }
 
-    public Task<ActionResult<OrganizationSettingsDto>> UpdateSettings(OrganizationSettingsOptions options)
+    public async Task<ActionResult<OrganizationSettingsDto>> UpdateSettings(OrganizationSettingsOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPutActionResultAsync<OrganizationSettingsOptions, OrganizationSettingsDto>(RootUrl, options);
     }
 }

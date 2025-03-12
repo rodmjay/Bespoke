@@ -9,32 +9,34 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class CompaniesProxy : BaseProxy, ICompaniesController
 {
+    private const string RootUrl = "v1.0/people/{0}/companies";
+
     public CompaniesProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<List<CompanyDetails>> GetCompanies(int personId)
+    public async Task<List<CompanyDetails>> GetCompanies(int personId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<List<CompanyDetails>>(string.Format(RootUrl, personId));
     }
 
-    public Task<CompanyDetails> GetCompany(int personId, int companyId)
+    public async Task<CompanyDetails> GetCompany(int personId, int companyId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<CompanyDetails>($"{string.Format(RootUrl, personId)}/{companyId}");
     }
 
-    public Task<ActionResult<CompanyDetails>> CreateCompany(int personId, CompanyOptions options)
+    public async Task<ActionResult<CompanyDetails>> CreateCompany(int personId, CompanyOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPostActionResultAsync<CompanyOptions, CompanyDetails>(string.Format(RootUrl, personId), options);
     }
 
-    public Task<ActionResult<CompanyDetails>> UpdateCompany(int personId, int companyId, CompanyOptions options)
+    public async Task<ActionResult<CompanyDetails>> UpdateCompany(int personId, int companyId, CompanyOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPutActionResultAsync<CompanyOptions, CompanyDetails>($"{string.Format(RootUrl, personId)}/{companyId}", options);
     }
 
-    public Task<Result> DeleteCompany(int personId, int jobId)
+    public async Task<Result> DeleteCompany(int personId, int jobId)
     {
-        throw new NotImplementedException();
+        return await DoDeleteAsync<Result>($"{string.Format(RootUrl, personId)}/{jobId}");
     }
 }

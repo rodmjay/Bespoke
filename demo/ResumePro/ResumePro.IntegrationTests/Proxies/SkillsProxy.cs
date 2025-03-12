@@ -6,12 +6,14 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class SkillsProxy : BaseProxy, ISkillsController
 {
+    private const string RootUrl = "v1.0/skills";
+
     public SkillsProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<List<SkillDto>> GetSkills()
+    public async Task<List<SkillDto>> GetSkills()
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<List<SkillDto>>(RootUrl);
     }
 }

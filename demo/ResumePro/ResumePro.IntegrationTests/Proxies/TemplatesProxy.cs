@@ -8,22 +8,24 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class TemplatesProxy : BaseProxy, ITemplatesController
 {
+    private const string RootUrl = "v1.0/templates";
+
     public TemplatesProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<List<TemplateDto>> GetTemplates()
+    public async Task<List<TemplateDto>> GetTemplates()
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<List<TemplateDto>>(RootUrl);
     }
 
-    public Task<ActionResult<TemplateDto>> CreateTemplate(TemplateOptions options)
+    public async Task<ActionResult<TemplateDto>> CreateTemplate(TemplateOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPostActionResultAsync<TemplateOptions, TemplateDto>(RootUrl, options);
     }
 
-    public Task<ActionResult<TemplateDto>> UpdateTemplate(int templateId, TemplateOptions options)
+    public async Task<ActionResult<TemplateDto>> UpdateTemplate(int templateId, TemplateOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPutActionResultAsync<TemplateOptions, TemplateDto>($"{RootUrl}/{templateId}", options);
     }
 }

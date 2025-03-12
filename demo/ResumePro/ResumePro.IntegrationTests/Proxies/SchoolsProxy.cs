@@ -9,32 +9,34 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class SchoolsProxy : BaseProxy, ISchoolsController
 {
+    private const string RootUrl = "v1.0/people/{0}/schools";
+
     public SchoolsProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<List<SchoolDetails>> GetSchools(int personId)
+    public async Task<List<SchoolDetails>> GetSchools(int personId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<List<SchoolDetails>>(string.Format(RootUrl, personId));
     }
 
-    public Task<SchoolDetails> GetSchool(int personId, int schoolId)
+    public async Task<SchoolDetails> GetSchool(int personId, int schoolId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<SchoolDetails>($"{string.Format(RootUrl, personId)}/{schoolId}");
     }
 
-    public Task<ActionResult<SchoolDetails>> UpdateSchool(int personId, int schoolId, SchoolOptions options)
+    public async Task<ActionResult<SchoolDetails>> UpdateSchool(int personId, int schoolId, SchoolOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPutActionResultAsync<SchoolOptions, SchoolDetails>($"{string.Format(RootUrl, personId)}/{schoolId}", options);
     }
 
-    public Task<Result> DeleteSchool(int personId, int schoolId)
+    public async Task<Result> DeleteSchool(int personId, int schoolId)
     {
-        throw new NotImplementedException();
+        return await DoDeleteAsync<Result>($"{string.Format(RootUrl, personId)}/{schoolId}");
     }
 
-    public Task<ActionResult<SchoolDetails>> CreateSchool(int personId, SchoolOptions options)
+    public async Task<ActionResult<SchoolDetails>> CreateSchool(int personId, SchoolOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPostActionResultAsync<SchoolOptions, SchoolDetails>(string.Format(RootUrl, personId), options);
     }
 }

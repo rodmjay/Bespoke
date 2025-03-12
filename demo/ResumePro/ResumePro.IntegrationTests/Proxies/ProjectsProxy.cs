@@ -9,34 +9,36 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class ProjectsProxy : BaseProxy, IProjectsController
 {
+    private const string RootUrl = "v1.0/people/{0}/companies/{1}/positions/{2}/projects";
+
     public ProjectsProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<ProjectDetails> GetProject(int personId, int companyId, int positionId, int projectId)
+    public async Task<ProjectDetails> GetProject(int personId, int companyId, int positionId, int projectId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<ProjectDetails>($"{string.Format(RootUrl, personId, companyId, positionId)}/{projectId}");
     }
 
-    public Task<List<ProjectDetails>> GetList(int personId, int companyId, int positionId)
+    public async Task<List<ProjectDetails>> GetList(int personId, int companyId, int positionId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<List<ProjectDetails>>(string.Format(RootUrl, personId, companyId, positionId));
     }
 
-    public Task<ActionResult<ProjectDetails>> CreateProject(int personId, int companyId, int positionId,
+    public async Task<ActionResult<ProjectDetails>> CreateProject(int personId, int companyId, int positionId,
         ProjectOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPostActionResultAsync<ProjectOptions, ProjectDetails>(string.Format(RootUrl, personId, companyId, positionId), options);
     }
 
-    public Task<ActionResult<ProjectDetails>> Update(int personId, int companyId, int positionId, int projectId,
+    public async Task<ActionResult<ProjectDetails>> Update(int personId, int companyId, int positionId, int projectId,
         ProjectOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPutActionResultAsync<ProjectOptions, ProjectDetails>($"{string.Format(RootUrl, personId, companyId, positionId)}/{projectId}", options);
     }
 
-    public Task<Result> Delete(int personId, int companyId, int positionId, int projectId)
+    public async Task<Result> Delete(int personId, int companyId, int positionId, int projectId)
     {
-        throw new NotImplementedException();
+        return await DoDeleteAsync<Result>($"{string.Format(RootUrl, personId, companyId, positionId)}/{projectId}");
     }
 }

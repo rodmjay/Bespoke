@@ -9,32 +9,34 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class ReferencesProxy : BaseProxy, IReferencesController
 {
+    private const string RootUrl = "v1.0/people/{0}/references";
+
     public ReferencesProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<ReferenceDto> Get(int personId, int referenceId)
+    public async Task<ReferenceDto> Get(int personId, int referenceId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<ReferenceDto>($"{string.Format(RootUrl, personId)}/{referenceId}");
     }
 
-    public Task<List<ReferenceDto>> GetReferences(int personId)
+    public async Task<List<ReferenceDto>> GetReferences(int personId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<List<ReferenceDto>>(string.Format(RootUrl, personId));
     }
 
-    public Task<ActionResult<ReferenceDto>> CreateReference(int personId, ReferenceOptions options)
+    public async Task<ActionResult<ReferenceDto>> CreateReference(int personId, ReferenceOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPostActionResultAsync<ReferenceOptions, ReferenceDto>(string.Format(RootUrl, personId), options);
     }
 
-    public Task<ActionResult<ReferenceDto>> UpdateReference(int personId, int referenceId, ReferenceOptions options)
+    public async Task<ActionResult<ReferenceDto>> UpdateReference(int personId, int referenceId, ReferenceOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPutActionResultAsync<ReferenceOptions, ReferenceDto>($"{string.Format(RootUrl, personId)}/{referenceId}", options);
     }
 
-    public Task<Result> DeleteReference(int personId, int referenceId)
+    public async Task<Result> DeleteReference(int personId, int referenceId)
     {
-        throw new NotImplementedException();
+        return await DoDeleteAsync<Result>($"{string.Format(RootUrl, personId)}/{referenceId}");
     }
 }

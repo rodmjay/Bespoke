@@ -8,13 +8,15 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class ResumeSettingsProxy : BaseProxy, IResumeSettingsController
 {
+    private const string RootUrl = "v1.0/people/{0}/resumes/{1}/settings";
+
     public ResumeSettingsProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<ActionResult<ResumeSettingsDto>> UpdateSettings(int personId, int resumeId,
+    public async Task<ActionResult<ResumeSettingsDto>> UpdateSettings(int personId, int resumeId,
         ResumeSettingsOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPutActionResultAsync<ResumeSettingsOptions, ResumeSettingsDto>(string.Format(RootUrl, personId, resumeId), options);
     }
 }
