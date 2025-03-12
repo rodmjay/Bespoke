@@ -8,12 +8,14 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class TextProxy : BaseProxy, ITextController
 {
+    private const string RootUrl = "v1.0/text";
+
     public TextProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<ChatResult> Professionalize([FromBody] ChatOptions options)
+    public async Task<ChatResult> Professionalize([FromBody] ChatOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPostAsync<ChatOptions, ChatResult>($"{RootUrl}/professionalize", options);
     }
 }
