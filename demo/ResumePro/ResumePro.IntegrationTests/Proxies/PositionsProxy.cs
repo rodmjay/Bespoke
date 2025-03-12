@@ -9,32 +9,34 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class PositionsProxy : BaseProxy, IPositionsController
 {
+    private const string RootUrl = "v1.0/people/{0}/companies/{1}/positions";
+
     public PositionsProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<ActionResult<CompanyDetails>> CreatePosition(int personId, int companyId, PositionOptions options)
+    public async Task<ActionResult<CompanyDetails>> CreatePosition(int personId, int companyId, PositionOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPostActionResultAsync<PositionOptions, CompanyDetails>(string.Format(RootUrl, personId, companyId), options);
     }
 
-    public Task<ActionResult<CompanyDetails>> UpdatePosition(int personId, int companyId, int positionId, PositionOptions options)
+    public async Task<ActionResult<CompanyDetails>> UpdatePosition(int personId, int companyId, int positionId, PositionOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPutActionResultAsync<PositionOptions, CompanyDetails>($"{string.Format(RootUrl, personId, companyId)}/{positionId}", options);
     }
 
-    public Task<Result> DeletePosition(int personId, int companyId, int positionId)
+    public async Task<Result> DeletePosition(int personId, int companyId, int positionId)
     {
-        throw new NotImplementedException();
+        return await DoDeleteAsync<Result>($"{string.Format(RootUrl, personId, companyId)}/{positionId}");
     }
 
-    public Task<List<PositionDetails>> GetPositions(int personId, int companyId)
+    public async Task<List<PositionDetails>> GetPositions(int personId, int companyId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<List<PositionDetails>>(string.Format(RootUrl, personId, companyId));
     }
 
-    public Task<PositionDetails> GetPosition(int personId, int companyId, int positionId)
+    public async Task<PositionDetails> GetPosition(int personId, int companyId, int positionId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<PositionDetails>($"{string.Format(RootUrl, personId, companyId)}/{positionId}");
     }
 }
