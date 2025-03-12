@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Threading.Tasks;
 
 namespace ResumePro.IntegrationTests.Tests.Controllers
 {
@@ -14,8 +15,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             {
                 // TODO: Implement test logic later.
                 // For now, just stub in the test so that it passes.
-                await Task.CompletedTask;
-                await Task.CompletedTask;
+                await Task.CompletedTask; // Single placeholder if needed
                 Assert.Pass("Stub: AddResumeSkill passed.");
             }
         }
@@ -28,8 +28,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             public async Task DeleteResumeSkill_ShouldReturnSuccess()
             {
                 // TODO: Add logic to test invalid input scenarios.
-                await Task.CompletedTask;
-                await Task.CompletedTask;
+                await Task.CompletedTask; // Single placeholder if needed
                 Assert.Pass("Stub: DeleteResumeSkill passed.");
             }
         }
