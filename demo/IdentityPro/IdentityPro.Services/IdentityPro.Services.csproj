@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Bespoke.Services\Bespoke.Services.csproj" />
+    <ProjectReference Include="..\IdentityPro.Data\IdentityPro.Data.csproj" />
+    <ProjectReference Include="..\IdentityPro.Domain\IdentityPro.Domain.csproj" />
+    <ProjectReference Include="..\IdentityPro.Shared\IdentityPro.Shared.csproj" />
+  </ItemGroup>
+
+
 </Project>

@@ -160,7 +160,8 @@ public abstract class BaseContext<TContext> : DbContext, IDataContextAsync where
         builder.ApplyCreatedTimestampConvention();
         builder.ApplyModifiedConvention();
         builder.ApplyModifiedTimestampConvention();
-
+        builder.IgnoreObjectState();
+        
         SeedDatabase(builder);
     }
 

@@ -6,6 +6,6 @@
 
 namespace ResumePro.Services.Interfaces;
 
-public interface ICountryService : ICountryStore, IStateProvinceStore
+public interface ICountryService : ICountryStore, IStateProvinceService
 {
 }

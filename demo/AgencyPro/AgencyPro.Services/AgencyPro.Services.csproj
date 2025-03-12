@@ -16,7 +16,6 @@
   <ItemGroup>
     <Folder Include="Contracts\EventHandlers\" />
     <Folder Include="Contracts\Mapping\" />
-    <Folder Include="Organizations\Implementation\" />
   </ItemGroup>
 
 </Project>

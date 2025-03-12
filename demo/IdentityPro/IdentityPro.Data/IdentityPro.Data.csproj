@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Duende.IdentityServer.EntityFramework.Storage" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Bespoke.Data\Bespoke.Data.csproj" />
+    <ProjectReference Include="..\IdentityPro.Domain\IdentityPro.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

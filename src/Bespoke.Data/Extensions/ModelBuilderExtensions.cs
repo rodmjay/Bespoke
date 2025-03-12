@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Bespoke.Shared.Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Reflection.Emit;
 
 namespace Bespoke.Data.Extensions
 {
@@ -128,6 +130,20 @@ namespace Bespoke.Data.Extensions
                     modelBuilder.Entity(entityType.ClrType)
                         .Property<int?>(nameof(IModifiedTimestamp.ModifiedTimestamp))
                         .IsRequired(false);
+                }
+            }
+        }
+
+        public static void IgnoreObjectState(this ModelBuilder modelBuilder)
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                // Look for a property named "ObjectState" on the entity.
+                var objectStateProperty = entityType.ClrType.GetProperty("ObjectState");
+                if (objectStateProperty != null)
+                {
+                    // Mark the property as not mapped.
+                    modelBuilder.Entity(entityType.ClrType).Ignore("ObjectState");
                 }
             }
         }

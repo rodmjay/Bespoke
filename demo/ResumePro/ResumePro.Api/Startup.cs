@@ -12,7 +12,9 @@ using Bespoke.Core.Settings;
 using Bespoke.Data.Extensions;
 using Bespoke.Data.SqlServer;
 using Bespoke.Rest.Extensions;
+using Bespoke.Rest.Middleware;
 using Bespoke.Rest.Swagger.Extensions;
+using Bespoke.Shared.Enums;
 using Microsoft.Extensions.Options;
 using ResumePro.Data.Contexts;
 using ResumePro.Services.Extensions;
@@ -107,6 +109,35 @@ public sealed class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext context,
         IOptions<AppSettings> settings)
     {
-        RestApiBuilderExtensions.Configure(app, env, settings);
+
+        app.UseMiddleware<ExceptionMiddleware>();
+
+        //if (settings.Value.Mode == OperationMode.Demo)
+        //    app.UseMiddleware<DemoModeMiddleware>();
+        //else
+        //    app.UseMiddleware<LiveModeMiddleware>();
+
+
+        var appSettings = settings.Value;
+
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint($"/swagger/{settings.Value.Version}/swagger.json", appSettings.Name);
+            c.RoutePrefix = "swagger";  // Changed from string.Empty to "swagger"
+        });
+
+        // Serve Angular’s static files (index.html, etc.)
+        app.UseDefaultFiles();
+        app.UseStaticFiles();
+
+        app.UseHttpsRedirection();
+        app.UseRouting();
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
     }
 }
