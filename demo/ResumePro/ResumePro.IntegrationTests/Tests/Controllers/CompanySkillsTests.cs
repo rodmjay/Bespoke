@@ -1,7 +1,6 @@
 using NUnit.Framework;
-using System.Threading.Tasks;
 
-namespace ResumePro.IntegrationTests.Tests
+namespace ResumePro.IntegrationTests.Tests.Controllers
 {
     [TestFixture]
     public class CompanySkillsTests : BaseApiTest
