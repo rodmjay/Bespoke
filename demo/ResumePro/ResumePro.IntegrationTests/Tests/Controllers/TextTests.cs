@@ -16,7 +16,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 // TODO: Implement test logic later.
                 // For now, just stub in the test so that it passes.
                 await Task.CompletedTask;
-                await Task.CompletedTask;
                 Assert.Pass("Stub: Professionalize with valid options passed.");
             }
             
@@ -24,7 +23,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             public async Task Professionalize_WithInvalidOptions_ShouldReturnBadRequest()
             {
                 // TODO: Add logic to test invalid input scenarios.
-                await Task.CompletedTask;
                 await Task.CompletedTask;
                 Assert.Pass("Stub: Professionalize with invalid options passed.");
             }

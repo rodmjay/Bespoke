@@ -16,8 +16,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 // TODO: Implement test logic later.
                 // For now, just stub in the test so that it passes.
                 await Task.CompletedTask;
-                await Task.CompletedTask;
-                await Task.CompletedTask;
                 Assert.Pass("Stub: Create with valid options passed.");
             }
             
@@ -25,8 +23,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             public async Task Create_WithInvalidOptions_ShouldReturnBadRequest()
             {
                 // TODO: Add logic to test invalid input scenarios.
-                await Task.CompletedTask;
-                await Task.CompletedTask;
                 await Task.CompletedTask;
                 Assert.Pass("Stub: Create with invalid options passed.");
             }
@@ -41,8 +37,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             {
                 // TODO: Add test logic later.
                 await Task.CompletedTask;
-                await Task.CompletedTask;
-                await Task.CompletedTask;
                 Assert.Pass("Stub: Update with valid options passed.");
             }
         }
@@ -56,8 +50,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             {
                 // TODO: Add test logic later.
                 await Task.CompletedTask;
-                await Task.CompletedTask;
-                await Task.CompletedTask;
                 Assert.Pass("Stub: Delete passed.");
             }
         }
@@ -70,8 +62,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             public async Task Get_ShouldReturnCertification()
             {
                 // TODO: Add test logic later.
-                await Task.CompletedTask;
-                await Task.CompletedTask;
                 await Task.CompletedTask;
                 Assert.Pass("Stub: Get passed.");
             }

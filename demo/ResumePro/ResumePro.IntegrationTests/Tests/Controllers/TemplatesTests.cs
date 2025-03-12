@@ -16,7 +16,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 // TODO: Implement test logic later.
                 // For now, just stub in the test so that it passes.
                 await Task.CompletedTask;
-                await Task.CompletedTask;
                 Assert.Pass("Stub: GetTemplates passed.");
             }
         }
@@ -29,7 +28,6 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             public async Task CreateTemplate_WithValidOptions_ShouldReturnSuccess()
             {
                 // TODO: Add test logic later.
-                await Task.CompletedTask;
                 await Task.CompletedTask;
                 Assert.Pass("Stub: CreateTemplate with valid options passed.");
             }
