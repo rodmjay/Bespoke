@@ -27,6 +27,7 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
         builder.Entity<StateProvince>().Seed("state_provinces.csv");
         builder.Entity<Skill>().Seed("skills.csv");
         builder.Entity<Language>().Seed("languages.csv");
+        builder.Entity<Persona>().Seed("personas.csv");
 
         //builder.Entity<ProjectHighlight>().Seed("project_highlights.csv");
         //builder.Entity<CompanySkill>().Seed("company_skills.csv");
