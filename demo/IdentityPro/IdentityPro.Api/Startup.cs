@@ -27,7 +27,7 @@ public sealed class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddCompositeRoot(Configuration, builder =>
+        services.AddBespoke(Configuration, builder =>
         {
             builder
                 .AddEventAggregator()

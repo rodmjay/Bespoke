@@ -15,7 +15,7 @@ public static class ServiceCollectionExtensions
         return builder;
     }
 
-    public static AppBuilder AddCompositeRoot(this IServiceCollection services, IConfiguration configuration,
+    public static AppBuilder AddBespoke(this IServiceCollection services, IConfiguration configuration,
         Action<AppBuilder> configure = default)
     {
         var builder = CreateAppBuilder(services, configuration);
