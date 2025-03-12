@@ -3,9 +3,12 @@ using NUnit.Framework;
 using ResumePro.Api;
 using ResumePro.Api.Interfaces;
 using ResumePro.IntegrationTests.Proxies;
+using System;
+using System.Threading.Tasks;
 
 namespace ResumePro.IntegrationTests.Tests;
 
+[Category("Integration")]
 public abstract partial class BaseApiTest : IntegrationTest<BaseApiTest, Startup>
 {
     protected ICertificationsController CertificationsController => new CertificationsProxy(ApiClient);
@@ -31,15 +34,30 @@ public abstract partial class BaseApiTest : IntegrationTest<BaseApiTest, Startup
     protected ITextController TextController => new TextProxy(ApiClient);
     protected IUserController UserController => new UserProxy(ApiClient);
 
+    protected static bool IsRunningOnCI()
+    {
+        return Environment.GetEnvironmentVariable("CI") != null || 
+               Environment.GetEnvironmentVariable("GITHUB_ACTIONS") != null;
+    }
+
     [OneTimeSetUp]
     public virtual async Task SetupFixture()
     {
+        if (IsRunningOnCI())
+        {
+            Assert.Ignore("Tests skipped when running on CI environment due to LocalDB not being supported");
+            return;
+        }
+        
         await ResetDatabase();
     }
 
     [OneTimeTearDown]
     public virtual async Task TeardownFixture()
     {
-        await DeleteDatabase();
+        if (!IsRunningOnCI())
+        {
+            await DeleteDatabase();
+        }
     }
 }
