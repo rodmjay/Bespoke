@@ -6,12 +6,14 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class UserProxy : BaseProxy, IUserController
 {
+    private const string RootUrl = "v1.0/user";
+
     public UserProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<UserOutput> GetUser()
+    public async Task<UserOutput> GetUser()
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<UserOutput>(RootUrl);
     }
 }

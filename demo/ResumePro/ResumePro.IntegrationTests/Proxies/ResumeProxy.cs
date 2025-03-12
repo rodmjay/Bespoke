@@ -9,32 +9,34 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class ResumeProxy : BaseProxy, IResumeController
 {
+    private const string RootUrl = "v1.0/people/{0}/resumes";
+
     public ResumeProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<ResumeDetails> GetResume(int personId, int resumeId)
+    public async Task<ResumeDetails> GetResume(int personId, int resumeId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<ResumeDetails>($"{string.Format(RootUrl, personId)}/{resumeId}");
     }
 
-    public Task<List<ResumeDto>> GetResumes(int personId)
+    public async Task<List<ResumeDto>> GetResumes(int personId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<List<ResumeDto>>(string.Format(RootUrl, personId));
     }
 
-    public Task<ActionResult<ResumeDetails>> CreateResume(int personId, ResumeOptions options)
+    public async Task<ActionResult<ResumeDetails>> CreateResume(int personId, ResumeOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPostActionResultAsync<ResumeOptions, ResumeDetails>(string.Format(RootUrl, personId), options);
     }
 
-    public Task<ActionResult<ResumeDetails>> UpdateResume(int personId, int resumeId, ResumeOptions options)
+    public async Task<ActionResult<ResumeDetails>> UpdateResume(int personId, int resumeId, ResumeOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPutActionResultAsync<ResumeOptions, ResumeDetails>($"{string.Format(RootUrl, personId)}/{resumeId}", options);
     }
 
-    public Task<Result> DeleteResume(int personId, int resumeId)
+    public async Task<Result> DeleteResume(int personId, int resumeId)
     {
-        throw new NotImplementedException();
+        return await DoDeleteAsync<Result>($"{string.Format(RootUrl, personId)}/{resumeId}");
     }
 }

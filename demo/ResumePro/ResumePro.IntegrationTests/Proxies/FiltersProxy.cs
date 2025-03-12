@@ -6,12 +6,14 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class FiltersProxy : BaseProxy, IFiltersController
 {
+    private const string RootUrl = "v1.0/filters";
+
     public FiltersProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<FilterContainer> GetFilters()
+    public async Task<FilterContainer> GetFilters()
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<FilterContainer>(RootUrl);
     }
 }

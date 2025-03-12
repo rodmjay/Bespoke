@@ -10,32 +10,34 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class PeopleProxy : BaseProxy, IPeopleController
 {
+    private const string RootUrl = "v1.0/people";
+
     public PeopleProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<PagedList<PersonaDto>> GetPeople(PersonaFilters filters, PagingQuery paging)
+    public async Task<PagedList<PersonaDto>> GetPeople(PersonaFilters filters, PagingQuery paging)
     {
-        throw new NotImplementedException();
+        return await DoPostAsync<PersonaFilters, PagedList<PersonaDto>>($"{RootUrl}/Search", filters);
     }
 
-    public Task<PersonaDetails> GetPerson(int personId)
+    public async Task<PersonaDetails> GetPerson(int personId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<PersonaDetails>($"{RootUrl}/{personId}");
     }
 
-    public Task<ActionResult<PersonaDetails>> CreatePerson(PersonOptions options)
+    public async Task<ActionResult<PersonaDetails>> CreatePerson(PersonOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPostActionResultAsync<PersonOptions, PersonaDetails>(RootUrl, options);
     }
 
-    public Task<ActionResult<PersonaDetails>> UpdatePerson(int personId, PersonOptions options)
+    public async Task<ActionResult<PersonaDetails>> UpdatePerson(int personId, PersonOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPutActionResultAsync<PersonOptions, PersonaDetails>($"{RootUrl}/{personId}", options);
     }
 
-    public Task<Result> DeletePerson(int personId)
+    public async Task<Result> DeletePerson(int personId)
     {
-        throw new NotImplementedException();
+        return await DoDeleteAsync<Result>($"{RootUrl}/{personId}");
     }
 }

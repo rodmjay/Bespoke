@@ -9,32 +9,34 @@ namespace ResumePro.IntegrationTests.Proxies;
 
 public sealed class DegreesProxy : BaseProxy, IDegreesController
 {
+    private const string RootUrl = "v1.0/people/{0}/schools/{1}/degrees";
+
     public DegreesProxy(HttpClient httpClient) : base(httpClient)
     {
     }
 
-    public Task<DegreeDto> GetDegree(int personId, int schoolId, int degreeId)
+    public async Task<DegreeDto> GetDegree(int personId, int schoolId, int degreeId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<DegreeDto>($"{string.Format(RootUrl, personId, schoolId)}/{degreeId}");
     }
 
-    public Task<List<DegreeDto>> GetDegrees(int personId, int schoolId)
+    public async Task<List<DegreeDto>> GetDegrees(int personId, int schoolId)
     {
-        throw new NotImplementedException();
+        return await DoGetAsync<List<DegreeDto>>(string.Format(RootUrl, personId, schoolId));
     }
 
-    public Task<ActionResult<DegreeDto>> UpdateDegree(int personId, int schoolId, int degreeId, DegreeOptions options)
+    public async Task<ActionResult<DegreeDto>> CreateDegree(int personId, int schoolId, DegreeOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPostActionResultAsync<DegreeOptions, DegreeDto>(string.Format(RootUrl, personId, schoolId), options);
     }
 
-    public Task<Result> DeleteDegree(int personId, int schoolId, int degreeId)
+    public async Task<ActionResult<DegreeDto>> UpdateDegree(int personId, int schoolId, int degreeId, DegreeOptions options)
     {
-        throw new NotImplementedException();
+        return await DoPutActionResultAsync<DegreeOptions, DegreeDto>($"{string.Format(RootUrl, personId, schoolId)}/{degreeId}", options);
     }
 
-    public Task<ActionResult<DegreeDto>> CreateDegree(int personId, int schoolId, DegreeOptions options)
+    public async Task<Result> DeleteDegree(int personId, int schoolId, int degreeId)
     {
-        throw new NotImplementedException();
+        return await DoDeleteAsync<Result>($"{string.Format(RootUrl, personId, schoolId)}/{degreeId}");
     }
 }
