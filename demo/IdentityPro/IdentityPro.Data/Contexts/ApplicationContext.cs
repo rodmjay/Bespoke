@@ -53,7 +53,7 @@ public class ApplicationContext(
 
     protected override void PreModelCreating(ModelBuilder builder)
     {
-        builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+        builder.ApplyConfigurationsFromAssembly(typeof(User).Assembly);
 
         var configurationOptions = new ConfigurationStoreOptions
         {
@@ -103,7 +103,9 @@ public class ApplicationContext(
 
     private void SeedUsersAndRoles(ModelBuilder builder)
     {
-      
+        builder.Entity<Organization>().Seed("organizations.csv");
+        builder.Entity<User>().Seed("users.csv");
+        builder.Entity<Role>().Seed("roles.csv");
     }
 
     protected override void SeedDatabase(ModelBuilder builder)

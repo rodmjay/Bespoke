@@ -26,5 +26,5 @@ public class UserLogin : IdentityUserLogin<int>, IEntityTypeConfiguration<UserLo
             .HasForeignKey(x => x.UserId);
     }
 
-    [NotMapped] [IgnoreDataMember] public ObjectState ObjectState { get; set; }
+    public ObjectState ObjectState { get; set; }
 }
