@@ -8,7 +8,7 @@
     <RepositoryUrl>https://github.com/rodmjay/bespoke</RepositoryUrl>
     <Description>Bespoke library for building microservices</Description>
     <Authors>Rod Johnson</Authors>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <PackageId>Bespoke.Payments</PackageId>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -37,6 +37,7 @@
 	</ItemGroup>
 
 </Project>
+
 
 
 
