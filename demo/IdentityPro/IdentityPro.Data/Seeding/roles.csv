@@ -1,0 +1,4 @@
+Id,RoleName,Description
+1,Administrator,Full access to all system features
+2,User,Standard access with limited privileges
+3,Guest,Minimal access for view-only operations
