@@ -1,0 +1,34 @@
+@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register Confirmation";
+}
+
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                @ViewData["Title"]
+            </h2>
+            <p class="mt-2 text-center text-sm text-gray-600">
+                Please check your email to confirm your account.
+            </p>
+        </div>
+        <div class="text-center mt-4">
+            <p class="text-sm text-gray-600">
+                @Model.StatusMessage
+            </p>
+            @if (Model.DisplayConfirmAccountLink)
+            {
+                <p class="mt-4">
+                    <a id="confirm-link" href="@Model.EmailConfirmationUrl" class="font-medium text-indigo-600 hover:text-indigo-500">
+                        Click here to confirm your account
+                    </a>
+                </p>
+                <p class="mt-2 text-xs text-gray-500">
+                    If you don't receive an email, you can use the link above to confirm your account.
+                </p>
+            }
+        </div>
+    </div>
+</div>
