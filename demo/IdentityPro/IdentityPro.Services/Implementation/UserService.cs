@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Bespoke.Data.Extensions;
 using Bespoke.Services.Bases;
 using IdentityPro.Shared.Models;
 using Microsoft.AspNetCore.Identity;
@@ -42,18 +43,23 @@ public partial class UserService : BaseService<User>, IUserService
 
     public Task<T> GetUserById<T>(int id) where T : UserDto
     {
-        return AutoMapper.QueryableExtensions.Extensions.ProjectTo<T>
-            (Users.Where(x => x.Id == id), ProjectionMapping).FirstAsync();
+        ThrowIfDisposed();
+
+        return Users.Where(x => x.Id == id).ProjectTo<T>(Mapper).FirstAsync();
     }
 
     private Task<User> FindUserAsync(int userId, CancellationToken cancellationToken)
     {
-        return Users.SingleOrDefaultAsync(u => u.Id.Equals(userId), cancellationToken);
+        ThrowIfDisposed();
+
+        return Users.FirstAsync(u => u.Id.Equals(userId), cancellationToken);
     }
 
     private int ConvertIdFromString(string id)
     {
-        if (id == null) return default;
+        ThrowIfDisposed();
+
+        if (id == null) return 0;
         return (int)TypeDescriptor.GetConverter(typeof(int)).ConvertFromInvariantString(id)!;
     }
 

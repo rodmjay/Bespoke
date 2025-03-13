@@ -22,7 +22,7 @@ public partial class UserService
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
 
-        return Task.FromResult(user.UserName);
+        return Task.FromResult(user.UserName!);
     }
 
     public Task SetUserNameAsync(User user, string userName,

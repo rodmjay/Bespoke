@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.Serialization;
-using Bespoke.Data.Enums;
+﻿using Bespoke.Data.Enums;
 using Bespoke.Data.Interfaces;
 using IdentityPro.Shared.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -11,24 +9,16 @@ namespace IdentityPro.Domain.Entities;
 
 public class User : IdentityUser<int>, IEntityTypeConfiguration<User>, IObjectState, IUser
 {
-    public User()
-    {
-        UserRoles = new List<UserRole>();
-        UserTokens = new List<UserToken>();
-        UserLogins = new List<UserLogin>();
-        UserClaims = new List<UserClaim>();
-    }
-
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string FirstName { get; set; } = null!;
+    public string LastName { get; set; } = null!;
     public string FullName => FirstName + " " + LastName;
 
-    public ICollection<UserRole> UserRoles { get; set; }
-    public ICollection<UserToken> UserTokens { get; set; }
-    public ICollection<UserLogin> UserLogins { get; set; }
-    public ICollection<UserClaim> UserClaims { get; set; }
+    public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+    public ICollection<UserToken> UserTokens { get; set; } = new List<UserToken>();
+    public ICollection<UserLogin> UserLogins { get; set; } = new List<UserLogin>();
+    public ICollection<UserClaim> UserClaims { get; set; } = new List<UserClaim>();
 
-    public Organization Organization { get; set; }
+    public Organization Organization { get; set; } = null!;
     public int OrganizationId { get; set; }
 
     public Guid? CurrentApplication { get; set; }
@@ -67,5 +57,5 @@ public class User : IdentityUser<int>, IEntityTypeConfiguration<User>, IObjectSt
             .OnDelete(DeleteBehavior.Cascade);
     }
 
-    [NotMapped] [IgnoreDataMember] public ObjectState ObjectState { get; set; }
+    public ObjectState ObjectState { get; set; }
 }
