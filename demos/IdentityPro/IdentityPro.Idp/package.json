@@ -1,0 +1,14 @@
+{
+  "name": "identitypro.idp",
+  "version": "1.0.0",
+  "description": "Identity Provider with Tailwind CSS",
+  "scripts": {
+    "build:css": "tailwindcss -i ./wwwroot/css/tailwind/input.css -o ./wwwroot/css/site.css",
+    "watch:css": "tailwindcss -i ./wwwroot/css/tailwind/input.css -o ./wwwroot/css/site.css --watch"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.2"
+  }
+}
