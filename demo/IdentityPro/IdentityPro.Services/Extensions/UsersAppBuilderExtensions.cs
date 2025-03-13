@@ -1,4 +1,5 @@
-﻿using Bespoke.Core.Builders;
+﻿using System.Security.Claims;
+using Bespoke.Core.Builders;
 using IdentityPro.Data.Contexts;
 using IdentityPro.Services.Factories;
 using IdentityPro.Services.Implementation;
@@ -24,10 +25,10 @@ public static class UsersAppBuilderExtensions
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = true;
 
-                options.ClaimsIdentity.EmailClaimType = "email";
-                options.ClaimsIdentity.RoleClaimType = "role";
-                options.ClaimsIdentity.UserIdClaimType = "sub";
-                options.ClaimsIdentity.UserNameClaimType = "name";
+                options.ClaimsIdentity.EmailClaimType = ClaimTypes.Email;
+                options.ClaimsIdentity.RoleClaimType = ClaimTypes.Role;
+                options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier;
+                options.ClaimsIdentity.UserNameClaimType = ClaimTypes.Name;
                 options.ClaimsIdentity.SecurityStampClaimType = "ss";
 
                 options.Lockout.MaxFailedAccessAttempts = 5;

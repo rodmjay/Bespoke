@@ -8,6 +8,7 @@ using Bespoke.Data.SqlServer;
 using Bespoke.Rest.Extensions;
 using Bespoke.Rest.Swagger.Extensions;
 using IdentityPro.Data.Contexts;
+using IdentityPro.Services.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -46,7 +47,8 @@ public sealed class Startup
                 .AddRest(restSettings => { restSettings.Cors.AllowAnyOrigin = true; },
                     restBuilder => { restBuilder.AddSwagger(options => { options.SwaggerGenDemoMode(); }); });
 
-            //builder.Services.AddServices(config);
+            builder.AddIdentity();
+            builder.AddUserDependencies();
         });
     }
 

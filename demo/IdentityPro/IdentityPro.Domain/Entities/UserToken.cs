@@ -10,7 +10,7 @@ namespace IdentityPro.Domain.Entities;
 
 public class UserToken : IdentityUserToken<int>, IEntityTypeConfiguration<UserToken>, IObjectState
 {
-    public User User { get; set; }
+    public User User { get; set; } = null!;
 
     public void Configure(EntityTypeBuilder<UserToken> builder)
     {
@@ -26,5 +26,5 @@ public class UserToken : IdentityUserToken<int>, IEntityTypeConfiguration<UserTo
             .HasForeignKey(x => x.UserId);
     }
 
-    [NotMapped] [IgnoreDataMember] public ObjectState ObjectState { get; set; }
+    public ObjectState ObjectState { get; set; }
 }
