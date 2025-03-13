@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -134,6 +134,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityPro.Infrastructure.SqlServer", "demo\IdentityPro\IdentityPro.Infrastructure.SqlServer\IdentityPro.Infrastructure.SqlServer.csproj", "{62318FBE-4D3E-4AA0-BEC8-F62DFDF03E5D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityPro.IntegrationTests", "demo\IdentityPro\IdentityPro.IntegrationTests\IdentityPro.IntegrationTests.csproj", "{87FCBD06-8EA8-4917-94D5-2F5F08C1CEAF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demos", "demos", "{46C11EF6-A57B-4339-975E-0FE8BBE9FAAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityPro", "IdentityPro", "{FBA25E65-33AE-4132-A787-D67EDD05F7D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityPro.Idp", "demos\IdentityPro\IdentityPro.Idp\IdentityPro.Idp.csproj", "{BE3F1879-7631-4CFF-87AC-2CADF8CE64C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -361,6 +367,10 @@ Global
 		{87FCBD06-8EA8-4917-94D5-2F5F08C1CEAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87FCBD06-8EA8-4917-94D5-2F5F08C1CEAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87FCBD06-8EA8-4917-94D5-2F5F08C1CEAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE3F1879-7631-4CFF-87AC-2CADF8CE64C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE3F1879-7631-4CFF-87AC-2CADF8CE64C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE3F1879-7631-4CFF-87AC-2CADF8CE64C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE3F1879-7631-4CFF-87AC-2CADF8CE64C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -425,5 +435,7 @@ Global
 		{364DB96B-EB26-4ED7-9D02-73CBA6339BAB} = {EBB12414-7C5B-4AB3-96FB-69913D655D88}
 		{62318FBE-4D3E-4AA0-BEC8-F62DFDF03E5D} = {EBB12414-7C5B-4AB3-96FB-69913D655D88}
 		{87FCBD06-8EA8-4917-94D5-2F5F08C1CEAF} = {EBB12414-7C5B-4AB3-96FB-69913D655D88}
+		{FBA25E65-33AE-4132-A787-D67EDD05F7D7} = {46C11EF6-A57B-4339-975E-0FE8BBE9FAAA}
+		{BE3F1879-7631-4CFF-87AC-2CADF8CE64C7} = {FBA25E65-33AE-4132-A787-D67EDD05F7D7}
 	EndGlobalSection
 EndGlobal
