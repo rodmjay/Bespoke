@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Identity.UI.Services;
-using System.Threading.Tasks;
 
-namespace IdentityPro.Idp.Services
+namespace IdentityPro.Services.Implementation
 {
     public class EmailSender : IEmailSender
     {
@@ -9,7 +8,7 @@ namespace IdentityPro.Idp.Services
         {
             // For development, log the email instead of sending
             // In production, implement actual email sending logic
-            System.Console.WriteLine($"Email: To: {email}, Subject: {subject}, Message: {htmlMessage}");
+            Console.WriteLine($"Email: To: {email}, Subject: {subject}, Message: {htmlMessage}");
             return Task.CompletedTask;
         }
     }

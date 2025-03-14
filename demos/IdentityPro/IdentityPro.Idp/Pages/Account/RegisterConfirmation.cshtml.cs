@@ -1,11 +1,7 @@
 using System.Text;
-using System.Threading.Tasks;
-using IdentityPro.Idp.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 
 namespace IdentityPro.Idp.Pages.Account
@@ -13,10 +9,10 @@ namespace IdentityPro.Idp.Pages.Account
     [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager _userManager;
         private readonly IEmailSender _sender;
 
-        public RegisterConfirmationModel(UserManager<ApplicationUser> userManager, IEmailSender sender)
+        public RegisterConfirmationModel(UserManager userManager, IEmailSender sender)
         {
             _userManager = userManager;
             _sender = sender;

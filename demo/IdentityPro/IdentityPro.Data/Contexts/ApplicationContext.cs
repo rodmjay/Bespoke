@@ -12,6 +12,9 @@ using Microsoft.Extensions.Options;
 
 namespace IdentityPro.Data.Contexts;
 
+
+
+
 public class ApplicationContext(
     DbContextOptions<ApplicationContext> options,
     IOptions<DbSettings> settings,

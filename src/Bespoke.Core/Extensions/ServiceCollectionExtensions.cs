@@ -58,7 +58,7 @@ public static class ServiceCollectionExtensions
         var mapper = mapperConfig.CreateMapper();
         builder.Services.AddSingleton(mapper);
         //builder.Services.TryAddScoped(sp => mapper);
-
+        builder.Services.AddSingleton(mapperConfig);
         return builder;
     }
 

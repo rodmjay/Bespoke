@@ -46,10 +46,10 @@ public static class UsersAppBuilderExtensions
             .AddDefaultTokenProviders()
             // AddDefaultUI is not available in the current version of Microsoft.AspNetCore.Identity.UI
             // .AddDefaultUI()
-            .AddClaimsPrincipalFactory<UserRoleClaimsPrincipalFactory>()
+           // .AddClaimsPrincipalFactory<UserRoleClaimsPrincipalFactory>()
             .AddRoleManager<RoleManager>()
             .AddUserManager<UserManager>()
-            .AddSignInManager<SignInManager<User>>();
+            .AddSignInManager<SignInManager>();
 
         builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
             opt.TokenLifespan = TimeSpan.FromHours(24));

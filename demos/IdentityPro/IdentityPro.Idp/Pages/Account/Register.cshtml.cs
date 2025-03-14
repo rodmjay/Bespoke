@@ -1,30 +1,24 @@
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using IdentityPro.Idp.Models;
-using IdentityPro.Idp.Models.AccountViewModels;
+using IdentityPro.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 
 namespace IdentityPro.Idp.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager _signInManager;
+        private readonly UserManager _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
+            UserManager userManager,
+            SignInManager signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -50,7 +44,7 @@ namespace IdentityPro.Idp.Pages.Account
             
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser 
+                var user = new User 
                 { 
                     UserName = Input.Email, 
                     Email = Input.Email,

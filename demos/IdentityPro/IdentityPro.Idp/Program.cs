@@ -1,20 +1,25 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using Bespoke.Core.Extensions;
+using Serilog;
 
-namespace IdentityPro.Idp
+namespace IdentityPro.Idp;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
-    
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        BuildHost(args)
+            .Init();
+    }
+
+    public static IHostBuilder BuildHost(string[] args)
+    {
+        return Host.CreateDefaultBuilder(args)
+            .ConfigureAppConfiguration(HostBuilderExtensions.ConfigureAppConfiguration)
+            .UseSerilog(HostBuilderExtensions.ConfigureLogging)
+            .ConfigureWebHostDefaults(builder =>
+            {
+                builder
+                    .UseStartup<Startup>();
+            });
     }
 }

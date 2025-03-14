@@ -1,15 +1,15 @@
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+using Bespoke.Azure.AppInsights.Extensions;
+using Bespoke.Azure.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Identity.Web;
-using IdentityPro.Idp.Data;
-using IdentityPro.Idp.Models;
-using IdentityPro.Idp.Services;
+using Bespoke.Core.Extensions;
+using Bespoke.Data.Extensions;
+using Bespoke.Data.SqlServer;
+using Bespoke.Rest.Extensions;
+using Bespoke.Rest.Swagger.Extensions;
+using IdentityPro.Data.Contexts;
+using IdentityPro.Services.Extensions;
+using IdentityPro.Services.Implementation;
 
 namespace IdentityPro.Idp
 {
@@ -24,30 +24,78 @@ namespace IdentityPro.Idp
     
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configure database
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            // Configure Identity
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            services.AddBespoke(Configuration, builder =>
             {
-                options.SignIn.RequireConfirmedAccount = true;
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 8;
-            })
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddDefaultTokenProviders();
+                builder
+                    .AddEventAggregator()
+                    .AddAutomapper()
+                    .AddStorage(
+                        dbSettings =>
+                        {
+                            dbSettings.MigrationsAssembly = "IdentityPro.Infrastructure.SqlServer";
+                            dbSettings.MaxRetryCount = 5;
+                        },
+                        dataBuilder =>
+                        {
+                            dataBuilder.UseSqlServer<ApplicationContext>(sqlSettings =>
+                            {
+                                sqlSettings.ConnectionStringName = "DefaultConnection";
+                            });
+                        }
+                    )
+                    .AddAzure(
+                        azureSettings =>
+                        {
+                            azureSettings.UseAzureManagedIdentity = true;
+                            azureSettings.AccountName = "MyAzureStorageAccount";
+                            azureSettings.AccountKey = "SuperSecretKey";
+                        },
+                        azureBuilder =>
+                        {
+                            azureBuilder.AddAppInsights(
+                                appInsightsSettings =>
+                                {
+                                    appInsightsSettings.CloudRoleName = "IDPRO";
+                                    appInsightsSettings.EnableAdaptiveSampling = true;
+                                    appInsightsSettings.EnableDependencyTrackingTelemetryModule = false;
+                                });
+                        })
+                    .AddRest(restSettings => { restSettings.Cors.AllowAnyOrigin = true; },
+                        restBuilder => { restBuilder.AddSwagger(options =>
+                        {
+                            options.SwaggerGenDemoMode();
+                        }); 
+                        });
+
+                builder.AddIdentity();
+                builder.AddUserDependencies();
+                //builder.Services.AddServices(Configuration);
+            });
+
+
+            //// Configure Identity
+            //services.AddIdentity<User, Role>(options =>
+            //{
+            //    options.SignIn.RequireConfirmedAccount = true;
+            //    options.Password.RequireDigit = true;
+            //    options.Password.RequireLowercase = true;
+            //    options.Password.RequireNonAlphanumeric = true;
+            //    options.Password.RequireUppercase = true;
+            //    options.Password.RequiredLength = 8;
+            //})
+            //.AddEntityFrameworkStores<ApplicationContext>()
+            //.AddDefaultTokenProviders();
 
             // Configure authentication using Microsoft Identity Web
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = IdentityConstants.ApplicationScheme;
                 options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-            })
-            .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"));
+            }).AddCookie(IdentityConstants.ExternalScheme, options =>
+            {
+                options.Cookie.Name = "Identity.External";
+            });
+            //.AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureSettings/AzureAd"));
 
             // Add Email Sender
             services.AddTransient<IEmailSender, EmailSender>();

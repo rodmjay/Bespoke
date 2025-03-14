@@ -811,7 +811,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("IdentityProviders");
+                    b.ToTable("IdentityProviders", (string)null);
                 });
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.IdentityResource", b =>
@@ -1122,7 +1122,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Organization");
+                    b.ToTable("Organization", (string)null);
                 });
 
             modelBuilder.Entity("IdentityPro.Domain.Entities.Role", b =>
@@ -1144,7 +1144,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role");
+                    b.ToTable("Role", (string)null);
                 });
 
             modelBuilder.Entity("IdentityPro.Domain.Entities.RoleClaim", b =>
@@ -1168,7 +1168,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("RoleClaim");
+                    b.ToTable("RoleClaim", (string)null);
                 });
 
             modelBuilder.Entity("IdentityPro.Domain.Entities.User", b =>
@@ -1239,7 +1239,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasIndex("OrganizationId");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("IdentityPro.Domain.Entities.UserClaim", b =>
@@ -1263,7 +1263,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserClaim");
+                    b.ToTable("UserClaim", (string)null);
                 });
 
             modelBuilder.Entity("IdentityPro.Domain.Entities.UserLogin", b =>
@@ -1282,7 +1282,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("UserId", "ProviderKey", "LoginProvider");
 
-                    b.ToTable("UserLogin");
+                    b.ToTable("UserLogin", (string)null);
                 });
 
             modelBuilder.Entity("IdentityPro.Domain.Entities.UserRole", b =>
@@ -1297,7 +1297,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRole");
+                    b.ToTable("UserRole", (string)null);
                 });
 
             modelBuilder.Entity("IdentityPro.Domain.Entities.UserToken", b =>
@@ -1316,7 +1316,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("UserToken");
+                    b.ToTable("UserToken", (string)null);
                 });
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceClaim", b =>
