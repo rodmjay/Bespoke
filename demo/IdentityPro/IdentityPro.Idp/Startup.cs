@@ -12,6 +12,7 @@ using IdentityPro.Services.Extensions;
 using IdentityPro.Services.Implementation;
 using Bespoke.Core.Settings;
 using Microsoft.Extensions.Options;
+using Bespoke.Rest.Middleware;
 
 namespace IdentityPro.Idp
 {
@@ -116,6 +117,8 @@ namespace IdentityPro.Idp
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
             IOptions<AppSettings> settings)
         {
+            app.UseMiddleware<ExceptionMiddleware>();
+
             var appSettings = settings.Value;
 
             if (env.IsDevelopment())

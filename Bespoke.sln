@@ -106,6 +106,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumePro.Shared", "demo\ResumePro\ResumePro.Shared\ResumePro.Shared.csproj", "{45BD7699-C4B8-4668-8DBB-BE520A47AA68}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ResumePro", "ResumePro", "{9A8EE683-E2CF-43C6-93BE-C4A55FFD8DAF}"
+	ProjectSection(SolutionItems) = preProject
+		demo\ResumePro\Dockerfile = demo\ResumePro\Dockerfile
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumePro.Data", "demo\ResumePro\ResumePro.Data\ResumePro.Data.csproj", "{EA4638C6-02FC-4CB8-8291-7C0E6B6A2802}"
 EndProject

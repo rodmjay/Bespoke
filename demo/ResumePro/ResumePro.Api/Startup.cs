@@ -95,13 +95,17 @@ public sealed class Startup
     {
         app.UseMiddleware<ExceptionMiddleware>();
 
-        //if (settings.Value.Mode == OperationMode.Demo)
-        //    app.UseMiddleware<DemoModeMiddleware>();
-        //else
-        //    app.UseMiddleware<LiveModeMiddleware>();
-
-
         var appSettings = settings.Value;
+
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Error");
+            app.UseHsts();
+        }
 
         app.UseSwagger();
         app.UseSwaggerUI(c =>
@@ -118,6 +122,9 @@ public sealed class Startup
         app.UseRouting();
         app.UseAuthorization();
 
-        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
     }
 }

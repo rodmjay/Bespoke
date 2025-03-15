@@ -30,8 +30,4 @@
 		<ProjectReference Include="..\..\..\src\Bespoke.Rest\Bespoke.Rest.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Services\" />
-	</ItemGroup>
-
 </Project>
