@@ -8,7 +8,7 @@ namespace IdentityPro.Domain.Entities;
 
 public class UserClaim : IdentityUserClaim<int>, IEntityTypeConfiguration<UserClaim>, IObjectState
 {
-    public User User { get; set; }
+    public User User { get; set; } = null!;
 
     public void Configure(EntityTypeBuilder<UserClaim> builder)
     {

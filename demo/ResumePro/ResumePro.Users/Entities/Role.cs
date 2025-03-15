@@ -14,8 +14,8 @@ namespace ResumePro.Users.Entities;
 
 public class Role : IdentityRole<int>, IObjectState, IRole, IEntityTypeConfiguration<Role>
 {
-    public ICollection<UserRole> UserRoles { get; set; }
-    public ICollection<RoleClaim> RoleClaims { get; set; }
+    public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+    public ICollection<RoleClaim> RoleClaims { get; set; } = new List<RoleClaim>();
 
     public void Configure(EntityTypeBuilder<Role> builder)
     {
