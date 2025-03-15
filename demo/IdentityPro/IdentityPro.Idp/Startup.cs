@@ -10,6 +10,8 @@ using Bespoke.Rest.Swagger.Extensions;
 using IdentityPro.Data.Contexts;
 using IdentityPro.Services.Extensions;
 using IdentityPro.Services.Implementation;
+using Bespoke.Core.Settings;
+using Microsoft.Extensions.Options;
 
 namespace IdentityPro.Idp
 {
@@ -111,8 +113,11 @@ namespace IdentityPro.Idp
                 });
         }
     
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+            IOptions<AppSettings> settings)
         {
+            var appSettings = settings.Value;
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -122,7 +127,14 @@ namespace IdentityPro.Idp
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-    
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint($"/swagger/{settings.Value.Version}/swagger.json", appSettings.Name);
+                c.RoutePrefix = "swagger"; // Changed from string.Empty to "swagger"
+            });
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
     
@@ -134,6 +146,7 @@ namespace IdentityPro.Idp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

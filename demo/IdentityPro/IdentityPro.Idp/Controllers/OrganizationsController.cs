@@ -1,10 +1,8 @@
 ﻿using Bespoke.Rest.Bases;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IdentityPro.Api.Controllers
+namespace IdentityPro.Idp.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
     public class OrganizationsController : BaseController
     {
         public OrganizationsController(IServiceProvider serviceProvider) : base(serviceProvider)

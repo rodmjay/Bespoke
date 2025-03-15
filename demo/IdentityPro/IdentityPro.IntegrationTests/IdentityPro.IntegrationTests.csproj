@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\tests\Bespoke.IntegrationTesting\Bespoke.IntegrationTesting.csproj" />
-    <ProjectReference Include="..\IdentityPro.Api\IdentityPro.Api.csproj" />
   </ItemGroup>
 
 </Project>

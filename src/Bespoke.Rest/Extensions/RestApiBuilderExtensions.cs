@@ -6,6 +6,7 @@ using Bespoke.Rest.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -76,6 +77,17 @@ public static class RestApiBuilderExtensions
     {
         var appSettings = settings.Value;
 
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Error");
+            app.UseHsts();
+        }
+
+
         if (_swaggerAdded)
         {
             app.UseSwagger();
@@ -94,6 +106,9 @@ public static class RestApiBuilderExtensions
         app.UseRouting();
         app.UseAuthorization();
 
-        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
     }
 }
