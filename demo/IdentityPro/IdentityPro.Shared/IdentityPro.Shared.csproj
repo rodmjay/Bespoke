@@ -11,10 +11,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Duende.IdentityServer" />
+		<!--<PackageReference Include="Duende.IdentityServer" />
 		<PackageReference Include="Duende.IdentityServer.AspNetIdentity" />
 		<PackageReference Include="Duende.IdentityServer.EntityFramework" />
-		<PackageReference Include="Duende.IdentityServer.EntityFramework.Storage" />
+		<PackageReference Include="Duende.IdentityServer.EntityFramework.Storage" />-->
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" />

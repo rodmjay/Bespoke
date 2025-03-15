@@ -1,7 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Security.Claims;
-using Duende.IdentityServer.Models;
-using Duende.IdentityServer.Validation;
 using IdentityPro.Services.Factories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace IdentityPro.Services.Managers;
 
-public partial class SignInManager : SignInManager<User>, IResourceOwnerPasswordValidator
+public partial class SignInManager : SignInManager<User>
 {
     private const string LoginProviderKey = "LoginProvider";
     private const string XsrfKey = "XsrfId";
@@ -39,30 +37,30 @@ public partial class SignInManager : SignInManager<User>, IResourceOwnerPassword
     }
 
 
-    public async Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
-    {
-        var account = await UserManager.FindByNameAsync(context.UserName);
-        if (account == null)
-        {
-            context.Result = new GrantValidationResult(
-                TokenRequestErrors.InvalidGrant,
-                ErrorMessages.UserErrors.UserDoesNotExist);
-        }
-        else
-        {
-            var isValid =
-                UserManager.PasswordHasher.VerifyHashedPassword(account, account.PasswordHash, context.Password);
-            if (isValid == PasswordVerificationResult.Failed)
-                context.Result = new GrantValidationResult(
-                    TokenRequestErrors.InvalidGrant,
-                    ErrorMessages.UserErrors.InvalidPassword);
-            else if (isValid == PasswordVerificationResult.Success)
-                context.Result = new GrantValidationResult(
-                    account.Id.ToString(),
-                    "local"
-                );
-        }
-    }
+    //public async Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
+    //{
+    //    var account = await UserManager.FindByNameAsync(context.UserName);
+    //    if (account == null)
+    //    {
+    //        context.Result = new GrantValidationResult(
+    //            TokenRequestErrors.InvalidGrant,
+    //            ErrorMessages.UserErrors.UserDoesNotExist);
+    //    }
+    //    else
+    //    {
+    //        var isValid =
+    //            UserManager.PasswordHasher.VerifyHashedPassword(account, account.PasswordHash, context.Password);
+    //        if (isValid == PasswordVerificationResult.Failed)
+    //            context.Result = new GrantValidationResult(
+    //                TokenRequestErrors.InvalidGrant,
+    //                ErrorMessages.UserErrors.InvalidPassword);
+    //        else if (isValid == PasswordVerificationResult.Success)
+    //            context.Result = new GrantValidationResult(
+    //                account.Id.ToString(),
+    //                "local"
+    //            );
+    //    }
+    //}
 
     private string GetLogMessage(string message, [CallerMemberName] string callerName = null)
     {
