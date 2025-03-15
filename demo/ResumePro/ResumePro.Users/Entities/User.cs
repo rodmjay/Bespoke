@@ -24,8 +24,8 @@ public class User : IdentityUser<int>, IEntityTypeConfiguration<User>, IObjectSt
         UserClaims = new List<UserClaim>();
     }
 
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string FirstName { get; set; } = null!;
+    public string LastName { get; set; } = null!;
     public string FullName => FirstName + " " + LastName;
 
     public ICollection<UserRole> UserRoles { get; set; }
@@ -33,7 +33,7 @@ public class User : IdentityUser<int>, IEntityTypeConfiguration<User>, IObjectSt
     public ICollection<UserLogin> UserLogins { get; set; }
     public ICollection<UserClaim> UserClaims { get; set; }
 
-    public Organization Organization { get; set; }
+    public Organization Organization { get; set; } = null!;
     public int OrganizationId { get; set; }
 
     public Guid? CurrentApplication { get; set; }

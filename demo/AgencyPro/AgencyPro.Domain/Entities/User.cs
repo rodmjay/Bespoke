@@ -10,8 +10,8 @@ public class User : IdentityUser<Guid>, IEntityTypeConfiguration<User>, IObjectS
     public string FullName => FirstName + " " + LastName;
     public bool SendMail { get; set; }
 
-    public Person Person { get; set; }
-    public virtual ICollection<UserNotification> Notifications { get; set; }
+    public Person Person { get; set; } = null!;
+    public virtual ICollection<UserNotification> Notifications { get; set; } = new List<UserNotification>();
 
     public void Configure(EntityTypeBuilder<User> builder)
     {
