@@ -21,7 +21,10 @@
 	
 	  <ProjectReference Include="..\..\..\src\Bespoke.Rest\Bespoke.Rest.csproj" />
 	
+	  <ProjectReference Include="..\..\..\src\Bespoke.Data.SQLite\Bespoke.Data.SQLite.csproj" />
+	
 	  <ProjectReference Include="..\ResumePro.Infrastructure.SqlServer\ResumePro.Infrastructure.SqlServer.csproj" />
+	  <ProjectReference Include="..\ResumePro.Infrastructure.SQLite\ResumePro.Infrastructure.SQLite.csproj" />
 	  <ProjectReference Include="..\ResumePro.Services\ResumePro.Services.csproj" />
 	  <ProjectReference Include="..\ResumePro.Shared\ResumePro.Shared.csproj" />
 	</ItemGroup>
