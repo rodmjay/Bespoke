@@ -5,16 +5,14 @@
 #endregion
 
 using System.Security.Claims;
-using Duende.IdentityServer;
-using Duende.IdentityServer.Extensions;
-using Duende.IdentityServer.Models;
-using Duende.IdentityServer.Services;
 using ResumePro.Users.Factories;
+using ResumePro.Users.Interfaces;
 using ResumePro.Users.Managers;
+using ResumePro.Users.Constants;
 
 namespace ResumePro.Users.IdentityServer.Services;
 
-public class IdentityProfileService : IProfileService
+public class IdentityProfileService : ILocalProfileService
 {
     private readonly UserRoleClaimsPrincipalFactory _userClaimsFactory;
     private readonly UserManager _userManager;
@@ -27,9 +25,9 @@ public class IdentityProfileService : IProfileService
         _userClaimsFactory = userClaimsFactory;
     }
 
-    public async Task GetProfileDataAsync(ProfileDataRequestContext context)
+    public async Task GetProfileDataAsync(LocalProfileDataRequestContext context)
     {
-        var sub = context.Subject.GetSubjectId();
+        var sub = context.Subject.FindFirst("sub")?.Value;
         var user = await _userManager.FindByIdAsync(sub);
         var principal = await _userClaimsFactory.CreateAsync(user);
 
@@ -40,16 +38,15 @@ public class IdentityProfileService : IProfileService
 
         claims.Add(user.TwoFactorEnabled ? new Claim("amr", "mfa") : new Claim("amr", "pwd"));
 
-        claims.Add(new Claim(IdentityServerConstants.StandardScopes.Email, user.Email));
+        claims.Add(new Claim(LocalIdentityServerConstants.StandardScopes.Email, user.Email));
         claims.Add(new Claim("organizationId", user.OrganizationId.ToString()));
 
         context.IssuedClaims = claims;
     }
 
-
-    public async Task IsActiveAsync(IsActiveContext context)
+    public async Task IsActiveAsync(LocalIsActiveContext context)
     {
-        var sub = context.Subject.GetSubjectId();
+        var sub = context.Subject.FindFirst("sub")?.Value;
         var user = await _userManager.FindByIdAsync(sub);
         context.IsActive = user != null;
     }

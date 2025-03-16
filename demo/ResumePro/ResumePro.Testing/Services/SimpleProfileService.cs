@@ -5,16 +5,14 @@
 #endregion
 
 using System.Security.Claims;
-using Duende.IdentityServer.Models;
-using Duende.IdentityServer.Services;
+using ResumePro.Users.Interfaces;
 using IdentityModel;
 
 namespace ResumePro.Testing.Services;
 
-public class SimpleProfileService : IProfileService
-
+public class SimpleProfileService : ILocalProfileService
 {
-    public Task GetProfileDataAsync(ProfileDataRequestContext context)
+    public Task GetProfileDataAsync(LocalProfileDataRequestContext context)
     {
         var subject = context.Subject.Claims.First(claim => claim.Type == JwtClaimTypes.Subject).Value;
 
@@ -31,7 +29,7 @@ public class SimpleProfileService : IProfileService
         return Task.CompletedTask;
     }
 
-    public Task IsActiveAsync(IsActiveContext context)
+    public Task IsActiveAsync(LocalIsActiveContext context)
     {
         context.IsActive = true;
         return Task.CompletedTask;

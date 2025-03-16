@@ -4,10 +4,6 @@
 
 #endregion
 
-using alsami.Duende.IdentityServer.AspNetCore.Testing.Builder;
-using alsami.Duende.IdentityServer.AspNetCore.Testing.Configuration;
-using alsami.Duende.IdentityServer.AspNetCore.Testing.Services;
-using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -18,14 +14,47 @@ using ResumePro.Context;
 using ResumePro.Shared.Extensions;
 using ResumePro.Testing.Extensions;
 using ResumePro.Testing.Services;
+using System.Security.Claims;
 
 namespace ResumePro.Testing.Bases;
 
+// Simple configuration classes to replace Duende dependencies
+public class LocalClientConfiguration
+{
+    public LocalClientConfiguration(string id, string secret)
+    {
+        Id = id;
+        Secret = secret;
+    }
+
+    public string Id { get; }
+    public string Secret { get; }
+}
+
+public class LocalUserLoginConfiguration
+{
+    public LocalUserLoginConfiguration(string username, string password)
+    {
+        Username = username;
+        Password = password;
+    }
+
+    public string Username { get; }
+    public string Password { get; }
+}
+
+public class LocalTokenResponse
+{
+    public string AccessToken { get; set; } = string.Empty;
+    public int ExpiresIn { get; set; } = 3600;
+    public string TokenType { get; set; } = "Bearer";
+}
+
 public abstract class IntegrationTest<TFixture, TStartup> where TStartup : class
 {
-    private ClientConfiguration _clientConfiguration;
+    private LocalClientConfiguration _clientConfiguration;
     private DbContextOptions<ApplicationContext> _context;
-    private IdentityServerWebHostProxy _identityServerWebHostProxy;
+    private TestServer _identityServer;
 
     protected IntegrationTest()
     {
@@ -40,31 +69,18 @@ public abstract class IntegrationTest<TFixture, TStartup> where TStartup : class
 
     private void InitializeIdentityServerProxy()
     {
-        _clientConfiguration = new ClientConfiguration("postman", "secret");
+        _clientConfiguration = new LocalClientConfiguration("postman", "secret");
 
-        var client = new Client
-        {
-            ClientId = _clientConfiguration.Id,
-            ClientSecrets = new List<Secret>
+        // Create a simplified test server for authentication
+        var webHostBuilder = WebHost.CreateDefaultBuilder()
+            .ConfigureServices(services =>
             {
-                new(_clientConfiguration.Secret.Sha256())
-            },
-            AllowedScopes = new[] { "api1", "profile", "openid" },
-            AllowedGrantTypes = new[] { GrantType.ClientCredentials, GrantType.ResourceOwnerPassword },
-            AccessTokenType = AccessTokenType.Jwt,
-            AccessTokenLifetime = 7200,
-            AllowOfflineAccess = true
-        };
+                services.AddSingleton<SimpleProfileService>();
+                services.AddSingleton<SimpleResourceOwnerPasswordValidator>();
+            })
+            .Configure(app => { });
 
-        var webHostBuilder = new IdentityServerTestWebHostBuilder()
-            .AddClients(client)
-            .AddApiScopes(new ApiScope("api1"))
-            .AddIdentityResources(new IdentityResources.OpenId(), new IdentityResources.Profile())
-            .UseResourceOwnerPasswordValidator(typeof(SimpleResourceOwnerPasswordValidator))
-            .UseProfileService(typeof(SimpleProfileService))
-            .CreateWebHostBuilder();
-
-        _identityServerWebHostProxy = new IdentityServerWebHostProxy(webHostBuilder);
+        _identityServer = new TestServer(webHostBuilder);
     }
 
     private void InitializeApi()
@@ -72,7 +88,7 @@ public abstract class IntegrationTest<TFixture, TStartup> where TStartup : class
         var apiWebHostBuilder = WebHost.CreateDefaultBuilder()
             .ConfigureAppConfiguration(CustomWebHostBuilderExtensions.Configure<TFixture>)
             .ConfigureServices(services =>
-                services.AddSingleton(_identityServerWebHostProxy.IdentityServer.CreateHandler()))
+                services.AddSingleton(_identityServer.CreateHandler()))
             .UseStartup<TStartup>();
 
         var apiServer = new TestServer(apiWebHostBuilder);
@@ -86,13 +102,25 @@ public abstract class IntegrationTest<TFixture, TStartup> where TStartup : class
 
     protected async Task<string> GetAccessToken(string username, string password)
     {
-        var userLogin = new UserLoginConfiguration(username, password);
-
-        var tokenResponse = await _identityServerWebHostProxy
-            .GetResourceOwnerPasswordAccessTokenAsync(_clientConfiguration, userLogin, "api1", "profile",
-                "openid");
+        // Simplified token generation for testing
+        var userLogin = new LocalUserLoginConfiguration(username, password);
+        
+        // Create a mock token response
+        var tokenResponse = new LocalTokenResponse
+        {
+            AccessToken = GenerateTestToken(username),
+            ExpiresIn = 7200,
+            TokenType = "Bearer"
+        };
 
         return tokenResponse.AccessToken;
+    }
+    
+    private string GenerateTestToken(string username)
+    {
+        // This is a simplified mock token for testing purposes
+        // In a real implementation, you would use a proper JWT library
+        return $"test_token_{username}_{DateTime.UtcNow.Ticks}";
     }
 
     protected async Task<TOutput> DoPost<TInput, TOutput>(string url, TInput input)

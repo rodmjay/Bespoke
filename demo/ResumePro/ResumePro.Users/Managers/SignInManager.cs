@@ -6,8 +6,6 @@
 
 using System.Runtime.CompilerServices;
 using System.Security.Claims;
-using Duende.IdentityServer.Models;
-using Duende.IdentityServer.Validation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -15,10 +13,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ResumePro.Users.Entities;
 using ResumePro.Users.Factories;
+using ResumePro.Users.Interfaces;
 
 namespace ResumePro.Users.Managers;
 
-public partial class SignInManager : SignInManager<User>, IResourceOwnerPasswordValidator
+public partial class SignInManager : SignInManager<User>, ILocalResourceOwnerPasswordValidator
 {
     private const string LoginProviderKey = "LoginProvider";
     private const string XsrfKey = "XsrfId";
@@ -46,13 +45,13 @@ public partial class SignInManager : SignInManager<User>, IResourceOwnerPassword
     }
 
 
-    public async Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
+    public async Task ValidateAsync(LocalResourceOwnerPasswordValidationContext context)
     {
         var account = await UserManager.FindByNameAsync(context.UserName);
         if (account == null)
         {
-            context.Result = new GrantValidationResult(
-                TokenRequestErrors.InvalidGrant,
+            context.Result = new LocalGrantValidationResult(
+                LocalTokenRequestErrors.InvalidGrant,
                 ErrorMessages.UserErrors.UserDoesNotExist);
         }
         else
@@ -60,11 +59,11 @@ public partial class SignInManager : SignInManager<User>, IResourceOwnerPassword
             var isValid =
                 UserManager.PasswordHasher.VerifyHashedPassword(account, account.PasswordHash, context.Password);
             if (isValid == PasswordVerificationResult.Failed)
-                context.Result = new GrantValidationResult(
-                    TokenRequestErrors.InvalidGrant,
+                context.Result = new LocalGrantValidationResult(
+                    LocalTokenRequestErrors.InvalidGrant,
                     ErrorMessages.UserErrors.InvalidPassword);
             else if (isValid == PasswordVerificationResult.Success)
-                context.Result = new GrantValidationResult(
+                context.Result = new LocalGrantValidationResult(
                     account.Id.ToString(),
                     "local"
                 );

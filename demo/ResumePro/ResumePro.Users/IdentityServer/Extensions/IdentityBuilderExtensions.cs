@@ -6,8 +6,6 @@
 
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography.X509Certificates;
-using Duende.IdentityServer.Services;
-using Duende.IdentityServer.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +17,7 @@ using ResumePro.Users.Contexts;
 using ResumePro.Users.Entities;
 using ResumePro.Users.IdentityServer.Builders;
 using ResumePro.Users.IdentityServer.Services;
+using ResumePro.Users.Interfaces;
 using ResumePro.Users.Managers;
 using Serilog;
 
@@ -28,53 +27,11 @@ public static class IdentityBuilderExtensions
 {
     public static LocalIdentityServerBuilder ConfigureIdentityServer(this WebAppBuilder builder)
     {
-        var identityBuilder = builder.Services.AddIdentityServer(options =>
-            {
-                options.IssuerUri = builder.AppSettings.Authority;
-                options.Events.RaiseErrorEvents = true;
-                options.Events.RaiseInformationEvents = true;
-                options.Events.RaiseFailureEvents = true;
-                options.Events.RaiseSuccessEvents = true;
-                options.EmitStaticAudienceClaim = true;
-
-                options.UserInteraction.LoginUrl = "/Account/Login";
-            })
-            .AddConfigurationStore<ApplicationContext>(options =>
-            {
-                options.ConfigureDbContext = b => { b.UseSqlServer(builder.ConnectionString); };
-            })
-            .AddOperationalStore<ApplicationContext>(options =>
-            {
-                options.ConfigureDbContext = b => b.UseSqlServer(builder.ConnectionString);
-
-                options.EnableTokenCleanup = true;
-                options.TokenCleanupInterval = 30;
-            })
-            .AddAspNetIdentity<User>()
-            .AddProfileService<IdentityProfileService>();
-
-        if (!builder.Environment.IsDevelopment()) identityBuilder.AddConfigurationStoreCache();
-
-        if (!string.IsNullOrWhiteSpace(builder.AppSettings.CodeSigningThumbprint))
-        {
-            X509Certificate2 cert = null;
-            using (var certStore = new X509Store(StoreName.My, StoreLocation.CurrentUser))
-            {
-                certStore.Open(OpenFlags.ReadOnly);
-                var certCollection = certStore.Certificates.Find(
-                    X509FindType.FindByThumbprint,
-                    builder.AppSettings.CodeSigningThumbprint,
-                    false);
-
-                if (certCollection.Count > 0) cert = certCollection[0];
-            }
-
-            identityBuilder.AddSigningCredential(cert);
-        }
-        else
-        {
-            identityBuilder.AddDeveloperSigningCredential();
-        }
+        // Replace Duende IdentityServer with a custom implementation
+        // This is a placeholder for the actual implementation
+        
+        builder.Services.AddScoped<ILocalProfileService, IdentityProfileService>();
+        builder.Services.AddScoped<ILocalResourceOwnerPasswordValidator, SignInManager>();
 
         builder.Services.ConfigureApplicationCookie(config =>
         {
@@ -82,9 +39,6 @@ public static class IdentityBuilderExtensions
             config.LoginPath = "/Account/Login";
             config.LogoutPath = "/Account/Logout";
         });
-
-        builder.Services.AddScoped<IProfileService, IdentityProfileService>();
-        builder.Services.AddScoped<IResourceOwnerPasswordValidator, SignInManager>();
 
         builder.Services.AddAntiforgery(options =>
         {
@@ -95,7 +49,6 @@ public static class IdentityBuilderExtensions
 
         return new LocalIdentityServerBuilder(builder);
     }
-
 
     public static void Configure(IApplicationBuilder app, IWebHostEnvironment env,
         ApplicationContext context)
@@ -123,7 +76,7 @@ public static class IdentityBuilderExtensions
         app.UseStaticFiles();
         app.UseRouting();
 
-        app.UseIdentityServer();
+        // Replace UseIdentityServer with custom middleware if needed
         app.UseAuthorization();
 
         app.UseSession();

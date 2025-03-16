@@ -5,24 +5,23 @@
 #endregion
 
 using System.Security.Claims;
-using Duende.IdentityServer.Models;
-using Duende.IdentityServer.Validation;
+using ResumePro.Users.Interfaces;
 using IdentityModel;
 
 namespace ResumePro.Testing.Services;
 
-public class SimpleResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
+public class SimpleResourceOwnerPasswordValidator : ILocalResourceOwnerPasswordValidator
 {
-    public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
+    public Task ValidateAsync(LocalResourceOwnerPasswordValidationContext context)
     {
         if (context.UserName != "admin@admin.com" || context.Password != "ASDFasdf!")
         {
             context.Result =
-                new GrantValidationResult(TokenRequestErrors.InvalidRequest, "Username or password is wrong!");
+                new LocalGrantValidationResult(LocalTokenRequestErrors.InvalidRequest, "Username or password is wrong!");
             return Task.CompletedTask;
         }
 
-        context.Result = new GrantValidationResult("1", OidcConstants.AuthenticationMethods.Password,
+        context.Result = new LocalGrantValidationResult("1", OidcConstants.AuthenticationMethods.Password,
             new List<Claim>
             {
                 new(JwtClaimTypes.Subject, "1"),
