@@ -103,7 +103,6 @@ public sealed class Startup
         }
         else
         {
-            app.UseExceptionHandler("/Error");
             app.UseHsts();
         }
 
