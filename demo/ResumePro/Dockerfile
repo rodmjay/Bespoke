@@ -10,7 +10,7 @@ RUN ls -la
 # Remove any existing node_modules (to avoid platform conflicts)
 RUN rm -rf node_modules
 # Install dependencies and build the Angular app using production configuration
-RUN npm install && npm run build -- --configuration=production
+RUN npm install && npm run build --configuration=production
 
 ##################################################
 # Stage 2: Build and publish the .NET API with SDK
