@@ -1,25 +1,74 @@
 @page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Bespoke - Open Source Microservice Platform";
 }
 
-<div class="text-center">
-    <h1 class="text-4xl font-bold text-gray-800 mb-4">Welcome to IdentityPro.Idp</h1>
-    <p class="text-xl text-gray-600">A modern identity provider built with ASP.NET Core and Tailwind CSS.</p>
-</div>
+<!-- Header -->
+<header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-bold text-gray-900">Bespoke</h1>
+        <p class="mt-2 text-lg text-gray-600">An Open Source Microservice Platform</p>
+    </div>
+</header>
 
-<div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div class="bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-3">Secure Authentication</h2>
-        <p class="text-gray-600">Implement secure authentication flows with modern protocols.</p>
+<!-- Main Content -->
+<main class="bg-gray-100">
+    <div class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+        <!-- Social Media Links -->
+        <section class="mb-10">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Connect with Us</h2>
+            <div class="flex flex-wrap gap-4">
+                <a href="https://github.com/rodmjay/Bespoke" target="_blank" class="text-blue-500 hover:underline">
+                    GitHub
+                </a>
+                <a href="https://patreon.com/bespoke" target="_blank" class="text-blue-500 hover:underline">
+                    Patreon
+                </a>
+                <a href="https://twitch.tv/bespokedev" target="_blank" class="text-blue-500 hover:underline">
+                    Twitch
+                </a>
+                <a href="https://youtube.com/c/bespokedev" target="_blank" class="text-blue-500 hover:underline">
+                    YouTube
+                </a>
+            </div>
+        </section>
+
+        <!-- Donate Button -->
+        <section class="mb-10">
+            <button onclick="window.location.href='https://donate.bespoke.dev'" 
+                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded">
+                Donate
+            </button>
+        </section>
+
+        <!-- About Section -->
+        <section class="mb-10">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">About Bespoke</h2>
+            <p class="text-gray-700 text-lg leading-relaxed">
+                Bespoke is an open source microservice platform built for developers, by developers. Our goal is to empower you 
+                with flexible, modular microservices that make building scalable applications easier. Explore our repository, join 
+                our community, and learn more about our vision.
+            </p>
+        </section>
+
+        <!-- Feature Cards -->
+        <section>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Key Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Modular Architecture</h3>
+                    <p class="text-gray-600">Build applications with independent, reusable microservices.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Secure Identity</h3>
+                    <p class="text-gray-600">Implement secure authentication and authorization with IdentityPro.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Scalable Design</h3>
+                    <p class="text-gray-600">Scale your applications horizontally with containerized services.</p>
+                </div>
+            </div>
+        </section>
     </div>
-    <div class="bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-3">User Management</h2>
-        <p class="text-gray-600">Easily manage users, roles, and permissions.</p>
-    </div>
-    <div class="bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-3">Integration</h2>
-        <p class="text-gray-600">Seamlessly integrate with your existing applications.</p>
-    </div>
-</div>
+</main>
