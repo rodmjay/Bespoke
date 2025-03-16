@@ -11,7 +11,7 @@ RUN ls -la
 RUN rm -rf node_modules
 # Install dependencies and build the Angular app using production configuration
 RUN npm install && \
-    # Create a proper Angular workspace configuration file
+    # Create a complete Angular workspace configuration file with all required properties
     echo '{' > angular.json && \
     echo '  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",' >> angular.json && \
     echo '  "version": 1,' >> angular.json && \
@@ -21,17 +21,27 @@ RUN npm install && \
     echo '      "projectType": "application",' >> angular.json && \
     echo '      "root": "",' >> angular.json && \
     echo '      "sourceRoot": "src",' >> angular.json && \
+    echo '      "prefix": "app",' >> angular.json && \
     echo '      "architect": {' >> angular.json && \
     echo '        "build": {' >> angular.json && \
     echo '          "builder": "@angular-devkit/build-angular:application",' >> angular.json && \
     echo '          "options": {' >> angular.json && \
-    echo '            "outputPath": "dist/resumepro"' >> angular.json && \
+    echo '            "outputPath": "dist/resumepro",' >> angular.json && \
+    echo '            "index": "src/index.html",' >> angular.json && \
+    echo '            "browser": "src/main.ts",' >> angular.json && \
+    echo '            "polyfills": ["zone.js"],' >> angular.json && \
+    echo '            "tsConfig": "tsconfig.app.json",' >> angular.json && \
+    echo '            "inlineStyleLanguage": "scss",' >> angular.json && \
+    echo '            "assets": ["src/assets"],' >> angular.json && \
+    echo '            "styles": ["src/styles.scss"],' >> angular.json && \
+    echo '            "scripts": []' >> angular.json && \
     echo '          }' >> angular.json && \
     echo '        }' >> angular.json && \
     echo '      }' >> angular.json && \
     echo '    }' >> angular.json && \
     echo '  }' >> angular.json && \
     echo '}' >> angular.json && \
+    # Build the Angular app using the production configuration
     npm run build --configuration=production
 
 ##################################################
