@@ -6,29 +6,29 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 [Route("account")]
 public class AccountController : ControllerBase
 {
-    [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginModel model)
-    {
-        // Validate credentials here (e.g. check username/password)
+    //[HttpPost("login")]
+    //public async Task<IActionResult> Login([FromBody] LoginModel model)
+    //{
+    //    // Validate credentials here (e.g. check username/password)
 
-        // If valid, create the user principal
-        var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, model.Username),
-            // Add additional claims as needed
-        };
-        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-        var authProperties = new AuthenticationProperties
-        {
-            // Customize properties like IsPersistent, ExpiresUtc, etc.
-        };
+    //    // If valid, create the user principal
+    //    var claims = new List<Claim>
+    //    {
+    //        new Claim(ClaimTypes.Name, model.Username),
+    //        // Add additional claims as needed
+    //    };
+    //    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+    //    var authProperties = new AuthenticationProperties
+    //    {
+    //        // Customize properties like IsPersistent, ExpiresUtc, etc.
+    //    };
 
-        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-            new ClaimsPrincipal(claimsIdentity),
-            authProperties);
+    //    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+    //        new ClaimsPrincipal(claimsIdentity),
+    //        authProperties);
 
-        return Ok();
-    }
+    //    return Ok();
+    //}
 
     [HttpPost("logout")]
     public async Task<IActionResult> Logout()
