@@ -43,20 +43,21 @@ jobs:
             dotnet nuget push "$package" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
           done
 
-      # Docker steps
+      # Docker steps for IdentityPro (unchanged)
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-      - name: Build Docker Image
+      - name: Build Docker Image for IdentityPro
         run: docker build -f demo/IdentityPro/Dockerfile -t ${{ secrets.DOCKERHUB_USERNAME }}/identitypro:latest .
 
-      - name: Push Docker Image
+      - name: Push Docker Image for IdentityPro
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/identitypro:latest
 
-      - name: Build Docker Image
+      # Docker steps for ResumePro using repository root as the build context
+      - name: Build Docker Image for ResumePro
         run: docker build -f demo/ResumePro/Dockerfile -t ${{ secrets.DOCKERHUB_USERNAME }}/resumepro:latest .
 
-      - name: Push Docker Image
+      - name: Push Docker Image for ResumePro
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/resumepro:latest
