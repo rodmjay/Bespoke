@@ -11,8 +11,27 @@ RUN ls -la
 RUN rm -rf node_modules
 # Install dependencies and build the Angular app using production configuration
 RUN npm install && \
-    # Fix for Angular CLI workspace detection - ensure angular.json exists with required schema and version
-    echo '{"$schema": "./node_modules/@angular/cli/lib/config/schema.json", "version": 1, "projects":{"resumepro":{"root":"","sourceRoot":"src","architect":{"build":{"builder":"@angular-devkit/build-angular:application","options":{"outputPath":"dist/resumepro"}}}}}}' > angular.json && \
+    # Create a proper Angular workspace configuration file
+    echo '{' > angular.json && \
+    echo '  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",' >> angular.json && \
+    echo '  "version": 1,' >> angular.json && \
+    echo '  "newProjectRoot": "projects",' >> angular.json && \
+    echo '  "projects": {' >> angular.json && \
+    echo '    "resumepro": {' >> angular.json && \
+    echo '      "projectType": "application",' >> angular.json && \
+    echo '      "root": "",' >> angular.json && \
+    echo '      "sourceRoot": "src",' >> angular.json && \
+    echo '      "architect": {' >> angular.json && \
+    echo '        "build": {' >> angular.json && \
+    echo '          "builder": "@angular-devkit/build-angular:application",' >> angular.json && \
+    echo '          "options": {' >> angular.json && \
+    echo '            "outputPath": "dist/resumepro"' >> angular.json && \
+    echo '          }' >> angular.json && \
+    echo '        }' >> angular.json && \
+    echo '      }' >> angular.json && \
+    echo '    }' >> angular.json && \
+    echo '  }' >> angular.json && \
+    echo '}' >> angular.json && \
     npm run build --configuration=production
 
 ##################################################
