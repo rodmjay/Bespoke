@@ -8,7 +8,7 @@ public class Organization : BaseEntity<Organization>
     public int Id { get; set; }
     public string Name { get; set; } = null!;
 
-    public ICollection<User> Users { get; set; } = new List<User>();
+    public ICollection<UserOrganization> UserOrganizations { get; set; } = new List<UserOrganization>();
 
     public override void Configure(EntityTypeBuilder<Organization> builder)
     {

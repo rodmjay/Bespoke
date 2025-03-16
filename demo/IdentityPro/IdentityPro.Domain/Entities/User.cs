@@ -18,8 +18,7 @@ public class User : IdentityUser<int>, IEntityTypeConfiguration<User>, IObjectSt
     public ICollection<UserLogin> UserLogins { get; set; } = new List<UserLogin>();
     public ICollection<UserClaim> UserClaims { get; set; } = new List<UserClaim>();
 
-    public Organization Organization { get; set; } = null!;
-    public int OrganizationId { get; set; }
+    public ICollection<UserOrganization> UserOrganizations { get; set; } = new List<UserOrganization>();
 
     public Guid? CurrentApplication { get; set; }
 
@@ -51,10 +50,7 @@ public class User : IdentityUser<int>, IEntityTypeConfiguration<User>, IObjectSt
             .HasForeignKey(x => x.UserId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasOne(x => x.Organization)
-            .WithMany(x => x.Users)
-            .HasForeignKey(x => x.OrganizationId)
-            .OnDelete(DeleteBehavior.Cascade);
+        // Relationship with Organization is now configured through UserOrganization entity
     }
 
     public ObjectState ObjectState { get; set; }
