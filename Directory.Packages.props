@@ -20,6 +20,7 @@
 		<!-- Entity Framework Packages -->
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.13" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.13" />
+		<PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.13" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.13" />
 		<!-- Extensions Packages -->
 		<PackageVersion Include="Microsoft.Extensions.Azure" Version="1.7.1" />
