@@ -1,32 +1,43 @@
-# Dockerfile at demo/IdentityPro/Dockerfile
+#############################################
+# Stage 1: Build the Angular app with Node 18
+#############################################
+FROM node:18 AS node-build
+WORKDIR /app/ResumeProApp
+# Copy the entire Angular project (including package.json, angular.json, etc.)
+COPY demo/ResumePro/ResumeProApp/ ./
+# (Optional) List files for debugging – remove when confirmed
+RUN ls -la
+# Remove any existing node_modules (to avoid platform conflicts)
+RUN rm -rf node_modules
+# Install dependencies and build the Angular app using production configuration
+RUN npm install && npm run build -- --configuration production
 
-# Build stage: use the .NET SDK image to restore, build, and publish the API project
+##################################################
+# Stage 2: Build and publish the .NET API with SDK
+##################################################
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /build
-
-# Copy the entire repository (including demo and src folders) into the container.
-# The build context is the repository root.
+# Copy the entire repository so that all projects (including those in src) are available
 COPY . .
-
-# Restore dependencies for the API project using its full path relative to the repo root.
-RUN dotnet restore demo/ResumePro/ResumePro.Api/ResumePro.Api.csproj
-
 # Set working directory to the API project folder
 WORKDIR /build/demo/ResumePro/ResumePro.Api
-
-# Publish the API project as a self-contained deployment for linux-x64.
+# Restore dependencies (disabling treat warnings as errors)
+RUN dotnet restore ResumePro.Api.csproj /p:TreatWarningsAsErrors=false
+# Publish the API as a self-contained deployment for linux-x64
 RUN dotnet publish ResumePro.Api.csproj -c Release -o /app/publish \
-    --self-contained true -r linux-x64 -p:PublishTrimmed=false
+    --self-contained true -r linux-x64 -p:PublishTrimmed=false /p:TreatWarningsAsErrors=false
 
-# Runtime stage: use the minimal runtime-deps image since the app is self-contained.
+#####################################################
+# Stage 3: Create final runtime image using runtime-deps
+#####################################################
 FROM mcr.microsoft.com/dotnet/runtime-deps:8.0
 WORKDIR /app
-
-# Copy the published output from the build stage.
+# Copy the published API output from the build stage
 COPY --from=build /app/publish .
-
-# Expose the port your API listens on (adjust if needed)
+# Copy the Angular build output into wwwroot so that the API can serve the static files.
+# (This Dockerfile assumes your Angular CLI outputs to "dist/resumepro" – adjust if necessary.)
+COPY --from=node-build /app/ResumeProApp/dist/resumepro ./wwwroot
+# Expose the API port (adjust if necessary)
 EXPOSE 80
-
-# Set the container’s entry point to the published API executable.
+# Set the container’s entry point to the published API executable
 ENTRYPOINT ["./ResumePro.Api"]
