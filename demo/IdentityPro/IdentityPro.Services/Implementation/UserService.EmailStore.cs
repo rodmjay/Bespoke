@@ -39,12 +39,12 @@ public partial class UserService
         return UpdateAsync(user, cancellationToken);
     }
 
-    public Task<User> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
+    public Task<User?> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
 
-        return Users.Where(x => x.NormalizedEmail == normalizedEmail).FirstAsync(cancellationToken);
+        return Users.Where(x => x.NormalizedEmail == normalizedEmail).FirstOrDefaultAsync(cancellationToken);
     }
 
     public Task<string?> GetNormalizedEmailAsync(User user, CancellationToken cancellationToken)
