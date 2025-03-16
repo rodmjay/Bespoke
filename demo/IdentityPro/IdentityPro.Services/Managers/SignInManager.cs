@@ -104,13 +104,13 @@ public partial class SignInManager : SignInManager<User>
         return true;
     }
 
-    public override Task SignInAsync(User user, bool isPersistent, string authenticationMethod = null)
+    public override Task SignInAsync(User user, bool isPersistent, string? authenticationMethod = null)
     {
         return SignInAsync(user, new AuthenticationProperties { IsPersistent = isPersistent }, authenticationMethod);
     }
 
     public override Task SignInAsync(User user, AuthenticationProperties authenticationProperties,
-        string authenticationMethod = null)
+        string? authenticationMethod = null)
     {
         IList<Claim> additionalClaims = Array.Empty<Claim>();
         if (authenticationMethod != null)

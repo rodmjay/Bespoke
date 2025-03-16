@@ -91,13 +91,18 @@ namespace IdentityPro.Idp
 
             // Configure authentication using Microsoft Identity Web
             services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = IdentityConstants.ApplicationScheme;
-                options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-            }).AddCookie(IdentityConstants.ExternalScheme, options =>
-            {
-                options.Cookie.Name = "Identity.External";
-            });
+                {
+                    options.DefaultScheme = IdentityConstants.ApplicationScheme;
+                    options.DefaultSignInScheme = IdentityConstants.ApplicationScheme;
+                })
+                .AddCookie(IdentityConstants.ApplicationScheme, options =>
+                {
+                    options.Cookie.Name = "Identity.Application";
+                })
+                .AddCookie(IdentityConstants.ExternalScheme, options =>
+                {
+                    options.Cookie.Name = "Identity.External";
+                });
             //.AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureSettings/AzureAd"));
 
             // Add Email Sender

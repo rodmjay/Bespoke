@@ -35,7 +35,7 @@ namespace IdentityPro.Idp.Pages.Account
             returnUrl ??= Url.Content("~/");
 
             // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
 
             ReturnUrl = returnUrl;
         }

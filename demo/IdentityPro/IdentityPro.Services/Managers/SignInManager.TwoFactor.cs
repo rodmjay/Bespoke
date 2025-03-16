@@ -7,7 +7,7 @@ namespace IdentityPro.Services.Managers;
 
 public partial class SignInManager
 {
-    public override async Task<User> GetTwoFactorAuthenticationUserAsync()
+    public override async Task<User?> GetTwoFactorAuthenticationUserAsync()
     {
         var info = await RetrieveTwoFactorInfoAsync();
         if (info == null) return null;
@@ -20,7 +20,7 @@ public partial class SignInManager
         return Context.SignOutAsync(IdentityConstants.TwoFactorRememberMeScheme);
     }
 
-    internal ClaimsPrincipal StoreTwoFactorInfo(string userId, string loginProvider)
+    internal ClaimsPrincipal StoreTwoFactorInfo(string userId, string? loginProvider)
     {
         var identity = new ClaimsIdentity(IdentityConstants.TwoFactorUserIdScheme);
         identity.AddClaim(new Claim(ClaimTypes.Name, userId));
@@ -29,7 +29,7 @@ public partial class SignInManager
     }
 
     protected override async Task<SignInResult> SignInOrTwoFactorAsync(User user, bool isPersistent,
-        string loginProvider = null, bool bypassTwoFactor = false)
+        string? loginProvider = null, bool bypassTwoFactor = false)
     {
         if (!bypassTwoFactor && await IsTfaEnabled(user))
             if (!await IsTwoFactorClientRememberedAsync(user))
