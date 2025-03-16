@@ -1,4 +1,5 @@
-Id,Username,Email,FirstName,LastName,CreatedDate
-1,jdoe,jdoe@example.com,John,Doe,2023-01-01
-2,asmith,asmith@example.com,Alice,Smith,2023-01-02
-3,bjones,bjones@example.com,Bob,Jones,2023-01-03
+Id,Username,Email,FirstName,LastName,CreatedDate,RoleId
+1,jdoe,jdoe@example.com,John,Doe,2023-01-01,2
+2,asmith,asmith@example.com,Alice,Smith,2023-01-02,2
+3,bjones,bjones@example.com,Bob,Jones,2023-01-03,2
+4,admin,admin@example.com,Admin,User,2023-01-04,1
