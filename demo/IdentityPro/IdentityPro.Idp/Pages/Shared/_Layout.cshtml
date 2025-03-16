@@ -22,8 +22,16 @@
             <div class="hidden lg:flex lg:items-center lg:w-auto lg:space-x-6">
                 <a class="text-gray-800 hover:text-gray-600" asp-area="" asp-page="/Index">Home</a>
                 <a class="text-gray-800 hover:text-gray-600" asp-area="" asp-page="/Privacy">Privacy</a>
-                <a class="text-gray-800 hover:text-gray-600" asp-area="" asp-page="/Account/Register">Register</a>
-                <a class="text-gray-800 hover:text-gray-600" asp-area="" asp-page="/Account/Login">Sign In</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="text-gray-800 hover:text-gray-600" asp-area="" asp-page="/Admin/Account">@User.Identity.Name</a>
+                    <a class="text-gray-800 hover:text-gray-600" asp-area="" asp-page="/Account/Logout">Logout</a>
+                }
+                else
+                {
+                    <a class="text-gray-800 hover:text-gray-600" asp-area="" asp-page="/Account/Register">Register</a>
+                    <a class="text-gray-800 hover:text-gray-600" asp-area="" asp-page="/Account/Login">Sign In</a>
+                }
             </div>
         </div>
     </nav>
