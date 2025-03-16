@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Duende.IdentityServer.EntityFramework.Storage" />
+    <!-- Removed Duende package reference -->
   </ItemGroup>
 
   <ItemGroup>
