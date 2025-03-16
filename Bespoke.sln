@@ -74,6 +74,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{376EDBCC-8B54-4C13-8803-8C77890A8653}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		.github\workflows\build.yml = .github\workflows\build.yml
 		UpdatePatch.ps1 = UpdatePatch.ps1
 		upgrad-patch.bat = upgrad-patch.bat
 	EndProjectSection

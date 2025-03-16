@@ -3,7 +3,7 @@
 #############################################
 FROM node:18 AS node-build
 WORKDIR /app/ResumeProApp
-# Copy the entire Angular project (including package.json, angular.json, etc.)
+# Copy Angular project files from repository root (located in demo/ResumePro/ResumeProApp)
 COPY demo/ResumePro/ResumeProApp/ ./
 # (Optional) List files for debugging – remove when confirmed
 RUN ls -la
@@ -17,9 +17,9 @@ RUN npm install && npm run build --configuration=production
 ##################################################
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /build
-# Copy the entire repository so that all projects (including those in src) are available
+# Copy the entire repository (build context is the repository root)
 COPY . .
-# Set working directory to the API project folder
+# Set working directory to the API project folder (adjust path if necessary)
 WORKDIR /build/demo/ResumePro/ResumePro.Api
 # Restore dependencies (disabling treat warnings as errors)
 RUN dotnet restore ResumePro.Api.csproj /p:TreatWarningsAsErrors=false
@@ -35,7 +35,7 @@ WORKDIR /app
 # Copy the published API output from the build stage
 COPY --from=build /app/publish .
 # Copy the Angular build output into wwwroot so that the API can serve the static files.
-# (This Dockerfile assumes your Angular CLI outputs to "dist/resumepro" – adjust if necessary.)
+# (This assumes Angular outputs to "dist/resumepro" – adjust if necessary.)
 COPY --from=node-build /app/ResumeProApp/dist/resumepro ./wwwroot
 # Expose the API port (adjust if necessary)
 EXPOSE 80
