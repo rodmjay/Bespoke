@@ -45,8 +45,18 @@ public class ApplicationContextFactory : IDesignTimeDbContextFactory<Application
         optionsBuilder.EnableSensitiveDataLogging(false);
 #endif
 
-        optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"),
-            opt => { opt.MigrationsAssembly(settings.Value.MigrationsAssembly); });
+        if (config.GetSection("DbSettings/SQLite") != null)
+        {
+
+            optionsBuilder.UseSqlite(config.GetConnectionString("SQLite"),
+                opt => { opt.MigrationsAssembly(settings.Value.MigrationsAssembly); });
+        }
+        else
+        {
+            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"),
+                opt => { opt.MigrationsAssembly(settings.Value.MigrationsAssembly); });
+        }
+        
 
         return new ApplicationContext(optionsBuilder.Options, settings);
     }

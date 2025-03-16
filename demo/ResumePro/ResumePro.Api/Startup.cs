@@ -4,6 +4,7 @@ using Bespoke.Azure.Extensions;
 using Bespoke.Core.Extensions;
 using Bespoke.Core.Settings;
 using Bespoke.Data.Extensions;
+using Bespoke.Data.SQLite;
 using Bespoke.Data.SqlServer;
 using Bespoke.Rest.Extensions;
 using Bespoke.Rest.Middleware;
@@ -37,7 +38,7 @@ public sealed class Startup
                 .AddStorage(
                     dbSettings =>
                     {
-                        dbSettings.MigrationsAssembly = "ResumePro.Infrastructure.SqlServer";
+                        dbSettings.MigrationsAssembly = "ResumePro.Infrastructure.SQLite";
                         dbSettings.MaxRetryCount = 5;
                     },
                     dataBuilder =>
@@ -45,6 +46,10 @@ public sealed class Startup
                         dataBuilder.UseSqlServer<ApplicationContext>(sqlSettings =>
                         {
                             sqlSettings.ConnectionStringName = "DefaultConnection";
+                        });
+                        dataBuilder.UseSQLite<ApplicationContext>(settings =>
+                        {
+                            settings.ConnectionStringName = "SQLiteConnection";
                         });
                     }
                 )

@@ -24,6 +24,7 @@ public class DbSettings
     public bool UseContextPooling { get; set; } = false;
     public bool ValidateSaves { get; set; } = true;
     public string? DefaultSchema { get; set; }
+    public string ProviderName { get; set; } = "SqlServer";
     public NamingConvention NamingConventionType { get; set; } = NamingConvention.None;
     public DeleteBehavior DefaultDeleteBehavior { get; set; } = DeleteBehavior.NoAction;
 }

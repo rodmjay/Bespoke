@@ -143,6 +143,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityPro.IntegrationTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityPro.Idp", "demo\IdentityPro\IdentityPro.Idp\IdentityPro.Idp.csproj", "{D75CA26C-525D-404C-8514-1329FFC6E20B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Data.SQLite", "src\Bespoke.Data.SQLite\Bespoke.Data.SQLite.csproj", "{8D1BD54F-1E08-44E5-83C1-DB17246BD15E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumePro.Infrastructure.SQLite", "demo\ResumePro\ResumePro.Infrastructure.SQLite\ResumePro.Infrastructure.SQLite.csproj", "{A523ADAA-3127-49F1-A0B6-E547B576C5D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -369,6 +373,14 @@ Global
 		{D75CA26C-525D-404C-8514-1329FFC6E20B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D75CA26C-525D-404C-8514-1329FFC6E20B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D75CA26C-525D-404C-8514-1329FFC6E20B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D1BD54F-1E08-44E5-83C1-DB17246BD15E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D1BD54F-1E08-44E5-83C1-DB17246BD15E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D1BD54F-1E08-44E5-83C1-DB17246BD15E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D1BD54F-1E08-44E5-83C1-DB17246BD15E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A523ADAA-3127-49F1-A0B6-E547B576C5D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A523ADAA-3127-49F1-A0B6-E547B576C5D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A523ADAA-3127-49F1-A0B6-E547B576C5D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A523ADAA-3127-49F1-A0B6-E547B576C5D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -433,5 +445,7 @@ Global
 		{62318FBE-4D3E-4AA0-BEC8-F62DFDF03E5D} = {EBB12414-7C5B-4AB3-96FB-69913D655D88}
 		{87FCBD06-8EA8-4917-94D5-2F5F08C1CEAF} = {EBB12414-7C5B-4AB3-96FB-69913D655D88}
 		{D75CA26C-525D-404C-8514-1329FFC6E20B} = {EBB12414-7C5B-4AB3-96FB-69913D655D88}
+		{8D1BD54F-1E08-44E5-83C1-DB17246BD15E} = {A1B0F8DB-8FD8-4F19-A81A-93F5D3F0A3A2}
+		{A523ADAA-3127-49F1-A0B6-E547B576C5D3} = {9A8EE683-E2CF-43C6-93BE-C4A55FFD8DAF}
 	EndGlobalSection
 EndGlobal
