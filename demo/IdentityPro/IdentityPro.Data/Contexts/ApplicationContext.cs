@@ -29,9 +29,10 @@ public class ApplicationContext : BaseContext<ApplicationContext>
 
     private void SeedUsersAndRoles(ModelBuilder builder)
     {
-        //builder.Entity<Organization>().Seed("organizations.csv");
-       // builder.Entity<User>().Seed("users.csv");
-       // builder.Entity<Role>().Seed("roles.csv");
+        builder.Entity<Organization>().Seed("organizations.csv");
+        builder.Entity<User>().Seed("users.csv");
+        builder.Entity<Role>().Seed("roles.csv");
+        builder.Entity<UserOrganization>().Seed("userorganizations.csv");
     }
 
     protected override void SeedDatabase(ModelBuilder builder)
