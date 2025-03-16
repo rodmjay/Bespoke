@@ -102,7 +102,11 @@ namespace IdentityPro.Idp
                 .AddCookie(IdentityConstants.ExternalScheme, options =>
                 {
                     options.Cookie.Name = "Identity.External";
-                });
+                })
+                .AddCookie(IdentityConstants.TwoFactorUserIdScheme, options =>
+                {
+                    options.Cookie.Name = "Identity.TwoFactorUserId";
+                }); ;
             //.AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureSettings/AzureAd"));
 
             // Add Email Sender
