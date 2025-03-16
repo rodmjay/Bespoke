@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IdentityPro.Infrastructure.SqlServer.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250312050916_Migration1")]
+    [Migration("20250316005917_Migration1")]
     partial class Migration1
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResource", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiResource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,6 +34,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AllowedAccessTokenSigningAlgorithms")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -41,18 +42,17 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("DisplayName")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("Enabled")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastAccessed")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -60,9 +60,6 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("NonEditable")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("RequireResourceIndicator")
                         .HasColumnType("bit");
 
                     b.Property<bool>("ShowInDiscoveryDocument")
@@ -73,13 +70,10 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.ToTable("ApiResource", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceClaim", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiResourceClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -97,13 +91,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApiResourceId", "Type")
-                        .IsUnique();
+                    b.HasIndex("ApiResourceId");
 
                     b.ToTable("ApiResourceClaim", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceProperty", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiResourceProperty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -126,13 +119,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApiResourceId", "Key")
-                        .IsUnique();
+                    b.HasIndex("ApiResourceId");
 
                     b.ToTable("ApiResourceProperty", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceScope", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiResourceScope", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -150,13 +142,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApiResourceId", "Scope")
-                        .IsUnique();
+                    b.HasIndex("ApiResourceId");
 
                     b.ToTable("ApiResourceScope", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceSecret", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiResourceSecret", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -171,6 +162,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
@@ -194,7 +186,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.ToTable("ApiResourceSecret", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiScope", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiScope", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -206,10 +198,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("DisplayName")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -218,9 +212,6 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.Property<bool>("Enabled")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastAccessed")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -241,13 +232,10 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.ToTable("ApiScope", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiScopeClaim", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiScopeClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -265,13 +253,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ScopeId", "Type")
-                        .IsUnique();
+                    b.HasIndex("ScopeId");
 
                     b.ToTable("ApiScopeClaim", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiScopeProperty", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiScopeProperty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -294,13 +281,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ScopeId", "Key")
-                        .IsUnique();
+                    b.HasIndex("ScopeId");
 
                     b.ToTable("ApiScopeProperty", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.Client", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -330,6 +316,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("AllowedIdentityTokenSigningAlgorithms")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -346,13 +333,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("BackChannelLogoutUri")
+                        .IsRequired()
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
-                    b.Property<int?>("CibaLifetime")
-                        .HasColumnType("int");
-
                     b.Property<string>("ClientClaimsPrefix")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -362,29 +348,23 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("ClientName")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("ClientUri")
+                        .IsRequired()
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
                     b.Property<int?>("ConsentLifetime")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("CoordinateLifetimeWithUserSession")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<TimeSpan>("DPoPClockSkew")
-                        .HasColumnType("time");
-
-                    b.Property<int>("DPoPValidationMode")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
@@ -401,6 +381,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FrontChannelLogoutUri")
+                        .IsRequired()
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
@@ -410,14 +391,11 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Property<bool>("IncludeJwtId")
                         .HasColumnType("bit");
 
-                    b.Property<string>("InitiateLoginUri")
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
-
                     b.Property<DateTime?>("LastAccessed")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LogoUri")
+                        .IsRequired()
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
@@ -425,19 +403,14 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("PairWiseSubjectSalt")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
-
-                    b.Property<int?>("PollingInterval")
-                        .HasColumnType("int");
 
                     b.Property<string>("ProtocolType")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
-
-                    b.Property<int?>("PushedAuthorizationLifetime")
-                        .HasColumnType("int");
 
                     b.Property<int>("RefreshTokenExpiration")
                         .HasColumnType("int");
@@ -451,13 +424,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Property<bool>("RequireConsent")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("RequireDPoP")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("RequirePkce")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("RequirePushedAuthorization")
                         .HasColumnType("bit");
 
                     b.Property<bool>("RequireRequestObject")
@@ -473,6 +440,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserCodeType")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -481,13 +449,10 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId")
-                        .IsUnique();
-
                     b.ToTable("Client", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientClaim", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -510,13 +475,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId", "Type", "Value")
-                        .IsUnique();
+                    b.HasIndex("ClientId");
 
                     b.ToTable("ClientClaim", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientCorsOrigin", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientCorsOrigin", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -534,13 +498,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId", "Origin")
-                        .IsUnique();
+                    b.HasIndex("ClientId");
 
                     b.ToTable("ClientCorsOrigin", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientGrantType", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientGrantType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -558,13 +521,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId", "GrantType")
-                        .IsUnique();
+                    b.HasIndex("ClientId");
 
                     b.ToTable("ClientGrantType", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientIdPRestriction", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientIdPRestriction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -582,13 +544,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId", "Provider")
-                        .IsUnique();
+                    b.HasIndex("ClientId");
 
                     b.ToTable("ClientIdPRestriction", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientPostLogoutRedirectUri", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientPostLogoutRedirectUri", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -601,18 +562,17 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.Property<string>("PostLogoutRedirectUri")
                         .IsRequired()
-                        .HasMaxLength(400)
-                        .HasColumnType("nvarchar(400)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId", "PostLogoutRedirectUri")
-                        .IsUnique();
+                    b.HasIndex("ClientId");
 
                     b.ToTable("ClientPostLogoutRedirectUri", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientProperty", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientProperty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -635,13 +595,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId", "Key")
-                        .IsUnique();
+                    b.HasIndex("ClientId");
 
                     b.ToTable("ClientProperty", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientRedirectUri", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientRedirectUri", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -654,18 +613,17 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.Property<string>("RedirectUri")
                         .IsRequired()
-                        .HasMaxLength(400)
-                        .HasColumnType("nvarchar(400)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId", "RedirectUri")
-                        .IsUnique();
+                    b.HasIndex("ClientId");
 
                     b.ToTable("ClientRedirectUri", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientScope", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientScope", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -683,13 +641,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId", "Scope")
-                        .IsUnique();
+                    b.HasIndex("ClientId");
 
                     b.ToTable("ClientScope", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientSecret", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientSecret", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -704,6 +661,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
@@ -727,11 +685,13 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.ToTable("ClientSecret", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.DeviceFlowCodes", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalDeviceFlowCodes", b =>
                 {
-                    b.Property<string>("UserCode")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClientId")
                         .IsRequired()
@@ -743,10 +703,10 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasMaxLength(50000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -760,24 +720,26 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SessionId")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("SubjectId")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("UserCode");
+                    b.Property<string>("UserCode")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
-                    b.HasIndex("DeviceCode")
-                        .IsUnique();
-
-                    b.HasIndex("Expiration");
+                    b.HasKey("Id");
 
                     b.ToTable("DeviceFlowCodes", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.IdentityProvider", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalIdentityProvider", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -789,7 +751,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("Enabled")
                         .HasColumnType("bit");
@@ -801,23 +765,26 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Properties")
+                        .IsRequired()
+                        .HasMaxLength(10000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Scheme")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Updated")
-                        .HasColumnType("datetime2");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("IdentityProviders");
+                    b.ToTable("IdentityProvider", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.IdentityResource", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalIdentityResource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -829,10 +796,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("DisplayName")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -861,13 +830,10 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.ToTable("IdentityResource", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.IdentityResourceClaim", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalIdentityResourceClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -885,13 +851,12 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdentityResourceId", "Type")
-                        .IsUnique();
+                    b.HasIndex("IdentityResourceId");
 
                     b.ToTable("IdentityResourceClaim", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.IdentityResourceProperty", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalIdentityResourceProperty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -914,15 +879,15 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdentityResourceId", "Key")
-                        .IsUnique();
+                    b.HasIndex("IdentityResourceId");
 
                     b.ToTable("IdentityResourceProperty", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.Key", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalKey", b =>
                 {
                     b.Property<string>("Id")
+                        .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Algorithm")
@@ -944,6 +909,8 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Use")
+                        .IsRequired()
+                        .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Version")
@@ -951,18 +918,16 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Use");
-
                     b.ToTable("Key", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.PersistedGrant", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalPersistedGrant", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClientId")
                         .IsRequired()
@@ -977,10 +942,10 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasMaxLength(50000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -988,14 +953,17 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Key")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("SessionId")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("SubjectId")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -1006,28 +974,14 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ConsumedTime");
-
-                    b.HasIndex("Expiration");
-
-                    b.HasIndex("Key")
-                        .IsUnique()
-                        .HasFilter("[Key] IS NOT NULL");
-
-                    b.HasIndex("SubjectId", "ClientId", "Type");
-
-                    b.HasIndex("SubjectId", "SessionId", "Type");
-
                     b.ToTable("PersistedGrants", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.PushedAuthorizationRequest", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalPushedAuthorizationRequest", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    b.Property<string>("Id")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("ExpiresAtUtc")
                         .HasColumnType("datetime2");
@@ -1036,28 +990,23 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ReferenceValueHash")
+                    b.Property<string>("RequestUri")
                         .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExpiresAtUtc");
-
-                    b.HasIndex("ReferenceValueHash")
-                        .IsUnique();
-
-                    b.ToTable("PushedAuthorizationRequests", (string)null);
+                    b.ToTable("PushedAuthorizationRequests", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ServerSideSession", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalServerSideSession", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -1067,6 +1016,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DisplayName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -1087,6 +1037,7 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("SessionId")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -1097,23 +1048,223 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DisplayName");
-
-                    b.HasIndex("Expires");
-
-                    b.HasIndex("Key")
-                        .IsUnique();
-
-                    b.HasIndex("SessionId");
-
-                    b.HasIndex("SubjectId");
-
                     b.ToTable("ServerSideSession", "IdentityServer");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceClaim", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.Organization", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.ApiResource", "ApiResource")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Organization");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.RoleClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("RoleClaim");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("CurrentApplication")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("User");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.UserClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserClaim");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.UserLogin", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "ProviderKey", "LoginProvider");
+
+                    b.ToTable("UserLogin");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.UserRole", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("UserRole");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.UserToken", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("UserToken");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiResourceClaim", b =>
+                {
+                    b.HasOne("IdentityPro.Domain.Entities.LocalApiResource", "ApiResource")
                         .WithMany("UserClaims")
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1122,9 +1273,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("ApiResource");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceProperty", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiResourceProperty", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.ApiResource", "ApiResource")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalApiResource", "ApiResource")
                         .WithMany("Properties")
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1133,9 +1284,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("ApiResource");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceScope", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiResourceScope", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.ApiResource", "ApiResource")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalApiResource", "ApiResource")
                         .WithMany("Scopes")
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1144,9 +1295,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("ApiResource");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceSecret", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiResourceSecret", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.ApiResource", "ApiResource")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalApiResource", "ApiResource")
                         .WithMany("Secrets")
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1155,9 +1306,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("ApiResource");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiScopeClaim", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiScopeClaim", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.ApiScope", "Scope")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalApiScope", "Scope")
                         .WithMany("UserClaims")
                         .HasForeignKey("ScopeId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1166,9 +1317,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("Scope");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiScopeProperty", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiScopeProperty", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.ApiScope", "Scope")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalApiScope", "Scope")
                         .WithMany("Properties")
                         .HasForeignKey("ScopeId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1177,9 +1328,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("Scope");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientClaim", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientClaim", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalClient", "Client")
                         .WithMany("Claims")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1188,9 +1339,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientCorsOrigin", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientCorsOrigin", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalClient", "Client")
                         .WithMany("AllowedCorsOrigins")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1199,9 +1350,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientGrantType", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientGrantType", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalClient", "Client")
                         .WithMany("AllowedGrantTypes")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1210,9 +1361,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientIdPRestriction", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientIdPRestriction", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalClient", "Client")
                         .WithMany("IdentityProviderRestrictions")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1221,9 +1372,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientPostLogoutRedirectUri", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientPostLogoutRedirectUri", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalClient", "Client")
                         .WithMany("PostLogoutRedirectUris")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1232,9 +1383,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientProperty", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientProperty", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalClient", "Client")
                         .WithMany("Properties")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1243,9 +1394,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientRedirectUri", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientRedirectUri", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalClient", "Client")
                         .WithMany("RedirectUris")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1254,9 +1405,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientScope", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientScope", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalClient", "Client")
                         .WithMany("AllowedScopes")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1265,9 +1416,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientSecret", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClientSecret", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalClient", "Client")
                         .WithMany("ClientSecrets")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1276,9 +1427,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.IdentityResourceClaim", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalIdentityResourceClaim", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.IdentityResource", "IdentityResource")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalIdentityResource", "IdentityResource")
                         .WithMany("UserClaims")
                         .HasForeignKey("IdentityResourceId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1287,9 +1438,9 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("IdentityResource");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.IdentityResourceProperty", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalIdentityResourceProperty", b =>
                 {
-                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.IdentityResource", "IdentityResource")
+                    b.HasOne("IdentityPro.Domain.Entities.LocalIdentityResource", "IdentityResource")
                         .WithMany("Properties")
                         .HasForeignKey("IdentityResourceId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1298,7 +1449,81 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("IdentityResource");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResource", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.RoleClaim", b =>
+                {
+                    b.HasOne("IdentityPro.Domain.Entities.Role", "Role")
+                        .WithMany("RoleClaims")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.User", b =>
+                {
+                    b.HasOne("IdentityPro.Domain.Entities.Organization", "Organization")
+                        .WithMany("Users")
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.UserClaim", b =>
+                {
+                    b.HasOne("IdentityPro.Domain.Entities.User", "User")
+                        .WithMany("UserClaims")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.UserLogin", b =>
+                {
+                    b.HasOne("IdentityPro.Domain.Entities.User", "User")
+                        .WithMany("UserLogins")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.UserRole", b =>
+                {
+                    b.HasOne("IdentityPro.Domain.Entities.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("IdentityPro.Domain.Entities.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.UserToken", b =>
+                {
+                    b.HasOne("IdentityPro.Domain.Entities.User", "User")
+                        .WithMany("UserTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiResource", b =>
                 {
                     b.Navigation("Properties");
 
@@ -1309,14 +1534,14 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("UserClaims");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiScope", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalApiScope", b =>
                 {
                     b.Navigation("Properties");
 
                     b.Navigation("UserClaims");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.Client", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalClient", b =>
                 {
                     b.Navigation("AllowedCorsOrigins");
 
@@ -1337,11 +1562,34 @@ namespace IdentityPro.Infrastructure.SqlServer.Migrations
                     b.Navigation("RedirectUris");
                 });
 
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.IdentityResource", b =>
+            modelBuilder.Entity("IdentityPro.Domain.Entities.LocalIdentityResource", b =>
                 {
                     b.Navigation("Properties");
 
                     b.Navigation("UserClaims");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.Organization", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.Role", b =>
+                {
+                    b.Navigation("RoleClaims");
+
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("IdentityPro.Domain.Entities.User", b =>
+                {
+                    b.Navigation("UserClaims");
+
+                    b.Navigation("UserLogins");
+
+                    b.Navigation("UserRoles");
+
+                    b.Navigation("UserTokens");
                 });
 #pragma warning restore 612, 618
         }
