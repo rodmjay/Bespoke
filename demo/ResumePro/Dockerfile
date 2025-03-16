@@ -11,8 +11,8 @@ RUN ls -la
 RUN rm -rf node_modules
 # Install dependencies and build the Angular app using production configuration
 RUN npm install && \
-    # Fix for Angular CLI workspace detection - ensure angular.json exists
-    echo '{"projects":{"resumepro":{"root":"","sourceRoot":"src","architect":{"build":{"builder":"@angular-devkit/build-angular:application","options":{"outputPath":"dist/resumepro"}}}}}}' > angular.json && \
+    # Fix for Angular CLI workspace detection - ensure angular.json exists with required schema and version
+    echo '{"$schema": "./node_modules/@angular/cli/lib/config/schema.json", "version": 1, "projects":{"resumepro":{"root":"","sourceRoot":"src","architect":{"build":{"builder":"@angular-devkit/build-angular:application","options":{"outputPath":"dist/resumepro"}}}}}}' > angular.json && \
     npm run build --configuration=production
 
 ##################################################
