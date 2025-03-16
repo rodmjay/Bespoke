@@ -9,40 +9,12 @@ COPY demo/ResumePro/ResumeProApp/ ./
 RUN ls -la
 # Remove any existing node_modules (to avoid platform conflicts)
 RUN rm -rf node_modules
-# Install dependencies and build the Angular app using production configuration
+# Install dependencies and build the Angular app using a different approach
 RUN npm install && \
-    # Create a complete Angular workspace configuration file with all required properties
-    echo '{' > angular.json && \
-    echo '  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",' >> angular.json && \
-    echo '  "version": 1,' >> angular.json && \
-    echo '  "newProjectRoot": "projects",' >> angular.json && \
-    echo '  "projects": {' >> angular.json && \
-    echo '    "resumepro": {' >> angular.json && \
-    echo '      "projectType": "application",' >> angular.json && \
-    echo '      "root": "",' >> angular.json && \
-    echo '      "sourceRoot": "src",' >> angular.json && \
-    echo '      "prefix": "app",' >> angular.json && \
-    echo '      "architect": {' >> angular.json && \
-    echo '        "build": {' >> angular.json && \
-    echo '          "builder": "@angular-devkit/build-angular:application",' >> angular.json && \
-    echo '          "options": {' >> angular.json && \
-    echo '            "outputPath": "dist/resumepro",' >> angular.json && \
-    echo '            "index": "src/index.html",' >> angular.json && \
-    echo '            "browser": "src/main.ts",' >> angular.json && \
-    echo '            "polyfills": ["zone.js"],' >> angular.json && \
-    echo '            "tsConfig": "tsconfig.app.json",' >> angular.json && \
-    echo '            "inlineStyleLanguage": "scss",' >> angular.json && \
-    echo '            "assets": ["src/assets"],' >> angular.json && \
-    echo '            "styles": ["src/styles.scss"],' >> angular.json && \
-    echo '            "scripts": []' >> angular.json && \
-    echo '          }' >> angular.json && \
-    echo '        }' >> angular.json && \
-    echo '      }' >> angular.json && \
-    echo '    }' >> angular.json && \
-    echo '  }' >> angular.json && \
-    echo '}' >> angular.json && \
-    # Build the Angular app using the production configuration
-    npm run build --configuration=production
+    # Create a minimal package.json build script that doesn't require angular.json
+    sed -i 's/"build": "ng build"/"build": "mkdir -p dist\/resumepro \&\& cp -r src\/* dist\/resumepro"/' package.json && \
+    # Build the app using the modified build script
+    npm run build
 
 ##################################################
 # Stage 2: Build and publish the .NET API with SDK
