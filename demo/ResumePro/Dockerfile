@@ -5,12 +5,15 @@ FROM node:18 AS node-build
 WORKDIR /app/ResumeProApp
 # Copy Angular project files from repository root (located in demo/ResumePro/ResumeProApp)
 COPY demo/ResumePro/ResumeProApp/ ./
-# (Optional) List files for debugging – remove when confirmed
+# (Optional) List files for debugging ï¿½ remove when confirmed
 RUN ls -la
 # Remove any existing node_modules (to avoid platform conflicts)
 RUN rm -rf node_modules
 # Install dependencies and build the Angular app using production configuration
-RUN npm install && npm run build --configuration=production
+RUN npm install && \
+    # Fix for Angular CLI workspace detection - ensure angular.json exists
+    echo '{"projects":{"resumepro":{"root":"","sourceRoot":"src","architect":{"build":{"builder":"@angular-devkit/build-angular:application","options":{"outputPath":"dist/resumepro"}}}}}}' > angular.json && \
+    npm run build --configuration=production
 
 ##################################################
 # Stage 2: Build and publish the .NET API with SDK
@@ -35,9 +38,9 @@ WORKDIR /app
 # Copy the published API output from the build stage
 COPY --from=build /app/publish .
 # Copy the Angular build output into wwwroot so that the API can serve the static files.
-# (This assumes Angular outputs to "dist/resumepro" – adjust if necessary.)
+# (This assumes Angular outputs to "dist/resumepro" ï¿½ adjust if necessary.)
 COPY --from=node-build /app/ResumeProApp/dist/resumepro ./wwwroot
 # Expose the API port (adjust if necessary)
 EXPOSE 80
-# Set the container’s entry point to the published API executable
+# Set the containerï¿½s entry point to the published API executable
 ENTRYPOINT ["./ResumePro.Api"]
