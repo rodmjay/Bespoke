@@ -29,7 +29,10 @@ public class UserClaimsPrincipalFactory(
 
         id.AddClaim(new Claim(Options.ClaimsIdentity.UserIdClaimType, userId));
         id.AddClaim(new Claim(Options.ClaimsIdentity.UserNameClaimType, userName));
-        id.AddClaim(new Claim("organizationId", user.OrganizationId.ToString()));
+        
+        // Get the first organization ID if user has any organizations
+        var organizationId = user.UserOrganizations.FirstOrDefault()?.OrganizationId.ToString() ?? "0";
+        id.AddClaim(new Claim("organizationId", organizationId));
 
         if (UserManager.SupportsUserEmail)
         {
