@@ -52,11 +52,11 @@ jobs:
 
       - name: Push Docker Image
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/identitypro.idp:latest
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/identitypro:latest
 
       - name: Build Docker Image
         run: docker build -f demo/ResumePro/Dockerfile -t ${{ secrets.DOCKERHUB_USERNAME }}/resumepro:latest .
 
       - name: Push Docker Image
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/resumepro.api:latest
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/resumepro:latest
