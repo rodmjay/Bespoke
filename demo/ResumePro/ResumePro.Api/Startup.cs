@@ -8,6 +8,7 @@ using Bespoke.Data.SqlServer;
 using Bespoke.Rest.Extensions;
 using Bespoke.Rest.Middleware;
 using Bespoke.Rest.Swagger.Extensions;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
 using ResumePro.Data.Contexts;
 using ResumePro.Services.Extensions;
@@ -67,6 +68,15 @@ public sealed class Startup
                     })
                 .AddRest(restSettings => { restSettings.Cors.AllowAnyOrigin = true; },
                     restBuilder => { restBuilder.AddSwagger(options => { options.SwaggerGenDemoMode(); }); });
+
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/account/login";
+                    options.LoginPath = "/account/logout";
+                });
+            builder.Services.AddAuthorization();
 
             builder.Services.AddServices(Configuration);
         });
