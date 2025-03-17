@@ -19,5 +19,5 @@ public class BaseController : ControllerBase
 
     public int UserId => User.UserId();
 
-    public int OrganizationId => User.OrganizationId();
+    public int OrganizationId => User.Identity?.IsAuthenticated == true ? User.OrganizationId() : 1; // Default to org ID 1 for development
 }
