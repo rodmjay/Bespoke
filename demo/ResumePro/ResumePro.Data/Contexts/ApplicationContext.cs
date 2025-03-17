@@ -43,7 +43,7 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
         //builder.Entity<Persona>().Seed("personas.csv");
 
         //builder.Entity<Highlight>().Seed("highlights.csv");
-        //builder.Entity<PersonaSkill>().Seed("persona_skills.csv");
+        builder.Entity<PersonaSkill>().Seed("persona_skills.csv");
 
         //builder.Entity<PersonaLanguage>().Seed("persona_language.csv");
         //builder.Entity<Resume>().Seed("resumes.csv");

@@ -13,8 +13,13 @@ export interface PersonaDto {
   skillCount: number;
 }
 
+export interface Skill {
+  id: number;
+  title: string;
+}
+
 export interface PersonaDetails extends PersonaDto {
-  skills: any[]; // Will be typed as PersonaSkillDto[] after creating skill models
+  skills: Skill[]; // Properly typed as Skill[]
   languages: any[]; // Will be typed as PersonaLanguageDto[] after creating language models
 }
 
