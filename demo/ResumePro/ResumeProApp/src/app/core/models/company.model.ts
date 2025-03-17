@@ -39,6 +39,7 @@ export interface PositionDto {
 
 export interface PositionDetails extends PositionDto {
   highlights: HighlightDto[];
+  description?: string; // Added to fix TypeScript errors in mock data
 }
 
 export interface PositionOptions {
