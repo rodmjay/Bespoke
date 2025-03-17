@@ -29,28 +29,29 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
         builder.Entity<Skill>().Seed("skills.csv");
         builder.Entity<Language>().Seed("languages.csv");
         builder.Entity<Persona>().Seed("personas.csv");
-
-        builder.Entity<ProjectHighlight>().Seed("project_highlights.csv");
-        builder.Entity<CompanySkill>().Seed("company_skills.csv");
-        builder.Entity<Project>().Seed("projects.csv");
-        builder.Entity<Reference>().Seed("references.csv");
+        
+        builder.Entity<Template>().Seed("templates.csv");
         builder.Entity<School>().Seed("schools.csv");
         builder.Entity<Degree>().Seed("degrees.csv");
-        builder.Entity<ResumeCompany>().Seed("resume_companies.csv");
-
         builder.Entity<SkillCategory>().Seed("skill_categories.csv");
         builder.Entity<SkillCategorySkill>().Seed("category_skills.csv");
-
+        
+        builder.Entity<Company>().Seed("companies.csv");
+        builder.Entity<Position>().Seed("positions.csv");
+        builder.Entity<Project>().Seed("projects.csv");
+        builder.Entity<ProjectHighlight>().Seed("project_highlights.csv");
         builder.Entity<Highlight>().Seed("highlights.csv");
+        
         builder.Entity<PersonaSkill>().Seed("persona_skills.csv");
-
         builder.Entity<PersonaLanguage>().Seed("persona_language.csv");
+        builder.Entity<CompanySkill>().Seed("company_skills.csv");
+        
         builder.Entity<Resume>().Seed("resumes.csv");
         builder.Entity<ResumeSettings>().Seed("resume_settings.csv");
         builder.Entity<OrganizationSettings>().Seed("organization_settings.csv");
         builder.Entity<ResumeSkill>().Seed("resume_skills.csv");
-        builder.Entity<Company>().Seed("companies.csv");
-        builder.Entity<Position>().Seed("positions.csv");
+        builder.Entity<ResumeCompany>().Seed("resume_companies.csv");
+        builder.Entity<Reference>().Seed("references.csv");
     }
 
     protected override void PreModelCreating(ModelBuilder builder)
