@@ -30,13 +30,14 @@ export class PeopleComponent implements OnInit {
     this.loading = true;
     this.peopleService.getPeople().subscribe({
       next: (response) => {
-        this.people = response.items;
+        this.people = response.items || [];
         this.loading = false;
+        console.log('People loaded:', this.people);
       },
       error: (err) => {
-        this.error = 'Failed to load people data';
+        this.error = 'Failed to load people data. Please make sure the API is running.';
         this.loading = false;
-        console.error(err);
+        console.error('Error loading people:', err);
       }
     });
   }
