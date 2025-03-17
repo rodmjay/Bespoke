@@ -4,14 +4,17 @@ import { PeopleComponent } from './people/people.component';
 import { PersonDetailComponent } from './person-detail/person-detail.component';
 import { ResumeDetailComponent } from './resume-detail/resume-detail.component';
 import { SkillsComponent } from './skills/skills.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
-const routes: Routes = [
-  { path: '', redirectTo: '/people', pathMatch: 'full' },
-  { path: 'people', component: PeopleComponent },
-  { path: 'person/:id', component: PersonDetailComponent },
-  { path: 'person/:personId/resume/:resumeId', component: ResumeDetailComponent },
-  { path: 'skills', component: SkillsComponent },
-  { path: '**', redirectTo: '/people' }
+export const routes: Routes = [
+  { path: '', component: DashboardComponent, children: [
+    { path: '', redirectTo: 'people', pathMatch: 'full' },
+    { path: 'people', component: PeopleComponent },
+    { path: 'person/:id', component: PersonDetailComponent },
+    { path: 'person/:personId/resume/:resumeId', component: ResumeDetailComponent },
+    { path: 'skills', component: SkillsComponent }
+  ]},
+  { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({

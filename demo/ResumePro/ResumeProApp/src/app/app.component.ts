@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  template: '<app-dashboard></app-dashboard>',
-  standalone: false
+  standalone: true,
+  imports: [RouterModule],
+  template: '<router-outlet></router-outlet>',
+  styles: []
 })
 export class AppComponent {
   title = 'resumepro';

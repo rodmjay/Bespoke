@@ -1,7 +1,5 @@
 /* Global styles for ResumeProApp */
-/* /* PrimeNG theme imports commented out due to compatibility issues */ */
-/* /* PrimeNG resources import commented out */ */
-/* /* PrimeIcons import commented out */ */
+/* PrimeNG styles will be loaded from node_modules */
 
 body {
   font-family: var(--font-family);
