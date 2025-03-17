@@ -10,6 +10,7 @@ public sealed class ResumeCompany : BaseEntity<ResumeCompany>
     public Resume Resume { get; set; } = null!;
     public int CompanyId { get; set; }
     public Company Company { get; set; } = null!;
+    public int PersonId { get; set; }
 
     public override void Configure(EntityTypeBuilder<ResumeCompany> builder)
     {
@@ -17,14 +18,14 @@ public sealed class ResumeCompany : BaseEntity<ResumeCompany>
 
         builder.HasOne(x => x.Resume)
             .WithMany(x => x.Companies)
-            .HasForeignKey(x => new { x.OrganizationId, x.ResumeId })
-            .HasPrincipalKey(x => new { x.OrganizationId, x.Id })
+            .HasForeignKey(x => new { x.OrganizationId, x.ResumeId, x.PersonId })
+            .HasPrincipalKey(x => new { x.OrganizationId, x.Id, x.PersonId })
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(x => x.Company)
             .WithMany(x => x.Resumes)
-            .HasForeignKey(x => new { x.OrganizationId, x.CompanyId })
-            .HasPrincipalKey(x => new { x.OrganizationId, x.Id })
+            .HasForeignKey(x => new { x.OrganizationId, x.CompanyId, x.PersonId })
+            .HasPrincipalKey(x => new { x.OrganizationId, x.Id, x.PersonId })
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

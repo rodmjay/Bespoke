@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResumePro.Data.Contexts;
 
@@ -10,9 +11,11 @@ using ResumePro.Data.Contexts;
 namespace ResumePro.Infrastructure.SQLite.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20250317214558_FixTemplateSeeding")]
+    partial class FixTemplateSeeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.13");
@@ -4515,7 +4518,7 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("varchar(512)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("OrganizationId", "PersonId", "CompanyId", "PositionId", "ProjectId", "Id");
 
@@ -4631,9 +4634,6 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
                     b.Property<int>("OrganizationId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("PersonId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Id")
                         .HasColumnType("INTEGER");
 
@@ -4645,7 +4645,10 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.HasKey("OrganizationId", "PersonId", "Id");
+                    b.Property<int>("PersonId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("OrganizationId", "Id");
 
                     b.ToTable("Resume");
 
@@ -4653,26 +4656,26 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
                         new
                         {
                             OrganizationId = 1,
-                            PersonId = 1,
                             Id = 1,
                             Description = "Experienced software engineer with expertise in cloud technologies and distributed systems",
-                            JobTitle = "Senior Software Engineer"
+                            JobTitle = "Senior Software Engineer",
+                            PersonId = 1
                         },
                         new
                         {
                             OrganizationId = 1,
-                            PersonId = 1,
                             Id = 2,
                             Description = "Versatile developer with skills in both frontend and backend technologies",
-                            JobTitle = "Full Stack Developer"
+                            JobTitle = "Full Stack Developer",
+                            PersonId = 1
                         },
                         new
                         {
                             OrganizationId = 1,
-                            PersonId = 1,
                             Id = 3,
                             Description = "Specialist in automation and infrastructure as code",
-                            JobTitle = "DevOps Engineer"
+                            JobTitle = "DevOps Engineer",
+                            PersonId = 1
                         });
                 });
 
@@ -4687,14 +4690,9 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("PersonId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("OrganizationId", "ResumeId", "CompanyId");
 
-                    b.HasIndex("OrganizationId", "CompanyId", "PersonId");
-
-                    b.HasIndex("OrganizationId", "ResumeId", "PersonId");
+                    b.HasIndex("OrganizationId", "CompanyId");
 
                     b.ToTable("ResumeCompany");
 
@@ -4703,36 +4701,31 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
                         {
                             OrganizationId = 1,
                             ResumeId = 1,
-                            CompanyId = 1,
-                            PersonId = 1
+                            CompanyId = 1
                         },
                         new
                         {
                             OrganizationId = 1,
                             ResumeId = 1,
-                            CompanyId = 2,
-                            PersonId = 1
+                            CompanyId = 2
                         },
                         new
                         {
                             OrganizationId = 1,
                             ResumeId = 2,
-                            CompanyId = 1,
-                            PersonId = 1
+                            CompanyId = 1
                         },
                         new
                         {
                             OrganizationId = 1,
                             ResumeId = 2,
-                            CompanyId = 3,
-                            PersonId = 1
+                            CompanyId = 3
                         },
                         new
                         {
                             OrganizationId = 1,
                             ResumeId = 3,
-                            CompanyId = 2,
-                            PersonId = 1
+                            CompanyId = 2
                         });
                 });
 
@@ -4742,9 +4735,6 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ResumeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PersonId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool?>("AttachAllJobs")
@@ -4774,7 +4764,7 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
                     b.Property<int?>("SkillView")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("OrganizationId", "ResumeId", "PersonId");
+                    b.HasKey("OrganizationId", "ResumeId");
 
                     b.HasIndex("DefaultTemplateId");
 
@@ -4785,7 +4775,6 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
                         {
                             OrganizationId = 1,
                             ResumeId = 1,
-                            PersonId = 1,
                             AttachAllJobs = true,
                             AttachAllSkills = true,
                             DefaultTemplateId = 1,
@@ -4800,7 +4789,6 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
                         {
                             OrganizationId = 1,
                             ResumeId = 2,
-                            PersonId = 1,
                             AttachAllJobs = true,
                             AttachAllSkills = true,
                             DefaultTemplateId = 1,
@@ -4815,7 +4803,6 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
                         {
                             OrganizationId = 1,
                             ResumeId = 3,
-                            PersonId = 1,
                             AttachAllJobs = false,
                             AttachAllSkills = true,
                             DefaultTemplateId = 1,
@@ -6888,7 +6875,6 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
                     b.HasOne("ResumePro.Domain.Entities.Resume", "Resume")
                         .WithMany("Renderings")
                         .HasForeignKey("OrganizationId", "ResumeId")
-                        .HasPrincipalKey("OrganizationId", "Id")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -6912,15 +6898,14 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
                 {
                     b.HasOne("ResumePro.Domain.Entities.Company", "Company")
                         .WithMany("Resumes")
-                        .HasForeignKey("OrganizationId", "CompanyId", "PersonId")
-                        .HasPrincipalKey("OrganizationId", "Id", "PersonId")
+                        .HasForeignKey("OrganizationId", "CompanyId")
+                        .HasPrincipalKey("OrganizationId", "Id")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ResumePro.Domain.Entities.Resume", "Resume")
                         .WithMany("Companies")
-                        .HasForeignKey("OrganizationId", "ResumeId", "PersonId")
-                        .HasPrincipalKey("OrganizationId", "Id", "PersonId")
+                        .HasForeignKey("OrganizationId", "ResumeId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -6944,8 +6929,7 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
 
                     b.HasOne("ResumePro.Domain.Entities.Resume", "Resume")
                         .WithOne("ResumeSettings")
-                        .HasForeignKey("ResumePro.Domain.Entities.ResumeSettings", "OrganizationId", "ResumeId", "PersonId")
-                        .HasPrincipalKey("ResumePro.Domain.Entities.Resume", "OrganizationId", "Id", "PersonId")
+                        .HasForeignKey("ResumePro.Domain.Entities.ResumeSettings", "OrganizationId", "ResumeId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -6961,6 +6945,7 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
                     b.HasOne("ResumePro.Domain.Entities.Resume", "Resume")
                         .WithMany("Skills")
                         .HasForeignKey("OrganizationId", "PersonId", "ResumeId")
+                        .HasPrincipalKey("OrganizationId", "PersonId", "Id")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

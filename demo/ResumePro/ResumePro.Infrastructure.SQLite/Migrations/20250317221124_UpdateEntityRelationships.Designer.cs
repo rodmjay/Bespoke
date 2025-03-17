@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResumePro.Data.Contexts;
 
@@ -10,9 +11,11 @@ using ResumePro.Data.Contexts;
 namespace ResumePro.Infrastructure.SQLite.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20250317221124_UpdateEntityRelationships")]
+    partial class UpdateEntityRelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.13");
@@ -4515,7 +4518,7 @@ namespace ResumePro.Infrastructure.SQLite.Migrations
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("varchar(512)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("OrganizationId", "PersonId", "CompanyId", "PositionId", "ProjectId", "Id");
 

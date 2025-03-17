@@ -21,13 +21,16 @@ public sealed class ResumeSettings : BaseEntity<ResumeSettings>, IResumeSettings
     public SkillView? SkillView { get; set; }
     public bool? ShowRatings { get; set; }
 
+    public int PersonId { get; set; }
+    
     public override void Configure(EntityTypeBuilder<ResumeSettings> builder)
     {
-        builder.HasKey(x => new { x.OrganizationId, x.ResumeId });
+        builder.HasKey(x => new { x.OrganizationId, x.ResumeId, x.PersonId });
 
         builder.HasOne(x => x.Resume)
             .WithOne(x => x.ResumeSettings)
-            .HasForeignKey<ResumeSettings>(x => new { x.OrganizationId, x.ResumeId })
+            .HasForeignKey<ResumeSettings>(x => new { x.OrganizationId, x.ResumeId, x.PersonId })
+            .HasPrincipalKey<Resume>(x => new { x.OrganizationId, x.Id, x.PersonId })
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(x => x.Template)
