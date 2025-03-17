@@ -27,25 +27,34 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
         builder.Entity<Country>().Seed("countries.csv");
         builder.Entity<StateProvince>().Seed("state_provinces.csv");
         builder.Entity<Skill>().Seed("skills.csv");
+        builder.Entity<Country>().Seed("countries.csv");
+        builder.Entity<StateProvince>().Seed("state_provinces.csv");
         builder.Entity<Language>().Seed("languages.csv");
-        builder.Entity<Persona>().Seed("personas.csv");
-        
-        builder.Entity<Template>().Seed("templates.csv");
-        builder.Entity<School>().Seed("schools.csv");
-        builder.Entity<Degree>().Seed("degrees.csv");
+        builder.Entity<Skill>().Seed("skills.csv");
         builder.Entity<SkillCategory>().Seed("skill_categories.csv");
         builder.Entity<SkillCategorySkill>().Seed("category_skills.csv");
+        builder.Entity<Template>().Seed("templates.csv");
         
+        // Seed Persona after its dependencies (StateProvince)
+        builder.Entity<Persona>().Seed("personas.csv");
+        
+        // Seed entities that depend on Persona
+        builder.Entity<School>().Seed("schools.csv");
+        builder.Entity<Degree>().Seed("degrees.csv");
         builder.Entity<Company>().Seed("companies.csv");
         builder.Entity<Position>().Seed("positions.csv");
+        
+        // Seed entities that depend on Position
         builder.Entity<Project>().Seed("projects.csv");
         builder.Entity<ProjectHighlight>().Seed("project_highlights.csv");
         builder.Entity<Highlight>().Seed("highlights.csv");
         
+        // Seed relationship entities
         builder.Entity<PersonaSkill>().Seed("persona_skills.csv");
         builder.Entity<PersonaLanguage>().Seed("persona_language.csv");
         builder.Entity<CompanySkill>().Seed("company_skills.csv");
         
+        // Seed resume-related entities
         builder.Entity<Resume>().Seed("resumes.csv");
         builder.Entity<ResumeSettings>().Seed("resume_settings.csv");
         builder.Entity<OrganizationSettings>().Seed("organization_settings.csv");
