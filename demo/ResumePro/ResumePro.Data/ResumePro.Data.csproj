@@ -80,9 +80,6 @@
 		<EmbeddedResource Include="Seeding\skill_categories.csv">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</EmbeddedResource>
-		<EmbeddedResource Include="Seeding\state_provinces.csv">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
