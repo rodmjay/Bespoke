@@ -13,10 +13,18 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             [Test]
             public async Task GetPeople_ShouldReturnPeople()
             {
-                // TODO: Implement test logic later.
-                // For now, just stub in the test so that it passes.
-                await Task.CompletedTask;
-                Assert.Pass("Stub: GetPeople passed.");
+                // Create a filter and paging query
+                var filters = new ResumePro.Shared.Filters.PersonaFilters();
+                var paging = new Bespoke.Shared.Common.PagingQuery { Page = 1, Size = 10 };
+                
+                // Call the API through the proxy
+                var people = await AssertGetPeople(filters, paging);
+                
+                // Verify the response
+                Assert.That(people, Is.Not.Null);
+                Assert.That(people.Items, Is.Not.Null);
+                Assert.That(people.Items.Count, Is.GreaterThanOrEqualTo(0));
+                Assert.That(people.CurrentPage, Is.EqualTo(paging.Page));
             }
         }
         
