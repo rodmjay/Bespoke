@@ -63,7 +63,13 @@ export class PersonDetailComponent implements OnInit {
           gitHub: '',
           resumeCount: 2,
           skillCount: 5,
-          skills: [],
+          skills: [
+            { id: 1, title: 'C#' },
+            { id: 2, title: 'Azure' },
+            { id: 4, title: 'Angular' },
+            { id: 5, title: 'Entity Framework' },
+            { id: 6, title: 'TypeScript' }
+          ],
           languages: []
         };
         this.loadResumes();
