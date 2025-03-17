@@ -100,6 +100,20 @@
         </div>
       </p-tabPanel>
 
+      <p-tabPanel header="Languages" *ngIf="person.languages">
+        <div *ngIf="person.languages && person.languages.length > 0">
+          <div *ngFor="let language of person.languages" class="mb-3 p-3 border-round surface-card">
+            <div class="flex justify-content-between align-items-center">
+              <h3>{{ language.name }}</h3>
+              <p-tag [severity]="getLanguageProficiencySeverity(language.proficiency)" 
+                     [value]="language.proficiencyName"></p-tag>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!person.languages || person.languages.length === 0">
+          No language information found.
+        </div>
+      </p-tabPanel>
     </p-tabView>
   </div>
 </div>
