@@ -2,7 +2,7 @@ import { Component, computed } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DrawerModule } from 'primeng/drawer';
 import { BadgeModule } from 'primeng/badge';
-import { LayoutService } from '@/layout/service/layout.service';
+import { LayoutService } from '../service/layout.service';
 
 @Component({
     selector: '[app-profilesidebar]',

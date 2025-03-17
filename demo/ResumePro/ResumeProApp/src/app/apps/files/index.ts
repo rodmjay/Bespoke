@@ -8,7 +8,7 @@ import { TableModule } from 'primeng/table';
 import { Subscription } from 'rxjs';
 import { FileAppService } from '@/apps/files/service/file.service';
 import { UploaderComponent } from '@/apps/files/uploader/uploader';
-import { LayoutService } from '@/layout/service/layout.service';
+import { LayoutService } from '../../../layout/service/layout.service';
 import { Ripple } from 'primeng/ripple';
 
 @Component({

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { Subscription } from 'rxjs';
-import { LayoutService } from '@/layout/service/layout.service';
+import { LayoutService } from '../../../layout/service/layout.service';
 
 @Component({
     selector: 'home-widget',

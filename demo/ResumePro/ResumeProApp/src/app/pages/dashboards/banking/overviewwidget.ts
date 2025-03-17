@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, effect, inject, PLATFORM_ID } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
-import { LayoutService } from '@/layout/service/layout.service';
+import { LayoutService } from '../../../layout/service/layout.service';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({

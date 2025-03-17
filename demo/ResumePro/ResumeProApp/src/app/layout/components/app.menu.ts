@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AppMenuitem } from './app.menuitem';
+import { AppMenuitem as AppMenuitemComponent } from './app.menuitem';
 
 @Component({
     selector: 'app-menu',
     standalone: true,
-    imports: [CommonModule, AppMenuitem, RouterModule],
+    imports: [CommonModule, AppMenuitemComponent, RouterModule],
     template: `<ul class="layout-menu">
         <ng-container *ngFor="let item of model; let i = index">
             <li
