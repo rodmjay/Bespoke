@@ -12,11 +12,12 @@ import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TabViewModule } from 'primeng/tabview';
 import { ChipModule } from 'primeng/chip';
+import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'app-person-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, CardModule, TableModule, ButtonModule, ProgressSpinnerModule, TabViewModule, ChipModule],
+  imports: [CommonModule, RouterModule, CardModule, TableModule, ButtonModule, ProgressSpinnerModule, TabViewModule, ChipModule, TagModule],
   templateUrl: './person-detail.component.html',
   styleUrl: './person-detail.component.scss'
 })
@@ -70,7 +71,48 @@ export class PersonDetailComponent implements OnInit {
             { id: 5, title: 'Entity Framework' },
             { id: 6, title: 'TypeScript' }
           ],
-          languages: []
+          languages: [
+            {
+              code3: 'eng',
+              name: 'English',
+              proficiency: 5,
+              proficiencyName: 'Fluent'
+            },
+            {
+              code3: 'spa',
+              name: 'Spanish',
+              proficiency: 3,
+              proficiencyName: 'Intermediate'
+            },
+            {
+              code3: 'fra',
+              name: 'French',
+              proficiency: 2,
+              proficiencyName: 'Elementary'
+            }
+          ],
+          schools: [
+            {
+              id: 1,
+              name: 'University of Washington',
+              location: 'Seattle, WA',
+              startDate: '2010-09-01',
+              endDate: '2014-05-31',
+              degrees: [
+                { id: 1, name: 'Bachelor of Science in Computer Science', order: 1 }
+              ]
+            },
+            {
+              id: 2,
+              name: 'Stanford University',
+              location: 'Palo Alto, CA',
+              startDate: '2014-09-01',
+              endDate: '2016-05-31',
+              degrees: [
+                { id: 1, name: 'Master of Science in Computer Science', order: 1 }
+              ]
+            }
+          ]
         };
         this.loadResumes();
       }
@@ -130,5 +172,16 @@ export class PersonDetailComponent implements OnInit {
         this.error = null;
       }
     });
+  }
+
+  getLanguageProficiencySeverity(proficiency: number): 'success' | 'info' | 'warn' | 'danger' | 'secondary' {
+    switch (proficiency) {
+      case 1: return 'info';      // Beginner
+      case 2: return 'info';      // Elementary
+      case 3: return 'warn';      // Intermediate
+      case 4: return 'warn';      // Advanced
+      case 5: return 'success';   // Fluent
+      default: return 'secondary'; // None
+    }
   }
 }

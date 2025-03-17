@@ -33,8 +33,8 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
         //builder.Entity<CompanySkill>().Seed("company_skills.csv");
         //builder.Entity<Project>().Seed("projects.csv");
         //builder.Entity<Reference>().Seed("references.csv");
-        //builder.Entity<School>().Seed("schools.csv");
-        //builder.Entity<Degree>().Seed("degrees.csv");
+        builder.Entity<School>().Seed("schools.csv");
+        builder.Entity<Degree>().Seed("degrees.csv");
         //builder.Entity<ResumeCompany>().Seed("resume_companies.csv");
 
         //builder.Entity<SkillCategory>().Seed("skill_categories.csv");
@@ -45,7 +45,7 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
         //builder.Entity<Highlight>().Seed("highlights.csv");
         builder.Entity<PersonaSkill>().Seed("persona_skills.csv");
 
-        //builder.Entity<PersonaLanguage>().Seed("persona_language.csv");
+        builder.Entity<PersonaLanguage>().Seed("persona_language.csv");
         //builder.Entity<Resume>().Seed("resumes.csv");
         //builder.Entity<ResumeSettings>().Seed("resume_settings.csv");
         //builder.Entity<OrganizationSettings>().Seed("organization_settings.csv");
