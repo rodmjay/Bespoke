@@ -1,0 +1,39 @@
+<div class="card">
+  <h2>People</h2>
+  
+  <div *ngIf="loading" class="loading">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+  </div>
+  
+  <p-table [value]="people" *ngIf="!loading && !error" [paginator]="true" [rows]="10" 
+           [showCurrentPageReport]="true" [tableStyle]="{'min-width': '50rem'}"
+           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Location</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-person>
+      <tr>
+        <td>{{ person.id }}</td>
+        <td>{{ person.firstName }} {{ person.lastName }}</td>
+        <td>{{ person.email }}</td>
+        <td>{{ person.phoneNumber }}</td>
+        <td>{{ person.city }}, {{ person.state }}, {{ person.country }}</td>
+        <td>
+          <button pButton icon="pi pi-eye" class="p-button-rounded p-button-info" 
+                  [routerLink]="['/person', person.id]"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

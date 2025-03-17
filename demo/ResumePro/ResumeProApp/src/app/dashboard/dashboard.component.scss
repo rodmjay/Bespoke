@@ -1,0 +1,32 @@
+.layout-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.layout-sidebar {
+  width: 250px;
+  background-color: #f8f9fa;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.sidebar-header {
+  padding: 1rem 0;
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 1rem;
+}
+
+.layout-content {
+  flex: 1;
+  padding: 1rem;
+}
+
+.content-header {
+  padding: 1rem 0;
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 1rem;
+}
+
+.content-body {
+  padding: 1rem 0;
+}
