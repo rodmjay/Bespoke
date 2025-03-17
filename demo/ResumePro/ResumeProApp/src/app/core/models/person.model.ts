@@ -18,9 +18,25 @@ export interface Skill {
   title: string;
 }
 
+export interface School {
+  id: number;
+  name: string;
+  location: string;
+  startDate: string;
+  endDate?: string;
+  degrees: Degree[];
+}
+
+export interface Degree {
+  id: number;
+  name: string;
+  order: number;
+}
+
 export interface PersonaDetails extends PersonaDto {
   skills: Skill[]; // Properly typed as Skill[]
   languages: any[]; // Will be typed as PersonaLanguageDto[] after creating language models
+  schools: School[];
 }
 
 export interface PersonOptions {

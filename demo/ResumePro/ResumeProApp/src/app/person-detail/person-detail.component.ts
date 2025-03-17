@@ -70,7 +70,29 @@ export class PersonDetailComponent implements OnInit {
             { id: 5, title: 'Entity Framework' },
             { id: 6, title: 'TypeScript' }
           ],
-          languages: []
+          languages: [],
+          schools: [
+            {
+              id: 1,
+              name: 'University of Washington',
+              location: 'Seattle, WA',
+              startDate: '2010-09-01',
+              endDate: '2014-05-31',
+              degrees: [
+                { id: 1, name: 'Bachelor of Science in Computer Science', order: 1 }
+              ]
+            },
+            {
+              id: 2,
+              name: 'Stanford University',
+              location: 'Palo Alto, CA',
+              startDate: '2014-09-01',
+              endDate: '2016-05-31',
+              degrees: [
+                { id: 1, name: 'Master of Science in Computer Science', order: 1 }
+              ]
+            }
+          ]
         };
         this.loadResumes();
       }
