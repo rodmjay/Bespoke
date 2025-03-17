@@ -19,10 +19,32 @@ export const appRoutes: Routes = [
                 loadComponent: () => import('./app/people/people.component').then(c => c.PeopleComponent),
                 data: { breadcrumb: 'People' },
             },
-            // Only keep the essential routes for ResumePro
-            // Additional routes can be added as needed
+            {
+                path: 'people/:personId',
+                loadComponent: () => import('./app/person-detail/person-detail.component').then(c => c.PersonDetailComponent),
+                data: { breadcrumb: 'Person Details' },
+            },
+            {
+                path: 'people/:personId/resume/:resumeId',
+                loadComponent: () => import('./app/resume-detail/resume-detail.component').then(c => c.ResumeDetailComponent),
+                data: { breadcrumb: 'Resume Details' },
+            },
+            {
+                path: 'resumes',
+                loadComponent: () => import('./app/dashboard/dashboard.component').then(c => c.DashboardComponent),
+                data: { breadcrumb: 'My Resumes' },
+            },
+            {
+                path: 'resumes/create',
+                loadComponent: () => import('./app/dashboard/dashboard.component').then(c => c.DashboardComponent),
+                data: { breadcrumb: 'Create Resume' },
+            },
+            {
+                path: 'skills',
+                loadComponent: () => import('./app/skills/skills.component').then(c => c.SkillsComponent),
+                data: { breadcrumb: 'Skills' },
+            },
         ],
     },
-    // Simplified routing for ResumePro
     { path: '**', redirectTo: '' },
 ];
