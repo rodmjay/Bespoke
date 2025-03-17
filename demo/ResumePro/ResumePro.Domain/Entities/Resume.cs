@@ -20,7 +20,7 @@ public sealed class Resume : BaseEntity<Resume>, IResume
 
     public override void Configure(EntityTypeBuilder<Resume> builder)
     {
-        builder.HasKey(x => new { x.OrganizationId, x.Id });
+        builder.HasKey(x => new { x.OrganizationId, x.PersonId, x.Id });
 
         builder.Property(x => x.JobTitle)
             .ConfigureColumn(StringColumnSize.Small);
