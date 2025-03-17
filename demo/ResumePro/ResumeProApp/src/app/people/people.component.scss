@@ -34,4 +34,20 @@
   .p-datatable-wrapper {
     overflow-x: auto;
   }
+  
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  
+  .p-datatable .p-datatable-tbody > tr:hover {
+    background: var(--surface-hover);
+  }
+  
+  .text-color {
+    color: var(--text-color);
+  }
+  
+  .no-underline {
+    text-decoration: none;
+  }
 }
