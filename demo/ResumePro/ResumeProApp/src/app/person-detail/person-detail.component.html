@@ -1,0 +1,85 @@
+<div class="card">
+  <div *ngIf="loading" class="loading">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+  </div>
+  
+  <div *ngIf="person && !loading" class="person-details">
+    <h2>{{ person.firstName }} {{ person.lastName }}</h2>
+    
+    <p-tabView>
+      <p-tabPanel header="Personal Information">
+        <div class="grid">
+          <div class="col-12 md:col-6">
+            <div class="field">
+              <label>Email</label>
+              <div>{{ person.email }}</div>
+            </div>
+            
+            <div class="field">
+              <label>Phone</label>
+              <div>{{ person.phoneNumber }}</div>
+            </div>
+            
+            <div class="field">
+              <label>Location</label>
+              <div>{{ person.city }}, {{ person.state }}, {{ person.country }}</div>
+            </div>
+          </div>
+          
+          <div class="col-12 md:col-6">
+            <div class="field">
+              <label>LinkedIn</label>
+              <div>{{ person.linkedIn }}</div>
+            </div>
+            
+            <div class="field">
+              <label>GitHub</label>
+              <div>{{ person.gitHub }}</div>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+      
+      <p-tabPanel header="Resumes ({{ resumes.length }})">
+        <p-table [value]="resumes" [tableStyle]="{'min-width': '50rem'}">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>ID</th>
+              <th>Job Title</th>
+              <th>Description</th>
+              <th>Skills</th>
+              <th>Actions</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-resume>
+            <tr>
+              <td>{{ resume.id }}</td>
+              <td>{{ resume.jobTitle }}</td>
+              <td>{{ resume.description }}</td>
+              <td>{{ resume.skillCount }}</td>
+              <td>
+                <button pButton icon="pi pi-eye" class="p-button-rounded p-button-info" 
+                        [routerLink]="['/person', personId, 'resume', resume.id]"></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+      
+      <p-tabPanel header="Skills ({{ person.skillCount }})">
+        <div *ngIf="person.skills && person.skills.length > 0">
+          <p-chip *ngFor="let skill of person.skills" 
+                  [label]="skill.title" 
+                  styleClass="m-1"></p-chip>
+        </div>
+        <div *ngIf="!person.skills || person.skills.length === 0">
+          No skills found.
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>

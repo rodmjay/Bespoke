@@ -43,21 +43,13 @@ public abstract partial class BaseApiTest : IntegrationTest<BaseApiTest, Startup
     [OneTimeSetUp]
     public virtual async Task SetupFixture()
     {
-        if (IsRunningOnCI())
-        {
-            Assert.Ignore("Tests skipped when running on CI environment due to LocalDB not being supported");
-            return;
-        }
-        
+        // Always use SQLite for tests, which works in both local and CI environments
         await ResetDatabase();
     }
 
     [OneTimeTearDown]
     public virtual async Task TeardownFixture()
     {
-        if (!IsRunningOnCI())
-        {
-            await DeleteDatabase();
-        }
+        await DeleteDatabase();
     }
 }

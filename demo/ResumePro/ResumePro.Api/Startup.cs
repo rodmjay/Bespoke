@@ -43,14 +43,22 @@ public sealed class Startup
                     },
                     dataBuilder =>
                     {
-                        dataBuilder.UseSqlServer<ApplicationContext>(sqlSettings =>
+                        var useSQLite = Configuration.GetValue<bool>("AppSettings:UseSQLite");
+                        
+                        if (useSQLite)
                         {
-                            sqlSettings.ConnectionStringName = "DefaultConnection";
-                        });
-                        dataBuilder.UseSQLite<ApplicationContext>(settings =>
+                            dataBuilder.UseSQLite<ApplicationContext>(settings =>
+                            {
+                                settings.ConnectionStringName = "SQLiteConnection";
+                            });
+                        }
+                        else
                         {
-                            settings.ConnectionStringName = "SQLiteConnection";
-                        });
+                            dataBuilder.UseSqlServer<ApplicationContext>(sqlSettings =>
+                            {
+                                sqlSettings.ConnectionStringName = "DefaultConnection";
+                            });
+                        }
                     }
                 )
                 .AddAzure(
