@@ -7,7 +7,7 @@ import {DomHandler} from 'primeng/dom';
 import {TooltipModule} from 'primeng/tooltip';
 import {CommonModule} from '@angular/common';
 import {RippleModule} from 'primeng/ripple';
-import {LayoutService} from '@/layout/service/layout.service';
+import {LayoutService} from '../service/layout.service';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector

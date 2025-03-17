@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
 import { ChartModule } from 'primeng/chart';
 import { debounceTime, Subscription } from 'rxjs';
-import { LayoutService } from '@/layout/service/layout.service';
+import { LayoutService } from '../../../layout/service/layout.service';
 
 interface Week {
     label: string;

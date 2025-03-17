@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AppMenu } from './app.menu';
-import { LayoutService } from '@/layout/service/layout.service';
+import { LayoutService } from '../service/layout.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
