@@ -4,10 +4,19 @@ import { PeopleService } from '../core/services/people.service';
 import { ResumeService } from '../core/services/resume.service';
 import { PersonaDetails } from '../core/models/person.model';
 import { ResumeDto } from '../core/models/resume.model';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { CardModule } from 'primeng/card';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TabViewModule } from 'primeng/tabview';
+import { ChipModule } from 'primeng/chip';
 
 @Component({
   selector: 'app-person-detail',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, RouterModule, CardModule, TableModule, ButtonModule, ProgressSpinnerModule, TabViewModule, ChipModule],
   templateUrl: './person-detail.component.html',
   styleUrl: './person-detail.component.scss'
 })

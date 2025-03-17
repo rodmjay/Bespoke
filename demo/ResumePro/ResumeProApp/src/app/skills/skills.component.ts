@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { SkillService } from '../core/services/skill.service';
 import { SkillDto } from '../core/models/skill.model';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { TableModule } from 'primeng/table';
+import { CardModule } from 'primeng/card';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-skills',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, RouterModule, TableModule, CardModule, ProgressSpinnerModule],
   templateUrl: './skills.component.html',
   styleUrl: './skills.component.scss'
 })

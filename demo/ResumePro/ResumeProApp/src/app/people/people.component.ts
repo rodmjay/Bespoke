@@ -2,10 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { PeopleService } from '../core/services/people.service';
 import { PagedList, PagingQuery } from '../core/models/base.model';
 import { PersonaDto, PersonaFilters } from '../core/models/person.model';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-people',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, RouterModule, TableModule, ButtonModule, ProgressSpinnerModule],
   templateUrl: './people.component.html',
   styleUrl: './people.component.scss'
 })

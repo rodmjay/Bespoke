@@ -2,10 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ResumeService } from '../core/services/resume.service';
 import { ResumeDetails } from '../core/models/resume.model';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { CardModule } from 'primeng/card';
+import { AccordionModule } from 'primeng/accordion';
+import { ChipModule } from 'primeng/chip';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-resume-detail',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, RouterModule, CardModule, AccordionModule, ChipModule, ProgressSpinnerModule],
   templateUrl: './resume-detail.component.html',
   styleUrl: './resume-detail.component.scss'
 })
