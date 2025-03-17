@@ -10,8 +10,8 @@ export const routes: Routes = [
   { path: '', component: DashboardComponent, children: [
     { path: '', redirectTo: 'people', pathMatch: 'full' },
     { path: 'people', component: PeopleComponent },
-    { path: 'person/:id', component: PersonDetailComponent },
-    { path: 'person/:personId/resume/:resumeId', component: ResumeDetailComponent },
+    { path: 'people/:personId', component: PersonDetailComponent },
+    { path: 'people/:personId/resume/:resumeId', component: ResumeDetailComponent },
     { path: 'skills', component: SkillsComponent }
   ]},
   { path: '**', redirectTo: '/' }

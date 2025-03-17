@@ -3,7 +3,7 @@ import { PeopleService } from '../core/services/people.service';
 import { PagedList, PagingQuery } from '../core/models/base.model';
 import { PersonaDto, PersonaFilters } from '../core/models/person.model';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -20,10 +20,18 @@ export class PeopleComponent implements OnInit {
   loading = true;
   error: string | null = null;
 
-  constructor(private peopleService: PeopleService) {}
+  constructor(
+    private peopleService: PeopleService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadPeople();
+  }
+  
+  navigateToPerson(person: PersonaDto): void {
+    console.log('Navigating to person:', person.id);
+    this.router.navigate(['/people', person.id]);
   }
 
   loadPeople(): void {

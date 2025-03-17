@@ -1,16 +1,16 @@
 <div class="card">
-  <h2>People</h2>
+  <h2 class="text-xl font-semibold mb-4">People</h2>
   
-  <div *ngIf="loading" class="loading">
+  <div *ngIf="loading" class="flex justify-content-center">
     <p-progressSpinner></p-progressSpinner>
   </div>
   
-  <div *ngIf="error" class="error">
+  <div *ngIf="error" class="p-error p-4">
     <p>{{ error }}</p>
   </div>
   
   <p-table [value]="people" *ngIf="!loading && !error" [paginator]="true" [rows]="10" 
-           [showCurrentPageReport]="true" [tableStyle]="{'min-width': '50rem'}"
+           [showCurrentPageReport]="true" [tableStyle]="{'min-width': '50rem', 'width': '100%'}"
            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
     <ng-template pTemplate="header">
       <tr>
@@ -23,15 +23,15 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-person>
-      <tr>
-        <td>{{ person.id }}</td>
-        <td>{{ person.firstName }} {{ person.lastName }}</td>
-        <td>{{ person.email }}</td>
-        <td>{{ person.phoneNumber }}</td>
-        <td>{{ person.city }}, {{ person.state }}, {{ person.country }}</td>
+      <tr class="cursor-pointer">
+        <td><a [routerLink]="['/people', person.id]" class="text-color no-underline">{{ person.id }}</a></td>
+        <td><a [routerLink]="['/people', person.id]" class="text-color no-underline">{{ person.firstName }} {{ person.lastName }}</a></td>
+        <td><a [routerLink]="['/people', person.id]" class="text-color no-underline">{{ person.email }}</a></td>
+        <td><a [routerLink]="['/people', person.id]" class="text-color no-underline">{{ person.phoneNumber }}</a></td>
+        <td><a [routerLink]="['/people', person.id]" class="text-color no-underline">{{ person.city }}, {{ person.state }}, {{ person.country }}</a></td>
         <td>
           <button pButton icon="pi pi-eye" class="p-button-rounded p-button-info" 
-                  [routerLink]="['/person', person.id]"></button>
+                  [routerLink]="['/people', person.id]" (click)="$event.stopPropagation()"></button>
         </td>
       </tr>
     </ng-template>
