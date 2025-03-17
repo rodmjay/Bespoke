@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Bespoke.Data.Enums;
+using Bespoke.Data.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ResumePro.Domain.Entities;
@@ -18,6 +20,9 @@ public sealed class ProjectHighlight : BaseEntity<ProjectHighlight>
     public override void Configure(EntityTypeBuilder<ProjectHighlight> builder)
     {
         builder.HasKey(x => new { x.OrganizationId, x.PersonId, x.CompanyId, x.PositionId, x.ProjectId, x.Id });
+
+        builder.Property(x => x.Text)
+            .ConfigureColumn(StringColumnSize.Medium);
 
         builder.HasOne(x => x.Project)
             .WithMany(x => x.Highlights)
