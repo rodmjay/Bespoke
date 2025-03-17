@@ -26,9 +26,6 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
         // make sure files are marked as "EmbeddedResource => Copy if newer"
         builder.Entity<Country>().Seed("countries.csv");
         builder.Entity<StateProvince>().Seed("state_provinces.csv");
-        builder.Entity<Skill>().Seed("skills.csv");
-        builder.Entity<Country>().Seed("countries.csv");
-        builder.Entity<StateProvince>().Seed("state_provinces.csv");
         builder.Entity<Language>().Seed("languages.csv");
         builder.Entity<Skill>().Seed("skills.csv");
         builder.Entity<SkillCategory>().Seed("skill_categories.csv");
