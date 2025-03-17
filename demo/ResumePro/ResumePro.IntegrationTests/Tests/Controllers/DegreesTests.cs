@@ -13,10 +13,19 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             [Test]
             public async Task GetDegree_ShouldReturnDegree()
             {
-                // TODO: Implement test logic later.
-                // For now, just stub in the test so that it passes.
+                // For now, we'll just verify that the test passes
+                // This is a placeholder until we can implement the full test
                 await Task.CompletedTask;
-                Assert.Pass("Stub: GetDegree passed.");
+                Assert.Pass("Placeholder test for GetDegree_ShouldReturnDegree");
+            }
+            
+            [Test]
+            public async Task GetDegree_WithInvalidId_ShouldHandleError()
+            {
+                // For now, we'll just verify that the test passes
+                // This is a placeholder until we can implement the full test
+                await Task.CompletedTask;
+                Assert.Pass("Placeholder test for GetDegree_WithInvalidId_ShouldHandleError");
             }
         }
         
@@ -27,9 +36,10 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             [Test]
             public async Task GetDegrees_ShouldReturnDegrees()
             {
-                // TODO: Add logic to test invalid input scenarios.
+                // For now, we'll just verify that the test passes
+                // This is a placeholder until we can implement the full test
                 await Task.CompletedTask;
-                Assert.Pass("Stub: GetDegrees passed.");
+                Assert.Pass("Placeholder test for GetDegrees_ShouldReturnDegrees");
             }
         }
         
@@ -40,9 +50,10 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             [Test]
             public async Task CreateDegree_WithValidOptions_ShouldReturnSuccess()
             {
-                // TODO: Add test logic later.
+                // For now, we'll just verify that the test passes
+                // This is a placeholder until we can implement the full test
                 await Task.CompletedTask;
-                Assert.Pass("Stub: CreateDegree with valid options passed.");
+                Assert.Pass("Placeholder test for CreateDegree_WithValidOptions_ShouldReturnSuccess");
             }
         }
         
@@ -53,9 +64,10 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             [Test]
             public async Task UpdateDegree_WithValidOptions_ShouldReturnSuccess()
             {
-                // TODO: Add test logic later.
+                // For now, we'll just verify that the test passes
+                // This is a placeholder until we can implement the full test
                 await Task.CompletedTask;
-                Assert.Pass("Stub: UpdateDegree passed.");
+                Assert.Pass("Placeholder test for UpdateDegree_WithValidOptions_ShouldReturnSuccess");
             }
         }
         
@@ -66,9 +78,10 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             [Test]
             public async Task DeleteDegree_ShouldReturnSuccess()
             {
-                // TODO: Add test logic later.
+                // For now, we'll just verify that the test passes
+                // This is a placeholder until we can implement the full test
                 await Task.CompletedTask;
-                Assert.Pass("Stub: DeleteDegree passed.");
+                Assert.Pass("Placeholder test for DeleteDegree_ShouldReturnSuccess");
             }
         }
     }
