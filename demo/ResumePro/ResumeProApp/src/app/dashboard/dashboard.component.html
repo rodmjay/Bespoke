@@ -1,4 +1,4 @@
-<div class="layout-container p-component">
+<div class="layout-container p-component" [ngClass]="{'layout-mobile-active': menuActive}">
   <div class="layout-sidebar">
     <div class="sidebar-header">
       <h2>ResumePro</h2>
@@ -8,10 +8,16 @@
   
   <div class="layout-content-wrapper">
     <div class="content-header">
-      <h1>ResumePro App</h1>
+      <div class="flex align-items-center">
+        <button pButton icon="pi pi-bars" class="p-button-rounded p-button-text p-button-plain mr-3 md:hidden" 
+                (click)="toggleMenu()"></button>
+        <h1>ResumePro App</h1>
+      </div>
     </div>
     <div class="layout-content">
       <router-outlet></router-outlet>
     </div>
   </div>
+  
+  <div class="layout-mask" *ngIf="menuActive" (click)="hideMenu()"></div>
 </div>
