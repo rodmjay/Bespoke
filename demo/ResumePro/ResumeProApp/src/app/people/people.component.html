@@ -1,5 +1,15 @@
 <div class="card">
-  <h2 class="text-xl font-semibold mb-4">People</h2>
+  <div class="flex justify-content-between align-items-center mb-4">
+    <h2 class="text-xl font-semibold m-0">People</h2>
+    <button 
+      pButton 
+      pRipple 
+      label="Create Person" 
+      icon="pi pi-plus" 
+      class="p-button-success" 
+      (click)="showCreatePersonDialog()"
+    ></button>
+  </div>
   
   <div *ngIf="loading" class="flex justify-content-center">
     <p-progressSpinner></p-progressSpinner>
@@ -30,7 +40,7 @@
         <td><a [routerLink]="['/people', person.id]" class="text-color no-underline">{{ person.phoneNumber }}</a></td>
         <td><a [routerLink]="['/people', person.id]" class="text-color no-underline">{{ person.city }}, {{ person.state }}, {{ person.country }}</a></td>
         <td>
-          <button pButton icon="pi pi-eye" class="p-button-rounded p-button-info" 
+          <button pButton icon="pi pi-eye" class="p-button-rounded p-button-info mr-2" 
                   [routerLink]="['/people', person.id]" (click)="$event.stopPropagation()"></button>
         </td>
       </tr>
@@ -42,3 +52,5 @@
     </ng-template>
   </p-table>
 </div>
+
+<app-person-form #personForm (personCreated)="onPersonCreated($event)"></app-person-form>

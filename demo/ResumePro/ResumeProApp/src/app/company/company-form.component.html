@@ -1,0 +1,86 @@
+<p-toast></p-toast>
+
+<p-dialog 
+  [(visible)]="visible" 
+  [style]="{width: '450px'}" 
+  [header]="isEditMode ? 'Edit Company' : 'Create Company'" 
+  [modal]="true" 
+  styleClass="p-fluid"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="hideDialog()">
+  
+  <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label for="name">Company Name*</label>
+      <input 
+        type="text" 
+        pInputText 
+        id="name" 
+        formControlName="name" 
+        [ngClass]="{'ng-invalid ng-dirty': companyForm.get('name')?.invalid && companyForm.get('name')?.touched}"
+      />
+      <small 
+        *ngIf="companyForm.get('name')?.invalid && companyForm.get('name')?.touched" 
+        class="p-error"
+      >
+        Company name is required
+      </small>
+    </div>
+    
+    <div class="field">
+      <label for="description">Description</label>
+      <textarea 
+        pInputTextarea 
+        id="description" 
+        formControlName="description" 
+        [rows]="5"
+        [ngClass]="{'ng-invalid ng-dirty': companyForm.get('description')?.invalid && companyForm.get('description')?.touched}"
+      ></textarea>
+      <small 
+        *ngIf="companyForm.get('description')?.invalid && companyForm.get('description')?.touched" 
+        class="p-error"
+      >
+        Description cannot exceed 500 characters
+      </small>
+    </div>
+    
+    <div class="field">
+      <label for="website">Website</label>
+      <input 
+        type="text" 
+        pInputText 
+        id="website" 
+        formControlName="website"
+        placeholder="https://example.com"
+        [ngClass]="{'ng-invalid ng-dirty': companyForm.get('website')?.invalid && companyForm.get('website')?.touched}"
+      />
+      <small 
+        *ngIf="companyForm.get('website')?.invalid && companyForm.get('website')?.touched" 
+        class="p-error"
+      >
+        Please enter a valid website URL
+      </small>
+    </div>
+  </form>
+  
+  <ng-template pTemplate="footer">
+    <button 
+      pButton 
+      pRipple 
+      label="Cancel" 
+      icon="pi pi-times" 
+      class="p-button-text" 
+      (click)="hideDialog()"
+    ></button>
+    <button 
+      pButton 
+      pRipple 
+      [label]="isEditMode ? 'Update' : 'Save'" 
+      icon="pi pi-check" 
+      class="p-button-text" 
+      [loading]="loading"
+      (click)="onSubmit()"
+    ></button>
+  </ng-template>
+</p-dialog>

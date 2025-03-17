@@ -29,4 +29,22 @@ export class PeopleService extends ApiService {
   deletePerson(personId: number): Observable<Result> {
     return this.delete<Result>(`${this.baseUrl}/${personId}`);
   }
+  
+  // Skills management
+  getSkills(personId: number): Observable<any[]> {
+    return this.get<any[]>(`${this.baseUrl}/${personId}/skills`);
+  }
+  
+  toggleSkill(personId: number, skillId: number): Observable<Result> {
+    return this.post<Result>(`${this.baseUrl}/${personId}/skills/${skillId}/toggle`, {});
+  }
+  
+  // Languages management
+  getLanguages(personId: number): Observable<any[]> {
+    return this.get<any[]>(`${this.baseUrl}/${personId}/languages`);
+  }
+  
+  toggleLanguage(personId: number, languageCode: string, proficiency: number): Observable<Result> {
+    return this.post<Result>(`${this.baseUrl}/${personId}/languages/${languageCode}/toggle`, { proficiency });
+  }
 }

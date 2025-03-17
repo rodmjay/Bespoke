@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PeopleService } from '../core/services/people.service';
 import { ResumeService } from '../core/services/resume.service';
-import { PersonaDetails } from '../core/models/person.model';
-import { ResumeDto } from '../core/models/resume.model';
+import { PersonaDetails, PersonaLanguage, School, Degree, Skill } from '../core/models/person.model';
+import { ResumeDto, ResumeOptions } from '../core/models/resume.model';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CardModule } from 'primeng/card';
@@ -13,15 +13,35 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TabViewModule } from 'primeng/tabview';
 import { ChipModule } from 'primeng/chip';
 import { TagModule } from 'primeng/tag';
+import { ToastModule } from 'primeng/toast';
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { PersonEditFormComponent } from './person-edit-form/person-edit-form.component';
 
 @Component({
   selector: 'app-person-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, CardModule, TableModule, ButtonModule, ProgressSpinnerModule, TabViewModule, ChipModule, TagModule],
+  imports: [
+    CommonModule, 
+    RouterModule, 
+    CardModule, 
+    TableModule, 
+    ButtonModule, 
+    ProgressSpinnerModule, 
+    TabViewModule, 
+    ChipModule, 
+    TagModule,
+    ToastModule,
+    ConfirmDialogModule,
+    PersonEditFormComponent
+  ],
+  providers: [MessageService, ConfirmationService],
   templateUrl: './person-detail.component.html',
   styleUrl: './person-detail.component.scss'
 })
 export class PersonDetailComponent implements OnInit {
+  @ViewChild('personEditForm') personEditForm!: PersonEditFormComponent;
+  
   personId!: number;
   person: PersonaDetails | null = null;
   resumes: ResumeDto[] = [];
@@ -30,8 +50,11 @@ export class PersonDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private peopleService: PeopleService,
-    private resumeService: ResumeService
+    private resumeService: ResumeService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -183,5 +206,211 @@ export class PersonDetailComponent implements OnInit {
       case 5: return 'success';   // Fluent
       default: return 'secondary'; // None
     }
+  }
+
+  showEditPersonDialog(): void {
+    this.personEditForm.showDialog();
+  }
+
+  onPersonUpdated(person: PersonaDetails): void {
+    this.person = person;
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Person information updated successfully'
+    });
+  }
+
+  createResume(): void {
+    if (!this.person) return;
+
+    const resumeOptions: ResumeOptions = {
+      jobTitle: 'New Resume',
+      description: 'Resume Description',
+      settings: {
+        showEmail: true,
+        showPhone: true,
+        showLinkedIn: true,
+        showGitHub: true,
+        showLocation: true
+      },
+      skillIds: [],
+      companyIds: []
+    };
+
+    this.resumeService.createResume(this.personId, resumeOptions).subscribe({
+      next: (resume) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Resume created successfully'
+        });
+        this.loadResumes();
+      },
+      error: (error) => {
+        console.error('Error creating resume:', error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to create resume'
+        });
+      }
+    });
+  }
+
+  deleteResume(resumeId: number): void {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this resume?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.resumeService.deleteResume(this.personId, resumeId).subscribe({
+          next: () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'Resume deleted successfully'
+            });
+            this.loadResumes();
+          },
+          error: (error) => {
+            console.error('Error deleting resume:', error);
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Failed to delete resume'
+            });
+          }
+        });
+      }
+    });
+  }
+
+  addSkills(): void {
+    // Navigate to skills component with return URL
+    this.router.navigate(['/skills'], { 
+      queryParams: { 
+        personId: this.personId,
+        returnUrl: `/people/${this.personId}`
+      } 
+    });
+  }
+
+  removeSkill(skillId: number): void {
+    if (!this.person) return;
+
+    this.peopleService.toggleSkill(this.personId, skillId).subscribe({
+      next: () => {
+        // Update local skills list
+        if (this.person && this.person.skills) {
+          this.person.skills = this.person.skills.filter(s => s.id !== skillId);
+          this.person.skillCount = this.person.skills.length;
+        }
+        
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Skill removed successfully'
+        });
+      },
+      error: (error) => {
+        console.error('Error removing skill:', error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to remove skill'
+        });
+      }
+    });
+  }
+
+  addEducation(): void {
+    // This would open a dialog to add a new school
+    // For now, we'll just show a message
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Info',
+      detail: 'Add Education functionality will be implemented in the next phase'
+    });
+  }
+
+  editSchool(school: School): void {
+    // This would open a dialog to edit the school
+    // For now, we'll just show a message
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Info',
+      detail: 'Edit School functionality will be implemented in the next phase'
+    });
+  }
+
+  deleteSchool(schoolId: number): void {
+    // This would confirm and delete the school
+    // For now, we'll just show a message
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Info',
+      detail: 'Delete School functionality will be implemented in the next phase'
+    });
+  }
+
+  addDegree(schoolId: number): void {
+    // This would open a dialog to add a new degree
+    // For now, we'll just show a message
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Info',
+      detail: 'Add Degree functionality will be implemented in the next phase'
+    });
+  }
+
+  editDegree(schoolId: number, degree: Degree): void {
+    // This would open a dialog to edit the degree
+    // For now, we'll just show a message
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Info',
+      detail: 'Edit Degree functionality will be implemented in the next phase'
+    });
+  }
+
+  deleteDegree(schoolId: number, degreeId: number): void {
+    // This would confirm and delete the degree
+    // For now, we'll just show a message
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Info',
+      detail: 'Delete Degree functionality will be implemented in the next phase'
+    });
+  }
+
+  addLanguage(): void {
+    // This would open a dialog to add a new language
+    // For now, we'll just show a message
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Info',
+      detail: 'Add Language functionality will be implemented in the next phase'
+    });
+  }
+
+  editLanguage(language: PersonaLanguage): void {
+    // This would open a dialog to edit the language
+    // For now, we'll just show a message
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Info',
+      detail: 'Edit Language functionality will be implemented in the next phase'
+    });
+  }
+
+  removeLanguage(languageCode: string): void {
+    // This would confirm and remove the language
+    // For now, we'll just show a message
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Info',
+      detail: 'Remove Language functionality will be implemented in the next phase'
+    });
   }
 }
