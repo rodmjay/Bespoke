@@ -36,7 +36,12 @@ export const appRoutes: Routes = [
             },
             {
                 path: 'resumes/create',
-                loadComponent: () => import('./app/dashboard/dashboard.component').then(c => c.DashboardComponent),
+                loadComponent: () => import('./app/resume-create/resume-create.component').then(c => c.ResumeCreateComponent),
+                data: { breadcrumb: 'Create Resume' },
+            },
+            {
+                path: 'people/:personId/resumes/create',
+                loadComponent: () => import('./app/resume-create/resume-create.component').then(c => c.ResumeCreateComponent),
                 data: { breadcrumb: 'Create Resume' },
             },
             {

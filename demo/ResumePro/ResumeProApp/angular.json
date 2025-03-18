@@ -27,7 +27,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              { "glob": "**/*", "input": "node_modules/primeicons/fonts", "output": "assets/fonts" }
             ],
             "styles": [
               "src/styles.scss"
@@ -94,7 +95,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              { "glob": "**/*", "input": "node_modules/primeicons/fonts", "output": "assets/fonts" }
             ],
             "styles": [
               "src/styles.scss"

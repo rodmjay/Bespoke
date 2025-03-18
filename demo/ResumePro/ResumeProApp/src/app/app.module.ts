@@ -10,6 +10,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 
 // Application bootstrap
 import { AppComponent } from './app.component';
+import { ResumeCreateComponent } from './resume-create/resume-create.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { AppComponent } from './app.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
+  declarations: [],
   providers: [
     provideRouter(routes),
     provideAnimations()
