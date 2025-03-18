@@ -33,6 +33,8 @@ dotnet run
 
 By default, the API will be available at `https://localhost:5001` and `http://localhost:5000`.
 
+> **Note:** When running the API in development mode, it will automatically start the Angular app if port 4200 is available. This feature is only enabled in development environment and won't affect build pipelines.
+
 ## Getting Started with the Angular App
 
 ### Installing Dependencies
