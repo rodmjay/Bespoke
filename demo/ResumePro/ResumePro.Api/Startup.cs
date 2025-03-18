@@ -116,7 +116,7 @@ public sealed class Startup
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext context,
-        IOptions<AppSettings> settings, AngularAppService angularAppService, IHostApplicationLifetime appLifetime)
+        IOptions<AppSettings> settings, IHostApplicationLifetime appLifetime)
     {
         app.UseMiddleware<ExceptionMiddleware>();
 
@@ -126,14 +126,18 @@ public sealed class Startup
         {
             app.UseDeveloperExceptionPage();
             
-            // Start the Angular app in development mode
-            angularAppService.StartAngularApp();
-            
-            // Register for application shutdown to dispose the Angular process
-            appLifetime.ApplicationStopping.Register(() =>
+            // Start the Angular app in development mode if the service is available
+            var angularAppService = app.ApplicationServices.GetService<AngularAppService>();
+            if (angularAppService != null)
             {
-                angularAppService.Dispose();
-            });
+                angularAppService.StartAngularApp();
+                
+                // Register for application shutdown to dispose the Angular process
+                appLifetime.ApplicationStopping.Register(() =>
+                {
+                    angularAppService.Dispose();
+                });
+            }
         }
         else
         {
