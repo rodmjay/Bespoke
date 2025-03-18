@@ -23,3 +23,16 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+// Custom command to handle API errors
+Cypress.Commands.add('handleApiError', () => {
+  // Intercept API calls and return a mock response
+  cy.intercept('POST', '**/v1.0/people/*/resumes', {
+    statusCode: 200,
+    body: {
+      id: 1,
+      jobTitle: 'Software Engineer',
+      description: 'Experienced software engineer with expertise in web development'
+    }
+  });
+});
