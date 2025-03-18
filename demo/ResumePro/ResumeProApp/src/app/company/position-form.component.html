@@ -1,0 +1,92 @@
+<p-toast></p-toast>
+
+<p-dialog 
+  [(visible)]="displayDialog" 
+  [style]="{width: '450px'}" 
+  [header]="dialogTitle" 
+  [modal]="true" 
+  styleClass="p-fluid"
+  [draggable]="false" 
+  [resizable]="false"
+  (onHide)="hideDialog()">
+  
+  <form [formGroup]="positionForm" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label for="title" class="font-bold">Title</label>
+      <input 
+        id="title" 
+        type="text" 
+        pInputText 
+        formControlName="title" 
+        required 
+        autofocus 
+        [ngClass]="{'ng-invalid ng-dirty': positionForm.get('title')?.invalid && positionForm.get('title')?.touched}"
+      />
+      <small 
+        *ngIf="positionForm.get('title')?.invalid && positionForm.get('title')?.touched" 
+        class="p-error"
+      >Title is required.</small>
+    </div>
+    
+    <div class="field">
+      <label for="description" class="font-bold">Description</label>
+      <textarea 
+        id="description" 
+        pInputTextarea 
+        formControlName="description" 
+        rows="3" 
+        [ngClass]="{'ng-invalid ng-dirty': positionForm.get('description')?.invalid && positionForm.get('description')?.touched}"
+      ></textarea>
+      <small 
+        *ngIf="positionForm.get('description')?.invalid && positionForm.get('description')?.touched" 
+        class="p-error"
+      >Description is required.</small>
+    </div>
+    
+    <div class="field">
+      <label for="startDate" class="font-bold">Start Date</label>
+      <p-calendar 
+        id="startDate" 
+        formControlName="startDate" 
+        dateFormat="mm/dd/yy" 
+        [showIcon]="true"
+        [ngClass]="{'ng-invalid ng-dirty': positionForm.get('startDate')?.invalid && positionForm.get('startDate')?.touched}"
+      ></p-calendar>
+      <small 
+        *ngIf="positionForm.get('startDate')?.invalid && positionForm.get('startDate')?.touched" 
+        class="p-error"
+      >Start date is required.</small>
+    </div>
+    
+    <div class="field">
+      <label for="endDate" class="font-bold">End Date</label>
+      <p-calendar 
+        id="endDate" 
+        formControlName="endDate" 
+        dateFormat="mm/dd/yy" 
+        [showIcon]="true"
+      ></p-calendar>
+      <small class="text-gray-500">Leave blank for current position</small>
+    </div>
+  </form>
+  
+  <ng-template pTemplate="footer">
+    <button 
+      pButton 
+      pRipple 
+      label="Cancel" 
+      icon="pi pi-times" 
+      class="p-button-text" 
+      (click)="hideDialog()"
+    ></button>
+    <button 
+      pButton 
+      pRipple 
+      label="Save" 
+      icon="pi pi-check" 
+      class="p-button-text" 
+      (click)="onSubmit()"
+      [loading]="loading"
+    ></button>
+  </ng-template>
+</p-dialog>
