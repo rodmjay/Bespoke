@@ -42,6 +42,8 @@
         <td>
           <button pButton icon="pi pi-eye" class="p-button-rounded p-button-info mr-2" 
                   [routerLink]="['/people', person.id]" (click)="$event.stopPropagation()"></button>
+          <button pButton icon="pi pi-file-plus" class="p-button-rounded p-button-success" 
+                  [routerLink]="['/people', person.id, 'resumes', 'create']" (click)="$event.stopPropagation()"></button>
         </td>
       </tr>
     </ng-template>
