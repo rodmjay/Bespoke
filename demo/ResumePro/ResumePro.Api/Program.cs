@@ -1,4 +1,5 @@
 ﻿using Bespoke.Core.Extensions;
+using ResumePro.Api.Services;
 using Serilog;
 
 namespace ResumePro.Api;
@@ -20,6 +21,10 @@ public class Program
             {
                 builder
                     .UseStartup<Startup>();
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddSingleton<AngularAppService>();
             });
     }
 }

@@ -10,7 +10,9 @@ using Bespoke.Rest.Extensions;
 using Bespoke.Rest.Middleware;
 using Bespoke.Rest.Swagger.Extensions;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using ResumePro.Api.Services;
 using ResumePro.Data.Contexts;
 using ResumePro.Services.Extensions;
 
@@ -114,7 +116,7 @@ public sealed class Startup
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext context,
-        IOptions<AppSettings> settings)
+        IOptions<AppSettings> settings, AngularAppService angularAppService, IHostApplicationLifetime appLifetime)
     {
         app.UseMiddleware<ExceptionMiddleware>();
 
@@ -123,6 +125,15 @@ public sealed class Startup
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
+            
+            // Start the Angular app in development mode
+            angularAppService.StartAngularApp();
+            
+            // Register for application shutdown to dispose the Angular process
+            appLifetime.ApplicationStopping.Register(() =>
+            {
+                angularAppService.Dispose();
+            });
         }
         else
         {
