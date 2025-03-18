@@ -39,10 +39,12 @@ export interface PositionDto {
 
 export interface PositionDetails extends PositionDto {
   highlights: HighlightDto[];
+  description?: string; // Add description property
 }
 
 export interface PositionOptions {
   title: string;
+  description: string;
   startDate: string;
   endDate?: string;
 }

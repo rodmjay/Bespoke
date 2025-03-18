@@ -45,6 +45,11 @@ export const appRoutes: Routes = [
                 data: { breadcrumb: 'Create Resume' },
             },
             {
+                path: 'people/:personId/companies/:companyId',
+                loadComponent: () => import('./app/company/company-detail.component').then(c => c.CompanyDetailComponent),
+                data: { breadcrumb: 'Company Details' },
+            },
+            {
                 path: 'skills',
                 loadComponent: () => import('./app/skills/skills.component').then(c => c.SkillsComponent),
                 data: { breadcrumb: 'Skills' },

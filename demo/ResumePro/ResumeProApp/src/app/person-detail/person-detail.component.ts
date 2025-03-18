@@ -2,8 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PeopleService } from '../core/services/people.service';
 import { ResumeService } from '../core/services/resume.service';
+import { CompanyService } from '../core/services/company.service';
 import { PersonaDetails, PersonaLanguage, School, Degree, Skill } from '../core/models/person.model';
 import { ResumeDto, ResumeOptions } from '../core/models/resume.model';
+import { CompanyDetails, CompanyOptions } from '../core/models/company.model';
+import { CompanyFormComponent } from '../company/company-form.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CardModule } from 'primeng/card';
@@ -33,7 +36,8 @@ import { PersonEditFormComponent } from './person-edit-form/person-edit-form.com
     TagModule,
     ToastModule,
     ConfirmDialogModule,
-    PersonEditFormComponent
+    PersonEditFormComponent,
+    CompanyFormComponent
   ],
   providers: [MessageService, ConfirmationService],
   templateUrl: './person-detail.component.html',
@@ -45,6 +49,7 @@ export class PersonDetailComponent implements OnInit {
   personId!: number;
   person: PersonaDetails | null = null;
   resumes: ResumeDto[] = [];
+  companies: CompanyDetails[] = [];
   loading = true;
   error: string | null = null;
 
@@ -53,6 +58,7 @@ export class PersonDetailComponent implements OnInit {
     private router: Router,
     private peopleService: PeopleService,
     private resumeService: ResumeService,
+    private companyService: CompanyService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {}
@@ -70,6 +76,7 @@ export class PersonDetailComponent implements OnInit {
       next: (person) => {
         this.person = person;
         this.loadResumes();
+        this.loadCompanies();
       },
       error: (err) => {
         console.error('Error loading person details:', err);
@@ -138,6 +145,7 @@ export class PersonDetailComponent implements OnInit {
           ]
         };
         this.loadResumes();
+        this.loadCompanies();
       }
     });
   }
@@ -411,6 +419,60 @@ export class PersonDetailComponent implements OnInit {
       severity: 'info',
       summary: 'Info',
       detail: 'Remove Language functionality will be implemented in the next phase'
+    });
+  }
+
+  loadCompanies(): void {
+    this.companyService.getCompanies(this.personId).subscribe({
+      next: (companies) => {
+        this.companies = companies;
+      },
+      error: (err) => {
+        console.error('Error loading companies:', err);
+        this.companies = [];
+      }
+    });
+  }
+
+  @ViewChild('companyForm') companyForm!: any;
+
+  addCompany(): void {
+    if (this.companyForm) {
+      this.companyForm.showDialog();
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Company form component not found'
+      });
+    }
+  }
+
+  deleteCompany(companyId: number): void {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this company?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.companyService.deleteCompany(this.personId, companyId).subscribe({
+          next: () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'Company deleted successfully'
+            });
+            this.loadCompanies();
+          },
+          error: (error) => {
+            console.error('Error deleting company:', error);
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Failed to delete company'
+            });
+          }
+        });
+      }
     });
   }
 }

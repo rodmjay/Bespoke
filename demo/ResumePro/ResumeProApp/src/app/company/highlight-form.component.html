@@ -1,0 +1,51 @@
+<p-toast></p-toast>
+
+<p-dialog 
+  [(visible)]="displayDialog" 
+  [style]="{width: '450px'}" 
+  [header]="dialogTitle" 
+  [modal]="true" 
+  styleClass="p-fluid"
+  [draggable]="false" 
+  [resizable]="false"
+  (onHide)="hideDialog()">
+  
+  <form [formGroup]="highlightForm" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label for="text" class="font-bold">Highlight Text</label>
+      <textarea 
+        id="text" 
+        pInputTextarea 
+        formControlName="text" 
+        rows="3" 
+        required 
+        autofocus
+        [ngClass]="{'ng-invalid ng-dirty': highlightForm.get('text')?.invalid && highlightForm.get('text')?.touched}"
+      ></textarea>
+      <small 
+        *ngIf="highlightForm.get('text')?.invalid && highlightForm.get('text')?.touched" 
+        class="p-error"
+      >Highlight text is required.</small>
+    </div>
+  </form>
+  
+  <ng-template pTemplate="footer">
+    <button 
+      pButton 
+      pRipple 
+      label="Cancel" 
+      icon="pi pi-times" 
+      class="p-button-text" 
+      (click)="hideDialog()"
+    ></button>
+    <button 
+      pButton 
+      pRipple 
+      label="Save" 
+      icon="pi pi-check" 
+      class="p-button-text" 
+      (click)="onSubmit()"
+      [loading]="loading"
+    ></button>
+  </ng-template>
+</p-dialog>

@@ -6,6 +6,7 @@ import { ResumeDetailComponent } from './resume-detail/resume-detail.component';
 import { ResumeCreateComponent } from './resume-create/resume-create.component';
 import { SkillsComponent } from './skills/skills.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CompanyDetailComponent } from './company/company-detail.component';
 
 export const routes: Routes = [
   { path: 'resumes/create', component: ResumeCreateComponent },
@@ -15,6 +16,7 @@ export const routes: Routes = [
     { path: 'people/:personId', component: PersonDetailComponent },
     { path: 'people/:personId/resume/:resumeId', component: ResumeDetailComponent },
     { path: 'people/:personId/resumes/create', component: ResumeCreateComponent },
+    { path: 'people/:personId/companies/:companyId', component: CompanyDetailComponent },
     { path: 'skills', component: SkillsComponent }
   ]},
   { path: '**', redirectTo: '/' }
