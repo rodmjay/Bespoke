@@ -23,3 +23,15 @@ p-treetable {
 .p-checkbox {
     display: block !important;
 }
+
+.layout-breadcrumb {
+    .p-breadcrumb {
+        background: transparent;
+        border: none;
+        padding: 0.5rem 0;
+        
+        .p-menuitem-text {
+            color: var(--text-color);
+        }
+    }
+}
