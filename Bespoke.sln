@@ -147,6 +147,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Data.SQLite", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumePro.Infrastructure.SQLite", "demo\ResumePro\ResumePro.Infrastructure.SQLite\ResumePro.Infrastructure.SQLite.csproj", "{A523ADAA-3127-49F1-A0B6-E547B576C5D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespoke.Data.PostgreSQL", "src\Bespoke.Data.PostgreSQL\Bespoke.Data.PostgreSQL.csproj", "{E113BCD8-185E-40EA-A8D1-F0DDDB55D3B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumePro.Infrastructure.PostgreSQL", "demo\ResumePro\ResumePro.Infrastructure.PostgreSQL\ResumePro.Infrastructure.PostgreSQL.csproj", "{7B67DAEF-98B6-4F60-A64E-07790A52AC31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -381,6 +385,14 @@ Global
 		{A523ADAA-3127-49F1-A0B6-E547B576C5D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A523ADAA-3127-49F1-A0B6-E547B576C5D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A523ADAA-3127-49F1-A0B6-E547B576C5D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E113BCD8-185E-40EA-A8D1-F0DDDB55D3B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E113BCD8-185E-40EA-A8D1-F0DDDB55D3B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E113BCD8-185E-40EA-A8D1-F0DDDB55D3B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E113BCD8-185E-40EA-A8D1-F0DDDB55D3B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B67DAEF-98B6-4F60-A64E-07790A52AC31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B67DAEF-98B6-4F60-A64E-07790A52AC31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B67DAEF-98B6-4F60-A64E-07790A52AC31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B67DAEF-98B6-4F60-A64E-07790A52AC31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -447,5 +459,7 @@ Global
 		{D75CA26C-525D-404C-8514-1329FFC6E20B} = {EBB12414-7C5B-4AB3-96FB-69913D655D88}
 		{8D1BD54F-1E08-44E5-83C1-DB17246BD15E} = {A1B0F8DB-8FD8-4F19-A81A-93F5D3F0A3A2}
 		{A523ADAA-3127-49F1-A0B6-E547B576C5D3} = {9A8EE683-E2CF-43C6-93BE-C4A55FFD8DAF}
+		{E113BCD8-185E-40EA-A8D1-F0DDDB55D3B1} = {A1B0F8DB-8FD8-4F19-A81A-93F5D3F0A3A2}
+		{7B67DAEF-98B6-4F60-A64E-07790A52AC31} = {9A8EE683-E2CF-43C6-93BE-C4A55FFD8DAF}
 	EndGlobalSection
 EndGlobal
