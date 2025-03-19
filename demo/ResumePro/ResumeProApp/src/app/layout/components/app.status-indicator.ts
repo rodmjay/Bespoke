@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../../core/state';
@@ -8,11 +9,12 @@ import { selectIsApiChecking, selectIsApiOnline } from '../../core/state/api/api
 @Component({
   selector: 'app-status-indicator',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   template: `
     <div class="api-status-indicator">
       <div class="status-dot" [ngClass]="statusClass$ | async"></div>
       <span class="status-text">API: {{ statusText$ | async }}</span>
+      <a class="test-runner-link" [routerLink]="['/test-runner']">Tests</a>
     </div>
   `,
   styles: [`
@@ -39,6 +41,16 @@ import { selectIsApiChecking, selectIsApiOnline } from '../../core/state/api/api
     .status-text {
       font-size: 0.875rem;
       color: var(--text-color-secondary);
+    }
+    .test-runner-link {
+      font-size: 0.875rem;
+      color: var(--primary-color);
+      text-decoration: none;
+      margin-left: 0.5rem;
+      cursor: pointer;
+    }
+    .test-runner-link:hover {
+      text-decoration: underline;
     }
   `]
 })
