@@ -16,6 +16,8 @@ using Microsoft.Extensions.Options;
 using ResumePro.Api.Services;
 using ResumePro.Data.Contexts;
 using ResumePro.Services.Extensions;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using HealthChecks.NpgSql;
 
 namespace ResumePro.Api;
 
