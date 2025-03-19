@@ -4,6 +4,7 @@ using Bespoke.Azure.Extensions;
 using Bespoke.Core.Extensions;
 using Bespoke.Core.Settings;
 using Bespoke.Data.Extensions;
+using ResumePro.Infrastructure.PostgreSQL;
 using Bespoke.Data.SQLite;
 using Bespoke.Data.SqlServer;
 using Bespoke.Rest.Extensions;
@@ -46,6 +47,7 @@ public sealed class Startup
                     dataBuilder =>
                     {
                         var useSQLite = Configuration.GetValue<bool>("AppSettings:UseSQLite");
+                        var usePostgreSQL = Configuration.GetValue<bool>("AppSettings:UsePostgreSQL");
                         
                         if (useSQLite)
                         {
@@ -53,6 +55,11 @@ public sealed class Startup
                             {
                                 settings.ConnectionStringName = "SQLiteConnection";
                             });
+                        }
+                        else if (usePostgreSQL)
+                        {
+                            dataBuilder.Settings.MigrationsAssembly = "ResumePro.Infrastructure.PostgreSQL";
+                            dataBuilder.UsePostgreSQLApplicationContext();
                         }
                         else
                         {

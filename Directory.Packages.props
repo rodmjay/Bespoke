@@ -25,6 +25,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.13" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.13" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.13" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
     <!-- Extensions Packages -->
     <PackageVersion Include="Microsoft.Extensions.Azure" Version="1.7.1" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.FileExtensions" Version="8.0.1" />
