@@ -174,6 +174,12 @@ public sealed class Startup
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseAuthorization();
+        
+        // Add CORS middleware
+        app.UseCors(builder => 
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader());
 
         app.UseEndpoints(endpoints =>
         {
