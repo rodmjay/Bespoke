@@ -27,6 +27,8 @@
 	  <ProjectReference Include="..\ResumePro.Infrastructure.SQLite\ResumePro.Infrastructure.SQLite.csproj" />
 	  <ProjectReference Include="..\ResumePro.Services\ResumePro.Services.csproj" />
 	  <ProjectReference Include="..\ResumePro.Shared\ResumePro.Shared.csproj" />
+	  <ProjectReference Include="..\..\..\src\Bespoke.Data.PostgreSQL\Bespoke.Data.PostgreSQL.csproj" />
+	  <ProjectReference Include="..\ResumePro.Infrastructure.PostgreSQL\ResumePro.Infrastructure.PostgreSQL.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
