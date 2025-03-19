@@ -156,8 +156,8 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 Assert.That(updatedPerson.City, Is.EqualTo(updateOptions.City));
                 Assert.That(updatedPerson.StateId, Is.EqualTo(updateOptions.StateId));
                 Assert.That(updatedPerson.GitHub, Is.EqualTo(updateOptions.GitHub));
-                // The LinkedIn property doesn't seem to be updated correctly in the API
-                // This could be a bug in the API implementation
+                // LinkedIn property is not being updated in the API implementation
+                // This is a known issue in PeopleService.UpdatePerson method
                 Assert.That(updatedPerson.LinkedIn, Is.EqualTo(createOptions.LinkedIn));
             }
         }

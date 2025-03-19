@@ -204,8 +204,54 @@
           No language information found.
         </div>
       </p-tabPanel>
+
+      <p-tabPanel header="Companies ({{ companies.length }})">
+        <div class="flex justify-content-end mb-3">
+          <button 
+            pButton 
+            pRipple 
+            label="Add Company" 
+            icon="pi pi-plus" 
+            class="p-button-success" 
+            (click)="showCompanyForm()"
+          ></button>
+        </div>
+        <p-table [value]="companies" [tableStyle]="{'min-width': '50rem'}">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Company</th>
+              <th>Description</th>
+              <th>Location</th>
+              <th>Positions</th>
+              <th>Actions</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-company>
+            <tr>
+              <td>{{ company.company }}</td>
+              <td>{{ company.description }}</td>
+              <td>{{ company.location }}</td>
+              <td>{{ company.positionCount }}</td>
+              <td>
+                <button pButton icon="pi pi-eye" class="p-button-rounded p-button-info mr-2" 
+                        [routerLink]="['/people', personId, 'companies', company.id]"></button>
+                <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"
+                        (click)="companyForm.showDialog(company)"></button>
+                <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                        (click)="deleteCompany(company.id)"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="5" class="text-center">No companies found</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
     </p-tabView>
   </div>
 </div>
 
 <app-person-edit-form #personEditForm [person]="person" [personId]="personId" (personUpdated)="onPersonUpdated($event)"></app-person-edit-form>
+<app-company-form #companyForm [personId]="personId" (companyCreated)="onCompanyCreated($event)" (companyUpdated)="onCompanyUpdated($event)"></app-company-form>

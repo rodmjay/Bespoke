@@ -8,11 +8,18 @@ import { CardModule } from 'primeng/card';
 import { AccordionModule } from 'primeng/accordion';
 import { ChipModule } from 'primeng/chip';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DividerModule } from 'primeng/divider';
+import { PanelModule } from 'primeng/panel';
+import { AvatarModule } from 'primeng/avatar';
+import { TimelineModule } from 'primeng/timeline';
+import { TagModule } from 'primeng/tag';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-resume-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, CardModule, AccordionModule, ChipModule, ProgressSpinnerModule],
+  imports: [CommonModule, RouterModule, CardModule, AccordionModule, ChipModule, ProgressSpinnerModule, DividerModule, PanelModule, AvatarModule, TimelineModule, TagModule, BreadcrumbModule],
   templateUrl: './resume-detail.component.html',
   styleUrl: './resume-detail.component.scss'
 })
@@ -22,6 +29,7 @@ export class ResumeDetailComponent implements OnInit {
   resume: ResumeDetails | null = null;
   loading = true;
   error: string | null = null;
+  breadcrumbItems: MenuItem[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +41,14 @@ export class ResumeDetailComponent implements OnInit {
       this.personId = +params['personId'];
       this.resumeId = +params['resumeId'];
       this.loadResumeDetails();
+      
+      // Initialize breadcrumb items
+      this.breadcrumbItems = [
+        { label: 'Dashboard', routerLink: '/' },
+        { label: 'People', routerLink: '/people' },
+        { label: `Person ${this.personId}`, routerLink: `/people/${this.personId}` },
+        { label: 'Resume', disabled: true }
+      ];
     });
   }
 
@@ -152,5 +168,58 @@ export class ResumeDetailComponent implements OnInit {
         this.error = null;
       }
     });
+  }
+
+  /**
+   * Returns the appropriate severity class for PrimeNG Tag component based on skill rating
+   */
+  getSkillSeverity(rating: number): 'success' | 'info' | 'warn' | 'secondary' {
+    switch (rating) {
+      case 5:
+        return 'success';
+      case 4:
+        return 'info';
+      case 3:
+        return 'warn';
+      default:
+        return 'secondary';
+    }
+  }
+
+  /**
+   * Transforms company and position data into timeline events
+   */
+  getTimelineEvents(): any[] {
+    if (!this.resume || !this.resume.companies) return [];
+    
+    const events: any[] = [];
+    this.resume.companies.forEach((company: any) => {
+      company.positions.forEach((position: any) => {
+        events.push({
+          company: company.name,
+          location: company.location,
+          title: position.title,
+          startDate: position.startDate,
+          endDate: position.endDate,
+          description: position.description,
+          projects: position.projects
+        });
+      });
+    });
+    
+    return events.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
+  }
+  
+  /**
+   * Returns skills filtered by category name
+   */
+  getSkillsByCategory(categoryName: string): any[] {
+    if (!this.resume || !this.resume.skillDictionary) return [];
+    
+    const category = this.resume.skillDictionary.find((cat: any) => 
+      cat.category === categoryName
+    );
+    
+    return category ? category.skills : [];
   }
 }
