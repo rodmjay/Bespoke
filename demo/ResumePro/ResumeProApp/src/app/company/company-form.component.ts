@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputTextarea } from 'primeng/inputtextarea';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { CalendarModule } from 'primeng/calendar';
 import { CompanyService } from '../core/services/company.service';
 import { CompanyDetails, CompanyOptions } from '../core/models/company.model';
 
@@ -20,6 +21,7 @@ import { CompanyDetails, CompanyOptions } from '../core/models/company.model';
     ButtonModule,
     InputTextModule,
     InputTextarea,
+    CalendarModule,
     ToastModule
   ],
   providers: [MessageService],
