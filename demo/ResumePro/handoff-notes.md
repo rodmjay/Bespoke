@@ -46,11 +46,16 @@ The ResumePro application has been enhanced with several new features and fixes:
 
 ## Remaining Issues
 
-1. **Missing Avatar Images**
+1. **PostgreSQL Database Connection**
+   - Database error: "relation 'Persona' does not exist"
+   - Need to create and apply PostgreSQL migrations
+   - Health check passes but actual database queries fail
+
+2. **Missing Avatar Images**
    - Browser console shows 404 errors for avatar images
    - Need to add proper avatar images or fallback mechanism
 
-2. **PrimeNG Deprecation Warnings**
+3. **PrimeNG Deprecation Warnings**
    - Dropdown component is deprecated as of v18
    - Should consider migrating to Select component
 
