@@ -178,7 +178,22 @@ public sealed class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
-            endpoints.MapHealthChecks("/health");
+            endpoints.MapHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+            {
+                ResponseWriter = async (context, report) =>
+                {
+                    context.Response.ContentType = "application/json";
+                    context.Response.Headers.Append("Access-Control-Allow-Origin", "*");
+                    
+                    var result = System.Text.Json.JsonSerializer.Serialize(new
+                    {
+                        status = report.Status.ToString(),
+                        checks = report.Entries.Select(e => new { name = e.Key, status = e.Value.Status.ToString() })
+                    });
+                    
+                    await context.Response.WriteAsync(result);
+                }
+            });
         });
     }
 }

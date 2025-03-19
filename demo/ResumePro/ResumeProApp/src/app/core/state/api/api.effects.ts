@@ -10,10 +10,14 @@ import * as ApiActions from './api.actions';
 export class ApiEffects {
   checkHealth$ = createEffect(() => this.actions$.pipe(
     ofType(ApiActions.checkApiHealth),
-    switchMap(() => this.http.get(`${environment.apiUrl}/health`).pipe(
-      map(() => ApiActions.apiHealthSuccess()),
-      catchError(() => [ApiActions.apiHealthFailure()])
-    ))
+    switchMap(() => {
+      // Use base URL without the /v1.0 prefix for health endpoint
+      const baseUrl = environment.apiUrl.replace('/v1.0', '');
+      return this.http.get(`${baseUrl}/health`).pipe(
+        map(() => ApiActions.apiHealthSuccess()),
+        catchError(() => [ApiActions.apiHealthFailure()])
+      );
+    })
   ));
 
   // Check health every 30 seconds
