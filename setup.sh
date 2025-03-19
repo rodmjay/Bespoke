@@ -72,6 +72,31 @@ CREATE TABLE IF NOT EXISTS \"Resume\" (
 
 echo -e "${GREEN}Database initialized with basic schema.${NC}"
 
+# Create PostgreSQL user for the application
+echo -e "${YELLOW}Creating PostgreSQL user for the application...${NC}"
+DB_USER="resumepro_user"
+DB_PASSWORD="resumepro_password"
+sudo -u postgres psql -c "DROP ROLE IF EXISTS $DB_USER;"
+sudo -u postgres psql -c "CREATE ROLE $DB_USER WITH LOGIN PASSWORD '$DB_PASSWORD';"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $DB_USER;"
+sudo -u postgres psql -d $DB_NAME -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO $DB_USER;"
+sudo -u postgres psql -d $DB_NAME -c "GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO $DB_USER;"
+echo -e "${GREEN}PostgreSQL user created successfully.${NC}"
+
+# Update API connection string
+echo -e "${YELLOW}Updating API connection string...${NC}"
+API_SETTINGS_FILE="$API_DIR/appsettings.json"
+# Backup the original file
+cp "$API_SETTINGS_FILE" "${API_SETTINGS_FILE}.bak"
+# Update the connection string
+sed -i "s/\"PostgreSQLConnection\": \"Host=localhost;Database=resumepro_test;Username=<USERNAME>;Password=<PASSWORD>\"/\"PostgreSQLConnection\": \"Host=localhost;Database=$DB_NAME;Username=$DB_USER;Password=$DB_PASSWORD\"/" "$API_SETTINGS_FILE"
+echo -e "${GREEN}API connection string updated successfully.${NC}"
+
+# Install NgRx packages for Angular app
+echo -e "${YELLOW}Installing required Angular packages...${NC}"
+cd "$APP_DIR" && npm install @ngrx/store @ngrx/effects @ngrx/store-devtools --save
+echo -e "${GREEN}Angular packages installed successfully.${NC}"
+
 # Start the API and Angular app
 echo -e "${YELLOW}Starting the API and Angular app...${NC}"
 echo -e "${GREEN}To start the API, run:${NC}"
