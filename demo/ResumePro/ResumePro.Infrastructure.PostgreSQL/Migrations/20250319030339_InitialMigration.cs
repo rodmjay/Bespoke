@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -17,12 +18,12 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Country",
                 columns: table => new
                 {
-                    Iso2 = table.Column<string>(type: "TEXT", maxLength: 2, nullable: false),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 80, nullable: false),
-                    CapsName = table.Column<string>(type: "TEXT", nullable: false),
-                    Iso3 = table.Column<string>(type: "TEXT", maxLength: 3, nullable: false),
-                    NumberCode = table.Column<int>(type: "INTEGER", nullable: true),
-                    PhoneCode = table.Column<int>(type: "INTEGER", nullable: false)
+                    Iso2 = table.Column<string>(type: "character varying(2)", maxLength: 2, nullable: false),
+                    Name = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
+                    CapsName = table.Column<string>(type: "text", nullable: false),
+                    Iso3 = table.Column<string>(type: "character varying(3)", maxLength: 3, nullable: false),
+                    NumberCode = table.Column<int>(type: "integer", nullable: true),
+                    PhoneCode = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -33,10 +34,10 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Language",
                 columns: table => new
                 {
-                    Code3 = table.Column<string>(type: "TEXT", nullable: false),
-                    NativeName = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Code2 = table.Column<string>(type: "TEXT", nullable: false)
+                    Code3 = table.Column<string>(type: "text", nullable: false),
+                    NativeName = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Code2 = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,17 +48,17 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "OrganizationSettings",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ResumeYearHistory = table.Column<int>(type: "INTEGER", nullable: false),
-                    AttachAllJobs = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AttachAllSkills = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DefaultTemplateId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ShowTechnologyPerJob = table.Column<bool>(type: "INTEGER", nullable: false),
-                    ShowDuration = table.Column<bool>(type: "INTEGER", nullable: false),
-                    ShowContactInfo = table.Column<bool>(type: "INTEGER", nullable: false),
-                    SkillView = table.Column<int>(type: "INTEGER", nullable: false),
-                    ShowRatings = table.Column<bool>(type: "INTEGER", nullable: false)
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ResumeYearHistory = table.Column<int>(type: "integer", nullable: false),
+                    AttachAllJobs = table.Column<bool>(type: "boolean", nullable: false),
+                    AttachAllSkills = table.Column<bool>(type: "boolean", nullable: false),
+                    DefaultTemplateId = table.Column<int>(type: "integer", nullable: false),
+                    ShowTechnologyPerJob = table.Column<bool>(type: "boolean", nullable: false),
+                    ShowDuration = table.Column<bool>(type: "boolean", nullable: false),
+                    ShowContactInfo = table.Column<bool>(type: "boolean", nullable: false),
+                    SkillView = table.Column<int>(type: "integer", nullable: false),
+                    ShowRatings = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,9 +69,9 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Sequence",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ResumeId = table.Column<int>(type: "INTEGER", nullable: false)
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ResumeId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,9 +82,9 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Skill",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,9 +95,9 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "SkillCategory",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,9 +108,9 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Template",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: true),
                     Name = table.Column<string>(type: "varchar(64)", nullable: false),
                     Source = table.Column<string>(type: "TEXT", nullable: false),
                     Format = table.Column<string>(type: "varchar(64)", nullable: false),
@@ -124,12 +125,12 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "StateProvince",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Iso2 = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Abbrev = table.Column<string>(type: "TEXT", nullable: false),
-                    Code = table.Column<string>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Iso2 = table.Column<string>(type: "character varying(2)", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Abbrev = table.Column<string>(type: "text", nullable: false),
+                    Code = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,8 +146,8 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "SkillCategorySkill",
                 columns: table => new
                 {
-                    SkillId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SkillCategoryId = table.Column<int>(type: "INTEGER", nullable: false)
+                    SkillId = table.Column<int>(type: "integer", nullable: false),
+                    SkillCategoryId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -167,17 +168,17 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Persona",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
-                    StateId = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    StateId = table.Column<int>(type: "integer", nullable: false),
                     FirstName = table.Column<string>(type: "varchar(64)", nullable: false),
                     LastName = table.Column<string>(type: "varchar(64)", nullable: false),
                     Email = table.Column<string>(type: "varchar(64)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "varchar(64)", nullable: false),
                     LinkedIn = table.Column<string>(type: "varchar(64)", nullable: true),
                     GitHub = table.Column<string>(type: "varchar(64)", nullable: true),
-                    City = table.Column<string>(type: "TEXT", nullable: false)
+                    City = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -193,12 +194,12 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Certification",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
                     Body = table.Column<string>(type: "varchar(255)", nullable: false),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -214,11 +215,11 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Company",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CompanyName = table.Column<string>(type: "varchar(255)", nullable: false),
                     Location = table.Column<string>(type: "varchar(255)", nullable: true),
                     Description = table.Column<string>(type: "varchar(1024)", nullable: true)
@@ -239,10 +240,10 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "PersonaLanguage",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Code3 = table.Column<string>(type: "TEXT", nullable: false),
-                    Proficiency = table.Column<int>(type: "INTEGER", nullable: false)
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false),
+                    Code3 = table.Column<string>(type: "text", nullable: false),
+                    Proficiency = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -263,9 +264,9 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "PersonaSkill",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SkillId = table.Column<int>(type: "INTEGER", nullable: false)
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false),
+                    SkillId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -286,13 +287,13 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Reference",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
                     Text = table.Column<string>(type: "varchar(1024)", nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: false),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
+                    Order = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -308,9 +309,9 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Resume",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
                     JobTitle = table.Column<string>(type: "varchar(255)", nullable: false),
                     Description = table.Column<string>(type: "varchar(1024)", nullable: false)
                 },
@@ -330,13 +331,13 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "School",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Location = table.Column<string>(type: "TEXT", nullable: false)
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Location = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -352,12 +353,12 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Position",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false),
+                    CompanyId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     JobTitle = table.Column<string>(type: "varchar(255)", nullable: false)
                 },
                 constraints: table =>
@@ -374,10 +375,10 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "CompanySkill",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SkillId = table.Column<int>(type: "INTEGER", nullable: false)
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    CompanyId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false),
+                    SkillId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -398,10 +399,10 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Rendering",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ResumeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    TemplateId = table.Column<int>(type: "INTEGER", nullable: false),
-                    RenderDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    ResumeId = table.Column<int>(type: "integer", nullable: false),
+                    TemplateId = table.Column<int>(type: "integer", nullable: false),
+                    RenderDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Text = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -423,10 +424,10 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "ResumeCompany",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ResumeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false)
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    ResumeId = table.Column<int>(type: "integer", nullable: false),
+                    CompanyId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -447,18 +448,18 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "ResumeSettings",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ResumeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false),
-                    AttachAllJobs = table.Column<bool>(type: "INTEGER", nullable: true),
-                    AttachAllSkills = table.Column<bool>(type: "INTEGER", nullable: true),
-                    ResumeYearHistory = table.Column<int>(type: "INTEGER", nullable: true),
-                    DefaultTemplateId = table.Column<int>(type: "INTEGER", nullable: true),
-                    ShowTechnologyPerJob = table.Column<bool>(type: "INTEGER", nullable: true),
-                    ShowDuration = table.Column<bool>(type: "INTEGER", nullable: true),
-                    ShowContactInfo = table.Column<bool>(type: "INTEGER", nullable: true),
-                    SkillView = table.Column<int>(type: "INTEGER", nullable: true),
-                    ShowRatings = table.Column<bool>(type: "INTEGER", nullable: true)
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    ResumeId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false),
+                    AttachAllJobs = table.Column<bool>(type: "boolean", nullable: true),
+                    AttachAllSkills = table.Column<bool>(type: "boolean", nullable: true),
+                    ResumeYearHistory = table.Column<int>(type: "integer", nullable: true),
+                    DefaultTemplateId = table.Column<int>(type: "integer", nullable: true),
+                    ShowTechnologyPerJob = table.Column<bool>(type: "boolean", nullable: true),
+                    ShowDuration = table.Column<bool>(type: "boolean", nullable: true),
+                    ShowContactInfo = table.Column<bool>(type: "boolean", nullable: true),
+                    SkillView = table.Column<int>(type: "integer", nullable: true),
+                    ShowRatings = table.Column<bool>(type: "boolean", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -484,10 +485,10 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "ResumeSkill",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ResumeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SkillId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false)
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    ResumeId = table.Column<int>(type: "integer", nullable: false),
+                    SkillId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -508,11 +509,11 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Degree",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    SchoolId = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    SchoolId = table.Column<int>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                    Order = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -528,12 +529,12 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Highlight",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PositionId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false),
+                    CompanyId = table.Column<int>(type: "integer", nullable: false),
+                    PositionId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    Order = table.Column<int>(type: "integer", nullable: false),
                     Text = table.Column<string>(type: "varchar(512)", nullable: false)
                 },
                 constraints: table =>
@@ -550,7 +551,7 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                         principalTable: "Persona",
                         principalColumns: new[] { "OrganizationId", "Id" });
                     table.ForeignKey(
-                        name: "FK_Highlight_Position_OrganizationId_PersonId_CompanyId_PositionId",
+                        name: "FK_Highlight_Position_OrganizationId_PersonId_CompanyId_Positi~",
                         columns: x => new { x.OrganizationId, x.PersonId, x.CompanyId, x.PositionId },
                         principalTable: "Position",
                         principalColumns: new[] { "OrganizationId", "PersonId", "CompanyId", "Id" });
@@ -560,15 +561,15 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "Project",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PositionId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    PositionId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    CompanyId = table.Column<int>(type: "integer", nullable: false),
+                    Order = table.Column<int>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
                     Description = table.Column<string>(type: "varchar(512)", nullable: true),
-                    Budget = table.Column<decimal>(type: "TEXT", nullable: true)
+                    Budget = table.Column<decimal>(type: "numeric", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -579,7 +580,7 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                         principalTable: "Company",
                         principalColumns: new[] { "OrganizationId", "PersonId", "Id" });
                     table.ForeignKey(
-                        name: "FK_Project_Position_OrganizationId_PersonId_CompanyId_PositionId",
+                        name: "FK_Project_Position_OrganizationId_PersonId_CompanyId_Position~",
                         columns: x => new { x.OrganizationId, x.PersonId, x.CompanyId, x.PositionId },
                         principalTable: "Position",
                         principalColumns: new[] { "OrganizationId", "PersonId", "CompanyId", "Id" });
@@ -589,20 +590,20 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 name: "ProjectHighlight",
                 columns: table => new
                 {
-                    OrganizationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PositionId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    CompanyId = table.Column<int>(type: "integer", nullable: false),
+                    ProjectId = table.Column<int>(type: "integer", nullable: false),
+                    PositionId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false),
+                    Order = table.Column<int>(type: "integer", nullable: false),
                     Text = table.Column<string>(type: "varchar(512)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProjectHighlight", x => new { x.OrganizationId, x.PersonId, x.CompanyId, x.PositionId, x.ProjectId, x.Id });
                     table.ForeignKey(
-                        name: "FK_ProjectHighlight_Project_OrganizationId_PersonId_CompanyId_PositionId_ProjectId",
+                        name: "FK_ProjectHighlight_Project_OrganizationId_PersonId_CompanyId_~",
                         columns: x => new { x.OrganizationId, x.PersonId, x.CompanyId, x.PositionId, x.ProjectId },
                         principalTable: "Project",
                         principalColumns: new[] { "OrganizationId", "PersonId", "CompanyId", "PositionId", "Id" });

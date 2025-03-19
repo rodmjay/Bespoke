@@ -14,6 +14,7 @@ public static class ServiceCollectionExtensions
         
         // Register all services
         services.AddScoped<IPeopleService, PeopleService>();
+        services.AddScoped<ISkillService, SkillService>();
         
         return services;
     }

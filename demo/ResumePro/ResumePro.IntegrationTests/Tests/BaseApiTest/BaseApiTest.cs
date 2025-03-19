@@ -1,4 +1,6 @@
 ﻿using Bespoke.IntegrationTesting.Bases;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using ResumePro.Api;
 using ResumePro.Api.Interfaces;
@@ -45,7 +47,14 @@ public abstract partial class BaseApiTest : IntegrationTest<BaseApiTest, Startup
     {
         try
         {
-            // Always use SQLite for tests, which works in both local and CI environments
+            // Use the database provider configured in appsettings.json
+            var configuration = ServiceProvider.GetRequiredService<IConfiguration>();
+            var useSQLite = configuration.GetValue<bool>("AppSettings:UseSQLite");
+            var usePostgreSQL = configuration.GetValue<bool>("AppSettings:UsePostgreSQL");
+            
+            Console.WriteLine($"Test configuration: UseSQLite={useSQLite}, UsePostgreSQL={usePostgreSQL}");
+            
+            // Reset database using the configured provider
             await ResetDatabase();
         }
         catch (Exception ex)
