@@ -23,31 +23,59 @@ public class ApplicationContextFactory : IDesignTimeDbContextFactory<Application
 
         Log.Information("Initializing ApplicationContextFactory with explicit logging settings.");
 
-        // Build configuration
-        var configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false)
-            .AddJsonFile("appsettings.Development.json", optional: true)
-            .AddEnvironmentVariables()
-            .Build();
-
         // Create DbContext options
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
         
-        // Get connection string from configuration
-        var connectionString = configuration.GetConnectionString("PostgreSQLConnection");
+        // Check if connection string is provided in args
+        string? connectionString = null;
         
+        if (args != null && args.Length > 0)
+        {
+            // Check if the argument is a connection string
+            if (args[0]?.Contains("Host=") == true || args[0]?.Contains("Server=") == true)
+            {
+                connectionString = args[0];
+                Log.Information("Using connection string from command line: {ConnectionString}", connectionString);
+            }
+        }
+        
+        // If no connection string in args, try to get from configuration
         if (string.IsNullOrEmpty(connectionString))
         {
-            throw new InvalidOperationException("PostgreSQL connection string not found in configuration.");
+            // Build configuration
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false)
+                .AddJsonFile("appsettings.Development.json", optional: true)
+                .AddJsonFile("appsettings.Migrations.json", optional: true)
+                .AddEnvironmentVariables()
+                .Build();
+                
+            connectionString = configuration.GetConnectionString("PostgreSQLConnection") ?? "";
+            
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new InvalidOperationException("PostgreSQL connection string not found in configuration.");
+            }
+            
+            Log.Information("Using PostgreSQL provider with connection from config: {ConnectionString}", connectionString);
         }
 
         // Configure PostgreSQL with migrations assembly
-        optionsBuilder.UseNpgsql(connectionString, npgsqlOptions =>
+        if (connectionString.Contains("Host=") || connectionString.Contains("Server="))
         {
-            npgsqlOptions.MigrationsAssembly("ResumePro.Infrastructure.PostgreSQL");
-            npgsqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
-        });
+            optionsBuilder.UseNpgsql(connectionString, npgsqlOptions =>
+            {
+                npgsqlOptions.MigrationsAssembly("ResumePro.Infrastructure.PostgreSQL");
+                npgsqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+            });
+        }
+        else
+        {
+            // We only support PostgreSQL
+            Log.Warning("Connection string does not appear to be PostgreSQL format. Please check your configuration.");
+            throw new InvalidOperationException("Only PostgreSQL connections are supported.");
+        }
 
         // Enable sensitive data logging in development
         optionsBuilder.EnableSensitiveDataLogging();
