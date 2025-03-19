@@ -28,7 +28,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              { "glob": "**/*", "input": "node_modules/primeicons/fonts", "output": "assets/fonts" }
+              { "glob": "**/*", "input": "node_modules/primeicons/fonts", "output": "assets/fonts" },
+              { "glob": "**/*", "input": "node_modules/jasmine-core/lib/jasmine-core", "output": "assets/jasmine" }
             ],
             "styles": [
               "src/styles.scss"
@@ -96,7 +97,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              { "glob": "**/*", "input": "node_modules/primeicons/fonts", "output": "assets/fonts" }
+              { "glob": "**/*", "input": "node_modules/primeicons/fonts", "output": "assets/fonts" },
+              { "glob": "**/*", "input": "node_modules/jasmine-core/lib/jasmine-core", "output": "assets/jasmine" }
             ],
             "styles": [
               "src/styles.scss"

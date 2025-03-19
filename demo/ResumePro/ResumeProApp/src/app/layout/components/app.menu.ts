@@ -87,6 +87,11 @@ export class AppMenu {
                         icon: 'pi pi-fw pi-sliders-h',
                         routerLink: ['/settings/preferences'],
                     },
+                    {
+                        label: 'Test Runner',
+                        icon: 'pi pi-fw pi-cog',
+                        routerLink: ['/test-runner'],
+                    },
                 ],
             },
         ];

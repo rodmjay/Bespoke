@@ -101,6 +101,13 @@ public sealed class Startup
             builder.Services.AddAuthorization();
 
             builder.Services.AddServices(Configuration);
+            
+            // Add health checks
+            builder.Services.AddHealthChecks()
+                .AddNpgSql(Configuration.GetConnectionString("PostgreSQLConnection") ?? 
+                    throw new InvalidOperationException("PostgreSQLConnection string is not configured."), 
+                    name: "postgres", 
+                    tags: new[] { "database" });
         });
 
         //var thisAssembly = Assembly.GetAssembly(GetType());
@@ -169,6 +176,7 @@ public sealed class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
+            endpoints.MapHealthChecks("/health");
         });
     }
 }
