@@ -17,6 +17,9 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PersonEditFormComponent } from './person-edit-form/person-edit-form.component';
+import { CompanyService } from '../core/services/company.service';
+import { CompanyFormComponent } from '../company/company-form.component';
+import { CompanyDetails } from '../core/models/company.model';
 
 @Component({
   selector: 'app-person-detail',
@@ -33,7 +36,8 @@ import { PersonEditFormComponent } from './person-edit-form/person-edit-form.com
     TagModule,
     ToastModule,
     ConfirmDialogModule,
-    PersonEditFormComponent
+    PersonEditFormComponent,
+    CompanyFormComponent
   ],
   providers: [MessageService, ConfirmationService],
   templateUrl: './person-detail.component.html',
@@ -41,10 +45,12 @@ import { PersonEditFormComponent } from './person-edit-form/person-edit-form.com
 })
 export class PersonDetailComponent implements OnInit {
   @ViewChild('personEditForm') personEditForm!: PersonEditFormComponent;
+  @ViewChild('companyForm') companyForm!: CompanyFormComponent;
   
   personId!: number;
   person: PersonaDetails | null = null;
   resumes: ResumeDto[] = [];
+  companies: CompanyDetails[] = [];
   loading = true;
   error: string | null = null;
 
@@ -53,6 +59,7 @@ export class PersonDetailComponent implements OnInit {
     private router: Router,
     private peopleService: PeopleService,
     private resumeService: ResumeService,
+    private companyService: CompanyService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {}
@@ -70,6 +77,7 @@ export class PersonDetailComponent implements OnInit {
       next: (person) => {
         this.person = person;
         this.loadResumes();
+        this.loadCompanies();
       },
       error: (err) => {
         console.error('Error loading person details:', err);
@@ -138,6 +146,7 @@ export class PersonDetailComponent implements OnInit {
           ]
         };
         this.loadResumes();
+        this.loadCompanies();
       }
     });
   }
@@ -411,6 +420,145 @@ export class PersonDetailComponent implements OnInit {
       severity: 'info',
       summary: 'Info',
       detail: 'Remove Language functionality will be implemented in the next phase'
+    });
+  }
+
+  // Company methods
+  loadCompanies(): void {
+    if (!this.person) return;
+    
+    this.companyService.getCompanies(this.personId).subscribe({
+      next: (companies) => {
+        this.companies = companies;
+      },
+      error: (err) => {
+        console.error('Error loading companies:', err);
+        // Provide mock data for demonstration
+        this.companies = [
+          {
+            id: 1,
+            company: 'Microsoft',
+            description: 'Worked on Azure cloud services and .NET development.',
+            location: 'Redmond, WA',
+            startDate: '2018-01-15',
+            endDate: '2022-03-30',
+            positionCount: 2,
+            showTechnology: true,
+            skills: [
+              { id: 1, title: 'C#' },
+              { id: 2, title: 'Azure' },
+              { id: 3, title: '.NET Core' }
+            ],
+            positions: [
+              {
+                id: 1,
+                title: 'Senior Software Engineer',
+                startDate: '2020-04-01',
+                endDate: '2022-03-30',
+                highlightCount: 3,
+                highlights: [
+                  { id: 1, text: 'Led a team of 5 developers on a cloud migration project.' },
+                  { id: 2, text: 'Implemented CI/CD pipelines reducing deployment time by 40%.' },
+                  { id: 3, text: 'Designed and implemented microservices architecture.' }
+                ]
+              },
+              {
+                id: 2,
+                title: 'Software Engineer',
+                startDate: '2018-01-15',
+                endDate: '2020-03-31',
+                highlightCount: 2,
+                highlights: [
+                  { id: 1, text: 'Developed RESTful APIs for internal services.' },
+                  { id: 2, text: 'Implemented authentication and authorization systems.' }
+                ]
+              }
+            ]
+          },
+          {
+            id: 2,
+            company: 'Amazon',
+            description: 'Worked on e-commerce platform and recommendation systems.',
+            location: 'Seattle, WA',
+            startDate: '2015-06-01',
+            endDate: '2017-12-31',
+            positionCount: 1,
+            showTechnology: true,
+            skills: [
+              { id: 4, title: 'Java' },
+              { id: 5, title: 'AWS' },
+              { id: 6, title: 'Spring Boot' }
+            ],
+            positions: [
+              {
+                id: 3,
+                title: 'Software Development Engineer',
+                startDate: '2015-06-01',
+                endDate: '2017-12-31',
+                highlightCount: 3,
+                highlights: [
+                  { id: 1, text: 'Developed recommendation algorithms improving conversion by 15%.' },
+                  { id: 2, text: 'Optimized database queries reducing response time by 30%.' },
+                  { id: 3, text: 'Implemented A/B testing framework for feature evaluation.' }
+                ]
+              }
+            ]
+          }
+        ];
+      }
+    });
+  }
+
+  showCompanyForm(): void {
+    this.companyForm.showDialog();
+  }
+
+  onCompanyCreated(company: CompanyDetails): void {
+    this.companies.push(company);
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Company created successfully'
+    });
+  }
+
+  onCompanyUpdated(updatedCompany: CompanyDetails): void {
+    const index = this.companies.findIndex(c => c.id === updatedCompany.id);
+    if (index !== -1) {
+      this.companies[index] = updatedCompany;
+    }
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Company updated successfully'
+    });
+  }
+
+  deleteCompany(companyId: number): void {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this company?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.companyService.deleteCompany(this.personId, companyId).subscribe({
+          next: () => {
+            this.companies = this.companies.filter(c => c.id !== companyId);
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'Company deleted successfully'
+            });
+          },
+          error: (error) => {
+            console.error('Error deleting company:', error);
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Failed to delete company'
+            });
+          }
+        });
+      }
     });
   }
 }

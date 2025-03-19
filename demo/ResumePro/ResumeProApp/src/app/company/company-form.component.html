@@ -12,16 +12,16 @@
   
   <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
     <div class="field">
-      <label for="name">Company Name*</label>
+      <label for="company">Company Name*</label>
       <input 
         type="text" 
         pInputText 
-        id="name" 
-        formControlName="name" 
-        [ngClass]="{'ng-invalid ng-dirty': companyForm.get('name')?.invalid && companyForm.get('name')?.touched}"
+        id="company" 
+        formControlName="company" 
+        [ngClass]="{'ng-invalid ng-dirty': companyForm.get('company')?.invalid && companyForm.get('company')?.touched}"
       />
       <small 
-        *ngIf="companyForm.get('name')?.invalid && companyForm.get('name')?.touched" 
+        *ngIf="companyForm.get('company')?.invalid && companyForm.get('company')?.touched" 
         class="p-error"
       >
         Company name is required
@@ -46,21 +46,49 @@
     </div>
     
     <div class="field">
-      <label for="website">Website</label>
+      <label for="location">Location*</label>
       <input 
         type="text" 
         pInputText 
-        id="website" 
-        formControlName="website"
-        placeholder="https://example.com"
-        [ngClass]="{'ng-invalid ng-dirty': companyForm.get('website')?.invalid && companyForm.get('website')?.touched}"
+        id="location" 
+        formControlName="location"
+        placeholder="City, State"
+        [ngClass]="{'ng-invalid ng-dirty': companyForm.get('location')?.invalid && companyForm.get('location')?.touched}"
       />
       <small 
-        *ngIf="companyForm.get('website')?.invalid && companyForm.get('website')?.touched" 
+        *ngIf="companyForm.get('location')?.invalid && companyForm.get('location')?.touched" 
         class="p-error"
       >
-        Please enter a valid website URL
+        Location is required
       </small>
+    </div>
+    
+    <div class="field">
+      <label for="startDate">Start Date*</label>
+      <p-calendar 
+        id="startDate" 
+        formControlName="startDate"
+        [showIcon]="true"
+        dateFormat="yy-mm-dd"
+        [ngClass]="{'ng-invalid ng-dirty': companyForm.get('startDate')?.invalid && companyForm.get('startDate')?.touched}"
+      ></p-calendar>
+      <small 
+        *ngIf="companyForm.get('startDate')?.invalid && companyForm.get('startDate')?.touched" 
+        class="p-error"
+      >
+        Start date is required
+      </small>
+    </div>
+    
+    <div class="field">
+      <label for="endDate">End Date</label>
+      <p-calendar 
+        id="endDate" 
+        formControlName="endDate"
+        [showIcon]="true"
+        dateFormat="yy-mm-dd"
+      ></p-calendar>
+      <small class="text-muted">Leave blank if current</small>
     </div>
   </form>
   
