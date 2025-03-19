@@ -9,6 +9,7 @@ import { MessageService } from 'primeng/api';
 import { PeopleService } from '../../core/services/people.service';
 import { PersonOptions } from '../../core/models/person.model';
 import { DropdownModule } from 'primeng/dropdown';
+import { RippleModule } from 'primeng/ripple';
 
 @Component({
   selector: 'app-person-form',
@@ -20,7 +21,8 @@ import { DropdownModule } from 'primeng/dropdown';
     ButtonModule,
     InputTextModule,
     ToastModule,
-    DropdownModule
+    DropdownModule,
+    RippleModule
   ],
   providers: [MessageService],
   templateUrl: './person-form.component.html',

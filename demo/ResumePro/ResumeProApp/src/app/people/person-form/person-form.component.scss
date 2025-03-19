@@ -1,6 +1,17 @@
 :host ::ng-deep {
-  .p-dialog-content {
-    padding: 1.5rem;
+  .person-dialog {
+    .p-dialog-header {
+      padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+    }
+    
+    .p-dialog-content {
+      padding: 0 1.5rem 1.5rem 1.5rem;
+    }
+    
+    .p-dialog-footer {
+      padding: 1rem 1.5rem 1.5rem 1.5rem;
+      border-top: 1px solid var(--surface-border);
+    }
   }
   
   .field {

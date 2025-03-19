@@ -2,47 +2,55 @@
 
 <p-dialog 
   [(visible)]="visible" 
-  [style]="{width: '450px'}" 
+  [style]="{width: '500px'}" 
   header="Create New Person" 
   [modal]="true" 
-  styleClass="p-fluid"
+  styleClass="p-fluid person-dialog"
   [draggable]="false"
   [resizable]="false"
+  [closeOnEscape]="true"
+  [dismissableMask]="true"
   (onHide)="hideDialog()">
   
   <form [formGroup]="personForm" (ngSubmit)="onSubmit()">
-    <div class="field">
-      <label for="firstName">First Name*</label>
-      <input 
-        type="text" 
-        pInputText 
-        id="firstName" 
-        formControlName="firstName" 
-        [ngClass]="{'ng-invalid ng-dirty': personForm.get('firstName')?.invalid && personForm.get('firstName')?.touched}"
-      />
-      <small 
-        *ngIf="personForm.get('firstName')?.invalid && personForm.get('firstName')?.touched" 
-        class="p-error"
-      >
-        First name is required
-      </small>
-    </div>
-    
-    <div class="field">
-      <label for="lastName">Last Name*</label>
-      <input 
-        type="text" 
-        pInputText 
-        id="lastName" 
-        formControlName="lastName" 
-        [ngClass]="{'ng-invalid ng-dirty': personForm.get('lastName')?.invalid && personForm.get('lastName')?.touched}"
-      />
-      <small 
-        *ngIf="personForm.get('lastName')?.invalid && personForm.get('lastName')?.touched" 
-        class="p-error"
-      >
-        Last name is required
-      </small>
+    <div class="grid">
+      <div class="col-12 md:col-6">
+        <div class="field">
+          <label for="firstName">First Name*</label>
+          <input 
+            type="text" 
+            pInputText 
+            id="firstName" 
+            formControlName="firstName" 
+            [ngClass]="{'ng-invalid ng-dirty': personForm.get('firstName')?.invalid && personForm.get('firstName')?.touched}"
+          />
+          <small 
+            *ngIf="personForm.get('firstName')?.invalid && personForm.get('firstName')?.touched" 
+            class="p-error"
+          >
+            First name is required
+          </small>
+        </div>
+      </div>
+      
+      <div class="col-12 md:col-6">
+        <div class="field">
+          <label for="lastName">Last Name*</label>
+          <input 
+            type="text" 
+            pInputText 
+            id="lastName" 
+            formControlName="lastName" 
+            [ngClass]="{'ng-invalid ng-dirty': personForm.get('lastName')?.invalid && personForm.get('lastName')?.touched}"
+          />
+          <small 
+            *ngIf="personForm.get('lastName')?.invalid && personForm.get('lastName')?.touched" 
+            class="p-error"
+          >
+            Last name is required
+          </small>
+        </div>
+      </div>
     </div>
     
     <div class="field">
@@ -82,58 +90,70 @@
       </small>
     </div>
     
-    <div class="field">
-      <label for="linkedIn">LinkedIn</label>
-      <input 
-        type="text" 
-        pInputText 
-        id="linkedIn" 
-        formControlName="linkedIn"
-      />
+    <div class="grid">
+      <div class="col-12 md:col-6">
+        <div class="field">
+          <label for="linkedIn">LinkedIn</label>
+          <input 
+            type="text" 
+            pInputText 
+            id="linkedIn" 
+            formControlName="linkedIn"
+          />
+        </div>
+      </div>
+      
+      <div class="col-12 md:col-6">
+        <div class="field">
+          <label for="gitHub">GitHub</label>
+          <input 
+            type="text" 
+            pInputText 
+            id="gitHub" 
+            formControlName="gitHub"
+          />
+        </div>
+      </div>
     </div>
     
-    <div class="field">
-      <label for="gitHub">GitHub</label>
-      <input 
-        type="text" 
-        pInputText 
-        id="gitHub" 
-        formControlName="gitHub"
-      />
-    </div>
-    
-    <div class="field">
-      <label for="city">City*</label>
-      <input 
-        type="text" 
-        pInputText 
-        id="city" 
-        formControlName="city" 
-        [ngClass]="{'ng-invalid ng-dirty': personForm.get('city')?.invalid && personForm.get('city')?.touched}"
-      />
-      <small 
-        *ngIf="personForm.get('city')?.invalid && personForm.get('city')?.touched" 
-        class="p-error"
-      >
-        City is required
-      </small>
-    </div>
-    
-    <div class="field">
-      <label for="state">State/Province*</label>
-      <input 
-        type="text" 
-        pInputText 
-        id="state" 
-        formControlName="state" 
-        [ngClass]="{'ng-invalid ng-dirty': personForm.get('state')?.invalid && personForm.get('state')?.touched}"
-      />
-      <small 
-        *ngIf="personForm.get('state')?.invalid && personForm.get('state')?.touched" 
-        class="p-error"
-      >
-        State/Province is required
-      </small>
+    <div class="grid">
+      <div class="col-12 md:col-6">
+        <div class="field">
+          <label for="city">City*</label>
+          <input 
+            type="text" 
+            pInputText 
+            id="city" 
+            formControlName="city" 
+            [ngClass]="{'ng-invalid ng-dirty': personForm.get('city')?.invalid && personForm.get('city')?.touched}"
+          />
+          <small 
+            *ngIf="personForm.get('city')?.invalid && personForm.get('city')?.touched" 
+            class="p-error"
+          >
+            City is required
+          </small>
+        </div>
+      </div>
+      
+      <div class="col-12 md:col-6">
+        <div class="field">
+          <label for="state">State/Province*</label>
+          <input 
+            type="text" 
+            pInputText 
+            id="state" 
+            formControlName="state" 
+            [ngClass]="{'ng-invalid ng-dirty': personForm.get('state')?.invalid && personForm.get('state')?.touched}"
+          />
+          <small 
+            *ngIf="personForm.get('state')?.invalid && personForm.get('state')?.touched" 
+            class="p-error"
+          >
+            State/Province is required
+          </small>
+        </div>
+      </div>
     </div>
     
     <div class="field">
@@ -156,22 +176,24 @@
   </form>
   
   <ng-template pTemplate="footer">
-    <button 
-      pButton 
-      pRipple 
-      label="Cancel" 
-      icon="pi pi-times" 
-      class="p-button-text" 
-      (click)="hideDialog()"
-    ></button>
-    <button 
-      pButton 
-      pRipple 
-      label="Save" 
-      icon="pi pi-check" 
-      class="p-button-text" 
-      [loading]="loading"
-      (click)="onSubmit()"
-    ></button>
+    <div class="flex justify-content-end">
+      <button 
+        pButton 
+        pRipple 
+        label="Cancel" 
+        icon="pi pi-times" 
+        class="p-button-outlined p-button-secondary mr-2" 
+        (click)="hideDialog()"
+      ></button>
+      <button 
+        pButton 
+        pRipple 
+        label="Save" 
+        icon="pi pi-check" 
+        class="p-button-primary" 
+        [loading]="loading"
+        (click)="onSubmit()"
+      ></button>
+    </div>
   </ng-template>
 </p-dialog>
