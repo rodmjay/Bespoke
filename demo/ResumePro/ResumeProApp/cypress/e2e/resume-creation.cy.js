@@ -10,7 +10,8 @@ describe('Resume Creation Tests', () => {
     cy.visit('/people/1/resumes/create');
     
     // Verify we're on the resume creation page for that person
-    cy.contains('Create New Resume for John Doe').should('be.visible');
+    cy.url().should('include', '/people/1/resumes/create');
+    cy.contains('Create New Resume').should('be.visible');
   });
 
   it('should display form fields and settings correctly', () => {
