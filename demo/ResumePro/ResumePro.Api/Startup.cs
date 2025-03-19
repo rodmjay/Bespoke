@@ -16,6 +16,8 @@ using Microsoft.Extensions.Options;
 using ResumePro.Api.Services;
 using ResumePro.Data.Contexts;
 using ResumePro.Services.Extensions;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using HealthChecks.NpgSql;
 
 namespace ResumePro.Api;
 
@@ -101,6 +103,13 @@ public sealed class Startup
             builder.Services.AddAuthorization();
 
             builder.Services.AddServices(Configuration);
+            
+            // Add health checks
+            builder.Services.AddHealthChecks()
+                .AddNpgSql(Configuration.GetConnectionString("PostgreSQLConnection") ?? 
+                    throw new InvalidOperationException("PostgreSQLConnection string is not configured."), 
+                    name: "postgres", 
+                    tags: new[] { "database" });
         });
 
         //var thisAssembly = Assembly.GetAssembly(GetType());
@@ -165,10 +174,32 @@ public sealed class Startup
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseAuthorization();
+        
+        // Add CORS middleware
+        app.UseCors(builder => 
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader());
 
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
+            endpoints.MapHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+            {
+                ResponseWriter = async (context, report) =>
+                {
+                    context.Response.ContentType = "application/json";
+                    context.Response.Headers.Append("Access-Control-Allow-Origin", "*");
+                    
+                    var result = System.Text.Json.JsonSerializer.Serialize(new
+                    {
+                        status = report.Status.ToString(),
+                        checks = report.Entries.Select(e => new { name = e.Key, status = e.Value.Status.ToString() })
+                    });
+                    
+                    await context.Response.WriteAsync(result);
+                }
+            });
         });
     }
 }

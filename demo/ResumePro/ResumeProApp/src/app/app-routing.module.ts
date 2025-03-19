@@ -15,7 +15,8 @@ export const routes: Routes = [
     { path: 'people/:personId', component: PersonDetailComponent },
     { path: 'people/:personId/resume/:resumeId', component: ResumeDetailComponent },
     { path: 'people/:personId/resumes/create', component: ResumeCreateComponent },
-    { path: 'skills', component: SkillsComponent }
+    { path: 'skills', component: SkillsComponent },
+    { path: 'test-runner', loadChildren: () => import('./test-runner/test-runner.module').then(m => m.TestRunnerModule) }
   ]},
   { path: '**', redirectTo: '/' }
 ];

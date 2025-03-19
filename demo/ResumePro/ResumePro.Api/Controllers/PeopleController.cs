@@ -22,11 +22,21 @@ public sealed class PeopleController : BaseController, IPeopleController
         filters ??= new PersonaFilters();
         try
         {
+            // Add CORS headers for this specific endpoint
+            HttpContext.Response.Headers.Append("Access-Control-Allow-Origin", "*");
+            HttpContext.Response.Headers.Append("Access-Control-Allow-Methods", "POST, OPTIONS");
+            HttpContext.Response.Headers.Append("Access-Control-Allow-Headers", "Content-Type");
+            
             return await _peopleService.GetPeople<PersonaDto>(OrganizationId, filters, paging)
                 .ConfigureAwait(false);
         }
         catch (Exception)
         {
+            // Add CORS headers for this specific endpoint
+            HttpContext.Response.Headers.Append("Access-Control-Allow-Origin", "*");
+            HttpContext.Response.Headers.Append("Access-Control-Allow-Methods", "POST, OPTIONS");
+            HttpContext.Response.Headers.Append("Access-Control-Allow-Headers", "Content-Type");
+            
             // Return mock data for demonstration when database is not available
             var mockData = new List<PersonaDto>
             {

@@ -8,11 +8,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { AppStatusIndicator } from './app.status-indicator';
 
 @Component({
     selector: '[app-topbar]',
     standalone: true,
-    imports: [RouterModule, CommonModule, StyleClassModule, AppBreadcrumb, InputTextModule, ButtonModule, IconFieldModule, InputIconModule],
+    imports: [RouterModule, CommonModule, StyleClassModule, AppBreadcrumb, InputTextModule, ButtonModule, IconFieldModule, InputIconModule, AppStatusIndicator],
     template: `<div class="layout-topbar">
         <div class="topbar-start">
             <button #menubutton type="button" class="topbar-menubutton p-link p-trigger" (click)="onMenuButtonClick()">
@@ -23,6 +24,9 @@ import { InputIconModule } from 'primeng/inputicon';
 
         <div class="topbar-end">
             <ul class="topbar-menu">
+                <li>
+                    <app-status-indicator></app-status-indicator>
+                </li>
                 <li class="topbar-search">
                     <p-iconfield>
                         <p-inputicon class="pi pi-search" />
