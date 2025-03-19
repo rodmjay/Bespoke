@@ -43,33 +43,14 @@ public sealed class Startup
                 .AddStorage(
                     dbSettings =>
                     {
-                        dbSettings.MigrationsAssembly = "ResumePro.Infrastructure.SQLite";
+                        dbSettings.MigrationsAssembly = "ResumePro.Infrastructure.PostgreSQL";
                         dbSettings.MaxRetryCount = 5;
                     },
                     dataBuilder =>
                     {
-                        var useSQLite = Configuration.GetValue<bool>("AppSettings:UseSQLite");
-                        var usePostgreSQL = Configuration.GetValue<bool>("AppSettings:UsePostgreSQL");
-                        
-                        if (useSQLite)
-                        {
-                            dataBuilder.UseSQLite<ApplicationContext>(settings =>
-                            {
-                                settings.ConnectionStringName = "SQLiteConnection";
-                            });
-                        }
-                        else if (usePostgreSQL)
-                        {
-                            dataBuilder.Settings.MigrationsAssembly = "ResumePro.Infrastructure.PostgreSQL";
-                            dataBuilder.UsePostgreSQLApplicationContext();
-                        }
-                        else
-                        {
-                            dataBuilder.UseSqlServer<ApplicationContext>(sqlSettings =>
-                            {
-                                sqlSettings.ConnectionStringName = "DefaultConnection";
-                            });
-                        }
+                        // Always use PostgreSQL
+                        dataBuilder.Settings.MigrationsAssembly = "ResumePro.Infrastructure.PostgreSQL";
+                        dataBuilder.UsePostgreSQLApplicationContext();
                     }
                 )
                 .AddAzure(
