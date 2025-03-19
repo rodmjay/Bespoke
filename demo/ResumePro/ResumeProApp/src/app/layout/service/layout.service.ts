@@ -39,7 +39,7 @@ interface MenuChangeEvent {
 export class LayoutService {
     _config: layoutConfig = {
         ripple: false,
-        preset: 'Apollo',
+        preset: 'Lara',
         primary: 'indigo',
         inputStyle: 'outlined',
         surface: null,

@@ -5,7 +5,6 @@ import { filter, Subscription } from 'rxjs';
 import { AppTopbar } from './app.topbar';
 import { AppSidebar } from './app.sidebar';
 import { LayoutService } from '../service/layout.service';
-import { AppConfigurator } from './app.configurator';
 import { AppProfileSidebar } from './app.profilesidebar';
 
 @Component({
@@ -16,7 +15,6 @@ import { AppProfileSidebar } from './app.profilesidebar';
         AppTopbar,
         AppSidebar,
         RouterModule,
-        AppConfigurator,
         AppProfileSidebar,
     ],
     template: `<div class="layout-container" [ngClass]="containerClass">
@@ -28,7 +26,6 @@ import { AppProfileSidebar } from './app.profilesidebar';
             </div>
         </div>
         <div app-profilesidebar></div>
-        <app-configurator></app-configurator>
         <div class="layout-mask animate-fadein"></div>
     </div> `,
 })

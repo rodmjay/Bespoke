@@ -34,7 +34,7 @@ import { InputIconModule } from 'primeng/inputicon';
                 </li>
                 <li class="topbar-profile">
                     <button type="button" class="p-link" (click)="onProfileButtonClick()">
-                        <img src="/layout/images/avatar.png" alt="Profile" />
+                        <img src="assets/layout/images/avatar.png" alt="Profile" />
                     </button>
                 </li>
             </ul>
