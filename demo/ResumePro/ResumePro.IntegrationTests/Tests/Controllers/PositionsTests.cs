@@ -88,26 +88,22 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a company for the person
                     var companyOptions = new CompanyOptions
                     {
-                        Name = "Test Company",
-                        City = "Seattle",
-                        StateId = 1,
+                        Company = "Test Company",
+                        Location = "Seattle",
                         StartDate = DateTime.Now.AddYears(-2),
-                        EndDate = null,
-                        IsCurrent = true
+                        EndDate = null
                     };
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
-                    Assert.That(companyResult.Result.IsT0, "Failed to create test company");
-                    var company = companyResult.Result.AsT0;
+                    Assert.That(companyResult, Is.Not.Null, "Failed to create test company");
+                    var company = companyResult.Value;
                     
                     // Create a position for the company
                     var positionOptions = new PositionOptions
                     {
-                        Title = "Software Engineer",
-                        CompanyId = company.Id,
+                        JobTitle = "Software Engineer",
                         StartDate = DateTime.Now.AddYears(-1),
-                        EndDate = null,
-                        IsCurrent = true
+                        EndDate = null
                     };
                     
                     var positionResult = await PositionsController.CreatePosition(person.Id, company.Id, positionOptions);
@@ -118,7 +114,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     var retrievedPosition = await PositionsController.GetPosition(person.Id, company.Id, position.Id);
                     Assert.That(retrievedPosition, Is.Not.Null, "Failed to retrieve position");
                     Assert.That(retrievedPosition.Id, Is.EqualTo(position.Id), "Position ID mismatch");
-                    Assert.That(retrievedPosition.Title, Is.EqualTo(positionOptions.Title), "Position title mismatch");
+                    Assert.That(retrievedPosition.Title, Is.EqualTo(positionOptions.JobTitle), "Position title mismatch");
                     Assert.That(retrievedPosition.CompanyId, Is.EqualTo(company.Id), "Position company ID mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
@@ -154,17 +150,15 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a company for the person to test with
                     var companyOptions = new CompanyOptions
                     {
-                        Name = "Test Company for Invalid Position",
-                        City = "Test City",
-                        StateId = 1,
+                        Company = "Test Company for Invalid Position",
+                        Location = "Test City",
                         StartDate = DateTime.Now.AddYears(-1),
-                        EndDate = null,
-                        IsCurrent = true
+                        EndDate = null
                     };
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
-                    Assert.That(companyResult.Result.IsT0, "Failed to create test company");
-                    var company = companyResult.Result.AsT0;
+                    Assert.That(companyResult, Is.Not.Null, "Failed to create test company");
+                    var company = companyResult.Value;
                     
                     // Assert that retrieving a non-existent position throws an exception
                     try
@@ -217,17 +211,15 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     };
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
-                    Assert.That(companyResult.Result.IsT0, "Failed to create test company");
-                    var company = companyResult.Result.AsT0;
+                    Assert.That(companyResult, Is.Not.Null, "Failed to create test company");
+                    var company = companyResult.Value;
                     
                     // Create a position for the company
                     var positionOptions = new PositionOptions
                     {
-                        Title = "Senior Developer",
-                        CompanyId = company.Id,
+                        JobTitle = "Senior Developer",
                         StartDate = DateTime.Now.AddYears(-2),
-                        EndDate = null,
-                        IsCurrent = true
+                        EndDate = null
                     };
                     
                     var positionResult = await PositionsController.CreatePosition(person.Id, company.Id, positionOptions);
@@ -241,7 +233,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Verify the position data
                     var position = positions[0];
                     Assert.That(position.Id, Is.GreaterThan(0), "Position ID should be positive");
-                    Assert.That(position.Title, Is.EqualTo(positionOptions.Title), "Position title mismatch");
+                    Assert.That(position.Title, Is.EqualTo(positionOptions.JobTitle), "Position title mismatch");
                     Assert.That(position.CompanyId, Is.EqualTo(company.Id), "Position company ID mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
