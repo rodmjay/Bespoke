@@ -18,6 +18,7 @@ using ResumePro.Data.Contexts;
 using ResumePro.Services.Extensions;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using HealthChecks.NpgSql;
+using HealthChecks.Sqlite;
 
 namespace ResumePro.Api;
 
@@ -48,9 +49,21 @@ public sealed class Startup
                     },
                     dataBuilder =>
                     {
-                        // Always use PostgreSQL
-                        dataBuilder.Settings.MigrationsAssembly = "ResumePro.Infrastructure.PostgreSQL";
-                        dataBuilder.UsePostgreSQLApplicationContext();
+                        // Use database provider based on configuration
+                        var useSQLite = Configuration.GetValue<bool>("AppSettings:UseSQLite");
+                        if (useSQLite)
+                        {
+                            dataBuilder.Settings.MigrationsAssembly = "ResumePro.Infrastructure.SQLite";
+                            dataBuilder.UseSQLite<ApplicationContext>(sqliteSettings =>
+                            {
+                                sqliteSettings.ConnectionStringName = "SQLiteConnection";
+                            });
+                        }
+                        else
+                        {
+                            dataBuilder.Settings.MigrationsAssembly = "ResumePro.Infrastructure.PostgreSQL";
+                            dataBuilder.UsePostgreSQLApplicationContext();
+                        }
                     }
                 )
                 .AddAzure(
@@ -86,11 +99,21 @@ public sealed class Startup
             builder.Services.AddServices(Configuration);
             
             // Add health checks
-            builder.Services.AddHealthChecks()
-                .AddNpgSql(Configuration.GetConnectionString("PostgreSQLConnection") ?? 
-                    throw new InvalidOperationException("PostgreSQLConnection string is not configured."), 
-                    name: "postgres", 
-                    tags: new[] { "database" });
+            var useSQLite = Configuration.GetValue<bool>("AppSettings:UseSQLite");
+            if (useSQLite)
+            {
+                builder.Services.AddHealthChecks()
+                    .AddSqlite(Configuration.GetConnectionString("SQLiteConnection") ?? 
+                        throw new InvalidOperationException("SQLiteConnection string is not configured."));
+            }
+            else
+            {
+                builder.Services.AddHealthChecks()
+                    .AddNpgSql(Configuration.GetConnectionString("PostgreSQLConnection") ?? 
+                        throw new InvalidOperationException("PostgreSQLConnection string is not configured."), 
+                        name: "postgres", 
+                        tags: new[] { "database" });
+            }
         });
 
         //var thisAssembly = Assembly.GetAssembly(GetType());

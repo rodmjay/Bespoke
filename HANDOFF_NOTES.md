@@ -8,7 +8,7 @@
 The ResumePro Angular application now has Cypress tests covering:
 - Basic navigation (with some failing tests)
 - Person creation functionality
-- Person update functionality
+- Person update functionality (including error handling scenarios)
 - Resume creation functionality (with some failing tests)
 - Resume viewing functionality (newly added)
 - Resume updating functionality (newly added)
@@ -16,7 +16,7 @@ The ResumePro Angular application now has Cypress tests covering:
 - Education history management (newly added)
 - Work experience management (newly added)
 - Resume download functionality (newly added)
-- Company creation functionality (newly added)
+- Company creation functionality (newly added with error handling)
 
 #### Current Test Files
 - `navigation.cy.js`: Tests basic navigation with some failing tests for person details and resume pages
@@ -54,6 +54,78 @@ The integration tests are run as part of the `devin_test.sh` script, which:
 
 Integration tests are passing, but Cypress tests are failing due to environment issues.
 
+## ResumePro Integration Tests Status
+
+### Project Overview
+This section tracks the implementation of integration tests for GET endpoints in the ResumePro API controllers.
+
+### Current Status
+- Created branch `devin-1742449056-add-get-tests` for implementing integration tests
+- Implemented integration tests for multiple controllers' GET endpoints
+- Added proper error handling for database connection issues
+- Updated BaseApiTest helper methods to match controller implementations
+- Fixed parameter mismatches in controller interfaces and test helper methods
+- Fixed property name mismatches in test files to match model classes
+- Fixed method signature issues in controller interfaces and test files
+- Ran integration tests to verify implementation
+- Created PR #81 for review
+- Fixed multiple CI build failures:
+  - Updated CompaniesTests.cs to use `CompanyName` instead of `Company`
+  - Updated HighlightsTests.cs to use `Text` instead of `Description`
+  - Updated PersonLanguagesTests.cs to use `LanguageName` and `Proficiency` instead of `LanguageId` and `ProficiencyId`
+  - Updated DegreesTests.cs to include required `schoolId` parameter in GetDegree calls
+  - Fixed database configuration to use SQLite consistently for tests instead of PostgreSQL
+  - Updated MigrationsAssembly setting to reference the SQLite migrations properly
+- Local integration tests pass, and CI build errors have been fixed
+- Current CI build status: Passing
+
+### GET Endpoints Inventory
+
+| Controller | GET Method | Test File | Test Status |
+|------------|------------|-----------|-------------|
+| SkillsController | GetSkills() | SkillsTests.cs | Implemented |
+| PeopleController | GetPerson() | PeopleTests.cs | Implemented |
+| CertificationsController | Get() | CertificationsTests.cs | Implemented |
+| CertificationsController | Get() (list) | CertificationsTests.cs | Implemented |
+| CompaniesController | GetCompanies() | CompaniesTests.cs | Implemented |
+| CompaniesController | GetCompany() | CompaniesTests.cs | Implemented |
+| DegreesController | GetDegree() | DegreesTests.cs | Implemented |
+| DegreesController | GetDegrees() | DegreesTests.cs | Implemented |
+| FiltersController | GetFilters() | FiltersTests.cs | Implemented |
+| HighlightsController | GetHighlight() | HighlightsTests.cs | Implemented |
+| HighlightsController | GetHighlights() | HighlightsTests.cs | Implemented |
+| PersonLanguagesController | GetPersonLanguages() | PersonLanguagesTests.cs | Implemented |
+| PersonSkillsController | GetSkills() | PersonSkillsTests.cs | Placeholder |
+| PositionsController | GetPositions() | PositionsTests.cs | Implemented |
+| PositionsController | GetPosition() | PositionsTests.cs | Implemented |
+| ProjectHighlightsController | GetHighlight() | ProjectHighlightsTests.cs | Placeholder |
+| ProjectHighlightsController | GetHighlights() | ProjectHighlightsTests.cs | Placeholder |
+| ProjectsController | GetProject() | ProjectsTests.cs | Placeholder |
+| ProjectsController | GetList() | ProjectsTests.cs | Placeholder |
+| ReferencesController | Get() | ReferencesTests.cs | Placeholder |
+| ReferencesController | GetReferences() | ReferencesTests.cs | Placeholder |
+| ResumesController | GetResume() | ResumesTests.cs | Placeholder |
+| ResumesController | GetResumes() | ResumesTests.cs | Placeholder |
+| SchoolsController | GetSchools() | SchoolsTests.cs | Placeholder |
+| SchoolsController | GetSchool() | SchoolsTests.cs | Placeholder |
+| TemplatesController | GetTemplates() | TemplatesTests.cs | Placeholder |
+
+### Test Implementation Pattern
+Each test implementation follows this pattern:
+1. Create test person with unique email to avoid conflicts
+2. Create necessary related entities (e.g., company, position, school)
+3. Create the entity being tested
+4. Call the API endpoint being tested
+5. Verify the response data matches expectations
+6. Include proper error handling for database connection issues
+7. Test invalid ID scenarios to ensure proper error handling
+
+### Test Coverage
+Initial code coverage: Not measured
+Current code coverage: 1.2% line coverage, 12.9% branch coverage
+
+The coverage report is available at `./demo/ResumePro/ResumePro.IntegrationTests/CoverageReport/index.html`
+
 ## Next Steps
 
 ### Cypress Testing Issues
@@ -67,6 +139,15 @@ Integration tests are passing, but Cypress tests are failing due to environment 
 ### Integration Tests
 1. Investigate errors in the `AssertCreatePerson` method
 2. Review coverage report to identify areas needing additional test coverage
+3. Implement remaining controller GET endpoint tests:
+   - PersonSkillsController
+   - ProjectHighlightsController
+   - ProjectsController
+   - ReferencesController
+   - ResumesController
+   - SchoolsController
+   - TemplatesController
+4. Further improve test coverage by adding more comprehensive test scenarios
 
 ## Implementation Plan
 1. Fix Cypress environment issues to enable test execution
