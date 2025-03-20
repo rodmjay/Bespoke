@@ -91,9 +91,9 @@ fi
 
 # Configure Angular CLI globally to be non-interactive and disable autocompletion prompt
 echo -e "${YELLOW}Configuring Angular CLI to be non-interactive...${NC}"
-ng config -g cli.interactive false --no-interactive
+ng config -g cli.interactive false
 echo -e "${YELLOW}Disabling Angular CLI autocompletion prompt...${NC}"
-ng config -g cli.autocomplete false --no-interactive
+ng config -g cli.autocomplete false
 
 # Build Angular app with the non-interactive flag
 echo -e "${YELLOW}Building Angular app...${NC}"
