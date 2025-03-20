@@ -15,6 +15,11 @@ public static class ServiceCollectionExtensions
         // Register all services
         services.AddScoped<IPeopleService, PeopleService>();
         services.AddScoped<ISkillService, SkillService>();
+        services.AddScoped<ICompanyService, CompanyService>();
+        services.AddScoped<IResumeService, ResumeService>();
+        services.AddScoped<ISchoolService, SchoolService>();
+        services.AddScoped<IPositionService, PositionService>();
+        services.AddScoped<IIdGenerationService, IdGenerationService>();
         
         return services;
     }
