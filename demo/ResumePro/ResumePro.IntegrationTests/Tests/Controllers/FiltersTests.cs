@@ -34,7 +34,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     foreach (var skill in filters.Skills)
                     {
                         Assert.That(skill.Id, Is.GreaterThan(0), "Skill ID should be positive");
-                        Assert.That(skill.Name, Is.Not.Null.And.Not.Empty, "Skill name should not be empty");
+                        Assert.That(skill.Title, Is.Not.Null.And.Not.Empty, "Skill name should not be empty");
                     }
                     
                     // Verify state/province data
@@ -43,7 +43,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     {
                         Assert.That(state.Id, Is.GreaterThan(0), "State ID should be positive");
                         Assert.That(state.Name, Is.Not.Null.And.Not.Empty, "State name should not be empty");
-                        Assert.That(state.Abbreviation, Is.Not.Null.And.Not.Empty, "State abbreviation should not be empty");
+                        Assert.That(state.Abbrev, Is.Not.Null.And.Not.Empty, "State abbreviation should not be empty");
                     }
                     
                     // Verify languages data
@@ -55,9 +55,9 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     }
                     
                     // Verify expected data is present
-                    Assert.That(filters.Skills.Exists(s => s.Name.Contains("Programming") || s.Name.Contains("Development")), 
+                    Assert.That(filters.Skills.Exists(s => s.Title.Contains("Programming") || s.Title.Contains("Development")), 
                         "At least one programming skill should be in the skills list");
-                    Assert.That(filters.States.Exists(s => s.Abbreviation == "CA"), 
+                    Assert.That(filters.States.Exists(s => s.Abbrev == "CA"), 
                         "California (CA) should be in the states list");
                     Assert.That(filters.Languages.Exists(l => l.Name == "English"), 
                         "English should be in the languages list");

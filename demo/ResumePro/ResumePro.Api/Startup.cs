@@ -18,6 +18,7 @@ using ResumePro.Data.Contexts;
 using ResumePro.Services.Extensions;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using HealthChecks.NpgSql;
+using HealthChecks.Sqlite;
 
 namespace ResumePro.Api;
 
@@ -102,7 +103,7 @@ public sealed class Startup
             if (useSQLite)
             {
                 builder.Services.AddHealthChecks()
-                    .AddSqlite<ApplicationContext>(Configuration.GetConnectionString("SQLiteConnection") ?? 
+                    .AddSqlite(Configuration.GetConnectionString("SQLiteConnection") ?? 
                         throw new InvalidOperationException("SQLiteConnection string is not configured."));
             }
             else

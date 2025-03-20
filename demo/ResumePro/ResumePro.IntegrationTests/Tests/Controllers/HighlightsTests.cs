@@ -45,6 +45,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
                     Assert.That(companyResult, Is.Not.Null, "Failed to create test company");
+                    Assert.That(companyResult.Value, Is.Not.Null, "Company result value should not be null");
                     var company = companyResult.Value;
                     
                     // Create a position for the company
@@ -56,6 +57,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     };
                     
                     var positionResult = await PositionsController.CreatePosition(person.Id, company.Id, positionOptions);
+                    Assert.That(positionResult, Is.Not.Null, "Position result should not be null");
                     Assert.That(positionResult.Value, Is.Not.Null, "Failed to create test position");
                     var position = positionResult.Value;
                     
@@ -66,6 +68,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     };
                     
                     var highlightResult = await HighlightsController.CreateHighlight(person.Id, company.Id, position.Id, highlightOptions);
+                    Assert.That(highlightResult, Is.Not.Null, "Highlight result should not be null");
                     Assert.That(highlightResult.Value, Is.Not.Null, "Failed to create test highlight");
                     var highlight = highlightResult.Value;
                     
@@ -116,6 +119,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
                     Assert.That(companyResult, Is.Not.Null, "Failed to create test company");
+                    Assert.That(companyResult.Value, Is.Not.Null, "Company result value should not be null");
                     var company = companyResult.Value;
                     
                     // Create a position for the company
@@ -127,6 +131,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     };
                     
                     var positionResult = await PositionsController.CreatePosition(person.Id, company.Id, positionOptions);
+                    Assert.That(positionResult, Is.Not.Null, "Position result should not be null");
                     Assert.That(positionResult.Value, Is.Not.Null, "Failed to create test position");
                     var position = positionResult.Value;
                     
@@ -185,6 +190,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
                     Assert.That(companyResult, Is.Not.Null, "Failed to create test company");
+                    Assert.That(companyResult.Value, Is.Not.Null, "Company result value should not be null");
                     var company = companyResult.Value;
                     
                     // Create a position for the company
@@ -196,6 +202,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     };
                     
                     var positionResult = await PositionsController.CreatePosition(person.Id, company.Id, positionOptions);
+                    Assert.That(positionResult, Is.Not.Null, "Position result should not be null");
                     Assert.That(positionResult.Value, Is.Not.Null, "Failed to create test position");
                     var position = positionResult.Value;
                     
@@ -206,6 +213,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     };
                     
                     var highlightResult = await HighlightsController.CreateHighlight(person.Id, company.Id, position.Id, highlightOptions);
+                    Assert.That(highlightResult, Is.Not.Null, "Highlight result should not be null");
                     Assert.That(highlightResult.Value, Is.Not.Null, "Failed to create test highlight");
                     
                     // Get the highlights list

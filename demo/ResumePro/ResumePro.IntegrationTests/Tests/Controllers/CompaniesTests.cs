@@ -143,14 +143,20 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
                     Assert.That(companyResult, Is.Not.Null, "Failed to create test company");
+                    Assert.That(companyResult.Value, Is.Not.Null, "Company result value should not be null");
                     var company = companyResult.Value;
                     
                     // Get the company details by ID
                     var retrievedCompany = await CompaniesController.GetCompany(person.Id, company.Id);
                     Assert.That(retrievedCompany, Is.Not.Null, "Failed to retrieve company");
-                    Assert.That(retrievedCompany.Id, Is.EqualTo(company.Id), "Company ID mismatch");
-                    Assert.That(retrievedCompany.CompanyName, Is.EqualTo(companyOptions.Company), "Company name mismatch");
-                    Assert.That(retrievedCompany.Location, Is.EqualTo(companyOptions.Location), "Company location mismatch");
+                    
+                    // Only check properties if company is not null
+                    if (retrievedCompany != null)
+                    {
+                        Assert.That(retrievedCompany.Id, Is.EqualTo(company.Id), "Company ID mismatch");
+                        Assert.That(retrievedCompany.CompanyName, Is.EqualTo(companyOptions.Company), "Company name mismatch");
+                        Assert.That(retrievedCompany.Location, Is.EqualTo(companyOptions.Location), "Company location mismatch");
+                    }
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {

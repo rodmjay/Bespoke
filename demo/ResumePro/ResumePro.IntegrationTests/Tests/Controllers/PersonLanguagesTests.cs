@@ -57,7 +57,9 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                         foreach (var language in personLanguages)
                         {
                             Assert.That(language.LanguageName, Is.Not.Null, "Language name should not be null");
-                            Assert.That(language.Proficiency, Is.Not.Null, "Proficiency should not be null");
+                            // LanguageLevel is an enum and can never be null, so we don't need to check for null
+                            // Use a valid enum value check instead
+                            Assert.That((int)language.Proficiency >= 0, "Proficiency should be a valid enum value");
                         }
                     }
                     else
