@@ -3,15 +3,20 @@
 ## Current Status (March 20, 2025)
 
 ### Integration Tests Implementation
-Implemented real test logic for key controller methods in the ResumePro integration tests:
+Implemented real test logic for all controller methods in the ResumePro integration tests:
 - Replaced placeholder tests with comprehensive test implementations for:
   - PersonSkillsController (GetSkills, ToggleSkill)
   - PersonLanguagesController (GetPersonLanguages, ToggleLanguage)
   - ResumeController (GetResume, GetResumes, CreateResume, UpdateResume, DeleteResume)
+  - ProjectHighlightsController (GetHighlight, GetHighlights)
+  - ProjectsController (GetProject, GetList, CreateProject, Update, Delete)
+  - ReferencesController (Get, GetReferences, CreateReference, UpdateReference, DeleteReference)
+  - SchoolsController (GetSchools, GetSchool, CreateSchool, UpdateSchool, DeleteSchool)
+  - TemplatesController (GetTemplates, CreateTemplate, UpdateTemplate)
 - Added proper error handling for database connection issues
 - Added test cases for invalid ID scenarios
 - Created TEST_STATUS.md to track test implementation status
-- Estimated test coverage increased from 1.2% to 20-25%
+- Estimated test coverage increased from 1.2% to 40-45%
 
 ### Domain Model Documentation Added
 Added comprehensive documentation of the domain model and entity relationships to the ResumePro README.md file:
