@@ -59,6 +59,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 
                 // Add a GetSkill test when the API endpoint is implemented
                 // For now, this test is marked as passing since Skills API is read-only
+                await Task.CompletedTask;
                 Assert.Pass($"GetSkill endpoint for invalid ID {invalidId} is not implemented");
             }
         }
