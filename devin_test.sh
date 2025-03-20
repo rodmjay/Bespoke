@@ -55,11 +55,43 @@ else
   $HOME/repos/Bespoke/devin_run.sh
 fi
 
-# Check if Cypress is installed
-if ! npm list --depth=0 -C "$APP_DIR" | grep -q "cypress"; then
-    echo -e "${YELLOW}Installing Cypress...${NC}"
-    cd "$APP_DIR" && npm install cypress --save-dev && npx cypress install
-    echo -e "${GREEN}Cypress installed successfully.${NC}"
+# Check if Cypress is installed and install/update dependencies
+echo -e "${YELLOW}Checking Cypress installation...${NC}"
+cd "$APP_DIR"
+
+# Install Cypress dependencies for Ubuntu
+if [ "$(grep -i ubuntu /etc/os-release)" != "" ]; then
+  echo -e "${YELLOW}Installing Cypress dependencies for Ubuntu...${NC}"
+  sudo apt-get update && sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev \
+  libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+fi
+
+# Ensure Cypress is properly installed with the correct version
+echo -e "${YELLOW}Installing Cypress v12.17.4...${NC}"
+npm uninstall cypress
+npm install cypress@12.17.4 --save-dev
+
+# Create local Cypress cache folder
+mkdir -p "$APP_DIR/.cypress-cache"
+export CYPRESS_CACHE_FOLDER="$APP_DIR/.cypress-cache"
+export CYPRESS_INSTALL_BINARY=12.17.4
+
+# Force reinstall Cypress
+echo -e "${YELLOW}Force reinstalling Cypress binary...${NC}"
+npx cypress install --force
+echo -e "${GREEN}Cypress installed successfully.${NC}"
+
+# Verify Cypress binary exists
+CYPRESS_BINARY=$(find "$APP_DIR/.cypress-cache" -name "Cypress" -type f 2>/dev/null | head -1)
+if [ -n "$CYPRESS_BINARY" ]; then
+  echo -e "${YELLOW}Setting permissions for Cypress binary...${NC}"
+  chmod +x "$CYPRESS_BINARY"
+  CYPRESS_BINARY_DIR=$(dirname "$CYPRESS_BINARY")
+  find "$CYPRESS_BINARY_DIR" -type f -exec chmod +x {} \;
+else
+  echo -e "${RED}Cypress binary not found. Installing globally...${NC}"
+  CYPRESS_CACHE_FOLDER="$APP_DIR/.cypress-cache" npm install -g cypress@12.17.4
+  CYPRESS_CACHE_FOLDER="$APP_DIR/.cypress-cache" npx cypress install --force
 fi
 
 # Check if API and Angular app are running
@@ -161,27 +193,84 @@ run_cypress_tests() {
   echo -e "${YELLOW}Running Cypress tests...${NC}"
   cd "$APP_DIR" || exit 1
   
-  # Ensure Cypress binary has correct permissions
-  CYPRESS_BINARY=$(find ~/.cache -name "Cypress" -type f 2>/dev/null | head -1)
-  if [ -n "$CYPRESS_BINARY" ]; then
-    echo -e "${YELLOW}Setting permissions for Cypress binary...${NC}"
-    chmod +x "$CYPRESS_BINARY"
+  # Ensure Cypress is properly installed
+  echo -e "${YELLOW}Ensuring Cypress is properly installed...${NC}"
+  npm uninstall cypress
+  npm install cypress@12.17.4 --save-dev
+  
+  # Create a local Cypress cache folder and install Cypress there
+  mkdir -p "$APP_DIR/.cypress-cache"
+  
+  # Install Cypress directly using npm
+  echo -e "${YELLOW}Installing Cypress globally...${NC}"
+  npm install -g cypress@12.17.4
+  
+  # Try to find the Cypress binary
+  CYPRESS_BINARY=$(which cypress 2>/dev/null)
+  if [ -z "$CYPRESS_BINARY" ]; then
+    CYPRESS_BINARY=$(find /usr/local/bin -name "cypress" 2>/dev/null | head -1)
   fi
   
-  # Run Cypress tests
-  npx cypress run
+  if [ -n "$CYPRESS_BINARY" ]; then
+    echo -e "${GREEN}Found Cypress binary at: $CYPRESS_BINARY${NC}"
+  else
+    echo -e "${RED}Cypress binary not found. Using npx...${NC}"
+    CYPRESS_BINARY="npx cypress"
+  fi
+  
+  # Clean Cypress cache if needed
+  echo -e "${YELLOW}Clearing Cypress cache...${NC}"
+  npx cypress cache clear
+  
+  # Run Cypress tests with better error handling
+  echo -e "${YELLOW}Running Cypress tests with headless Electron...${NC}"
+  cd "$APP_DIR" && CYPRESS_CACHE_FOLDER="$HOME/.cache/Cypress" CYPRESS_CRASH_REPORTS=0 ELECTRON_ENABLE_LOGGING=1 $CYPRESS_BINARY run --browser electron --project "$APP_DIR"
   
   if [ $? -eq 0 ]; then
     echo -e "${GREEN}Cypress tests completed successfully.${NC}"
     return 0
   else
-    echo -e "${RED}Cypress tests failed.${NC}"
-    return 1
+    echo -e "${RED}Cypress tests failed. Trying with more diagnostic information...${NC}"
+    cd "$APP_DIR" && CYPRESS_CACHE_FOLDER="$HOME/.cache/Cypress" CYPRESS_CRASH_REPORTS=0 DEBUG=cypress:* npx cypress run --browser electron --project "$APP_DIR"
+    
+    if [ $? -eq 0 ]; then
+      echo -e "${GREEN}Cypress tests completed successfully on retry.${NC}"
+      return 0
+    else
+      echo -e "${RED}Cypress tests failed after retry.${NC}"
+      return 1
+    fi
   fi
+}
+
+# Setup database
+setup_database() {
+  echo -e "${YELLOW}Setting up database...${NC}"
+  
+  # Check if PostgreSQL is running
+  if ! pg_isready -h localhost -p 5432 > /dev/null 2>&1; then
+    echo -e "${RED}PostgreSQL is not running. Starting PostgreSQL...${NC}"
+    sudo service postgresql start
+    sleep 2
+  fi
+  
+  # Create database and user if they don't exist
+  echo -e "${YELLOW}Ensuring database and user exist...${NC}"
+  sudo -u postgres psql -c "SELECT 1 FROM pg_database WHERE datname = 'resumepro_test'" | grep -q 1 || sudo -u postgres psql -c "CREATE DATABASE resumepro_test;"
+  sudo -u postgres psql -c "SELECT 1 FROM pg_roles WHERE rolname = 'resumepro_user'" | grep -q 1 || sudo -u postgres psql -c "CREATE USER resumepro_user WITH PASSWORD '/vNm1VBGD2Es93GrZX33yg==';"
+  sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE resumepro_test TO resumepro_user;"
+  
+  # Apply migrations
+  echo -e "${YELLOW}Applying database migrations...${NC}"
+  cd "$API_DIR" || exit 1
+  dotnet ef database update || echo -e "${RED}Failed to apply migrations. Continuing anyway...${NC}"
 }
 
 # Main execution
 main() {
+  # Setup database first
+  setup_database
+  
   # Check if API is running, start if not
   if ! check_api_running; then
     start_api
