@@ -1,5 +1,9 @@
 using NUnit.Framework;
 using System.Threading.Tasks;
+using System;
+using ResumePro.Shared.Models;
+using ResumePro.Shared.Options;
+using System.Linq;
 
 namespace ResumePro.IntegrationTests.Tests.Controllers
 {
@@ -13,10 +17,64 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             [Test]
             public async Task Get_ShouldReturnReference()
             {
-                // TODO: Implement test logic later.
-                // For now, just stub in the test so that it passes.
-                await Task.CompletedTask;
-                Assert.Pass("Stub: Get passed.");
+                // Arrange
+                var personOptions = new PersonOptions
+                {
+                    Email = $"test-{Guid.NewGuid()}@example.com",
+                    FirstName = "Test",
+                    LastName = "User",
+                    City = "Test City",
+                    PhoneNumber = "555-123-4567"
+                };
+                var person = await AssertCreatePerson(personOptions);
+                
+                var referenceOptions = new ReferenceOptions
+                {
+                    Name = $"Test Reference {Guid.NewGuid()}",
+                    Text = "This is a reference description",
+                    Order = 1
+                };
+                var createdReference = await AssertCreateReference(person.Id, referenceOptions);
+                
+                // Act
+                var reference = await AssertGetReference(person.Id, createdReference.Id);
+                
+                // Assert
+                Assert.That(reference, Is.Not.Null);
+                Assert.That(reference.Id, Is.EqualTo(createdReference.Id));
+                Assert.That(reference.Name, Is.EqualTo(referenceOptions.Name));
+                Assert.That(reference.Text, Is.EqualTo(referenceOptions.Text));
+                Assert.That(reference.Order, Is.EqualTo(referenceOptions.Order));
+            }
+            
+            [Test]
+            public async Task Get_WithInvalidId_ShouldHandleError()
+            {
+                // Arrange
+                var personOptions = new PersonOptions
+                {
+                    Email = $"test-{Guid.NewGuid()}@example.com",
+                    FirstName = "Test",
+                    LastName = "User",
+                    City = "Test City",
+                    PhoneNumber = "555-123-4567"
+                };
+                var person = await AssertCreatePerson(personOptions);
+                
+                int invalidReferenceId = -1;
+                
+                try
+                {
+                    // Act
+                    await ReferencesController.Get(person.Id, invalidReferenceId);
+                    Assert.Fail("Expected exception was not thrown");
+                }
+                catch (Exception ex)
+                {
+                    // Assert
+                    Assert.That(ex, Is.Not.Null);
+                    Assert.Pass("Exception was thrown as expected");
+                }
             }
         }
         
@@ -27,48 +85,62 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             [Test]
             public async Task GetReferences_ShouldReturnReferences()
             {
-                // TODO: Add logic to test invalid input scenarios.
-                await Task.CompletedTask;
-                Assert.Pass("Stub: GetReferences passed.");
+                // Arrange
+                var personOptions = new PersonOptions
+                {
+                    Email = $"test-{Guid.NewGuid()}@example.com",
+                    FirstName = "Test",
+                    LastName = "User",
+                    City = "Test City",
+                    PhoneNumber = "555-123-4567"
+                };
+                var person = await AssertCreatePerson(personOptions);
+                
+                // Create multiple references
+                var reference1Options = new ReferenceOptions
+                {
+                    Name = $"Test Reference 1 {Guid.NewGuid()}",
+                    Text = "This is reference 1 description",
+                    Order = 1
+                };
+                var reference2Options = new ReferenceOptions
+                {
+                    Name = $"Test Reference 2 {Guid.NewGuid()}",
+                    Text = "This is reference 2 description",
+                    Order = 2
+                };
+                
+                await AssertCreateReference(person.Id, reference1Options);
+                await AssertCreateReference(person.Id, reference2Options);
+                
+                // Act
+                var references = await AssertGetReferences(person.Id);
+                
+                // Assert
+                Assert.That(references, Is.Not.Null);
+                Assert.That(references.Count >= 2);
+                Assert.That(references.Any(r => r.Name == reference1Options.Name));
+                Assert.That(references.Any(r => r.Name == reference2Options.Name));
             }
-        }
-        
-        // Private nested class for CreateReference method tests
-        [TestFixture]
-        private class CreateReferenceMethodTests : ReferencesTests
-        {
+            
             [Test]
-            public async Task CreateReference_WithValidOptions_ShouldReturnSuccess()
+            public async Task GetReferences_WithInvalidPersonId_ShouldHandleError()
             {
-                // TODO: Add test logic later.
-                await Task.CompletedTask;
-                Assert.Pass("Stub: CreateReference with valid options passed.");
-            }
-        }
-        
-        // Private nested class for UpdateReference method tests
-        [TestFixture]
-        private class UpdateReferenceMethodTests : ReferencesTests
-        {
-            [Test]
-            public async Task UpdateReference_WithValidOptions_ShouldReturnSuccess()
-            {
-                // TODO: Add test logic later.
-                await Task.CompletedTask;
-                Assert.Pass("Stub: UpdateReference passed.");
-            }
-        }
-        
-        // Private nested class for DeleteReference method tests
-        [TestFixture]
-        private class DeleteReferenceMethodTests : ReferencesTests
-        {
-            [Test]
-            public async Task DeleteReference_ShouldReturnSuccess()
-            {
-                // TODO: Add test logic later.
-                await Task.CompletedTask;
-                Assert.Pass("Stub: DeleteReference passed.");
+                // Arrange
+                int invalidPersonId = -1;
+                
+                try
+                {
+                    // Act
+                    await ReferencesController.GetReferences(invalidPersonId);
+                    Assert.Fail("Expected exception was not thrown");
+                }
+                catch (Exception ex)
+                {
+                    // Assert
+                    Assert.That(ex, Is.Not.Null);
+                    Assert.Pass("Exception was thrown as expected");
+                }
             }
         }
     }
