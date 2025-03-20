@@ -14,21 +14,30 @@ This document tracks the implementation of integration tests for GET endpoints i
 | Controller | GET Method | Test File | Test Status |
 |------------|------------|-----------|-------------|
 | SkillsController | GetSkills() | SkillsTests.cs | Implemented |
-| PeopleController | GetPeople() | PeopleTests.cs | Implemented |
 | PeopleController | GetPerson() | PeopleTests.cs | Implemented |
+| CertificationsController | Get() | CertificationsTests.cs | Placeholder |
+| CertificationsController | Get() (list) | CertificationsTests.cs | Placeholder |
 | CompaniesController | GetCompanies() | CompaniesTests.cs | Placeholder |
 | CompaniesController | GetCompany() | CompaniesTests.cs | Placeholder |
-| FiltersController | GetFilters() | FiltersTests.cs | Placeholder |
-| PersonLanguagesController | GetPersonLanguages() | PersonLanguagesTests.cs | Placeholder |
-| CertificationsController | GetCertifications() | CertificationsTests.cs | Placeholder |
+| DegreesController | GetDegree() | DegreesTests.cs | Placeholder |
 | DegreesController | GetDegrees() | DegreesTests.cs | Placeholder |
+| FiltersController | GetFilters() | FiltersTests.cs | Placeholder |
+| HighlightsController | GetHighlight() | HighlightsTests.cs | Placeholder |
 | HighlightsController | GetHighlights() | HighlightsTests.cs | Placeholder |
+| PersonLanguagesController | GetPersonLanguages() | PersonLanguagesTests.cs | Placeholder |
+| PersonSkillsController | GetSkills() | PersonSkillsTests.cs | Placeholder |
 | PositionsController | GetPositions() | PositionsTests.cs | Placeholder |
-| ProjectHighlightsController | GetProjectHighlights() | ProjectHighlightsTests.cs | Placeholder |
-| ProjectsController | GetProjects() | ProjectsTests.cs | Placeholder |
+| PositionsController | GetPosition() | PositionsTests.cs | Placeholder |
+| ProjectHighlightsController | GetHighlight() | ProjectHighlightsTests.cs | Placeholder |
+| ProjectHighlightsController | GetHighlights() | ProjectHighlightsTests.cs | Placeholder |
+| ProjectsController | GetProject() | ProjectsTests.cs | Placeholder |
+| ProjectsController | GetList() | ProjectsTests.cs | Placeholder |
+| ReferencesController | Get() | ReferencesTests.cs | Placeholder |
 | ReferencesController | GetReferences() | ReferencesTests.cs | Placeholder |
-| ResumesController | GetResumes() | ResumeTests.cs | Placeholder |
+| ResumesController | GetResume() | ResumesTests.cs | Placeholder |
+| ResumesController | GetResumes() | ResumesTests.cs | Placeholder |
 | SchoolsController | GetSchools() | SchoolsTests.cs | Placeholder |
+| SchoolsController | GetSchool() | SchoolsTests.cs | Placeholder |
 | TemplatesController | GetTemplates() | TemplatesTests.cs | Placeholder |
 
 ## Implementation Plan
