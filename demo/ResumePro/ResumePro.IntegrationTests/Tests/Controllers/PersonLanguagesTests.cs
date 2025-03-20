@@ -149,9 +149,9 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     Assert.That(personLanguages, Is.Not.Empty, "Person languages should not be empty after adding a language");
                     
                     // Find the added language
-                    var addedLanguage = personLanguages.Find(l => l.LanguageId == languageToAdd.Id);
+                    var addedLanguage = personLanguages.Find(l => l.Code3 == languageToAdd.Code3);
                     Assert.That(addedLanguage, Is.Not.Null, $"Language {languageToAdd.Name} should have been added");
-                    Assert.That(addedLanguage.Proficiency, Is.EqualTo("Intermediate"), "Language proficiency should be set correctly");
+                    Assert.That(addedLanguage.Proficiency.ToString(), Is.EqualTo("Intermediate"), "Language proficiency should be set correctly");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {
@@ -194,7 +194,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     
                     // Verify the language was added
                     var personLanguagesAfterAdd = await PersonLanguagesController.GetPersonLanguages(person.Id);
-                    Assert.That(personLanguagesAfterAdd.Exists(l => l.LanguageId == languageToToggle.Id), 
+                    Assert.That(personLanguagesAfterAdd.Exists(l => l.Code3 == languageToToggle.Code3), 
                         $"Language {languageToToggle.Name} should have been added before removal test");
                     
                     // Now toggle again to remove the language
@@ -203,7 +203,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     
                     // Verify the language was removed
                     var personLanguagesAfterRemove = await PersonLanguagesController.GetPersonLanguages(person.Id);
-                    Assert.That(!personLanguagesAfterRemove.Exists(l => l.LanguageId == languageToToggle.Id), 
+                    Assert.That(!personLanguagesAfterRemove.Exists(l => l.Code3 == languageToToggle.Code3), 
                         $"Language {languageToToggle.Name} should have been removed");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
@@ -247,9 +247,9 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     
                     // Verify the language was added with correct proficiency
                     var personLanguagesAfterAdd = await PersonLanguagesController.GetPersonLanguages(person.Id);
-                    var addedLanguage = personLanguagesAfterAdd.Find(l => l.LanguageId == languageToUpdate.Id);
+                    var addedLanguage = personLanguagesAfterAdd.Find(l => l.Code3 == languageToUpdate.Code3);
                     Assert.That(addedLanguage, Is.Not.Null, $"Language {languageToUpdate.Name} should have been added");
-                    Assert.That(addedLanguage.Proficiency, Is.EqualTo("Beginner"), "Initial proficiency should be Beginner");
+                    Assert.That(addedLanguage.Proficiency.ToString(), Is.EqualTo("Beginner"), "Initial proficiency should be Beginner");
                     
                     // Now update the proficiency to "Advanced"
                     var updateResult = await PersonLanguagesController.ToggleLanguage(person.Id, languageToUpdate.Id, "Advanced");
@@ -257,9 +257,9 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     
                     // Verify the proficiency was updated
                     var personLanguagesAfterUpdate = await PersonLanguagesController.GetPersonLanguages(person.Id);
-                    var updatedLanguage = personLanguagesAfterUpdate.Find(l => l.LanguageId == languageToUpdate.Id);
+                    var updatedLanguage = personLanguagesAfterUpdate.Find(l => l.Code3 == languageToUpdate.Code3);
                     Assert.That(updatedLanguage, Is.Not.Null, $"Language {languageToUpdate.Name} should still exist after update");
-                    Assert.That(updatedLanguage.Proficiency, Is.EqualTo("Advanced"), "Proficiency should have been updated to Advanced");
+                    Assert.That(updatedLanguage.Proficiency.ToString(), Is.EqualTo("Advanced"), "Proficiency should have been updated to Advanced");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {

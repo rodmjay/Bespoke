@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using ResumePro.Shared.Models;
 using ResumePro.Shared.Options;
+using Bespoke.Shared.Common;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ResumePro.IntegrationTests.Tests.Controllers
 {
@@ -37,23 +39,25 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a resume for the person
                     var resumeOptions = new ResumeOptions
                     {
-                        Name = "Test Resume",
-                        PersonId = person.Id,
-                        TemplateId = 1 // Assuming template ID 1 exists
+                        JobTitle = "Test Resume",
+                        Description = "Test resume description",
+                        Settings = new ResumeSettingsOptions
+                        {
+                            DefaultTemplateId = 1 // Assuming template ID 1 exists
+                        }
                     };
                     
-                    var createdResume = await ResumesController.CreateResume(resumeOptions);
-                    Assert.That(createdResume, Is.Not.Null, "Failed to create test resume");
-                    Assert.That(createdResume.Id, Is.GreaterThan(0), "Resume ID should be greater than 0");
+                    var createdResume = await ResumeController.CreateResume(person.Id, resumeOptions);
+                    Assert.That(createdResume.Value, Is.Not.Null, "Failed to create test resume");
+                    Assert.That(createdResume.Value.Id, Is.GreaterThan(0), "Resume ID should be greater than 0");
                     
                     // Get the resume by ID
-                    var resume = await ResumesController.GetResume(createdResume.Id);
+                    var resume = await ResumeController.GetResume(person.Id, createdResume.Value.Id);
                     
                     // Verify the resume
                     Assert.That(resume, Is.Not.Null, "Resume should not be null");
-                    Assert.That(resume.Id, Is.EqualTo(createdResume.Id), "Resume ID should match");
-                    Assert.That(resume.Name, Is.EqualTo(resumeOptions.Name), "Resume name should match");
-                    Assert.That(resume.PersonId, Is.EqualTo(person.Id), "Person ID should match");
+                    Assert.That(resume.Id, Is.EqualTo(createdResume.Value.Id), "Resume ID should match");
+                    Assert.That(resume.JobTitle, Is.EqualTo(resumeOptions.JobTitle), "Resume job title should match");
                     
                     Console.WriteLine($"Successfully retrieved resume with ID {resume.Id} for person {person.Id}");
                 }
@@ -76,7 +80,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Expect an exception when calling with an invalid ID
                     try
                     {
-                        await ResumesController.GetResume(invalidResumeId);
+                        await ResumeController.GetResume(1, invalidResumeId);
                         Assert.Fail("Expected exception when getting non-existent resume");
                     }
                     catch (Exception ex)
@@ -123,27 +127,23 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     {
                         var resumeOptions = new ResumeOptions
                         {
-                            Name = $"Test Resume {i}",
-                            PersonId = person.Id,
-                            TemplateId = 1 // Assuming template ID 1 exists
+                            JobTitle = $"Test Resume {i}",
+                            Description = $"Test resume description {i}"
                         };
                         
-                        var createdResume = await ResumesController.CreateResume(resumeOptions);
-                        Assert.That(createdResume, Is.Not.Null, $"Failed to create test resume {i}");
+                        var createdResume = await ResumeController.CreateResume(person.Id, resumeOptions);
+                        Assert.That(createdResume.Value, Is.Not.Null, $"Failed to create test resume {i}");
                     }
                     
                     // Get all resumes for the person
-                    var resumes = await ResumesController.GetResumes(person.Id);
+                    var resumes = await ResumeController.GetResumes(person.Id);
                     
                     // Verify the resumes
                     Assert.That(resumes, Is.Not.Null, "Resumes should not be null");
                     Assert.That(resumes.Count, Is.GreaterThanOrEqualTo(3), "Should have at least 3 resumes");
                     
-                    // Verify each resume belongs to the correct person
-                    foreach (var resume in resumes)
-                    {
-                        Assert.That(resume.PersonId, Is.EqualTo(person.Id), "Resume should belong to the correct person");
-                    }
+                    // Verify we have resumes for the person
+                    Assert.That(resumes.Count, Is.GreaterThan(0), "Should have at least one resume for the person");
                     
                     Console.WriteLine($"Successfully retrieved {resumes.Count} resumes for person {person.Id}");
                 }
@@ -166,7 +166,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Expect an exception when calling with an invalid ID
                     try
                     {
-                        await ResumesController.GetResumes(invalidPersonId);
+                        await ResumeController.GetResumes(invalidPersonId);
                         // If we get here without an exception, the API should return an empty list
                         // This is also a valid behavior
                         Assert.Pass("API returned empty list for non-existent person");
@@ -217,21 +217,18 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a resume with valid options
                     var resumeOptions = new ResumeOptions
                     {
-                        Name = "Professional Resume",
-                        PersonId = person.Id,
-                        TemplateId = templates.First().Id
+                        JobTitle = "Professional Resume",
+                        Description = "Professional resume description"
                     };
                     
-                    var createdResume = await ResumesController.CreateResume(resumeOptions);
+                    var createdResume = await ResumeController.CreateResume(person.Id, resumeOptions);
                     
                     // Verify the created resume
-                    Assert.That(createdResume, Is.Not.Null, "Created resume should not be null");
-                    Assert.That(createdResume.Id, Is.GreaterThan(0), "Resume ID should be greater than 0");
-                    Assert.That(createdResume.Name, Is.EqualTo(resumeOptions.Name), "Resume name should match");
-                    Assert.That(createdResume.PersonId, Is.EqualTo(person.Id), "Person ID should match");
-                    Assert.That(createdResume.TemplateId, Is.EqualTo(resumeOptions.TemplateId), "Template ID should match");
+                    Assert.That(createdResume.Value, Is.Not.Null, "Created resume should not be null");
+                    Assert.That(createdResume.Value.Id, Is.GreaterThan(0), "Resume ID should be greater than 0");
+                    Assert.That(createdResume.Value.JobTitle, Is.EqualTo(resumeOptions.JobTitle), "Resume job title should match");
                     
-                    Console.WriteLine($"Successfully created resume with ID {createdResume.Id} for person {person.Id}");
+                    Console.WriteLine($"Successfully created resume with ID {createdResume.Value.Id} for person {person.Id}");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {
@@ -246,18 +243,19 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             {
                 try
                 {
-                    // Create resume with invalid person ID
-                    var invalidResumeOptions = new ResumeOptions
+                    // Try to create resume with invalid person ID
+                    var invalidPersonId = 99999;
+                    
+                    var resumeOptions = new ResumeOptions
                     {
-                        Name = "Invalid Resume",
-                        PersonId = 99999, // Invalid person ID
-                        TemplateId = 1
+                        JobTitle = "Invalid Resume",
+                        Description = "This should fail due to invalid person ID"
                     };
                     
                     // Expect an exception when calling with invalid options
                     try
                     {
-                        await ResumesController.CreateResume(invalidResumeOptions);
+                        await ResumeController.CreateResume(invalidPersonId, resumeOptions);
                         Assert.Fail("Expected exception when creating resume with invalid person ID");
                     }
                     catch (Exception ex)
@@ -306,35 +304,32 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a resume
                     var createOptions = new ResumeOptions
                     {
-                        Name = "Resume to Update",
-                        PersonId = person.Id,
-                        TemplateId = templates.First().Id
+                        JobTitle = "Resume to Update",
+                        Description = "Resume description to update"
                     };
                     
-                    var createdResume = await ResumesController.CreateResume(createOptions);
-                    Assert.That(createdResume, Is.Not.Null, "Failed to create test resume");
+                    var createdResume = await ResumeController.CreateResume(person.Id, createOptions);
+                    Assert.That(createdResume.Value, Is.Not.Null, "Failed to create test resume");
                     
                     // Update the resume with new options
                     var updateOptions = new ResumeOptions
                     {
-                        Id = createdResume.Id,
-                        Name = "Updated Resume Name",
-                        PersonId = person.Id,
-                        TemplateId = templates.First().Id // Keep the same template or change if multiple templates exist
+                        JobTitle = "Updated Resume Title",
+                        Description = "Updated resume description"
                     };
                     
-                    var updatedResume = await ResumesController.UpdateResume(updateOptions);
+                    var updatedResume = await ResumeController.UpdateResume(person.Id, createdResume.Value.Id, updateOptions);
                     
                     // Verify the updated resume
-                    Assert.That(updatedResume, Is.Not.Null, "Updated resume should not be null");
-                    Assert.That(updatedResume.Id, Is.EqualTo(createdResume.Id), "Resume ID should not change");
-                    Assert.That(updatedResume.Name, Is.EqualTo(updateOptions.Name), "Resume name should be updated");
+                    Assert.That(updatedResume.Value, Is.Not.Null, "Updated resume should not be null");
+                    Assert.That(updatedResume.Value.Id, Is.EqualTo(createdResume.Value.Id), "Resume ID should not change");
+                    Assert.That(updatedResume.Value.JobTitle, Is.EqualTo(updateOptions.JobTitle), "Resume job title should be updated");
                     
                     // Get the resume to verify the update was persisted
-                    var retrievedResume = await ResumesController.GetResume(updatedResume.Id);
-                    Assert.That(retrievedResume.Name, Is.EqualTo(updateOptions.Name), "Resume name update should be persisted");
+                    var retrievedResume = await ResumeController.GetResume(person.Id, updatedResume.Value.Id);
+                    Assert.That(retrievedResume.JobTitle, Is.EqualTo(updateOptions.JobTitle), "Resume job title update should be persisted");
                     
-                    Console.WriteLine($"Successfully updated resume with ID {updatedResume.Id} for person {person.Id}");
+                    Console.WriteLine($"Successfully updated resume with ID {updatedResume.Value.Id} for person {person.Id}");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {
@@ -349,19 +344,32 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             {
                 try
                 {
-                    // Update resume with invalid ID
-                    var invalidUpdateOptions = new ResumeOptions
+                    // Create a test person
+                    var personOptions = new PersonOptions
                     {
-                        Id = 99999, // Invalid resume ID
-                        Name = "Invalid Update",
-                        PersonId = 1,
-                        TemplateId = 1
+                        FirstName = "Update",
+                        LastName = "Invalid",
+                        Email = $"update.invalid.{Guid.NewGuid()}@example.com",
+                        PhoneNumber = "555-789-0123",
+                        City = "Boston",
+                        StateId = 5
+                    };
+                    
+                    var person = await AssertCreatePerson(personOptions);
+                    Assert.That(person, Is.Not.Null, "Failed to create test person");
+                    
+                    // Update resume with invalid ID
+                    var invalidResumeId = 99999;
+                    var updateOptions = new ResumeOptions
+                    {
+                        JobTitle = "Invalid Update",
+                        Description = "This should fail due to invalid resume ID"
                     };
                     
                     // Expect an exception when calling with invalid ID
                     try
                     {
-                        await ResumesController.UpdateResume(invalidUpdateOptions);
+                        await ResumeController.UpdateResume(person.Id, invalidResumeId, updateOptions);
                         Assert.Fail("Expected exception when updating non-existent resume");
                     }
                     catch (Exception ex)
@@ -406,20 +414,19 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a resume to delete
                     var resumeOptions = new ResumeOptions
                     {
-                        Name = "Resume to Delete",
-                        PersonId = person.Id,
-                        TemplateId = 1 // Assuming template ID 1 exists
+                        JobTitle = "Resume to Delete",
+                        Description = "Resume description to delete"
                     };
                     
-                    var createdResume = await ResumesController.CreateResume(resumeOptions);
-                    Assert.That(createdResume, Is.Not.Null, "Failed to create test resume");
+                    var createdResume = await ResumeController.CreateResume(person.Id, resumeOptions);
+                    Assert.That(createdResume.Value, Is.Not.Null, "Failed to create test resume");
                     
                     // Verify the resume exists
-                    var resumeBeforeDelete = await ResumesController.GetResume(createdResume.Id);
+                    var resumeBeforeDelete = await ResumeController.GetResume(person.Id, createdResume.Value.Id);
                     Assert.That(resumeBeforeDelete, Is.Not.Null, "Resume should exist before deletion");
                     
                     // Delete the resume
-                    var result = await ResumesController.DeleteResume(createdResume.Id);
+                    var result = await ResumeController.DeleteResume(person.Id, createdResume.Value.Id);
                     
                     // Verify the result
                     Assert.That(result.Succeeded, Is.True, "Delete operation should succeed");
@@ -427,7 +434,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Verify the resume no longer exists
                     try
                     {
-                        await ResumesController.GetResume(createdResume.Id);
+                        await ResumeController.GetResume(person.Id, createdResume.Value.Id);
                         Assert.Fail("Resume should not exist after deletion");
                     }
                     catch (Exception)
@@ -436,7 +443,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                         Assert.Pass("Resume was successfully deleted");
                     }
                     
-                    Console.WriteLine($"Successfully deleted resume with ID {createdResume.Id}");
+                    Console.WriteLine($"Successfully deleted resume with ID {createdResume.Value.Id}");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {
@@ -451,13 +458,27 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             {
                 try
                 {
+                    // Create a test person
+                    var personOptions = new PersonOptions
+                    {
+                        FirstName = "Delete",
+                        LastName = "Invalid",
+                        Email = $"delete.invalid.{Guid.NewGuid()}@example.com",
+                        PhoneNumber = "555-321-0987",
+                        City = "Denver",
+                        StateId = 6
+                    };
+                    
+                    var person = await AssertCreatePerson(personOptions);
+                    Assert.That(person, Is.Not.Null, "Failed to create test person");
+                    
                     // Delete resume with invalid ID
                     var invalidResumeId = 99999;
                     
                     // Expect an exception when calling with invalid ID
                     try
                     {
-                        await ResumesController.DeleteResume(invalidResumeId);
+                        await ResumeController.DeleteResume(person.Id, invalidResumeId);
                         // If we get here without an exception, the API should return a failed result
                         Assert.Fail("Expected exception when deleting non-existent resume");
                     }
