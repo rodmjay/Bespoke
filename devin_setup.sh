@@ -88,9 +88,11 @@ else
   echo -e "${RED}Angular app directory ${ANGULAR_APP_DIR} does not exist. Skipping npm install.${NC}"
 fi
 
-# Configure Angular CLI to be non-interactive
+# Configure Angular CLI to be non-interactive and disable autocompletion prompt
 echo -e "${YELLOW}Configuring Angular CLI to be non-interactive...${NC}"
 ng config cli.interactive false
+echo -e "${YELLOW}Disabling Angular CLI autocompletion prompt...${NC}"
+ng config cli.autocomplete false
 
 # Build Angular app with the non-interactive flag
 echo -e "${YELLOW}Building Angular app...${NC}"
