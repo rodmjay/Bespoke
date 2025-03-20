@@ -85,12 +85,10 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a company for the person
                     var companyOptions = new CompanyOptions
                     {
-                        Name = "Test Company",
-                        City = "Seattle",
-                        StateId = 1,
+                        Company = "Test Company",
+                        Location = "Seattle",
                         StartDate = DateTime.Now.AddYears(-2),
-                        EndDate = null,
-                        IsCurrent = true
+                        EndDate = null
                     };
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
@@ -104,9 +102,8 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Verify the company data
                     var company = companies[0];
                     Assert.That(company.Id, Is.GreaterThan(0), "Company ID should be positive");
-                    Assert.That(company.Name, Is.EqualTo(companyOptions.Name), "Company name mismatch");
-                    Assert.That(company.City, Is.EqualTo(companyOptions.City), "Company city mismatch");
-                    Assert.That(company.StateId, Is.EqualTo(companyOptions.StateId), "Company stateId mismatch");
+                    Assert.That(company.Name, Is.EqualTo(companyOptions.Company), "Company name mismatch");
+                    Assert.That(company.City, Is.EqualTo(companyOptions.Location), "Company location mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {
@@ -138,12 +135,10 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a company for the person
                     var companyOptions = new CompanyOptions
                     {
-                        Name = "Detail Company",
-                        City = "Portland",
-                        StateId = 2,
+                        Company = "Detail Company",
+                        Location = "Portland",
                         StartDate = DateTime.Now.AddYears(-1),
-                        EndDate = null,
-                        IsCurrent = true
+                        EndDate = null
                     };
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
@@ -154,9 +149,8 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     var retrievedCompany = await CompaniesController.GetCompany(person.Id, company.Id);
                     Assert.That(retrievedCompany, Is.Not.Null, "Failed to retrieve company");
                     Assert.That(retrievedCompany.Id, Is.EqualTo(company.Id), "Company ID mismatch");
-                    Assert.That(retrievedCompany.Name, Is.EqualTo(companyOptions.Name), "Company name mismatch");
-                    Assert.That(retrievedCompany.City, Is.EqualTo(companyOptions.City), "Company city mismatch");
-                    Assert.That(retrievedCompany.StateId, Is.EqualTo(companyOptions.StateId), "Company stateId mismatch");
+                    Assert.That(retrievedCompany.Name, Is.EqualTo(companyOptions.Company), "Company name mismatch");
+                    Assert.That(retrievedCompany.City, Is.EqualTo(companyOptions.Location), "Company location mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {
