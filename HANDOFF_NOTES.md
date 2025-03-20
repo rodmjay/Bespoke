@@ -92,6 +92,13 @@ Each test implementation follows this pattern:
 6. Include proper error handling for database connection issues
 7. Test invalid ID scenarios to ensure proper error handling
 
+## Test Coverage
+
+Initial code coverage: Not measured
+Current code coverage: 1.2% line coverage, 12.9% branch coverage
+
+The coverage report is available at `./demo/ResumePro/ResumePro.IntegrationTests/CoverageReport/index.html`
+
 ## Next Steps
 1. Implement remaining controller GET endpoint tests:
    - PersonSkillsController
@@ -101,5 +108,5 @@ Each test implementation follows this pattern:
    - ResumesController
    - SchoolsController
    - TemplatesController
-2. Generate code coverage report to verify improved coverage
+2. Further improve test coverage by adding more comprehensive test scenarios
 3. Create PR for review
