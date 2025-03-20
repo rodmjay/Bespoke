@@ -45,14 +45,6 @@ sudo apt-get update
 sudo apt-get install -y dotnet-sdk-8.0
 echo -e "${GREEN}.NET SDK installed successfully.${NC}"
 
-# Install .NET EF Tools
-echo -e "${YELLOW}Installing .NET Entity Framework Tools...${NC}"
-dotnet tool install --global dotnet-ef
-dotnet tool install --global dotnet-reportgenerator-globaltool
-echo 'export PATH="$PATH:$HOME/.dotnet/tools"' >> ~/.bashrc
-export PATH="$PATH:$HOME/.dotnet/tools"
-echo -e "${GREEN}.NET Entity Framework Tools installed successfully.${NC}"
-
 # Install PostgreSQL
 echo -e "${YELLOW}Installing PostgreSQL...${NC}"
 sudo apt-get install -y postgresql postgresql-contrib
@@ -65,16 +57,8 @@ cd ~/repos/Bespoke/demo/ResumePro/ResumeProApp
 npm install
 echo -e "${GREEN}Angular dependencies installed successfully.${NC}"
 
-# Install Cypress
-echo -e "${YELLOW}Installing Cypress...${NC}"
-cd ~/repos/Bespoke/demo/ResumePro/ResumeProApp
-npm install cypress --save-dev
-npx cypress install
-echo -e "${GREEN}Cypress installed successfully.${NC}"
-
 # Build Angular app
 echo -e "${YELLOW}Building Angular app...${NC}"
-cd ~/repos/Bespoke/demo/ResumePro/ResumeProApp
 ng build --no-interactive
 echo -e "${GREEN}Angular app built successfully.${NC}"
 

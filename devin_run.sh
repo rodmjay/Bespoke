@@ -36,25 +36,6 @@ if ! command -v npm &> /dev/null; then
     exit 1
 fi
 
-# Add .NET tools to PATH if not already there
-if [[ ":$PATH:" != *":$HOME/.dotnet/tools:"* ]]; then
-    echo -e "${YELLOW}Adding .NET tools to PATH...${NC}"
-    export PATH="$PATH:$HOME/.dotnet/tools"
-    echo 'export PATH="$PATH:$HOME/.dotnet/tools"' >> ~/.bashrc
-fi
-
-# Check for Entity Framework tools
-if ! command -v dotnet-ef &> /dev/null; then
-    echo -e "${YELLOW}Installing Entity Framework tools...${NC}"
-    dotnet tool install --global dotnet-ef
-fi
-
-# Check for ReportGenerator
-if ! command -v reportgenerator &> /dev/null; then
-    echo -e "${YELLOW}Installing ReportGenerator...${NC}"
-    dotnet tool install --global dotnet-reportgenerator-globaltool
-fi
-
 # Drop and recreate the database
 echo -e "${YELLOW}Dropping and recreating the PostgreSQL database...${NC}"
 sudo -u postgres psql -c "DROP DATABASE IF EXISTS $DB_NAME;" postgres
@@ -92,28 +73,20 @@ API_SETTINGS_FILE="$API_DIR/appsettings.json"
 # Backup the original file
 cp "$API_SETTINGS_FILE" "${API_SETTINGS_FILE}.bak"
 # Update the connection string
-sed -i "s|\"PostgreSQLConnection\": \".*\"|\"PostgreSQLConnection\": \"Host=localhost;Database=$DB_NAME;Username=$DB_USER;Password=$DB_PASSWORD\"|" "$API_SETTINGS_FILE"
+sed -i "s|\"PostgreSQLConnection\": \"Host=localhost;Database=resumepro_test;Username=<USERNAME>;Password=<PASSWORD>\"|\"PostgreSQLConnection\": \"Host=localhost;Database=$DB_NAME;Username=$DB_USER;Password=$DB_PASSWORD\"|" "$API_SETTINGS_FILE"
 echo -e "${GREEN}API connection string updated successfully.${NC}"
 
 # Run migrations using Entity Framework CLI
 echo -e "${YELLOW}Running database migrations...${NC}"
 cd "$API_DIR" && \
 dotnet add package Microsoft.EntityFrameworkCore.Design && \
-dotnet-ef database update --project ../ResumePro.Infrastructure.PostgreSQL/ResumePro.Infrastructure.PostgreSQL.csproj --startup-project .
+dotnet ef database update --project ../ResumePro.Infrastructure.PostgreSQL/ResumePro.Infrastructure.PostgreSQL.csproj --startup-project .
 echo -e "${GREEN}Database migrations completed successfully.${NC}"
 
 # Install NgRx packages for Angular app
 echo -e "${YELLOW}Installing required Angular packages...${NC}"
 cd "$APP_DIR" && npm install @ngrx/store @ngrx/effects @ngrx/store-devtools --save
 echo -e "${GREEN}Angular packages installed successfully.${NC}"
-
-# Check for Cypress and install if needed
-echo -e "${YELLOW}Checking Cypress installation...${NC}"
-if ! npm list --depth=0 | grep -q "cypress"; then
-    echo -e "${YELLOW}Installing Cypress...${NC}"
-    cd "$APP_DIR" && npm install cypress --save-dev && npx cypress install
-    echo -e "${GREEN}Cypress installed successfully.${NC}"
-fi
 
 # Start the API and Angular app
 echo -e "${YELLOW}Starting the API and Angular app...${NC}"
