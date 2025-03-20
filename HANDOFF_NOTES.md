@@ -13,6 +13,13 @@ This document tracks the implementation of integration tests for GET endpoints i
 - Fixed method signature issues in controller interfaces and test files
 - Ran integration tests to verify implementation
 - Created PR #81 for review
+- Fixed multiple CI build failures:
+  - Updated CompaniesTests.cs to use `CompanyName` instead of `Company`
+  - Updated HighlightsTests.cs to use `Text` instead of `Description`
+  - Updated PersonLanguagesTests.cs to use `LanguageName` and `Proficiency` instead of `LanguageId` and `ProficiencyId`
+  - Updated DegreesTests.cs to include required `schoolId` parameter in GetDegree calls
+- Local integration tests pass, but CI build is still failing after multiple fix attempts
+- Current CI build status: Failed (https://github.com/rodmjay/Bespoke/actions/runs/13963400566/job/39088709539)
 
 ## GET Endpoints Inventory
 
