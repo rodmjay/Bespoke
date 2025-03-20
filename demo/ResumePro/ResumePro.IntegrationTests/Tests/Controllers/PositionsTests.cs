@@ -114,8 +114,8 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     var retrievedPosition = await PositionsController.GetPosition(person.Id, company.Id, position.Id);
                     Assert.That(retrievedPosition, Is.Not.Null, "Failed to retrieve position");
                     Assert.That(retrievedPosition.Id, Is.EqualTo(position.Id), "Position ID mismatch");
-                    Assert.That(retrievedPosition.Title, Is.EqualTo(positionOptions.JobTitle), "Position title mismatch");
-                    Assert.That(retrievedPosition.CompanyId, Is.EqualTo(company.Id), "Position company ID mismatch");
+                    Assert.That(retrievedPosition.JobTitle, Is.EqualTo(positionOptions.JobTitle), "Position title mismatch");
+                    // CompanyId is not a property of PositionDto, so we don't assert it
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {
@@ -202,12 +202,10 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a company for the person
                     var companyOptions = new CompanyOptions
                     {
-                        Name = "List Company",
-                        City = "Portland",
-                        StateId = 2,
+                        Company = "List Company",
+                        Location = "Portland",
                         StartDate = DateTime.Now.AddYears(-3),
-                        EndDate = null,
-                        IsCurrent = true
+                        EndDate = null
                     };
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
@@ -233,8 +231,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Verify the position data
                     var position = positions[0];
                     Assert.That(position.Id, Is.GreaterThan(0), "Position ID should be positive");
-                    Assert.That(position.Title, Is.EqualTo(positionOptions.JobTitle), "Position title mismatch");
-                    Assert.That(position.CompanyId, Is.EqualTo(company.Id), "Position company ID mismatch");
+                    Assert.That(position.JobTitle, Is.EqualTo(positionOptions.JobTitle), "Position title mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {

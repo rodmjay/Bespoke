@@ -102,8 +102,8 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Verify the company data
                     var company = companies[0];
                     Assert.That(company.Id, Is.GreaterThan(0), "Company ID should be positive");
-                    Assert.That(company.Name, Is.EqualTo(companyOptions.Company), "Company name mismatch");
-                    Assert.That(company.City, Is.EqualTo(companyOptions.Location), "Company location mismatch");
+                    Assert.That(company.Company, Is.EqualTo(companyOptions.Company), "Company name mismatch");
+                    Assert.That(company.Location, Is.EqualTo(companyOptions.Location), "Company location mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {
@@ -149,8 +149,8 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     var retrievedCompany = await CompaniesController.GetCompany(person.Id, company.Id);
                     Assert.That(retrievedCompany, Is.Not.Null, "Failed to retrieve company");
                     Assert.That(retrievedCompany.Id, Is.EqualTo(company.Id), "Company ID mismatch");
-                    Assert.That(retrievedCompany.Name, Is.EqualTo(companyOptions.Company), "Company name mismatch");
-                    Assert.That(retrievedCompany.City, Is.EqualTo(companyOptions.Location), "Company location mismatch");
+                    Assert.That(retrievedCompany.Company, Is.EqualTo(companyOptions.Company), "Company name mismatch");
+                    Assert.That(retrievedCompany.Location, Is.EqualTo(companyOptions.Location), "Company location mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {
