@@ -191,11 +191,9 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a position for the company
                     var positionOptions = new PositionOptions
                     {
-                        Title = "Senior Developer",
-                        CompanyId = company.Id,
+                        JobTitle = "Senior Developer",
                         StartDate = DateTime.Now.AddYears(-2),
-                        EndDate = null,
-                        IsCurrent = true
+                        EndDate = null
                     };
                     
                     var positionResult = await PositionsController.CreatePosition(person.Id, company.Id, positionOptions);
