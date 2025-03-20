@@ -104,7 +104,6 @@ public sealed class Startup
                 builder.Services.AddHealthChecks()
                     .AddSqlite(Configuration.GetConnectionString("SQLiteConnection") ?? 
                         throw new InvalidOperationException("SQLiteConnection string is not configured."), 
-                        name: "sqlite", 
                         tags: new[] { "database" });
             }
             else
