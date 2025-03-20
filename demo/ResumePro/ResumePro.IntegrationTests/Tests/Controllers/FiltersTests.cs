@@ -25,21 +25,21 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     Assert.That(filters, Is.Not.Null, "Filters should not be null");
                     
                     // Verify filter components
-                    Assert.That(filters.Countries, Is.Not.Null, "Countries filter should not be null");
-                    Assert.That(filters.StateProvinces, Is.Not.Null, "StateProvinces filter should not be null");
+                    Assert.That(filters.Skills, Is.Not.Null, "Skills filter should not be null");
+                    Assert.That(filters.States, Is.Not.Null, "States filter should not be null");
                     Assert.That(filters.Languages, Is.Not.Null, "Languages filter should not be null");
                     
-                    // Verify countries data
-                    Assert.That(filters.Countries, Is.Not.Empty, "Countries list should not be empty");
-                    foreach (var country in filters.Countries)
+                    // Verify skills data
+                    Assert.That(filters.Skills, Is.Not.Empty, "Skills list should not be empty");
+                    foreach (var skill in filters.Skills)
                     {
-                        Assert.That(country.Id, Is.GreaterThan(0), "Country ID should be positive");
-                        Assert.That(country.Name, Is.Not.Null.And.Not.Empty, "Country name should not be empty");
+                        Assert.That(skill.Id, Is.GreaterThan(0), "Skill ID should be positive");
+                        Assert.That(skill.Name, Is.Not.Null.And.Not.Empty, "Skill name should not be empty");
                     }
                     
                     // Verify state/province data
-                    Assert.That(filters.StateProvinces, Is.Not.Empty, "StateProvinces list should not be empty");
-                    foreach (var state in filters.StateProvinces)
+                    Assert.That(filters.States, Is.Not.Empty, "States list should not be empty");
+                    foreach (var state in filters.States)
                     {
                         Assert.That(state.Id, Is.GreaterThan(0), "State ID should be positive");
                         Assert.That(state.Name, Is.Not.Null.And.Not.Empty, "State name should not be empty");
@@ -55,9 +55,9 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     }
                     
                     // Verify expected data is present
-                    Assert.That(filters.Countries.Exists(c => c.Name == "United States"), 
-                        "United States should be in the countries list");
-                    Assert.That(filters.StateProvinces.Exists(s => s.Abbreviation == "CA"), 
+                    Assert.That(filters.Skills.Exists(s => s.Name.Contains("Programming") || s.Name.Contains("Development")), 
+                        "At least one programming skill should be in the skills list");
+                    Assert.That(filters.States.Exists(s => s.Abbreviation == "CA"), 
                         "California (CA) should be in the states list");
                     Assert.That(filters.Languages.Exists(l => l.Name == "English"), 
                         "English should be in the languages list");

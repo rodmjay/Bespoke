@@ -38,8 +38,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     var schoolOptions = new SchoolOptions
                     {
                         Name = "Test University",
-                        City = "Seattle",
-                        StateId = 1,
+                        Location = "Seattle",
                         StartDate = DateTime.Now.AddYears(-4),
                         EndDate = DateTime.Now.AddYears(-2)
                     };
@@ -51,22 +50,20 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a degree for the school
                     var degreeOptions = new DegreeOptions
                     {
-                        Title = "Bachelor of Science",
-                        Major = "Computer Science",
-                        SchoolId = school.Id
+                        Name = "Bachelor of Science in Computer Science",
+                        Order = 1
                     };
                     
-                    var degreeResult = await DegreesController.CreateDegree(person.Id, degreeOptions);
+                    var degreeResult = await DegreesController.CreateDegree(person.Id, school.Id, degreeOptions);
                     Assert.That(degreeResult.Value, Is.Not.Null, "Failed to create test degree");
                     var degree = degreeResult.Value;
                     
                     // Get the degree by ID
-                    var retrievedDegree = await DegreesController.GetDegree(person.Id, degree.Id);
+                    var retrievedDegree = await DegreesController.GetDegree(person.Id, school.Id, degree.Id);
                     Assert.That(retrievedDegree, Is.Not.Null, "Failed to retrieve degree");
                     Assert.That(retrievedDegree.Id, Is.EqualTo(degree.Id), "Degree ID mismatch");
-                    Assert.That(retrievedDegree.Title, Is.EqualTo(degreeOptions.Title), "Degree title mismatch");
-                    Assert.That(retrievedDegree.Major, Is.EqualTo(degreeOptions.Major), "Degree major mismatch");
-                    Assert.That(retrievedDegree.SchoolId, Is.EqualTo(school.Id), "Degree school ID mismatch");
+                    Assert.That(retrievedDegree.Name, Is.EqualTo(degreeOptions.Name), "Degree name mismatch");
+                    Assert.That(retrievedDegree.Order, Is.EqualTo(degreeOptions.Order), "Degree order mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {
@@ -146,8 +143,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     var schoolOptions = new SchoolOptions
                     {
                         Name = "List University",
-                        City = "Portland",
-                        StateId = 2,
+                        Location = "Portland",
                         StartDate = DateTime.Now.AddYears(-5),
                         EndDate = DateTime.Now.AddYears(-1)
                     };
@@ -159,25 +155,23 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a degree for the school
                     var degreeOptions = new DegreeOptions
                     {
-                        Title = "Master of Science",
-                        Major = "Data Science",
-                        SchoolId = school.Id
+                        Name = "Master of Science in Data Science",
+                        Order = 1
                     };
                     
-                    var degreeResult = await DegreesController.CreateDegree(person.Id, degreeOptions);
+                    var degreeResult = await DegreesController.CreateDegree(person.Id, school.Id, degreeOptions);
                     Assert.That(degreeResult.Value, Is.Not.Null, "Failed to create test degree");
                     
                     // Get the degrees list
-                    var degrees = await DegreesController.GetDegrees(person.Id);
+                    var degrees = await DegreesController.GetDegrees(person.Id, school.Id);
                     Assert.That(degrees, Is.Not.Null, "Failed to retrieve degrees");
                     Assert.That(degrees, Is.Not.Empty, "Degrees list should not be empty");
                     
                     // Verify the degree data
                     var degree = degrees[0];
                     Assert.That(degree.Id, Is.GreaterThan(0), "Degree ID should be positive");
-                    Assert.That(degree.Title, Is.EqualTo(degreeOptions.Title), "Degree title mismatch");
-                    Assert.That(degree.Major, Is.EqualTo(degreeOptions.Major), "Degree major mismatch");
-                    Assert.That(degree.SchoolId, Is.EqualTo(school.Id), "Degree school ID mismatch");
+                    Assert.That(degree.Name, Is.EqualTo(degreeOptions.Name), "Degree name mismatch");
+                    Assert.That(degree.Order, Is.EqualTo(degreeOptions.Order), "Degree order mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {
