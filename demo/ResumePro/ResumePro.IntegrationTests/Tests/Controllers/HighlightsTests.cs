@@ -37,26 +37,22 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a company for the person
                     var companyOptions = new CompanyOptions
                     {
-                        Name = "Test Company",
-                        City = "Seattle",
-                        StateId = 1,
+                        Company = "Test Company",
+                        Location = "Seattle",
                         StartDate = DateTime.Now.AddYears(-2),
-                        EndDate = null,
-                        IsCurrent = true
+                        EndDate = null
                     };
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
-                    Assert.That(companyResult.Result.IsT0, "Failed to create test company");
-                    var company = companyResult.Result.AsT0;
+                    Assert.That(companyResult, Is.Not.Null, "Failed to create test company");
+                    var company = companyResult.Value;
                     
                     // Create a position for the company
                     var positionOptions = new PositionOptions
                     {
-                        Title = "Software Engineer",
-                        CompanyId = company.Id,
+                        JobTitle = "Software Engineer",
                         StartDate = DateTime.Now.AddYears(-1),
-                        EndDate = null,
-                        IsCurrent = true
+                        EndDate = null
                     };
                     
                     var positionResult = await PositionsController.CreatePosition(person.Id, company.Id, positionOptions);
@@ -66,8 +62,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a highlight for the position
                     var highlightOptions = new HighlightOptions
                     {
-                        Description = "Test Highlight",
-                        PositionId = position.Id
+                        Text = "Test Highlight"
                     };
                     
                     var highlightResult = await HighlightsController.CreateHighlight(person.Id, company.Id, position.Id, highlightOptions);
@@ -78,7 +73,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     var retrievedHighlight = await HighlightsController.GetHighlight(person.Id, company.Id, position.Id, highlight.Id);
                     Assert.That(retrievedHighlight, Is.Not.Null, "Failed to retrieve highlight");
                     Assert.That(retrievedHighlight.Id, Is.EqualTo(highlight.Id), "Highlight ID mismatch");
-                    Assert.That(retrievedHighlight.Description, Is.EqualTo(highlightOptions.Description), "Highlight description mismatch");
+                    Assert.That(retrievedHighlight.Description, Is.EqualTo(highlightOptions.Text), "Highlight description mismatch");
                     Assert.That(retrievedHighlight.PositionId, Is.EqualTo(position.Id), "Highlight position ID mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
@@ -114,26 +109,22 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a company for the person to test with
                     var companyOptions = new CompanyOptions
                     {
-                        Name = "Test Company for Invalid Highlight",
-                        City = "Test City",
-                        StateId = 1,
+                        Company = "Test Company for Invalid Highlight",
+                        Location = "Test City",
                         StartDate = DateTime.Now.AddYears(-1),
-                        EndDate = null,
-                        IsCurrent = true
+                        EndDate = null
                     };
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
-                    Assert.That(companyResult.Result.IsT0, "Failed to create test company");
-                    var company = companyResult.Result.AsT0;
+                    Assert.That(companyResult, Is.Not.Null, "Failed to create test company");
+                    var company = companyResult.Value;
                     
                     // Create a position for the company
                     var positionOptions = new PositionOptions
                     {
-                        Title = "Test Position for Invalid Highlight",
-                        CompanyId = company.Id,
+                        JobTitle = "Test Position for Invalid Highlight",
                         StartDate = DateTime.Now.AddYears(-1),
-                        EndDate = null,
-                        IsCurrent = true
+                        EndDate = null
                     };
                     
                     var positionResult = await PositionsController.CreatePosition(person.Id, company.Id, positionOptions);
@@ -187,17 +178,15 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a company for the person
                     var companyOptions = new CompanyOptions
                     {
-                        Name = "List Company",
-                        City = "Portland",
-                        StateId = 2,
+                        Company = "List Company",
+                        Location = "Portland",
                         StartDate = DateTime.Now.AddYears(-3),
-                        EndDate = null,
-                        IsCurrent = true
+                        EndDate = null
                     };
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
-                    Assert.That(companyResult.Result.IsT0, "Failed to create test company");
-                    var company = companyResult.Result.AsT0;
+                    Assert.That(companyResult, Is.Not.Null, "Failed to create test company");
+                    var company = companyResult.Value;
                     
                     // Create a position for the company
                     var positionOptions = new PositionOptions
@@ -216,8 +205,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a highlight for the position
                     var highlightOptions = new HighlightOptions
                     {
-                        Description = "List Highlight",
-                        PositionId = position.Id
+                        Text = "List Highlight"
                     };
                     
                     var highlightResult = await HighlightsController.CreateHighlight(person.Id, company.Id, position.Id, highlightOptions);
@@ -231,7 +219,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Verify the highlight data
                     var highlight = highlights[0];
                     Assert.That(highlight.Id, Is.GreaterThan(0), "Highlight ID should be positive");
-                    Assert.That(highlight.Description, Is.EqualTo(highlightOptions.Description), "Highlight description mismatch");
+                    Assert.That(highlight.Description, Is.EqualTo(highlightOptions.Text), "Highlight description mismatch");
                     Assert.That(highlight.PositionId, Is.EqualTo(position.Id), "Highlight position ID mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
