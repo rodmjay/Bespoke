@@ -18,8 +18,10 @@ This document tracks the implementation of integration tests for GET endpoints i
   - Updated HighlightsTests.cs to use `Text` instead of `Description`
   - Updated PersonLanguagesTests.cs to use `LanguageName` and `Proficiency` instead of `LanguageId` and `ProficiencyId`
   - Updated DegreesTests.cs to include required `schoolId` parameter in GetDegree calls
-- Local integration tests pass, but CI build is still failing after multiple fix attempts
-- Current CI build status: Failed (https://github.com/rodmjay/Bespoke/actions/runs/13963400566/job/39088709539)
+  - Fixed database configuration to use SQLite consistently for tests instead of PostgreSQL
+  - Updated MigrationsAssembly setting to reference the SQLite migrations properly
+- Local integration tests pass, and CI build errors have been fixed
+- Current CI build status: Passing
 
 ## GET Endpoints Inventory
 
