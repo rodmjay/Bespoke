@@ -11,7 +11,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
     public class ProjectsTests : BaseApiTest
     {
         // Helper method to create test data for project tests
-        private async Task<(PersonaDto person, CompanyDetails company, PositionDetails position)> CreateTestDataForProjects()
+        private async Task<(PersonaDto person, CompanyDetails company, ActionResult<CompanyDetails> position)> CreateTestDataForProjects()
         {
             try
             {
@@ -32,10 +32,10 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 // Create a test company
                 var companyOptions = new CompanyOptions
                 {
-                    Name = $"Test Company {Guid.NewGuid()}",
-                    Website = "https://example.com",
-                    City = "Seattle",
-                    StateId = 3
+                    Company = $"Test Company {Guid.NewGuid()}",
+                    Description = "Test company description",
+                    Location = "Seattle, WA",
+                    StartDate = DateTime.Now.AddYears(-3)
                 };
                 
                 var company = await AssertCreateCompany(person.Id, companyOptions);
@@ -44,18 +44,23 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 // Create a test position
                 var positionOptions = new PositionOptions
                 {
-                    Title = $"Test Position {Guid.NewGuid()}",
+                    JobTitle = $"Test Position {Guid.NewGuid()}",
                     StartDate = DateTime.Now.AddYears(-2),
-                    EndDate = DateTime.Now.AddYears(-1),
-                    IsCurrent = false,
-                    City = "Seattle",
-                    StateId = 3
+                    EndDate = DateTime.Now.AddYears(-1)
                 };
                 
-                var position = await AssertCreatePosition(person.Id, company.Id, positionOptions);
-                Assert.That(position, Is.Not.Null, "Failed to create test position");
+                var positionResult = await AssertCreatePosition(person.Id, company.Id, positionOptions);
+                Assert.That(positionResult, Is.Not.Null, "Failed to create test position");
+                Assert.That(positionResult.Value, Is.Not.Null, "Position value should not be null");
                 
-                return (person, company, position);
+                // Add null check to ensure Value is not null before returning
+                if (positionResult.Value == null)
+                {
+                    Assert.Inconclusive("Position value is null, cannot proceed with test");
+                    return (null, null, null); // This will never be reached due to Assert.Inconclusive
+                }
+                
+                return (person, company, positionResult);
             }
             catch (HttpRequestException ex) when (ex.Message.Contains("500"))
             {
@@ -76,6 +81,9 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 {
                     // Create test data
                     var (person, company, position) = await CreateTestDataForProjects();
+                    // Ensure position and position.Value are not null before proceeding
+                    Assert.That(position, Is.Not.Null, "Position should not be null");
+                    Assert.That(position.Value, Is.Not.Null, "Position value should not be null");
                     
                     // Create a test project
                     var projectOptions = new ProjectOptions
@@ -87,13 +95,13 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     };
                     
                     var createdProject = await ProjectsController.CreateProject(
-                        person.Id, company.Id, position.Id, projectOptions);
+                        person.Id, company.Id, position.Value.Id, projectOptions);
                     
                     Assert.That(createdProject.Value, Is.Not.Null, "Failed to create test project");
                     
                     // Get the project by ID
                     var project = await ProjectsController.GetProject(
-                        person.Id, company.Id, position.Id, createdProject.Value.Id);
+                        person.Id, company.Id, position.Value.Id, createdProject.Value.Id);
                     
                     // Verify the project data
                     Assert.That(project, Is.Not.Null, "Project should not be null");
@@ -154,6 +162,9 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 {
                     // Create test data
                     var (person, company, position) = await CreateTestDataForProjects();
+                    // Ensure position and position.Value are not null before proceeding
+                    Assert.That(position, Is.Not.Null, "Position should not be null");
+                    Assert.That(position.Value, Is.Not.Null, "Position value should not be null");
                     
                     // Create multiple test projects
                     var projectOptions1 = new ProjectOptions
@@ -172,15 +183,15 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                         Order = 2
                     };
                     
-                    await ProjectsController.CreateProject(person.Id, company.Id, position.Id, projectOptions1);
-                    await ProjectsController.CreateProject(person.Id, company.Id, position.Id, projectOptions2);
+                    await ProjectsController.CreateProject(person.Id, company.Id, position.Value.Id, projectOptions1);
+                    await ProjectsController.CreateProject(person.Id, company.Id, position.Value.Id, projectOptions2);
                     
                     // Get the list of projects
-                    var projects = await ProjectsController.GetList(person.Id, company.Id, position.Id);
+                    var projects = await ProjectsController.GetList(person.Id, company.Id, position.Value.Id);
                     
                     // Verify the projects list
                     Assert.That(projects, Is.Not.Null, "Projects list should not be null");
-                    Assert.That(projects.Count, Is.GreaterThanOrEqualTo(2), "Should have at least 2 projects");
+                    Assert.That(projects.Count >= 2, "Should have at least 2 projects");
                     
                     // Verify that our created projects are in the list
                     Assert.That(projects.Exists(p => p.Name == projectOptions1.Name), Is.True, 
@@ -237,6 +248,9 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 {
                     // Create test data
                     var (person, company, position) = await CreateTestDataForProjects();
+                    // Ensure position and position.Value are not null before proceeding
+                    Assert.That(position, Is.Not.Null, "Position should not be null");
+                    Assert.That(position.Value, Is.Not.Null, "Position value should not be null");
                     
                     // Create a test project
                     var projectOptions = new ProjectOptions
@@ -248,7 +262,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     };
                     
                     var result = await ProjectsController.CreateProject(
-                        person.Id, company.Id, position.Id, projectOptions);
+                        person.Id, company.Id, position.Value.Id, projectOptions);
                     
                     // Verify the result
                     Assert.That(result.Value, Is.Not.Null, "Created project should not be null");
@@ -316,6 +330,9 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 {
                     // Create test data
                     var (person, company, position) = await CreateTestDataForProjects();
+                    // Ensure position and position.Value are not null before proceeding
+                    Assert.That(position, Is.Not.Null, "Position should not be null");
+                    Assert.That(position.Value, Is.Not.Null, "Position value should not be null");
                     
                     // Create a test project
                     var originalOptions = new ProjectOptions
@@ -327,7 +344,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     };
                     
                     var createdProject = await ProjectsController.CreateProject(
-                        person.Id, company.Id, position.Id, originalOptions);
+                        person.Id, company.Id, position.Value.Id, originalOptions);
                     
                     Assert.That(createdProject.Value, Is.Not.Null, "Failed to create test project");
                     
@@ -341,7 +358,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     };
                     
                     var result = await ProjectsController.Update(
-                        person.Id, company.Id, position.Id, createdProject.Value.Id, updatedOptions);
+                        person.Id, company.Id, position.Value.Id, createdProject.Value.Id, updatedOptions);
                     
                     // Verify the result
                     Assert.That(result.Value, Is.Not.Null, "Updated project should not be null");
@@ -410,6 +427,9 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 {
                     // Create test data
                     var (person, company, position) = await CreateTestDataForProjects();
+                    // Ensure position and position.Value are not null before proceeding
+                    Assert.That(position, Is.Not.Null, "Position should not be null");
+                    Assert.That(position.Value, Is.Not.Null, "Position value should not be null");
                     
                     // Create a test project to delete
                     var projectOptions = new ProjectOptions
@@ -421,13 +441,13 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     };
                     
                     var createdProject = await ProjectsController.CreateProject(
-                        person.Id, company.Id, position.Id, projectOptions);
+                        person.Id, company.Id, position.Value.Id, projectOptions);
                     
                     Assert.That(createdProject.Value, Is.Not.Null, "Failed to create test project");
                     
                     // Delete the project
                     var result = await ProjectsController.Delete(
-                        person.Id, company.Id, position.Id, createdProject.Value.Id);
+                        person.Id, company.Id, position.Value.Id, createdProject.Value.Id);
                     
                     // Verify the result
                     Assert.That(result.Succeeded, Is.True, "Delete operation should succeed");
@@ -436,7 +456,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     try
                     {
                         await ProjectsController.GetProject(
-                            person.Id, company.Id, position.Id, createdProject.Value.Id);
+                            person.Id, company.Id, position.Value.Id, createdProject.Value.Id);
                         Assert.Fail("Expected exception when getting deleted project");
                     }
                     catch (Exception ex)
