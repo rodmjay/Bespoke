@@ -1,8 +1,9 @@
 #!/bin/bash
 set -e  # Exit immediately if a command exits with a non-zero status
 
-# Set non-interactive mode for apt-get and similar commands
+# Set non-interactive mode for apt-get and many CLI tools
 export DEBIAN_FRONTEND=noninteractive
+export CI=true
 
 # Colors for output
 GREEN='\033[0;32m'
@@ -88,11 +89,11 @@ else
   echo -e "${RED}Angular app directory ${ANGULAR_APP_DIR} does not exist. Skipping npm install.${NC}"
 fi
 
-# Configure Angular CLI to be non-interactive and disable autocompletion prompt
+# Configure Angular CLI globally to be non-interactive and disable autocompletion prompt
 echo -e "${YELLOW}Configuring Angular CLI to be non-interactive...${NC}"
-ng config cli.interactive false
+ng config -g cli.interactive false --no-interactive
 echo -e "${YELLOW}Disabling Angular CLI autocompletion prompt...${NC}"
-ng config cli.autocomplete false
+ng config -g cli.autocomplete false --no-interactive
 
 # Build Angular app with the non-interactive flag
 echo -e "${YELLOW}Building Angular app...${NC}"
