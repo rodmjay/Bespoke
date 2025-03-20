@@ -257,7 +257,17 @@ setup_database() {
   # Create database and user if they don't exist
   echo -e "${YELLOW}Ensuring database and user exist...${NC}"
   sudo -u postgres psql -c "SELECT 1 FROM pg_database WHERE datname = 'resumepro_test'" | grep -q 1 || sudo -u postgres psql -c "CREATE DATABASE resumepro_test;"
-  sudo -u postgres psql -c "SELECT 1 FROM pg_roles WHERE rolname = 'resumepro_user'" | grep -q 1 || sudo -u postgres psql -c "CREATE USER resumepro_user WITH PASSWORD '/vNm1VBGD2Es93GrZX33yg==';"
+  
+  # Check if credentials file exists to get password
+  if [ -f "$CREDENTIALS_FILE" ]; then
+    source "$CREDENTIALS_FILE"
+    sudo -u postgres psql -c "SELECT 1 FROM pg_roles WHERE rolname = 'resumepro_user'" | grep -q 1 || sudo -u postgres psql -c "CREATE USER resumepro_user WITH PASSWORD '$DB_PASSWORD';"
+  else
+    # Use a placeholder password that will be replaced by the actual credentials file
+    sudo -u postgres psql -c "SELECT 1 FROM pg_roles WHERE rolname = 'resumepro_user'" | grep -q 1 || sudo -u postgres psql -c "CREATE USER resumepro_user WITH PASSWORD 'placeholder_password';"
+    echo -e "${YELLOW}Warning: Using placeholder password. Please update with actual credentials.${NC}"
+  fi
+  
   sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE resumepro_test TO resumepro_user;"
   
   # Apply migrations
