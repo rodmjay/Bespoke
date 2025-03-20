@@ -18,21 +18,30 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             public async Task GetHighlight_ShouldReturnHighlight()
             {
                 // Arrange
-                var email = $"test-{Guid.NewGuid()}@example.com";
-                var person = await AssertCreatePerson(email);
+                var personOptions = new PersonOptions
+                {
+                    Email = $"test-{Guid.NewGuid()}@example.com",
+                    FirstName = "Test",
+                    LastName = "User",
+                    City = "Test City",
+                    PhoneNumber = "555-123-4567"
+                };
+                var person = await AssertCreatePerson(personOptions);
                 
                 var companyOptions = new CompanyOptions
                 {
-                    CompanyName = $"Test Company {Guid.NewGuid()}"
+                    Company = $"Test Company {Guid.NewGuid()}",
+                    Description = "Test company description",
+                    Location = "Test location",
+                    StartDate = DateTime.Now.AddYears(-3)
                 };
                 var company = await AssertCreateCompany(person.Id, companyOptions);
                 
                 var positionOptions = new PositionOptions
                 {
-                    Title = $"Test Position {Guid.NewGuid()}",
+                    JobTitle = $"Test Position {Guid.NewGuid()}",
                     StartDate = DateTime.Now.AddYears(-2),
-                    EndDate = DateTime.Now.AddYears(-1),
-                    IsCurrent = false
+                    EndDate = DateTime.Now.AddYears(-1)
                 };
                 var position = await AssertCreatePosition(person.Id, company.Id, positionOptions);
                 
@@ -62,21 +71,30 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             public async Task GetHighlight_WithInvalidId_ShouldHandleError()
             {
                 // Arrange
-                var email = $"test-{Guid.NewGuid()}@example.com";
-                var person = await AssertCreatePerson(email);
+                var personOptions = new PersonOptions
+                {
+                    Email = $"test-{Guid.NewGuid()}@example.com",
+                    FirstName = "Test",
+                    LastName = "User",
+                    City = "Test City",
+                    PhoneNumber = "555-123-4567"
+                };
+                var person = await AssertCreatePerson(personOptions);
                 
                 var companyOptions = new CompanyOptions
                 {
-                    CompanyName = $"Test Company {Guid.NewGuid()}"
+                    Company = $"Test Company {Guid.NewGuid()}",
+                    Description = "Test company description",
+                    Location = "Test location",
+                    StartDate = DateTime.Now.AddYears(-3)
                 };
                 var company = await AssertCreateCompany(person.Id, companyOptions);
                 
                 var positionOptions = new PositionOptions
                 {
-                    Title = $"Test Position {Guid.NewGuid()}",
+                    JobTitle = $"Test Position {Guid.NewGuid()}",
                     StartDate = DateTime.Now.AddYears(-2),
-                    EndDate = DateTime.Now.AddYears(-1),
-                    IsCurrent = false
+                    EndDate = DateTime.Now.AddYears(-1)
                 };
                 var position = await AssertCreatePosition(person.Id, company.Id, positionOptions);
                 
@@ -112,21 +130,30 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             public async Task GetHighlights_ShouldReturnHighlights()
             {
                 // Arrange
-                var email = $"test-{Guid.NewGuid()}@example.com";
-                var person = await AssertCreatePerson(email);
+                var personOptions = new PersonOptions
+                {
+                    Email = $"test-{Guid.NewGuid()}@example.com",
+                    FirstName = "Test",
+                    LastName = "User",
+                    City = "Test City",
+                    PhoneNumber = "555-123-4567"
+                };
+                var person = await AssertCreatePerson(personOptions);
                 
                 var companyOptions = new CompanyOptions
                 {
-                    CompanyName = $"Test Company {Guid.NewGuid()}"
+                    Company = $"Test Company {Guid.NewGuid()}",
+                    Description = "Test company description",
+                    Location = "Test location",
+                    StartDate = DateTime.Now.AddYears(-3)
                 };
                 var company = await AssertCreateCompany(person.Id, companyOptions);
                 
                 var positionOptions = new PositionOptions
                 {
-                    Title = $"Test Position {Guid.NewGuid()}",
+                    JobTitle = $"Test Position {Guid.NewGuid()}",
                     StartDate = DateTime.Now.AddYears(-2),
-                    EndDate = DateTime.Now.AddYears(-1),
-                    IsCurrent = false
+                    EndDate = DateTime.Now.AddYears(-1)
                 };
                 var position = await AssertCreatePosition(person.Id, company.Id, positionOptions);
                 
@@ -149,30 +176,39 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 
                 // Assert
                 Assert.That(highlights, Is.Not.Null);
-                Assert.That(highlights.Count, Is.GreaterThanOrEqualTo(2));
-                Assert.That(highlights.Any(h => h.Text == highlight1Options.Text), Is.True);
-                Assert.That(highlights.Any(h => h.Text == highlight2Options.Text), Is.True);
+                Assert.That(highlights.Count >= 2);
+                Assert.That(highlights.Any(h => h.Text == highlight1Options.Text));
+                Assert.That(highlights.Any(h => h.Text == highlight2Options.Text));
             }
             
             [Test]
             public async Task GetHighlights_WithInvalidProjectId_ShouldHandleError()
             {
                 // Arrange
-                var email = $"test-{Guid.NewGuid()}@example.com";
-                var person = await AssertCreatePerson(email);
+                var personOptions = new PersonOptions
+                {
+                    Email = $"test-{Guid.NewGuid()}@example.com",
+                    FirstName = "Test",
+                    LastName = "User",
+                    City = "Test City",
+                    PhoneNumber = "555-123-4567"
+                };
+                var person = await AssertCreatePerson(personOptions);
                 
                 var companyOptions = new CompanyOptions
                 {
-                    CompanyName = $"Test Company {Guid.NewGuid()}"
+                    Company = $"Test Company {Guid.NewGuid()}",
+                    Description = "Test company description",
+                    Location = "Test location",
+                    StartDate = DateTime.Now.AddYears(-3)
                 };
                 var company = await AssertCreateCompany(person.Id, companyOptions);
                 
                 var positionOptions = new PositionOptions
                 {
-                    Title = $"Test Position {Guid.NewGuid()}",
+                    JobTitle = $"Test Position {Guid.NewGuid()}",
                     StartDate = DateTime.Now.AddYears(-2),
-                    EndDate = DateTime.Now.AddYears(-1),
-                    IsCurrent = false
+                    EndDate = DateTime.Now.AddYears(-1)
                 };
                 var position = await AssertCreatePosition(person.Id, company.Id, positionOptions);
                 

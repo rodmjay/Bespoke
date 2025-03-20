@@ -17,8 +17,15 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             public async Task GetSkills_ShouldReturnPersonSkills()
             {
                 // Arrange
-                var email = $"test-{Guid.NewGuid()}@example.com";
-                var person = await AssertCreatePerson(email);
+                var personOptions = new PersonOptions
+                {
+                    Email = $"test-{Guid.NewGuid()}@example.com",
+                    FirstName = "Test",
+                    LastName = "User",
+                    City = "Test City",
+                    PhoneNumber = "555-123-4567"
+                };
+                var person = await AssertCreatePerson(personOptions);
                 
                 // Create a skill and associate it with the person
                 var skill = await AssertCreateSkill($"Test Skill {Guid.NewGuid()}");
@@ -29,8 +36,8 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 
                 // Assert
                 Assert.That(skills, Is.Not.Null);
-                Assert.That(skills.Count, Is.GreaterThanOrEqualTo(1));
-                Assert.That(skills.Any(s => s.Id == skill.Id), Is.True);
+                Assert.That(skills.Count >= 1);
+                Assert.That(skills.Any(s => s.Id == skill.Id));
             }
             
             [Test]
@@ -62,27 +69,41 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             public async Task ToggleSkill_AddSkill_ShouldReturnSuccess()
             {
                 // Arrange
-                var email = $"test-{Guid.NewGuid()}@example.com";
-                var person = await AssertCreatePerson(email);
+                var personOptions = new PersonOptions
+                {
+                    Email = $"test-{Guid.NewGuid()}@example.com",
+                    FirstName = "Test",
+                    LastName = "User",
+                    City = "Test City",
+                    PhoneNumber = "555-123-4567"
+                };
+                var person = await AssertCreatePerson(personOptions);
                 var skill = await AssertCreateSkill($"Test Skill {Guid.NewGuid()}");
                 
                 // Act
                 var result = await AssertTogglePersonSkill(person.Id, skill.Id);
                 
                 // Assert
-                Assert.That(result.Succeeded, Is.True);
+                Assert.That(result.Succeeded);
                 
                 // Verify the skill was added
                 var skills = await AssertGetPersonSkills(person.Id);
-                Assert.That(skills.Any(s => s.Id == skill.Id), Is.True);
+                Assert.That(skills.Any(s => s.Id == skill.Id));
             }
             
             [Test]
             public async Task ToggleSkill_RemoveSkill_ShouldReturnSuccess()
             {
                 // Arrange
-                var email = $"test-{Guid.NewGuid()}@example.com";
-                var person = await AssertCreatePerson(email);
+                var personOptions = new PersonOptions
+                {
+                    Email = $"test-{Guid.NewGuid()}@example.com",
+                    FirstName = "Test",
+                    LastName = "User",
+                    City = "Test City",
+                    PhoneNumber = "555-123-4567"
+                };
+                var person = await AssertCreatePerson(personOptions);
                 var skill = await AssertCreateSkill($"Test Skill {Guid.NewGuid()}");
                 
                 // Add the skill first
@@ -96,11 +117,11 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 var result = await AssertTogglePersonSkill(person.Id, skill.Id);
                 
                 // Assert
-                Assert.That(result.Succeeded, Is.True);
+                Assert.That(result.Succeeded);
                 
                 // Verify the skill was removed
                 var skillsAfter = await AssertGetPersonSkills(person.Id);
-                Assert.That(skillsAfter.Any(s => s.Id == skill.Id), Is.False);
+                Assert.That(!skillsAfter.Any(s => s.Id == skill.Id));
             }
             
             [Test]

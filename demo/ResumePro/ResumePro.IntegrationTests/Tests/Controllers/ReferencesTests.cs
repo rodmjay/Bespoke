@@ -18,16 +18,21 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             public async Task Get_ShouldReturnReference()
             {
                 // Arrange
-                var email = $"test-{Guid.NewGuid()}@example.com";
-                var person = await AssertCreatePerson(email);
+                var personOptions = new PersonOptions
+                {
+                    Email = $"test-{Guid.NewGuid()}@example.com",
+                    FirstName = "Test",
+                    LastName = "User",
+                    City = "Test City",
+                    PhoneNumber = "555-123-4567"
+                };
+                var person = await AssertCreatePerson(personOptions);
                 
                 var referenceOptions = new ReferenceOptions
                 {
                     Name = $"Test Reference {Guid.NewGuid()}",
-                    Title = "Test Title",
-                    Company = "Test Company",
-                    Email = $"reference-{Guid.NewGuid()}@example.com",
-                    Phone = "555-123-4567"
+                    Text = "This is a reference description",
+                    Order = 1
                 };
                 var createdReference = await AssertCreateReference(person.Id, referenceOptions);
                 
@@ -38,18 +43,23 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 Assert.That(reference, Is.Not.Null);
                 Assert.That(reference.Id, Is.EqualTo(createdReference.Id));
                 Assert.That(reference.Name, Is.EqualTo(referenceOptions.Name));
-                Assert.That(reference.Title, Is.EqualTo(referenceOptions.Title));
-                Assert.That(reference.Company, Is.EqualTo(referenceOptions.Company));
-                Assert.That(reference.Email, Is.EqualTo(referenceOptions.Email));
-                Assert.That(reference.Phone, Is.EqualTo(referenceOptions.Phone));
+                Assert.That(reference.Text, Is.EqualTo(referenceOptions.Text));
+                Assert.That(reference.Order, Is.EqualTo(referenceOptions.Order));
             }
             
             [Test]
             public async Task Get_WithInvalidId_ShouldHandleError()
             {
                 // Arrange
-                var email = $"test-{Guid.NewGuid()}@example.com";
-                var person = await AssertCreatePerson(email);
+                var personOptions = new PersonOptions
+                {
+                    Email = $"test-{Guid.NewGuid()}@example.com",
+                    FirstName = "Test",
+                    LastName = "User",
+                    City = "Test City",
+                    PhoneNumber = "555-123-4567"
+                };
+                var person = await AssertCreatePerson(personOptions);
                 
                 int invalidReferenceId = -1;
                 
@@ -76,25 +86,28 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             public async Task GetReferences_ShouldReturnReferences()
             {
                 // Arrange
-                var email = $"test-{Guid.NewGuid()}@example.com";
-                var person = await AssertCreatePerson(email);
+                var personOptions = new PersonOptions
+                {
+                    Email = $"test-{Guid.NewGuid()}@example.com",
+                    FirstName = "Test",
+                    LastName = "User",
+                    City = "Test City",
+                    PhoneNumber = "555-123-4567"
+                };
+                var person = await AssertCreatePerson(personOptions);
                 
                 // Create multiple references
                 var reference1Options = new ReferenceOptions
                 {
                     Name = $"Test Reference 1 {Guid.NewGuid()}",
-                    Title = "Test Title 1",
-                    Company = "Test Company 1",
-                    Email = $"reference1-{Guid.NewGuid()}@example.com",
-                    Phone = "555-123-4567"
+                    Text = "This is reference 1 description",
+                    Order = 1
                 };
                 var reference2Options = new ReferenceOptions
                 {
                     Name = $"Test Reference 2 {Guid.NewGuid()}",
-                    Title = "Test Title 2",
-                    Company = "Test Company 2",
-                    Email = $"reference2-{Guid.NewGuid()}@example.com",
-                    Phone = "555-987-6543"
+                    Text = "This is reference 2 description",
+                    Order = 2
                 };
                 
                 await AssertCreateReference(person.Id, reference1Options);
@@ -105,9 +118,9 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                 
                 // Assert
                 Assert.That(references, Is.Not.Null);
-                Assert.That(references.Count, Is.GreaterThanOrEqualTo(2));
-                Assert.That(references.Any(r => r.Name == reference1Options.Name), Is.True);
-                Assert.That(references.Any(r => r.Name == reference2Options.Name), Is.True);
+                Assert.That(references.Count >= 2);
+                Assert.That(references.Any(r => r.Name == reference1Options.Name));
+                Assert.That(references.Any(r => r.Name == reference2Options.Name));
             }
             
             [Test]
