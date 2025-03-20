@@ -2,6 +2,14 @@
 
 ## Current Status (March 20, 2025)
 
+### Domain Model Documentation Added
+Added comprehensive documentation of the domain model and entity relationships to the ResumePro README.md file:
+- Added descriptions of all core entities (Person, Company, Position, Project, etc.)
+- Documented key relationships between entities with cardinality (one-to-many, many-to-many)
+- Added visual representation of entity hierarchy showing work experience structure
+- Improved developer onboarding by clearly documenting data relationships
+- Documentation helps developers understand how components connect in the system
+
 ### New Database Seed Migration
 A new migration has been added to seed test data for personas and companies:
 - Migration name: `20250320072000_SeedPersonaAndCompany`

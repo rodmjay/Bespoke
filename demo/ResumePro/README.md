@@ -15,6 +15,54 @@ ResumePro is a comprehensive resume management application that allows users to 
 - `ResumePro.IntegrationTests`: Integration tests for the API
 - Other supporting projects for domain, data, services, etc.
 
+## Domain Model and Entity Relationships
+
+The ResumePro application is built around the following core entities and their relationships:
+
+### Core Entities
+
+| Entity | Description |
+|--------|-------------|
+| Person/Persona | The central entity representing an individual with a resume. Contains personal information like name, contact details, and location. |
+| Company | Represents an organization where a person has worked. Includes company name, location, and description. |
+| Position | Represents a job role at a company, including job title and employment dates. |
+| Project | Represents work done within a position, including name, description, and budget. |
+| Highlight | Represents achievements or notable points about a project. |
+| Resume | A compiled resume document for a person, including selected skills, experiences, and formatting settings. |
+| Skill | Represents professional skills that can be associated with people, companies, or specific positions. |
+| Language | Represents languages spoken by a person with proficiency levels. |
+| Reference | Represents professional references for a person. |
+| Certification | Represents professional certifications obtained by a person. |
+| School | Represents educational institutions attended by a person. |
+| Degree | Represents academic degrees obtained at a school. |
+
+### Key Relationships
+
+| Relationship | Cardinality | Description |
+|--------------|-------------|-------------|
+| Person → Company | Many-to-Many | A person can work at multiple companies, and a company can have multiple people. This relationship is established through positions. |
+| Company → Position | One-to-Many | A company can have multiple positions, but a position belongs to only one company. |
+| Position → Project | One-to-Many | A position can have multiple projects, but a project belongs to only one position. |
+| Project → Highlight | One-to-Many | A project can have multiple highlights, but a highlight belongs to only one project. |
+| Person → Skill | Many-to-Many | A person can have multiple skills, and a skill can be associated with multiple people. This relationship is implemented through PersonaSkill. |
+| Person → Language | Many-to-Many | A person can speak multiple languages, and a language can be spoken by multiple people. This relationship is implemented through PersonaLanguage. |
+| Person → Resume | One-to-Many | A person can have multiple resumes, but a resume belongs to only one person. |
+| Person → Reference | One-to-Many | A person can have multiple references, but a reference belongs to only one person. |
+| Person → School | One-to-Many | A person can attend multiple schools, but a school entry in the system belongs to one person. |
+| School → Degree | One-to-Many | A school can offer multiple degrees, but a degree entry belongs to one school. |
+| Person → Certification | One-to-Many | A person can have multiple certifications, but a certification entry belongs to one person. |
+
+### Entity Hierarchy
+
+The application follows a hierarchical structure for organizing work experience:
+- Person
+  - Company (where the person worked)
+    - Position (job roles at the company)
+      - Project (work done in the position)
+        - Highlight (achievements in the project)
+
+This hierarchical relationship allows for organized representation of a person's work history in their resume.
+
 ## Getting Started with the API
 
 ### Building the API
