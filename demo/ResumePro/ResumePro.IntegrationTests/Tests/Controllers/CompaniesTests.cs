@@ -92,7 +92,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     };
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
-                    Assert.That(companyResult.Result.IsT0, "Failed to create test company");
+                    Assert.That(companyResult, Is.Not.Null, "Failed to create test company");
                     
                     // Get the companies list
                     var companies = await CompaniesController.GetCompanies(person.Id);
@@ -142,8 +142,8 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     };
                     
                     var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
-                    Assert.That(companyResult.Result.IsT0, "Failed to create test company");
-                    var company = companyResult.Result.AsT0;
+                    Assert.That(companyResult, Is.Not.Null, "Failed to create test company");
+                    var company = companyResult.Value;
                     
                     // Get the company details by ID
                     var retrievedCompany = await CompaniesController.GetCompany(person.Id, company.Id);
