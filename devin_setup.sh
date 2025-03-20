@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e  # Exit immediately if a command exits with a non-zero status
 
+# Set non-interactive mode for apt-get and similar commands
+export DEBIAN_FRONTEND=noninteractive
+
 # Colors for output
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -89,13 +92,13 @@ fi
 echo -e "${YELLOW}Configuring Angular CLI to be non-interactive...${NC}"
 ng config cli.interactive false
 
-# Build Angular app (without the --no-interactive flag)
+# Build Angular app with the non-interactive flag
 echo -e "${YELLOW}Building Angular app...${NC}"
-ng build
+ng build --no-interactive
 echo -e "${GREEN}Angular app built successfully.${NC}"
 
 # Provide instruction to run the API
 echo -e "${YELLOW}To start the API, run:${NC}"
-echo -e "${GREEN}dotnet run --project ~/repos/Bespoke/demo/ResumePro/ResumePro.Api/ResumePro.Api.csproj${NC}"
+echo -e "${GREEN}dotnet run --project ~/repos/Bespoke/demo/ResumePro.Api/ResumePro.Api.csproj${NC}"
 
 echo -e "${YELLOW}Setup completed successfully. Run devin_run.sh to set up the database and start the application.${NC}"
