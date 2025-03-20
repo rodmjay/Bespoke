@@ -7,4 +7,11 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
   },
+  video: false,
+  screenshotOnRunFailure: true,
+  chromeWebSecurity: false,
+  retries: {
+    runMode: 2,
+    openMode: 0
+  }
 });
