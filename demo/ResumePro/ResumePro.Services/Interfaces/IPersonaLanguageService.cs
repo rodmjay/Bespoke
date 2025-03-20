@@ -1,4 +1,6 @@
 ﻿using Bespoke.Services.Interfaces;
+using Bespoke.Shared.Common;
+using OneOf;
 using ResumePro.Shared.Models;
 using ResumePro.Shared.Options;
 
@@ -13,4 +15,6 @@ public interface IPersonaLanguageService : IService<PersonaLanguage>
 
     Task<OneOf<PersonaLanguageDto, Result>> CreateOrUpdatePersonaLanguage(int organizationId, int personId,
         PersonLanguageOptions options);
+        
+    Task<Result> ToggleLanguage(int organizationId, int personId, int languageId, string proficiency);
 }

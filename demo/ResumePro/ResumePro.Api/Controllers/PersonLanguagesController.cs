@@ -1,5 +1,8 @@
-﻿using ResumePro.Api.Interfaces;
+﻿using Bespoke.Shared.Common;
+using Microsoft.AspNetCore.Mvc;
+using ResumePro.Api.Interfaces;
 using ResumePro.Services.Interfaces;
+using ResumePro.Shared.Models;
 
 namespace ResumePro.Api.Controllers;
 
@@ -18,6 +21,13 @@ public sealed class PersonLanguagesController : BaseController, IPersonLanguages
     public async Task<List<PersonaLanguageDto>> GetPersonLanguages([FromRoute] int personId)
     {
         return await _languageService.GetPersonaLanguages<PersonaLanguageDto>(OrganizationId, personId)
+            .ConfigureAwait(false);
+    }
+    
+    [HttpPost("{languageId}/{proficiency}")]
+    public async Task<Result> ToggleLanguage([FromRoute] int personId, [FromRoute] int languageId, [FromRoute] string proficiency)
+    {
+        return await _languageService.ToggleLanguage(OrganizationId, personId, languageId, proficiency)
             .ConfigureAwait(false);
     }
 }
