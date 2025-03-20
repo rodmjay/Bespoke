@@ -84,6 +84,11 @@ if [ -d "$ANGULAR_APP_DIR" ]; then
   echo -e "${YELLOW}Installing Angular dependencies...${NC}"
   cd "$ANGULAR_APP_DIR"
   npm install
+  # Check if @ngrx/store is listed in package.json; if not, install it
+  if ! grep -q '"@ngrx/store"' package.json; then
+    echo -e "${YELLOW}@ngrx/store not found in package.json. Installing @ngrx/store...${NC}"
+    npm install @ngrx/store --save
+  fi
   echo -e "${GREEN}Angular dependencies installed successfully.${NC}"
 else
   echo -e "${RED}Angular app directory ${ANGULAR_APP_DIR} does not exist. Skipping npm install.${NC}"
