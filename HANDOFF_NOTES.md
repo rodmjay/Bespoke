@@ -9,6 +9,8 @@ This document tracks the implementation of integration tests for GET endpoints i
 - Added proper error handling for database connection issues
 - Updated BaseApiTest helper methods to match controller implementations
 - Fixed parameter mismatches in controller interfaces and test helper methods
+- Fixed property name mismatches in test files to match model classes
+- Fixed method signature issues in controller interfaces and test files
 - Ran integration tests to verify implementation
 - Created PR #81 for review
 
