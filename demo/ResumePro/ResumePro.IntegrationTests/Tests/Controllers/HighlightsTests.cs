@@ -73,8 +73,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     var retrievedHighlight = await HighlightsController.GetHighlight(person.Id, company.Id, position.Id, highlight.Id);
                     Assert.That(retrievedHighlight, Is.Not.Null, "Failed to retrieve highlight");
                     Assert.That(retrievedHighlight.Id, Is.EqualTo(highlight.Id), "Highlight ID mismatch");
-                    Assert.That(retrievedHighlight.Description, Is.EqualTo(highlightOptions.Text), "Highlight description mismatch");
-                    Assert.That(retrievedHighlight.PositionId, Is.EqualTo(position.Id), "Highlight position ID mismatch");
+                    Assert.That(retrievedHighlight.Text, Is.EqualTo(highlightOptions.Text), "Highlight text mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {
@@ -217,8 +216,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Verify the highlight data
                     var highlight = highlights[0];
                     Assert.That(highlight.Id, Is.GreaterThan(0), "Highlight ID should be positive");
-                    Assert.That(highlight.Description, Is.EqualTo(highlightOptions.Text), "Highlight description mismatch");
-                    Assert.That(highlight.PositionId, Is.EqualTo(position.Id), "Highlight position ID mismatch");
+                    Assert.That(highlight.Text, Is.EqualTo(highlightOptions.Text), "Highlight text mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {

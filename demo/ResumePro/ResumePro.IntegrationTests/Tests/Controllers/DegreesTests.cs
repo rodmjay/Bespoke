@@ -98,7 +98,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Assert that retrieving a non-existent degree throws an exception
                     try
                     {
-                        await DegreesController.GetDegree(person.Id, invalidDegreeId);
+                        await DegreesController.GetDegree(person.Id, 1, invalidDegreeId); // Using 1 as a placeholder for schoolId
                         Assert.Fail("Expected exception when getting non-existent degree");
                     }
                     catch (Exception)

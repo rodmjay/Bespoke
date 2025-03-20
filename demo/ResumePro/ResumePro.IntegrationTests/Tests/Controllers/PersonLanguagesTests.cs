@@ -56,8 +56,8 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     {
                         foreach (var language in personLanguages)
                         {
-                            Assert.That(language.LanguageId, Is.GreaterThan(0), "Language ID should be positive");
-                            Assert.That(language.ProficiencyId, Is.GreaterThan(0), "Proficiency ID should be positive");
+                            Assert.That(language.LanguageName, Is.Not.Null, "Language name should not be null");
+                            Assert.That(language.Proficiency, Is.Not.Null, "Proficiency should not be null");
                         }
                     }
                     else
