@@ -52,12 +52,13 @@ describe('PeopleService', () => {
       linkedIn: 'linkedin.com/johndoe',
       gitHub: 'github.com/johndoe',
       city: 'New York',
-      state: 'NY',
+      state: 'NY', // Keep this as the PersonaDetails interface still has state
       country: 'USA',
       resumeCount: 2,
       skillCount: 5,
       skills: [],
-      languages: []
+      languages: [],
+      schools: [] // Add missing required property
     };
 
     service.getPerson(1).subscribe(person => {
@@ -77,17 +78,20 @@ describe('PeopleService', () => {
       linkedIn: 'linkedin.com/johndoe',
       gitHub: 'github.com/johndoe',
       city: 'New York',
-      state: 'NY',
-      country: 'USA'
+      stateId: 32, // Changed from state: 'NY'
+      country: 'USA',
+      languageOptions: [] // Add empty languageOptions array as required by backend
     };
 
     const mockResponse: PersonaDetails = {
       id: 1,
       ...options,
+      state: 'New York', // Add state property for PersonaDetails
       resumeCount: 0,
       skillCount: 0,
       skills: [],
-      languages: []
+      languages: [],
+      schools: [] // Add missing required property
     };
 
     service.createPerson(options).subscribe(response => {
@@ -108,17 +112,20 @@ describe('PeopleService', () => {
       linkedIn: 'linkedin.com/johnsmith',
       gitHub: 'github.com/johnsmith',
       city: 'New York',
-      state: 'NY',
-      country: 'USA'
+      stateId: 32, // Changed from state: 'NY'
+      country: 'USA',
+      languageOptions: [] // Add empty languageOptions array as required by backend
     };
 
     const mockResponse: PersonaDetails = {
       id: personId,
       ...options,
+      state: 'New York', // Add state property for PersonaDetails
       resumeCount: 2,
       skillCount: 5,
       skills: [],
-      languages: []
+      languages: [],
+      schools: [] // Add missing required property
     };
 
     service.updatePerson(personId, options).subscribe(response => {
