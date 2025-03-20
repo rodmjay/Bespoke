@@ -1,5 +1,8 @@
 using NUnit.Framework;
 using System.Threading.Tasks;
+using System;
+using ResumePro.Shared.Models;
+using System.Linq;
 
 namespace ResumePro.IntegrationTests.Tests.Controllers
 {
@@ -13,19 +16,41 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             [Test]
             public async Task GetSkills_ShouldReturnPersonSkills()
             {
-                // For now, we'll just verify that the test passes
-                // This is a placeholder until we can implement the full test
-                await Task.CompletedTask;
-                Assert.Pass("Placeholder test for GetSkills_ShouldReturnPersonSkills");
+                // Arrange
+                var email = $"test-{Guid.NewGuid()}@example.com";
+                var person = await AssertCreatePerson(email);
+                
+                // Create a skill and associate it with the person
+                var skill = await AssertCreateSkill($"Test Skill {Guid.NewGuid()}");
+                await AssertTogglePersonSkill(person.Id, skill.Id);
+                
+                // Act
+                var skills = await AssertGetPersonSkills(person.Id);
+                
+                // Assert
+                Assert.That(skills, Is.Not.Null);
+                Assert.That(skills.Count, Is.GreaterThanOrEqualTo(1));
+                Assert.That(skills.Any(s => s.Id == skill.Id), Is.True);
             }
             
             [Test]
             public async Task GetSkills_WithInvalidPersonId_ShouldHandleError()
             {
-                // For now, we'll just verify that the test passes
-                // This is a placeholder until we can implement the full test
-                await Task.CompletedTask;
-                Assert.Pass("Placeholder test for GetSkills_WithInvalidPersonId_ShouldHandleError");
+                // Arrange
+                int invalidPersonId = -1;
+                
+                try
+                {
+                    // Act
+                    await PersonSkillsController.GetSkills(invalidPersonId);
+                    Assert.Fail("Expected exception was not thrown");
+                }
+                catch (Exception ex)
+                {
+                    // Assert
+                    Assert.That(ex, Is.Not.Null);
+                    Assert.Pass("Exception was thrown as expected");
+                }
             }
         }
         
@@ -36,28 +61,67 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
             [Test]
             public async Task ToggleSkill_AddSkill_ShouldReturnSuccess()
             {
-                // For now, we'll just verify that the test passes
-                // This is a placeholder until we can implement the full test
-                await Task.CompletedTask;
-                Assert.Pass("Placeholder test for ToggleSkill_AddSkill_ShouldReturnSuccess");
+                // Arrange
+                var email = $"test-{Guid.NewGuid()}@example.com";
+                var person = await AssertCreatePerson(email);
+                var skill = await AssertCreateSkill($"Test Skill {Guid.NewGuid()}");
+                
+                // Act
+                var result = await AssertTogglePersonSkill(person.Id, skill.Id);
+                
+                // Assert
+                Assert.That(result.Succeeded, Is.True);
+                
+                // Verify the skill was added
+                var skills = await AssertGetPersonSkills(person.Id);
+                Assert.That(skills.Any(s => s.Id == skill.Id), Is.True);
             }
             
             [Test]
             public async Task ToggleSkill_RemoveSkill_ShouldReturnSuccess()
             {
-                // For now, we'll just verify that the test passes
-                // This is a placeholder until we can implement the full test
-                await Task.CompletedTask;
-                Assert.Pass("Placeholder test for ToggleSkill_RemoveSkill_ShouldReturnSuccess");
+                // Arrange
+                var email = $"test-{Guid.NewGuid()}@example.com";
+                var person = await AssertCreatePerson(email);
+                var skill = await AssertCreateSkill($"Test Skill {Guid.NewGuid()}");
+                
+                // Add the skill first
+                await AssertTogglePersonSkill(person.Id, skill.Id);
+                
+                // Verify the skill was added
+                var skillsBefore = await AssertGetPersonSkills(person.Id);
+                Assert.That(skillsBefore.Any(s => s.Id == skill.Id), Is.True);
+                
+                // Act - Toggle again to remove
+                var result = await AssertTogglePersonSkill(person.Id, skill.Id);
+                
+                // Assert
+                Assert.That(result.Succeeded, Is.True);
+                
+                // Verify the skill was removed
+                var skillsAfter = await AssertGetPersonSkills(person.Id);
+                Assert.That(skillsAfter.Any(s => s.Id == skill.Id), Is.False);
             }
             
             [Test]
             public async Task ToggleSkill_WithInvalidIds_ShouldHandleError()
             {
-                // For now, we'll just verify that the test passes
-                // This is a placeholder until we can implement the full test
-                await Task.CompletedTask;
-                Assert.Pass("Placeholder test for ToggleSkill_WithInvalidIds_ShouldHandleError");
+                // Arrange
+                int invalidPersonId = -1;
+                int invalidSkillId = -1;
+                
+                try
+                {
+                    // Act
+                    await PersonSkillsController.ToggleSkill(invalidPersonId, invalidSkillId);
+                    Assert.Fail("Expected exception was not thrown");
+                }
+                catch (Exception ex)
+                {
+                    // Assert
+                    Assert.That(ex, Is.Not.Null);
+                    Assert.Pass("Exception was thrown as expected");
+                }
             }
         }
     }
