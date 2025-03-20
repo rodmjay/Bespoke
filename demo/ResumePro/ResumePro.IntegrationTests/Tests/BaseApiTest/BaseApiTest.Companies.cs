@@ -49,8 +49,9 @@ namespace ResumePro.IntegrationTests.Tests
             try
             {
                 var response = await CompaniesController.CreateCompany(personId, options);
-                Assert.That(response.Result.IsT0, "Company creation failed");
-                return response.Result.AsT0;
+                Assert.That(response.IsSuccessStatusCode(), "Company creation failed");
+                var company = response.GetObject<CompanyDetails>();
+                return company;
             }
             catch (Exception ex)
             {
@@ -65,8 +66,9 @@ namespace ResumePro.IntegrationTests.Tests
             try
             {
                 var response = await CompaniesController.UpdateCompany(personId, companyId, options);
-                Assert.That(response.Result.IsT0, "Company update failed");
-                return response.Result.AsT0;
+                Assert.That(response.IsSuccessStatusCode(), "Company update failed");
+                var company = response.GetObject<CompanyDetails>();
+                return company;
             }
             catch (Exception ex)
             {

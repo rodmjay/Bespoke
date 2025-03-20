@@ -85,13 +85,12 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a certification for the person
                     var certificationOptions = new CertificationOptions
                     {
-                        Title = "Test Certification",
-                        Organization = "Test Organization",
-                        DateAchieved = DateTime.Now.AddYears(-1),
-                        ExpirationDate = DateTime.Now.AddYears(2)
+                        Name = "Test Certification",
+                        Body = "Test Organization",
+                        Date = DateTime.Now.AddYears(-1)
                     };
                     
-                    var certificationResult = await CertificationsController.Create(person.Id, certificationOptions);
+                    var certificationResult = await CertificationsController.CreateCertification(person.Id, certificationOptions);
                     Assert.That(certificationResult.Value, Is.Not.Null, "Failed to create test certification");
                     var certification = certificationResult.Value;
                     
@@ -99,8 +98,8 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     var retrievedCertification = await CertificationsController.Get(person.Id, certification.Id);
                     Assert.That(retrievedCertification, Is.Not.Null, "Failed to retrieve certification");
                     Assert.That(retrievedCertification.Id, Is.EqualTo(certification.Id), "Certification ID mismatch");
-                    Assert.That(retrievedCertification.Title, Is.EqualTo(certificationOptions.Title), "Certification title mismatch");
-                    Assert.That(retrievedCertification.Organization, Is.EqualTo(certificationOptions.Organization), "Certification organization mismatch");
+                    Assert.That(retrievedCertification.Name, Is.EqualTo(certificationOptions.Name), "Certification name mismatch");
+                    Assert.That(retrievedCertification.Body, Is.EqualTo(certificationOptions.Body), "Certification body mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {
@@ -132,13 +131,12 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Create a certification for the person
                     var certificationOptions = new CertificationOptions
                     {
-                        Title = "List Certification",
-                        Organization = "List Organization",
-                        DateAchieved = DateTime.Now.AddYears(-2),
-                        ExpirationDate = DateTime.Now.AddYears(3)
+                        Name = "List Certification",
+                        Body = "List Organization",
+                        Date = DateTime.Now.AddYears(-2)
                     };
                     
-                    var certificationResult = await CertificationsController.Create(person.Id, certificationOptions);
+                    var certificationResult = await CertificationsController.CreateCertification(person.Id, certificationOptions);
                     Assert.That(certificationResult.Value, Is.Not.Null, "Failed to create test certification");
                     
                     // Get the certifications list
@@ -149,8 +147,8 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Verify the certification data
                     var certification = certifications[0];
                     Assert.That(certification.Id, Is.GreaterThan(0), "Certification ID should be positive");
-                    Assert.That(certification.Title, Is.EqualTo(certificationOptions.Title), "Certification title mismatch");
-                    Assert.That(certification.Organization, Is.EqualTo(certificationOptions.Organization), "Certification organization mismatch");
+                    Assert.That(certification.Name, Is.EqualTo(certificationOptions.Name), "Certification name mismatch");
+                    Assert.That(certification.Body, Is.EqualTo(certificationOptions.Body), "Certification body mismatch");
                 }
                 catch (HttpRequestException ex) when (ex.Message.Contains("500"))
                 {
