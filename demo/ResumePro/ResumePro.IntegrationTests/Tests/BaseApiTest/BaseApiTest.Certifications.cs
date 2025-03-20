@@ -48,7 +48,7 @@ namespace ResumePro.IntegrationTests.Tests
         {
             try
             {
-                var response = await CertificationsController.Create(personId, options);
+                var response = await CertificationsController.CreateCertification(personId, options);
                 Assert.That(response.Value, Is.Not.Null, "Certification creation failed");
                 return response.Value;
             }
