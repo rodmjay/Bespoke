@@ -85,9 +85,13 @@ else
   echo -e "${RED}Angular app directory ${ANGULAR_APP_DIR} does not exist. Skipping npm install.${NC}"
 fi
 
-# Build Angular app
+# Configure Angular CLI to be non-interactive
+echo -e "${YELLOW}Configuring Angular CLI to be non-interactive...${NC}"
+ng config cli.interactive false
+
+# Build Angular app (without the --no-interactive flag)
 echo -e "${YELLOW}Building Angular app...${NC}"
-ng build --no-interactive
+ng build
 echo -e "${GREEN}Angular app built successfully.${NC}"
 
 # Provide instruction to run the API
