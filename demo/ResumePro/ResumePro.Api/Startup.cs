@@ -102,7 +102,7 @@ public sealed class Startup
             if (useSQLite)
             {
                 builder.Services.AddHealthChecks()
-                    .AddSqlite(Configuration.GetConnectionString("SQLiteConnection") ?? 
+                    .AddSqlite<ApplicationContext>(Configuration.GetConnectionString("SQLiteConnection") ?? 
                         throw new InvalidOperationException("SQLiteConnection string is not configured."));
             }
             else
