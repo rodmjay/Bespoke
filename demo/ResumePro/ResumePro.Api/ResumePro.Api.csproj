@@ -33,6 +33,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="AspNetCore.HealthChecks.NpgSql" />
+		<PackageReference Include="AspNetCore.HealthChecks.Sqlite" />
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" />
 		<PackageReference Include="Swashbuckle.AspNetCore" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
