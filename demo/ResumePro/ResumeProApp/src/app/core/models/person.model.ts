@@ -61,8 +61,9 @@ export interface PersonOptions {
   linkedIn: string;
   gitHub: string;
   city: string;
-  state: string;
+  stateId: number;
   country: string;
+  languageOptions?: any[];
 }
 
 export interface PersonaFilters {

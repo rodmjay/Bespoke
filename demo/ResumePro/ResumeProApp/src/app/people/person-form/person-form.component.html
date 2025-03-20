@@ -120,16 +120,19 @@
     </div>
     
     <div class="field">
-      <label for="state">State/Province*</label>
-      <input 
-        type="text" 
-        pInputText 
-        id="state" 
-        formControlName="state" 
-        [ngClass]="{'ng-invalid ng-dirty': personForm.get('state')?.invalid && personForm.get('state')?.touched}"
-      />
+      <label for="stateId">State/Province*</label>
+      <p-dropdown 
+        id="stateId" 
+        [options]="states" 
+        formControlName="stateId" 
+        optionLabel="name" 
+        optionValue="id"
+        [style]="{'width':'100%'}" 
+        placeholder="Select a state"
+        [ngClass]="{'ng-invalid ng-dirty': personForm.get('stateId')?.invalid && personForm.get('stateId')?.touched}"
+      ></p-dropdown>
       <small 
-        *ngIf="personForm.get('state')?.invalid && personForm.get('state')?.touched" 
+        *ngIf="personForm.get('stateId')?.invalid && personForm.get('stateId')?.touched" 
         class="p-error"
       >
         State/Province is required
