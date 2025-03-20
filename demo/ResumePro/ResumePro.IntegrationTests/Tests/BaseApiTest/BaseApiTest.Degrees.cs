@@ -12,11 +12,11 @@ namespace ResumePro.IntegrationTests.Tests
 {
     public abstract partial class BaseApiTest
     {
-        protected async Task<DegreeDto> AssertGetDegree(int personId, int degreeId)
+        protected async Task<DegreeDto> AssertGetDegree(int personId, int schoolId, int degreeId)
         {
             try
             {
-                var degree = await DegreesController.GetDegree(personId, degreeId);
+                var degree = await DegreesController.GetDegree(personId, schoolId, degreeId);
                 Assert.That(degree, Is.Not.Null, "Failed to retrieve degree");
                 return degree;
             }
@@ -28,11 +28,11 @@ namespace ResumePro.IntegrationTests.Tests
             }
         }
 
-        protected async Task<List<DegreeDto>> AssertGetDegrees(int personId)
+        protected async Task<List<DegreeDto>> AssertGetDegrees(int personId, int schoolId)
         {
             try
             {
-                var degrees = await DegreesController.GetDegrees(personId);
+                var degrees = await DegreesController.GetDegrees(personId, schoolId);
                 Assert.That(degrees, Is.Not.Null, "Failed to retrieve degrees");
                 return degrees;
             }
@@ -44,13 +44,13 @@ namespace ResumePro.IntegrationTests.Tests
             }
         }
 
-        protected async Task<DegreeDto> AssertCreateDegree(int personId, DegreeOptions options)
+        protected async Task<ActionResult<DegreeDto>> AssertCreateDegree(int personId, int schoolId, DegreeOptions options)
         {
             try
             {
-                var response = await DegreesController.CreateDegree(personId, options);
-                Assert.That(response.Value, Is.Not.Null, "Degree creation failed");
-                return response.Value;
+                var response = await DegreesController.CreateDegree(personId, schoolId, options);
+                Assert.That(response, Is.Not.Null, "Degree creation failed");
+                return response;
             }
             catch (Exception ex)
             {
@@ -60,13 +60,13 @@ namespace ResumePro.IntegrationTests.Tests
             }
         }
 
-        protected async Task<DegreeDto> AssertUpdateDegree(int personId, int degreeId, DegreeOptions options)
+        protected async Task<ActionResult<DegreeDto>> AssertUpdateDegree(int personId, int schoolId, int degreeId, DegreeOptions options)
         {
             try
             {
-                var response = await DegreesController.UpdateDegree(personId, degreeId, options);
-                Assert.That(response.Value, Is.Not.Null, "Degree update failed");
-                return response.Value;
+                var response = await DegreesController.UpdateDegree(personId, schoolId, degreeId, options);
+                Assert.That(response, Is.Not.Null, "Degree update failed");
+                return response;
             }
             catch (Exception ex)
             {
@@ -76,11 +76,11 @@ namespace ResumePro.IntegrationTests.Tests
             }
         }
 
-        protected async Task<Result> AssertDeleteDegree(int personId, int degreeId)
+        protected async Task<Result> AssertDeleteDegree(int personId, int schoolId, int degreeId)
         {
             try
             {
-                var result = await DegreesController.DeleteDegree(personId, degreeId);
+                var result = await DegreesController.DeleteDegree(personId, schoolId, degreeId);
                 Assert.That(result.Succeeded, "Degree deletion failed");
                 return result;
             }

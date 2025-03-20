@@ -12,11 +12,11 @@ namespace ResumePro.IntegrationTests.Tests
 {
     public abstract partial class BaseApiTest
     {
-        protected async Task<PositionDto> AssertGetPosition(int personId, int positionId)
+        protected async Task<PositionDetails> AssertGetPosition(int personId, int companyId, int positionId)
         {
             try
             {
-                var position = await PositionsController.GetPosition(personId, positionId);
+                var position = await PositionsController.GetPosition(personId, companyId, positionId);
                 Assert.That(position, Is.Not.Null, "Failed to retrieve position");
                 return position;
             }
@@ -28,11 +28,11 @@ namespace ResumePro.IntegrationTests.Tests
             }
         }
 
-        protected async Task<List<PositionDto>> AssertGetPositions(int personId)
+        protected async Task<List<PositionDetails>> AssertGetPositions(int personId, int companyId)
         {
             try
             {
-                var positions = await PositionsController.GetPositions(personId);
+                var positions = await PositionsController.GetPositions(personId, companyId);
                 Assert.That(positions, Is.Not.Null, "Failed to retrieve positions");
                 return positions;
             }
@@ -44,13 +44,13 @@ namespace ResumePro.IntegrationTests.Tests
             }
         }
 
-        protected async Task<PositionDto> AssertCreatePosition(int personId, PositionOptions options)
+        protected async Task<ActionResult<CompanyDetails>> AssertCreatePosition(int personId, int companyId, PositionOptions options)
         {
             try
             {
-                var response = await PositionsController.CreatePosition(personId, options);
-                Assert.That(response.Value, Is.Not.Null, "Position creation failed");
-                return response.Value;
+                var response = await PositionsController.CreatePosition(personId, companyId, options);
+                Assert.That(response, Is.Not.Null, "Position creation failed");
+                return response;
             }
             catch (Exception ex)
             {
@@ -60,13 +60,13 @@ namespace ResumePro.IntegrationTests.Tests
             }
         }
 
-        protected async Task<PositionDto> AssertUpdatePosition(int personId, int positionId, PositionOptions options)
+        protected async Task<ActionResult<CompanyDetails>> AssertUpdatePosition(int personId, int companyId, int positionId, PositionOptions options)
         {
             try
             {
-                var response = await PositionsController.UpdatePosition(personId, positionId, options);
-                Assert.That(response.Value, Is.Not.Null, "Position update failed");
-                return response.Value;
+                var response = await PositionsController.UpdatePosition(personId, companyId, positionId, options);
+                Assert.That(response, Is.Not.Null, "Position update failed");
+                return response;
             }
             catch (Exception ex)
             {
@@ -76,11 +76,11 @@ namespace ResumePro.IntegrationTests.Tests
             }
         }
 
-        protected async Task<Result> AssertDeletePosition(int personId, int positionId)
+        protected async Task<Result> AssertDeletePosition(int personId, int companyId, int positionId)
         {
             try
             {
-                var result = await PositionsController.DeletePosition(personId, positionId);
+                var result = await PositionsController.DeletePosition(personId, companyId, positionId);
                 Assert.That(result.Succeeded, "Position deletion failed");
                 return result;
             }

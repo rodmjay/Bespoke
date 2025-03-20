@@ -110,12 +110,12 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                         IsCurrent = true
                     };
                     
-                    var positionResult = await PositionsController.CreatePosition(person.Id, positionOptions);
+                    var positionResult = await PositionsController.CreatePosition(person.Id, company.Id, positionOptions);
                     Assert.That(positionResult.Value, Is.Not.Null, "Failed to create test position");
                     var position = positionResult.Value;
                     
                     // Get the position by ID
-                    var retrievedPosition = await PositionsController.GetPosition(person.Id, position.Id);
+                    var retrievedPosition = await PositionsController.GetPosition(person.Id, company.Id, position.Id);
                     Assert.That(retrievedPosition, Is.Not.Null, "Failed to retrieve position");
                     Assert.That(retrievedPosition.Id, Is.EqualTo(position.Id), "Position ID mismatch");
                     Assert.That(retrievedPosition.Title, Is.EqualTo(positionOptions.Title), "Position title mismatch");
@@ -151,10 +151,25 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Test with non-existent position ID
                     var invalidPositionId = 99999;
                     
+                    // Create a company for the person to test with
+                    var companyOptions = new CompanyOptions
+                    {
+                        Name = "Test Company for Invalid Position",
+                        City = "Test City",
+                        StateId = 1,
+                        StartDate = DateTime.Now.AddYears(-1),
+                        EndDate = null,
+                        IsCurrent = true
+                    };
+                    
+                    var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
+                    Assert.That(companyResult.Result.IsT0, "Failed to create test company");
+                    var company = companyResult.Result.AsT0;
+                    
                     // Assert that retrieving a non-existent position throws an exception
                     try
                     {
-                        await PositionsController.GetPosition(person.Id, invalidPositionId);
+                        await PositionsController.GetPosition(person.Id, company.Id, invalidPositionId);
                         Assert.Fail("Expected exception when getting non-existent position");
                     }
                     catch (Exception)
@@ -215,11 +230,11 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                         IsCurrent = true
                     };
                     
-                    var positionResult = await PositionsController.CreatePosition(person.Id, positionOptions);
+                    var positionResult = await PositionsController.CreatePosition(person.Id, company.Id, positionOptions);
                     Assert.That(positionResult.Value, Is.Not.Null, "Failed to create test position");
                     
                     // Get the positions list
-                    var positions = await PositionsController.GetPositions(person.Id);
+                    var positions = await PositionsController.GetPositions(person.Id, company.Id);
                     Assert.That(positions, Is.Not.Null, "Failed to retrieve positions");
                     Assert.That(positions, Is.Not.Empty, "Positions list should not be empty");
                     

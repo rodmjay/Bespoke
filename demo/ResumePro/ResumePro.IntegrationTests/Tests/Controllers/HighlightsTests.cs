@@ -59,7 +59,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                         IsCurrent = true
                     };
                     
-                    var positionResult = await PositionsController.CreatePosition(person.Id, positionOptions);
+                    var positionResult = await PositionsController.CreatePosition(person.Id, company.Id, positionOptions);
                     Assert.That(positionResult.Value, Is.Not.Null, "Failed to create test position");
                     var position = positionResult.Value;
                     
@@ -70,12 +70,12 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                         PositionId = position.Id
                     };
                     
-                    var highlightResult = await HighlightsController.CreateHighlight(person.Id, highlightOptions);
+                    var highlightResult = await HighlightsController.CreateHighlight(person.Id, company.Id, position.Id, highlightOptions);
                     Assert.That(highlightResult.Value, Is.Not.Null, "Failed to create test highlight");
                     var highlight = highlightResult.Value;
                     
                     // Get the highlight by ID
-                    var retrievedHighlight = await HighlightsController.GetHighlight(person.Id, highlight.Id);
+                    var retrievedHighlight = await HighlightsController.GetHighlight(person.Id, company.Id, position.Id, highlight.Id);
                     Assert.That(retrievedHighlight, Is.Not.Null, "Failed to retrieve highlight");
                     Assert.That(retrievedHighlight.Id, Is.EqualTo(highlight.Id), "Highlight ID mismatch");
                     Assert.That(retrievedHighlight.Description, Is.EqualTo(highlightOptions.Description), "Highlight description mismatch");
@@ -111,10 +111,39 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                     // Test with non-existent highlight ID
                     var invalidHighlightId = 99999;
                     
+                    // Create a company for the person to test with
+                    var companyOptions = new CompanyOptions
+                    {
+                        Name = "Test Company for Invalid Highlight",
+                        City = "Test City",
+                        StateId = 1,
+                        StartDate = DateTime.Now.AddYears(-1),
+                        EndDate = null,
+                        IsCurrent = true
+                    };
+                    
+                    var companyResult = await CompaniesController.CreateCompany(person.Id, companyOptions);
+                    Assert.That(companyResult.Result.IsT0, "Failed to create test company");
+                    var company = companyResult.Result.AsT0;
+                    
+                    // Create a position for the company
+                    var positionOptions = new PositionOptions
+                    {
+                        Title = "Test Position for Invalid Highlight",
+                        CompanyId = company.Id,
+                        StartDate = DateTime.Now.AddYears(-1),
+                        EndDate = null,
+                        IsCurrent = true
+                    };
+                    
+                    var positionResult = await PositionsController.CreatePosition(person.Id, company.Id, positionOptions);
+                    Assert.That(positionResult.Value, Is.Not.Null, "Failed to create test position");
+                    var position = positionResult.Value;
+                    
                     // Assert that retrieving a non-existent highlight throws an exception
                     try
                     {
-                        await HighlightsController.GetHighlight(person.Id, invalidHighlightId);
+                        await HighlightsController.GetHighlight(person.Id, company.Id, position.Id, invalidHighlightId);
                         Assert.Fail("Expected exception when getting non-existent highlight");
                     }
                     catch (Exception)
@@ -180,7 +209,7 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                         IsCurrent = true
                     };
                     
-                    var positionResult = await PositionsController.CreatePosition(person.Id, positionOptions);
+                    var positionResult = await PositionsController.CreatePosition(person.Id, company.Id, positionOptions);
                     Assert.That(positionResult.Value, Is.Not.Null, "Failed to create test position");
                     var position = positionResult.Value;
                     
@@ -191,11 +220,11 @@ namespace ResumePro.IntegrationTests.Tests.Controllers
                         PositionId = position.Id
                     };
                     
-                    var highlightResult = await HighlightsController.CreateHighlight(person.Id, highlightOptions);
+                    var highlightResult = await HighlightsController.CreateHighlight(person.Id, company.Id, position.Id, highlightOptions);
                     Assert.That(highlightResult.Value, Is.Not.Null, "Failed to create test highlight");
                     
                     // Get the highlights list
-                    var highlights = await HighlightsController.GetHighlights(person.Id, position.Id);
+                    var highlights = await HighlightsController.GetHighlights(person.Id, company.Id, position.Id);
                     Assert.That(highlights, Is.Not.Null, "Failed to retrieve highlights");
                     Assert.That(highlights, Is.Not.Empty, "Highlights list should not be empty");
                     
