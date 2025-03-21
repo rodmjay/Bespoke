@@ -6,6 +6,7 @@ using Bespoke.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using ResumePro.Domain.Entities;
+using ResumePro.Domain.Extensions;
 using ResumePro.Entities;
 
 [assembly: SeedAssembly]
@@ -72,5 +73,8 @@ public sealed class ApplicationContext : BaseContext<ApplicationContext>
     protected override void PreModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(typeof(Resume).Assembly);
+        
+        // Configure all DateTime properties to use UTC for PostgreSQL compatibility
+        builder.ConfigureUtcDateTimes();
     }
 }
