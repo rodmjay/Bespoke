@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e  # Exit immediately if a command exits with a non-zero status
+set -e  # Exit immediately if any command exits with a non-zero status
 
 # Set non-interactive mode for apt-get and many CLI tools
 export DEBIAN_FRONTEND=noninteractive
@@ -9,7 +9,7 @@ export CI=true
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
-NC='\033[0m' # No Color
+NC='\033[0m'  # No Color
 
 echo -e "${YELLOW}ResumePro VM Setup Script${NC}"
 echo -e "${YELLOW}==============================${NC}"
@@ -85,26 +85,17 @@ if [ -d "$ANGULAR_APP_DIR" ]; then
   cd "$ANGULAR_APP_DIR"
   npm install
 
-  # Define an array of required @ngrx packages.
-  # Add any other @ngrx packages needed by your project to this list.
-  required_ngrx_packages=(
-    "@ngrx/store"
-    "@ngrx/effects"
-    "@ngrx/entity"
-    "@ngrx/router-store"
-    # "@ngrx/component-store"  # Uncomment if needed
-  )
+  # Unconditionally install required @ngrx packages
+  echo -e "${YELLOW}Installing @ngrx/store...${NC}"
+  npm install @ngrx/store --save
 
-  for pkg in "${required_ngrx_packages[@]}"; do
-    if ! grep -q "\"$pkg\"" package.json; then
-      echo -e "${YELLOW}$pkg not found in package.json. Installing $pkg...${NC}"
-      npm install "$pkg" --save
-    else
-      echo -e "${GREEN}$pkg is already present in package.json.${NC}"
-    fi
-  done
+  echo -e "${YELLOW}Installing @ngrx/effects...${NC}"
+  npm install @ngrx/effects --save
 
-  echo -e "${GREEN}Angular dependencies installed successfully.${NC}"
+  echo -e "${YELLOW}Installing @ngrx/store-devtools...${NC}"
+  npm install @ngrx/store-devtools --save
+
+  echo -e "${GREEN}Angular dependencies and required @ngrx packages installed successfully.${NC}"
 else
   echo -e "${RED}Angular app directory ${ANGULAR_APP_DIR} does not exist. Skipping npm install.${NC}"
 fi
