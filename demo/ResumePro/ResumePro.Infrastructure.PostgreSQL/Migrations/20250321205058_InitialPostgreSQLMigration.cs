@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ResumePro.Infrastructure.PostgreSQL.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialPostgreSQLMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -1382,9 +1382,9 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 columns: new[] { "Id", "OrganizationId", "PersonId", "CompanyName", "Description", "EndDate", "Location", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, "Tech Innovations Inc.", "Leading software development company specializing in cloud solutions", new DateTime(2022, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "Seattle WA", new DateTime(2018, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 1, 1, "Digital Solutions LLC", "Startup focused on mobile application development", new DateTime(2017, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "San Francisco CA", new DateTime(2015, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, 1, 1, "Enterprise Systems Corp.", "Enterprise software solutions provider", new DateTime(2015, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "New York NY", new DateTime(2012, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, 1, 1, "Tech Innovations Inc.", "Leading software development company specializing in cloud solutions", new DateTime(2022, 12, 31, 0, 0, 0, 0, DateTimeKind.Utc), "Seattle WA", new DateTime(2018, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
+                    { 2, 1, 1, "Digital Solutions LLC", "Startup focused on mobile application development", new DateTime(2017, 12, 31, 0, 0, 0, 0, DateTimeKind.Utc), "San Francisco CA", new DateTime(2015, 6, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
+                    { 3, 1, 1, "Enterprise Systems Corp.", "Enterprise software solutions provider", new DateTime(2015, 5, 31, 0, 0, 0, 0, DateTimeKind.Utc), "New York NY", new DateTime(2012, 3, 1, 0, 0, 0, 0, DateTimeKind.Utc) }
                 });
 
             migrationBuilder.InsertData(
@@ -1477,8 +1477,8 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 columns: new[] { "Id", "OrganizationId", "EndDate", "Location", "Name", "PersonId", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2014, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "Seattle", "University of Washington", 1, new DateTime(2010, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 1, new DateTime(2016, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "Palo Alto", "Stanford University", 1, new DateTime(2014, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, 1, new DateTime(2014, 5, 31, 0, 0, 0, 0, DateTimeKind.Utc), "Seattle", "University of Washington", 1, new DateTime(2010, 9, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
+                    { 2, 1, new DateTime(2016, 5, 31, 0, 0, 0, 0, DateTimeKind.Utc), "Palo Alto", "Stanford University", 1, new DateTime(2014, 9, 1, 0, 0, 0, 0, DateTimeKind.Utc) }
                 });
 
             migrationBuilder.InsertData(
@@ -1513,10 +1513,10 @@ namespace ResumePro.Infrastructure.PostgreSQL.Migrations
                 columns: new[] { "CompanyId", "Id", "OrganizationId", "PersonId", "EndDate", "JobTitle", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, 1, new DateTime(2022, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "Senior Software Engineer", new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 1, 2, 1, 1, new DateTime(2019, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "Software Engineer", new DateTime(2018, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 1, 1, 1, new DateTime(2017, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "Full Stack Developer", new DateTime(2015, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, 1, 1, 1, new DateTime(2015, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "Junior Developer", new DateTime(2012, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, 1, 1, 1, new DateTime(2022, 12, 31, 0, 0, 0, 0, DateTimeKind.Utc), "Senior Software Engineer", new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
+                    { 1, 2, 1, 1, new DateTime(2019, 12, 31, 0, 0, 0, 0, DateTimeKind.Utc), "Software Engineer", new DateTime(2018, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
+                    { 2, 1, 1, 1, new DateTime(2017, 12, 31, 0, 0, 0, 0, DateTimeKind.Utc), "Full Stack Developer", new DateTime(2015, 6, 1, 0, 0, 0, 0, DateTimeKind.Utc) },
+                    { 3, 1, 1, 1, new DateTime(2015, 5, 31, 0, 0, 0, 0, DateTimeKind.Utc), "Junior Developer", new DateTime(2012, 3, 1, 0, 0, 0, 0, DateTimeKind.Utc) }
                 });
 
             migrationBuilder.InsertData(

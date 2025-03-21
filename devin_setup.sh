@@ -78,6 +78,26 @@ else
   sudo systemctl start postgresql
 fi
 
+# Create dev_user for PostgreSQL
+echo -e "${YELLOW}Creating dev_user for PostgreSQL...${NC}"
+sudo -u postgres psql -c "DROP ROLE IF EXISTS dev_user;"
+sudo -u postgres psql -c "CREATE ROLE dev_user WITH LOGIN PASSWORD 'Pa$$word!';"
+sudo -u postgres psql -c "ALTER ROLE dev_user CREATEDB;"
+sudo -u postgres psql -c "ALTER ROLE dev_user SUPERUSER;"
+echo -e "${GREEN}PostgreSQL dev_user created successfully.${NC}"
+
+# Create database for dev_user
+echo -e "${YELLOW}Creating database for dev_user...${NC}"
+sudo -u postgres psql -c "DROP DATABASE IF EXISTS resumepro_test;"
+sudo -u postgres psql -c "CREATE DATABASE resumepro_test OWNER dev_user;"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE resumepro_test TO dev_user;"
+echo -e "${GREEN}PostgreSQL database created successfully.${NC}"
+
+# Install dotnet-ef tool globally
+echo -e "${YELLOW}Installing dotnet-ef tool...${NC}"
+dotnet tool install --global dotnet-ef || dotnet tool update --global dotnet-ef
+echo -e "${GREEN}dotnet-ef tool installed successfully.${NC}"
+
 # Install Angular dependencies if the Angular app directory exists
 ANGULAR_APP_DIR=~/repos/Bespoke/demo/ResumePro/ResumeProApp
 if [ -d "$ANGULAR_APP_DIR" ]; then

@@ -47,14 +47,12 @@ public abstract partial class BaseApiTest : IntegrationTest<BaseApiTest, Startup
     {
         try
         {
-            // Use the database provider configured in appsettings.json
+            // Always use PostgreSQL for tests
             var configuration = ServiceProvider.GetRequiredService<IConfiguration>();
-            var useSQLite = configuration.GetValue<bool>("AppSettings:UseSQLite");
-            var usePostgreSQL = configuration.GetValue<bool>("AppSettings:UsePostgreSQL");
             
-            Console.WriteLine($"Test configuration: UseSQLite={useSQLite}, UsePostgreSQL={usePostgreSQL}");
+            Console.WriteLine("Test configuration: Using PostgreSQL database provider");
             
-            // Reset database using the configured provider
+            // Reset database using PostgreSQL
             await ResetDatabase();
         }
         catch (Exception ex)
