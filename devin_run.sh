@@ -68,10 +68,25 @@ if [ -f "$API_SETTINGS_FILE" ]; then
         cp "$API_SETTINGS_FILE" "${API_SETTINGS_FILE}.bak"
     fi
     # Replace any current PostgreSQLConnection string with the desired one using a regex
-    sed -i -E "s/\"PostgreSQLConnection\": \"[^\"]*\"/\"PostgreSQLConnection\": \"Host=localhost;Database=$DB_NAME;Username=$DB_USER;Password=$DB_PASSWORD\"/" "$API_SETTINGS_FILE"
+    sed -i -E "s|\"PostgreSQLConnection\": \"[^\"]*\"|\"PostgreSQLConnection\": \"Host=localhost;Database=$DB_NAME;Username=$DB_USER;Password=$DB_PASSWORD\"|" "$API_SETTINGS_FILE"
     echo -e "${GREEN}API connection string updated successfully.${NC}"
 else
     echo -e "${RED}API settings file not found at $API_SETTINGS_FILE. Skipping connection string update.${NC}"
+fi
+
+# Update IntegrationTests connection string in appsettings.json idempotently
+echo -e "${YELLOW}Updating IntegrationTests connection string...${NC}"
+INTEGRATION_TESTS_SETTINGS_FILE="$HOME/repos/Bespoke/demo/ResumePro/ResumePro.IntegrationTests/appsettings.json"
+if [ -f "$INTEGRATION_TESTS_SETTINGS_FILE" ]; then
+    # Backup original file if a backup doesn't already exist
+    if [ ! -f "${INTEGRATION_TESTS_SETTINGS_FILE}.bak" ]; then
+        cp "$INTEGRATION_TESTS_SETTINGS_FILE" "${INTEGRATION_TESTS_SETTINGS_FILE}.bak"
+    fi
+    # Replace any current PostgreSQLConnection string with the desired one using a regex
+    sed -i -E "s|\"PostgreSQLConnection\": \"[^\"]*\"|\"PostgreSQLConnection\": \"Host=localhost;Database=$DB_NAME;Username=$DB_USER;Password=$DB_PASSWORD\"|" "$INTEGRATION_TESTS_SETTINGS_FILE"
+    echo -e "${GREEN}IntegrationTests connection string updated successfully.${NC}"
+else
+    echo -e "${RED}IntegrationTests settings file not found at $INTEGRATION_TESTS_SETTINGS_FILE. Skipping connection string update.${NC}"
 fi
 
 # Run migrations using Entity Framework CLI
@@ -79,6 +94,16 @@ echo -e "${YELLOW}Running database migrations...${NC}"
 cd "$API_DIR"
 # Add the design package (this is idempotent if already added)
 dotnet add package Microsoft.EntityFrameworkCore.Design
+
+# Check if dotnet-ef is installed
+if ! command -v dotnet-ef &> /dev/null; then
+    echo -e "${YELLOW}Installing dotnet-ef tool...${NC}"
+    dotnet tool install --global dotnet-ef
+    # Source the profile to make the tool available in the current session
+    source ~/.profile
+fi
+
+# Run the migration
 dotnet ef database update --project ../ResumePro.Infrastructure.PostgreSQL/ResumePro.Infrastructure.PostgreSQL.csproj --startup-project .
 echo -e "${GREEN}Database migrations completed successfully.${NC}"
 
