@@ -45,17 +45,15 @@ public class ApplicationContextFactory : IDesignTimeDbContextFactory<Application
         optionsBuilder.EnableSensitiveDataLogging(false);
 #endif
 
-        if (config.GetSection("DbSettings/SQLite") != null)
+        // Always use PostgreSQL for database access
+        var connectionString = config.GetConnectionString("PostgreSQLConnection");
+        if (string.IsNullOrEmpty(connectionString))
         {
-
-            optionsBuilder.UseSqlite(config.GetConnectionString("SQLite"),
-                opt => { opt.MigrationsAssembly(settings.Value.MigrationsAssembly); });
+            throw new InvalidOperationException("PostgreSQL connection string is not configured.");
         }
-        else
-        {
-            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"),
-                opt => { opt.MigrationsAssembly(settings.Value.MigrationsAssembly); });
-        }
+        
+        optionsBuilder.UseNpgsql(connectionString,
+            opt => { opt.MigrationsAssembly(settings.Value.MigrationsAssembly); });
         
 
         return new ApplicationContext(optionsBuilder.Options, settings);

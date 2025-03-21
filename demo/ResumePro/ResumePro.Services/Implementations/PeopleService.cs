@@ -194,6 +194,7 @@ namespace ResumePro.Services.Implementations
 
         private async IAsyncEnumerable<Error> GetErrors(PersonOptions options)
         {
+            // Always validate the state ID
             var stateExists = await _stateRepo.Queryable()
                 .AsNoTracking()
                 .Where(x => x.Id == options.StateId)
