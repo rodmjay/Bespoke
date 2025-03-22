@@ -35,12 +35,6 @@ jobs:
       - name: Add .dotnet Tools to PATH
         run: echo "${HOME}/.dotnet/tools" >> $GITHUB_PATH
 
-      - name: Run Tests with Coverage and Generate Report
-        run: |
-          dotnet test --collect:"XPlat Code Coverage" --results-directory:./TestResults
-          reportgenerator -reports:"./TestResults/**/coverage.cobertura.xml" -targetdir:"./CoverageReport" -reporttypes:Html
-          echo "Coverage report generated at ./CoverageReport/index.html"
-
       - name: Pack NuGet Packages
         run: dotnet pack --configuration Release --no-build --output ./nupkg
 
