@@ -1,19 +1,22 @@
 services:
   resumepro:
+    image: ${DOCKERHUB_USERNAME}/resumepro:latest
     build:
-      context: .                    # Uses the repository root as build context
-      dockerfile: ./demo/ResumePro/Dockerfile    # Dockerfile for the API or app
+      context: .
+      dockerfile: ./demo/ResumePro/Dockerfile
     ports:
       - "3000:3000"
 
   identitypro:
+    image: ${DOCKERHUB_USERNAME}/identitypro:latest
     build:
-      context: .                    # Same context, different Dockerfile location
-      dockerfile: ./demo/IdentityPro/Dockerfile   # Dockerfile for IdentityPro
+      context: .
+      dockerfile: ./demo/IdentityPro/Dockerfile
     ports:
       - "3000:3000"
 
   resumeprotest:
+    # For integration tests, you might not need to push the image.
     build:
-      context: .                    # Repository root context again
+      context: .
       dockerfile: ./demo/ResumePro/ResumePro.IntegrationTests/Dockerfile
