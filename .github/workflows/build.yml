@@ -67,8 +67,6 @@ jobs:
       # *** New Step: Run Integration Tests ***
       - name: Run Integration Tests via Docker Compose
         run: |
-          # Bring up the integration test environment.
-          # Use the integration-specific docker-compose file (adjust path/filename if needed)
-          docker-compose -f docker-compose.integration.yml up --build --exit-code-from resumeprotest --abort-on-container-exit
-          # Tear down the integration test environment and remove volumes.
-          docker-compose -f docker-compose.integration.yml down -v
+          docker compose -f demo/ResumePro/ResumePro.IntegrationTests/docker-compose.yml up --build --exit-code-from resumeprotest --abort-on-container-exit
+          docker compose -f demo/ResumePro/ResumePro.IntegrationTests/docker-compose.yml down -v
+        shell: bash
