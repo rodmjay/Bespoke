@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e  # Exit immediately if a command exits with a non-zero status
+# Don't use set -e as it will cause the script to exit when background processes are started
 
 # ResumePro Setup Script (Idempotent Version)
 # This script sets up the PostgreSQL database, runs migrations,
@@ -15,6 +15,23 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
+
+# Function to handle cleanup on script exit
+cleanup() {
+  echo -e "${YELLOW}Stopping API and Angular app...${NC}"
+  if [ -n "$API_PID" ]; then
+    kill $API_PID 2>/dev/null || true
+    echo -e "${GREEN}API stopped.${NC}"
+  fi
+  if [ -n "$ANGULAR_PID" ]; then
+    kill $ANGULAR_PID 2>/dev/null || true
+    echo -e "${GREEN}Angular app stopped.${NC}"
+  fi
+  exit 0
+}
+
+# Set up trap to catch script termination
+trap cleanup INT TERM
 
 echo -e "${GREEN}ResumePro Setup Script${NC}"
 echo "=============================="
@@ -113,9 +130,59 @@ cd "$APP_DIR"
 npm install @ngrx/store @ngrx/effects @ngrx/store-devtools --save
 echo -e "${GREEN}Angular packages installed successfully.${NC}"
 
-# Instructions to start the API and Angular app
-echo -e "${YELLOW}To start the API, run:${NC}"
-echo -e "${GREEN}cd $API_DIR && dotnet run${NC}"
-echo -e "${YELLOW}To start the Angular app, run:${NC}"
-echo -e "${GREEN}cd $APP_DIR && npm run start${NC}"
-echo -e "${GREEN}Access the application at http://localhost:4200${NC}"
+# Ensure dotnet-ef is available in the current session
+export PATH="$HOME/.dotnet/tools:$PATH"
+
+# Start API
+echo -e "${YELLOW}Starting API...${NC}"
+cd "$API_DIR" || exit 1
+dotnet run &
+API_PID=$!
+echo -e "${GREEN}API started with PID: $API_PID${NC}"
+
+# Wait for API to be ready
+echo -e "${YELLOW}Waiting for API to be ready...${NC}"
+for i in {1..30}; do
+  if curl -s http://localhost:5229/health | grep -q "Healthy"; then
+    echo -e "${GREEN}API is ready.${NC}"
+    break
+  fi
+  echo -n "."
+  sleep 2
+  
+  # If we've tried 30 times and still not ready, warn but continue
+  if [ $i -eq 30 ]; then
+    echo -e "${RED}Warning: API did not respond as healthy within timeout. It may still be starting...${NC}"
+  fi
+done
+
+# Start Angular app
+echo -e "${YELLOW}Starting Angular app...${NC}"
+cd "$APP_DIR" || exit 1
+npm start &
+ANGULAR_PID=$!
+echo -e "${GREEN}Angular app started with PID: $ANGULAR_PID${NC}"
+
+# Wait for Angular app to be ready
+echo -e "${YELLOW}Waiting for Angular app to be ready...${NC}"
+for i in {1..30}; do
+  if curl -s http://localhost:4200 | grep -q "ResumePro"; then
+    echo -e "${GREEN}Angular app is ready.${NC}"
+    break
+  fi
+  echo -n "."
+  sleep 2
+  
+  # If we've tried 30 times and still not ready, warn but continue
+  if [ $i -eq 30 ]; then
+    echo -e "${RED}Warning: Angular app did not respond within timeout. It may still be starting...${NC}"
+  fi
+done
+
+echo -e "${GREEN}Application is now running!${NC}"
+echo -e "${GREEN}API: http://localhost:5229${NC}"
+echo -e "${GREEN}Frontend: http://localhost:4200${NC}"
+echo -e "${YELLOW}Press Ctrl+C to stop the application.${NC}"
+
+# Wait for user to press Ctrl+C
+wait $API_PID $ANGULAR_PID
