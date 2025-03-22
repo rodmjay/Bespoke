@@ -54,12 +54,13 @@ jobs:
         run: echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> $GITHUB_ENV
 
       - name: Build Docker Images via Docker Compose
-        run: docker-compose -f docker-compose.yml build
+        run: docker compose -f docker-compose.yml build
 
       - name: Push Docker Image for IdentityPro
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: docker-compose -f docker-compose.yml push identitypro
+        run: docker compose -f docker-compose.yml push identitypro
 
       - name: Push Docker Image for ResumePro
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: docker-compose -f docker-compose.yml push resumepro
+        run: docker compose -f docker-compose.yml push resumepro
+
