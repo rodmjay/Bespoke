@@ -75,7 +75,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{376EDBCC-8
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		.github\workflows\build.yml = .github\workflows\build.yml
+		devin_setup.sh = devin_setup.sh
+		docker-compose.yml = docker-compose.yml
 		HANDOFF_NOTES.md = HANDOFF_NOTES.md
+		human_setup.ps1 = human_setup.ps1
 		UpdatePatch.ps1 = UpdatePatch.ps1
 		upgrad-patch.bat = upgrad-patch.bat
 	EndProjectSection

@@ -1,0 +1,29 @@
+#############################################
+# Stage 1: Build the Integration Tests with .NET SDK
+#############################################
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Copy the entire repository from the build context (repository root)
+COPY . .
+
+# Change working directory to the integration test project directory
+WORKDIR /src/demo/ResumePro/ResumePro.IntegrationTests
+
+# Restore dependencies for the integration tests project
+RUN dotnet restore "ResumePro.IntegrationTests.csproj"
+
+# Build the integration tests project in Release mode
+RUN dotnet build "ResumePro.IntegrationTests.csproj" -c Release -o /app/build
+
+#############################################
+# Stage 2: Run the Integration Tests
+#############################################
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS testrunner
+WORKDIR /app
+
+# Copy the built integration test project from the build stage
+COPY --from=build /src/demo/ResumePro/ResumePro.IntegrationTests .
+
+# Run the integration tests (no bundling needed)
+CMD ["dotnet", "test", "--no-build", "--logger:trx"]

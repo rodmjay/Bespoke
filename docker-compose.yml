@@ -1,0 +1,19 @@
+services:
+  resumepro:
+    build:
+      context: .                    # Uses the repository root as build context
+      dockerfile: ./demo/ResumePro/Dockerfile    # Dockerfile for the API or app
+    ports:
+      - "3000:3000"
+
+  identitypro:
+    build:
+      context: .                    # Same context, different Dockerfile location
+      dockerfile: ./demo/IdentityPro/Dockerfile   # Dockerfile for IdentityPro
+    ports:
+      - "3000:3000"
+
+  resumeprotest:
+    build:
+      context: .                    # Repository root context again
+      dockerfile: ./demo/ResumePro/ResumePro.IntegrationTests/Dockerfile

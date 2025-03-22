@@ -19,7 +19,7 @@ REPO_DIR=~/repos/Bespoke
 if [ -d "$REPO_DIR" ]; then
   echo -e "${YELLOW}Pulling latest changes from main branch in ${REPO_DIR}...${NC}"
   cd "$REPO_DIR"
-  git pull
+  #git pull
   echo -e "${GREEN}Repository updated successfully.${NC}"
 else
   echo -e "${RED}Repository directory ${REPO_DIR} does not exist. Skipping git pull.${NC}"
