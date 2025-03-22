@@ -1,29 +1,31 @@
-#############################################
-# Stage 1: Build the Integration Tests with .NET SDK
-#############################################
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
-
-# Copy the entire repository from the build context (repository root)
-COPY . .
-
-# Change working directory to the integration test project directory
-WORKDIR /src/demo/ResumePro/ResumePro.IntegrationTests
-
-# Restore dependencies for the integration tests project
-RUN dotnet restore "ResumePro.IntegrationTests.csproj"
-
-# Build the integration tests project in Release mode
-RUN dotnet build "ResumePro.IntegrationTests.csproj" -c Release -o /app/build
-
-#############################################
-# Stage 2: Run the Integration Tests
-#############################################
+# Use .NET 8 SDK image
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS testrunner
+
+# Set work directory
 WORKDIR /app
 
-# Copy the built integration test project from the build stage
-COPY --from=build /src/demo/ResumePro/ResumePro.IntegrationTests .
+# Copy the entire repository into the image
+COPY . .
 
-# Run the integration tests (no bundling needed)
-CMD ["dotnet", "test", "--no-build", "--logger:trx"]
+# Restore dependencies for the integration test project, suppressing specific warnings and not treating warnings as errors
+RUN dotnet restore demo/ResumePro/ResumePro.IntegrationTests/ResumePro.IntegrationTests.csproj \
+    -p:TreatWarningsAsErrors=false
+
+# Build the integration tests project (and its project references) in Release mode
+RUN dotnet build demo/ResumePro/ResumePro.IntegrationTests/ResumePro.IntegrationTests.csproj \
+    -c Release \
+    -p:TreatWarningsAsErrors=false
+
+# Install ReportGenerator global tool for coverage report generation
+RUN dotnet tool install -g dotnet-reportgenerator-globaltool
+ENV PATH="$PATH:/root/.dotnet/tools"
+
+# Default command: run tests with coverage and generate report, then output coverage summary
+CMD /bin/sh -c '\
+    dotnet test demo/ResumePro/ResumePro.IntegrationTests/ResumePro.IntegrationTests.csproj -c Release --no-build \
+        --results-directory ./TestResults \
+        -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput=./TestResults/coverage.cobertura.xml \
+        -p:NoWarn="NU1604;NU1902;NU1903;NU1701" -p:TreatWarningsAsErrors=false && \
+    reportgenerator -reports:./TestResults/coverage.cobertura.xml -targetdir:./TestResults/CoverageReport -reporttypes:Html\;TextSummary && \
+    cat ./TestResults/CoverageReport/Summary.txt \
+'
