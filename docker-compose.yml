@@ -3,7 +3,7 @@ services:
     image: ${DOCKERHUB_USERNAME}/resumepro:latest
     build:
       context: .
-      dockerfile: demo/ResumePro/Dockerfile
+      dockerfile: ./demo/ResumePro/Dockerfile
     ports:
       - "3000:3000"
 
@@ -11,11 +11,12 @@ services:
     image: ${DOCKERHUB_USERNAME}/identitypro:latest
     build:
       context: .
-      dockerfile: demo/IdentityPro/Dockerfile
+      dockerfile: ./demo/IdentityPro/Dockerfile
     ports:
       - "3000:3000"
 
   resumeprotest:
+    # For integration tests, you might not need to push the image.
     build:
       context: .
-      dockerfile: demo/ResumePro/ResumePro.IntegrationTests/Dockerfile
+      dockerfile: ./demo/ResumePro/ResumePro.IntegrationTests/Dockerfile
