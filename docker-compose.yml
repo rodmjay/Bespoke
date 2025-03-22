@@ -14,9 +14,3 @@ services:
       dockerfile: ./demo/IdentityPro/Dockerfile
     ports:
       - "3000:3000"
-
-  resumeprotest:
-    # For integration tests, you might not need to push the image.
-    build:
-      context: .
-      dockerfile: ./demo/ResumePro/ResumePro.IntegrationTests/Dockerfile
