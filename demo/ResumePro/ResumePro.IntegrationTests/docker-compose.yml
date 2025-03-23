@@ -17,9 +17,8 @@ services:
 
   resumeprotest:
     build:
-      # Adjust the context relative to where you're running docker-compose.
-      context: ../../..
-      dockerfile: demo/ResumePro/ResumePro.IntegrationTests/Dockerfile
+      context: ../../..          # Repository root as build context
+      dockerfile: Dockerfile     # Dockerfile in the same directory as this compose file
     depends_on:
       postgres:
         condition: service_healthy
