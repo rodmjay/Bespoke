@@ -29,12 +29,6 @@ jobs:
       - name: Build Solution
         run: dotnet build --configuration Release --no-restore
 
-      - name: Install ReportGenerator
-        run: dotnet tool install --global dotnet-reportgenerator-globaltool
-
-      - name: Add .dotnet Tools to PATH
-        run: echo "${HOME}/.dotnet/tools" >> $GITHUB_PATH
-
       - name: Pack NuGet Packages
         run: dotnet pack --configuration Release --no-build --output ./nupkg
 
