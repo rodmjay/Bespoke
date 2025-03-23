@@ -16,9 +16,8 @@ services:
       start_period: 30s
 
   resumeprotest:
-    build:
-      context: ../../..          # Repository root as build context
-      dockerfile: Dockerfile     # Dockerfile in the same directory as this compose file
+    context: .  # Repository root as build context
+      dockerfile: demo/ResumePro/ResumePro.IntegrationTests/Dockerfile     # Dockerfile in the same directory as this compose file
     depends_on:
       postgres:
         condition: service_healthy
