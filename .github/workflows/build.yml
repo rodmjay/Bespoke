@@ -64,6 +64,23 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: docker compose -f docker-compose.yml push resumepro
 
+      - name: Debug – Check for Dockerfile and project structure
+        run: |
+          echo "Listing contents of repo root:"
+          ls -la
+      
+          echo "Listing contents of demo/ResumePro/ResumePro.IntegrationTests:"
+          ls -la demo/ResumePro/ResumePro.IntegrationTests
+      
+          echo "Checking for Dockerfile:"
+          if [ -f demo/ResumePro/ResumePro.IntegrationTests/Dockerfile ]; then
+            echo "✅ Dockerfile found!"
+          else
+            echo "❌ Dockerfile is missing!"
+            exit 1
+          fi
+        shell: bash
+
       # *** New Step: Run Integration Tests ***
       - name: Run Integration Tests via Docker Compose
         run: |
