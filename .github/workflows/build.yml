@@ -73,7 +73,7 @@ jobs:
           ls -la demo/ResumePro/ResumePro.IntegrationTests
       
           echo "Checking for Dockerfile:"
-          if [ -f demo/ResumePro/ResumePro.IntegrationTests/Dockerfile ]; then
+          if [ -f demo/ResumePro/ResumePro.IntegrationTests/DockerFile ]; then
             echo "✅ Dockerfile found!"
           else
             echo "❌ Dockerfile is missing!"
