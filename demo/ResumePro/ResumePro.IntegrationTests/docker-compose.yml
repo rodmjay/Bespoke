@@ -20,7 +20,7 @@ services:
    resumeprotest:
     build:
       context: "."  # this is now safe because we'll run from the repo root
-      dockerfile: demo/ResumePro/ResumePro.IntegrationTests/Dockerfile
+      dockerfile: demo/ResumePro/ResumePro.IntegrationTests/DockerFile
     depends_on:
       postgres:
         condition: service_healthy
