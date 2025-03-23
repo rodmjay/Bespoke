@@ -4,19 +4,15 @@ using Bespoke.Azure.Extensions;
 using Bespoke.Core.Extensions;
 using Bespoke.Core.Settings;
 using Bespoke.Data.Extensions;
-using ResumePro.Infrastructure.PostgreSQL;
 using Bespoke.Data.SqlServer;
 using Bespoke.Rest.Extensions;
 using Bespoke.Rest.Middleware;
 using Bespoke.Rest.Swagger.Extensions;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using ResumePro.Api.Services;
 using ResumePro.Data.Contexts;
 using ResumePro.Services.Extensions;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using HealthChecks.NpgSql;
 
 namespace ResumePro.Api;
 
@@ -42,14 +38,15 @@ public sealed class Startup
                 .AddStorage(
                     dbSettings =>
                     {
-                        dbSettings.MigrationsAssembly = "ResumePro.Infrastructure.PostgreSQL";
+                        dbSettings.MigrationsAssembly = "ResumePro.Infrastructure.SqlServer";
                         dbSettings.MaxRetryCount = 5;
                     },
                     dataBuilder =>
                     {
-                        // Always use PostgreSQL
-                        dataBuilder.Settings.MigrationsAssembly = "ResumePro.Infrastructure.PostgreSQL";
-                        dataBuilder.UsePostgreSQLApplicationContext();
+                        dataBuilder.UseSqlServer<ApplicationContext>(sqlSettings =>
+                        {
+                            sqlSettings.ConnectionStringName = "DefaultConnection";
+                        });
                     }
                 )
                 .AddAzure(

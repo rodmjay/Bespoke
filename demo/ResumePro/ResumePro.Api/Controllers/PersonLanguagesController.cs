@@ -1,8 +1,5 @@
-﻿using Bespoke.Shared.Common;
-using Microsoft.AspNetCore.Mvc;
-using ResumePro.Api.Interfaces;
+﻿using ResumePro.Api.Interfaces;
 using ResumePro.Services.Interfaces;
-using ResumePro.Shared.Models;
 
 namespace ResumePro.Api.Controllers;
 

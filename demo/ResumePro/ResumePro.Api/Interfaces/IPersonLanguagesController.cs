@@ -1,7 +1,4 @@
-﻿using Bespoke.Shared.Common;
-using ResumePro.Shared.Models;
-
-namespace ResumePro.Api.Interfaces;
+﻿namespace ResumePro.Api.Interfaces;
 
 public interface IPersonLanguagesController
 {

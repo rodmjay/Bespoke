@@ -46,13 +46,13 @@ public class ApplicationContextFactory : IDesignTimeDbContextFactory<Application
 #endif
 
         // Always use PostgreSQL for database access
-        var connectionString = config.GetConnectionString("PostgreSQLConnection");
+        var connectionString = config.GetConnectionString("DefaultConnection");
         if (string.IsNullOrEmpty(connectionString))
         {
-            throw new InvalidOperationException("PostgreSQL connection string is not configured.");
+            throw new InvalidOperationException("SqlServer connection string is not configured.");
         }
         
-        optionsBuilder.UseNpgsql(connectionString,
+        optionsBuilder.UseSqlServer(connectionString,
             opt => { opt.MigrationsAssembly(settings.Value.MigrationsAssembly); });
         
 

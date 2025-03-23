@@ -19,13 +19,13 @@
 	
 	  <ProjectReference Include="..\..\..\src\Bespoke.Azure\Bespoke.Azure.csproj" />
 	
+	  <ProjectReference Include="..\..\..\src\Bespoke.Data.SqlServer\Bespoke.Data.SqlServer.csproj" />
+	
 	  <ProjectReference Include="..\..\..\src\Bespoke.Rest\Bespoke.Rest.csproj" />
 	
 	  <ProjectReference Include="..\ResumePro.Infrastructure.SqlServer\ResumePro.Infrastructure.SqlServer.csproj" />
 	  <ProjectReference Include="..\ResumePro.Services\ResumePro.Services.csproj" />
 	  <ProjectReference Include="..\ResumePro.Shared\ResumePro.Shared.csproj" />
-	  <ProjectReference Include="..\..\..\src\Bespoke.Data.PostgreSQL\Bespoke.Data.PostgreSQL.csproj" />
-	  <ProjectReference Include="..\ResumePro.Infrastructure.PostgreSQL\ResumePro.Infrastructure.PostgreSQL.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
