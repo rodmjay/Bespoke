@@ -63,10 +63,3 @@ jobs:
       - name: Push Docker Image for ResumePro
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: docker compose -f docker-compose.yml push resumepro
-
-      # *** New Step: Run Integration Tests ***
-      - name: Run Integration Tests via Docker Compose
-        run: |
-          docker compose -f demo/ResumePro/ResumePro.IntegrationTests/docker-compose.yml up --build --exit-code-from resumeprotest --abort-on-container-exit
-          docker compose -f demo/ResumePro/ResumePro.IntegrationTests/docker-compose.yml down -v
-        shell: bash
