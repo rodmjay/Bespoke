@@ -84,7 +84,6 @@ jobs:
       # *** New Step: Run Integration Tests ***
       - name: Run Integration Tests via Docker Compose
         run: |
-          cd $GITHUB_WORKSPACE
           docker compose -f demo/ResumePro/ResumePro.IntegrationTests/docker-compose.yml up --build --exit-code-from resumeprotest --abort-on-container-exit
           docker compose -f demo/ResumePro/ResumePro.IntegrationTests/docker-compose.yml down -v
         shell: bash
