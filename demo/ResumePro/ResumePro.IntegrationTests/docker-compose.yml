@@ -18,7 +18,7 @@ services:
   resumeprotest:
     build:
       # Adjust the context relative to where you're running docker-compose.
-      context: .
+      context: ../../..
       dockerfile: demo/ResumePro/ResumePro.IntegrationTests/Dockerfile
     depends_on:
       postgres:
