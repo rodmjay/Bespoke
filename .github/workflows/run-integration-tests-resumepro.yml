@@ -1,5 +1,5 @@
 
-name: Build and Publish NuGet Packages
+name: Run Integration Tests (ResumePro)
 
 on:
   push:
