@@ -19,9 +19,7 @@ services:
 
   resumeprotest:
     build:
-      # Set context to the repository root (three levels up from the compose file)
-      context: "../../.."
-      # Dockerfile path relative to the repository root
+      context: ../../..
       dockerfile: demo/ResumePro/ResumePro.IntegrationTests/Dockerfile
     depends_on:
       postgres:
