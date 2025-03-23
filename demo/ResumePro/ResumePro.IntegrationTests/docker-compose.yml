@@ -19,7 +19,7 @@ services:
 
   resumeprotest:
     build:
-      context: "."  # assuming you run from the repo root
+      context: "../../.."  # assuming you run from the repo root
       dockerfile: demo/ResumePro/ResumePro.IntegrationTests/Dockerfile
     depends_on:
       postgres:
