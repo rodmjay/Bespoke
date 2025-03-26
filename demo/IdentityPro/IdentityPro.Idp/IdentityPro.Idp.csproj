@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Azure.Identity" />
 		<PackageReference Include="Microsoft.Identity.Web" />
 		<PackageReference Include="Microsoft.Identity.Web.UI" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />

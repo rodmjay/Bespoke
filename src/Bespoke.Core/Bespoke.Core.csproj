@@ -8,7 +8,7 @@
     <RepositoryUrl>https://github.com/rodmjay/bespoke</RepositoryUrl>
     <Description>Bespoke library for building microservices</Description>
     <Authors>Rod Johnson</Authors>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
     <PackageId>Bespoke.Core</PackageId>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Identity" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
@@ -41,10 +42,10 @@
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
     <PackageReference Include="Dawn.Guard" />
-    <PackageReference Include="Serilog.Enrichers.CorrelationId"  />
-    <PackageReference Include="Serilog.Enrichers.Environment"  />
-    <PackageReference Include="Serilog.Enrichers.Thread"  />
-    <PackageReference Include="Serilog.Sinks.ApplicationInsights"  />
+    <PackageReference Include="Serilog.Enrichers.CorrelationId" />
+    <PackageReference Include="Serilog.Enrichers.Environment" />
+    <PackageReference Include="Serilog.Enrichers.Thread" />
+    <PackageReference Include="Serilog.Sinks.ApplicationInsights" />
     <PackageReference Include="Serilog.Sinks.Async" />
     <PackageReference Include="Serilog.Sinks.Console" />
     <PackageReference Include="Serilog.Sinks.File" />
@@ -55,6 +56,7 @@
   </ItemGroup>
 
 </Project>
+
 
 
 

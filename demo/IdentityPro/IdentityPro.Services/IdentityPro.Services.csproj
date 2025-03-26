@@ -7,6 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Azure.Identity" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\..\src\Bespoke.Services\Bespoke.Services.csproj" />
 		<ProjectReference Include="..\IdentityPro.Data\IdentityPro.Data.csproj" />
 		<ProjectReference Include="..\IdentityPro.Domain\IdentityPro.Domain.csproj" />

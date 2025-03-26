@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Removed Duende package reference -->
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\src\Bespoke.Data\Bespoke.Data.csproj" />
     <ProjectReference Include="..\IdentityPro.Domain\IdentityPro.Domain.csproj" />
   </ItemGroup>
@@ -25,6 +21,10 @@
     <EmbeddedResource Include="Seeding\roles.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Identity" />
   </ItemGroup>
 
 </Project>

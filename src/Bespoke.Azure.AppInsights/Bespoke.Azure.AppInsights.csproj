@@ -8,7 +8,7 @@
 		<RepositoryUrl>https://github.com/rodmjay/bespoke</RepositoryUrl>
 		<Description>Bespoke library for building microservices</Description>
 		<Authors>Rod Johnson</Authors>
-		<Version>1.0.6</Version>
+		<Version>1.0.7</Version>
 		<PackageId>Bespoke.Azure.AppInsights</PackageId>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -25,6 +25,7 @@
 	</PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Identity" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" />
   </ItemGroup>
@@ -34,4 +35,5 @@
   </ItemGroup>
 
 </Project>
+
 

@@ -13,4 +13,7 @@
 	<ItemGroup>
 	  <Folder Include="Models\Skills\" />
 	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Azure.Identity" />
+	</ItemGroup>
 </Project>

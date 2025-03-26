@@ -18,4 +18,8 @@
 		<Folder Include="Contracts\Mapping\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="Azure.Identity" />
+	</ItemGroup>
+
 </Project>

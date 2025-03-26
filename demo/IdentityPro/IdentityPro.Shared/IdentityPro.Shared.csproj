@@ -17,6 +17,7 @@
 		<PackageReference Include="Duende.IdentityServer.AspNetIdentity" />
 		<PackageReference Include="Duende.IdentityServer.EntityFramework" />
 		<PackageReference Include="Duende.IdentityServer.EntityFramework.Storage" />-->
+		<PackageReference Include="Azure.Identity" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" />

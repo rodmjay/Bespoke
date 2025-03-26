@@ -8,7 +8,7 @@
     <RepositoryUrl>https://github.com/rodmjay/bespoke</RepositoryUrl>
     <Description>Bespoke library for building microservices</Description>
     <Authors>Rod Johnson</Authors>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
     <PackageId>Bespoke.Bicep</PackageId>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -24,7 +24,12 @@
 		<EmbeddedResource Include="*.bicep" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="Azure.Identity" />
+	</ItemGroup>
+
 </Project>
+
 
 
 

@@ -51,7 +51,7 @@
   <!-- Azure Packages -->
   <ItemGroup>
     <PackageVersion Include="Azure.Data.Tables" Version="12.8.2" />
-    <PackageVersion Include="Azure.Identity" Version="1.10.4" />
+    <PackageVersion Include="Azure.Identity" Version="1.13.2" />
     <PackageVersion Include="Azure.Storage.Blobs" Version="12.19.1" />
     <PackageVersion Include="Azure.Storage.Queues" Version="12.17.1" />
   </ItemGroup>

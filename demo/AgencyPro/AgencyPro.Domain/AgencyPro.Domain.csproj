@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Identity" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\src\Bespoke.Data.SqlServer\Bespoke.Data.SqlServer.csproj" />
     <ProjectReference Include="..\AgencyPro.Shared\AgencyPro.Shared.csproj" />
   </ItemGroup>

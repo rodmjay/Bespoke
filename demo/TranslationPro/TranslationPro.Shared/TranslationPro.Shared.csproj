@@ -6,6 +6,9 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
+	  <PackageReference Include="Azure.Identity" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\..\..\src\Bespoke.Shared\Bespoke.Shared.csproj" />
 	</ItemGroup>
 </Project>

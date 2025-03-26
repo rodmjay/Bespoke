@@ -83,6 +83,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Azure.Identity" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\..\src\Bespoke.Data.SqlServer\Bespoke.Data.SqlServer.csproj" />
 		<ProjectReference Include="..\ResumePro.Domain\ResumePro.Domain.csproj" />
 	</ItemGroup>
