@@ -1,11 +1,13 @@
 ﻿#nullable enable
 
 using System.Diagnostics.CodeAnalysis;
+using Bespoke.Core.Attributes;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bespoke.Data;
 
 [ExcludeFromCodeCoverage]
+[CustomSettings("DbSettings")]
 public class DbSettings
 {
     public enum NamingConvention
